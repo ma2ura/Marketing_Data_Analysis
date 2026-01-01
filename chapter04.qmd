@@ -1,0 +1,382 @@
+## データ整理と要約
+
+第4章は、データを読み込んで、形を整えて、特徴をつかむためのデータを要約する方法を学びます。
+Rは最初から用意されている基本関数だけでも十分強力ですが、外部で開発された様々なパッケージを使うと、さらに便利にデータ操作ができます。
+
+はじめに外部のパッケージをインストールしてRの機能を拡張します。
+Rでデータを操作する際に超強力なパッケージ群である`tidyverse`を読み込みます。
+あとで使うExcelファイルを読み込むための`readxl`パッケージも一緒に読み込みます。
+
+テキストでは、`install.packages()`関数でパッケージをインストールして、`library()`関数で読み込んでいますが、ここでは<span class = "markp">pacman`パッケージを使って、必要なパッケージを一括でインストールおよび読み込みをします</span>。
+
+まず始めに、`pacman`パッケージをインストールします。
+この作業はここで1回だけです。以降はこのコードは実行しなくて大丈夫です。
+
+```{r install_pacman}
+#| eval: false
+# first time only
+install.packages("pacman")
+```
+
+次に、`pacman`パッケージの`p_load()`関数を使って，`tidyverse`と`readxl`パッケージをインストールおよび読み込みします。
+`::`という記法はパッケージ名を明示的に指定して関数を使う方法ですが、ここでは`pacman`パッケージの`p_load()`関数を指定して使っています。
+
+```{r tidyverse}
+pacman::p_load(tidyverse, readxl, gt, gtExtras)
+```
+
+:::{.column-margin}
+一度`pacman`パッケージをインストールすれば、あとは`pacman::p_load()`関数を使うだけで、指定したパッケージがインストールされていなければ自動的にインストールし、読み込みまで行ってくれます。非常に便利です。
+:::
+
+作業ディレクトリ内の`data`フォルダに入っている`2022idpos.csv`というデータを読み込みます。
+何を読み込んだのか確認するために，基本関数`head()`でデータの先頭6行を表示させます。
+```{r code4-6}
+idpos <- readr::read_csv("data/2022idpos.csv", na = ".")
+idpos |> head()
+```
+
+:::{.column-margin}
+`readr`パッケージの`read_csv()`関数は，CSV形式のデータを読み込むための関数です。`na = "."`という引数は，データ内の`.`を欠損値として扱うことを指定しています。
+:::
+
+読み込んだデータに含まれている変数の名前を確認するため，基本関数`names()`を使います。
+
+```{r names}
+idpos |> names()
+```
+
+データの詳細を確認するため，`tidyverse`の`dplyr`パッケージの`glimpse()`関数を使います。
+
+```{r code4-9}
+idpos |> glimpse()
+```
+
+Excelのようにデータを表示させたいなら，基本関数`View()`を使います。
+
+```{r code4-10}
+#| eval: false
+View(idpos)
+```
+
+これで，自分が読み込んだデータがどんなものかを確認できました。
+
+### dplyrでデータの要約
+
+`tidyverse`の`dplyr`パッケージを使うと，データの要約が簡単にできます。
+ここでは，
+
+- `summarise()`関数：データの要約統計量を計算する
+- `mutate()`関数：新しい変数を作成する
+- `filter()`関数：条件に合う行を抽出する
+- `select()`関数：特定の変数を抽出する
+- `arrange()`関数：データを並び替える
+- `rename()`関数：変数の名前を変更する
+
+の使い方を学びます。
+
+先ほど読み込んだデータには，
+
+- id：顧客ID
+- date：購入日
+- spent：購入金額
+- coupon：クーポン利用の有無 (1=利用, 0=未利用)
+
+という4変数に3,000の観測値が含まれています。
+このデータを`dplyr`の各関数を使って，以下のような操作をしてみます。
+
+まず，
+
+1. `select()`関数で`spent`と`coupon`を抽出し，
+2. `arrange()`関数で`spent`の降順に並び替え，
+3. `mutate()`関数で`spent`の金額を10倍した`spent10`という新しい変数を作成し，
+4. `filter()`関数で`spent10`が10000以上の行を抽出し，
+5. `summarise()`関数で`spent10`の平均を計算し，
+6. `rename()`関数で`spent10`を`spent_times10`に名前変更する，
+
+という一連の操作を行います(この処理に意味はないです。)
+
+```{r}
+
+# コード4-11（見本コード）
+idpos |>
+  select(spent, coupon) |>
+  arrange(desc(spent)) |>
+  mutate(spent10 = spent * 10) |>
+  filter(spent10 >= 10000) |>
+  summarise(mean_spent10 = mean(spent10)) |>
+  rename(spent_times10 = mean_spent10)
+```
+
+すると，spentを10倍して，1万円以上の買い物の平均値を計算した結果が`spent_times10`として表示されます。
+
+このように加工したデータを`csv`ファイルとして保存するには、`readr`パッケージの`write_csv()`関数を使います。
+`write_csv()`関数は、第1引数に保存したいデータフレームを指定し、第2引数に保存先のファイルパスを指定します。
+
+```{r}
+#| eval: false
+readr::write_csv(idpos, path = "data/new_data.csv")  
+```
+
+### 企業データの処理
+
+MS Excelのファイルを読み込むこともできます。
+ここでは，`readxl`パッケージの`read_xlsx()`関数を使って，企業データを読み込みます。
+
+```{r code 4-27}
+firmdata <- readxl::read_xlsx("data/MktRes_firmdata.xlsx")
+firmdata |> glimpse()
+```
+
+31変数1,431観測値からならなるデータが読み込まれました。
+必要な変数が変わることもあるかと思うので、先に必要な変数名をベクトル`vars_list`として保存しておきます。
+
+必要な観測値と変数だけを抽出して、新しい変数を作成し、並び替えて、新しいオブジェクト`firm2018_check`に格納します。
+
+```{r}
+#| code-line-numbers: "3"
+
+# 必要な変数のリスト
+vars_list <- c("legalname", "fyear", "sales", "labor_cost", "emp", "temp")
+
+# コード4-28
+firm2018_check <- firmdata |>
+  filter(fyear == 2018) |> # 2018年のデータを抽出
+  select(all_of(vars_list)) |> # 必要な変数を選択
+  mutate(wage = labor_cost / (temp + emp), na.rm = TRUE) |> # 新しい変数wageを作成
+  # temp + empが0でないチェックが必要かも
+  arrange(desc(wage)) # wageの降順に並び替え
+head(firm2018_check, n = 10) # 先頭10行を表示
+```
+
+:::{.column-margin}
+`all_of()`関数は、`select()`関数内で使用され、変数名のベクトルを指定して、その変数を選択するために使います。これにより、変数名が動的に指定でき、コードの柔軟性が向上します。
+:::
+
+## 4 データの要約
+
+大規模データをあつかうとき、データそのものを眺めていても特徴をつかむことは難しいので、そのデータを特徴付ける代表値を計算して、そこからデータの特徴をつかみます。
+主要な代表値として、平均値(mean)や中央値(median)、散らばり具合を示す分散(variance)や標準偏差(standard deviation)があります。
+それぞれ、
+
+- 平均値：`mean()`関数
+- 中央値：`median()`関数
+- 分散：`var()`関数
+- 標準偏差：`sd()`関数
+
+を使って計算します。
+
+先ほどのデータ`firm2018_check`の`sales`変数について、代表値を計算してみます。
+ここでは、`dplyr`パッケージの`summarize()`関数を使って、平均、中央値、分散、標準偏差を一度に計算します。
+```{r}
+firm2018_check |> 
+  summarize(
+    mean_sales   = mean(sales),
+    median_sales = median(sales),
+    var_sales    = var(sales),
+    sd_sales     = sd(sales)
+  )
+```
+
+
+## カテゴリ変数の要約
+
+つぎに、データ上は数値や文字列として記録されていても、その数値や文字列がカテゴリーを表す名義尺度(nominal scale)である場合を考えましょう。
+
+例えば、`firmdata`の中の産業分類を表す`ind_en`変数は、文字列で表現されていますが、その文字列はある観測値が所属するカテゴリーを表しています。
+`fyear`変数は数値ですが、これは年度を表すカテゴリー変数です。
+
+カテゴリ内の観測値の頻度を確認するには基本関数`table()`を使いますが、ここでは、dplyr::`count()`関数を使って、`ind_en`変数の各カテゴリーの頻度を計算し、`gt`パッケージで表形式で表示します。
+
+```{r code4-35}
+firm2018 <- firmdata |>
+  filter(fyear == 2018) # 2018年のデータを抽出
+firm2018 |>
+  dplyr::count(ind_en, name = "企業数") |>
+  gt::gt() |>
+  gtExtras::gt_theme_538()
+```
+
+:::{.column-margin}
+教科書のように`table()`関数を使うと簡単に頻度表が作れますが、オブジェクトの型が`table`型になってしまい、後で他の処理に使いにくくなるので、`data.frame`型のまま処理できる`dplyr::count()`関数を使いました。
+:::
+
+広告費を表す`adient`変数の観測値が全企業の中央値より大きいか否か、でダミー変数`ad_dummy`を作成し、`ind_en`変数と`ad_dummy`変数のクロス集計表を作成します。
+
+教科書を先取りしますが、`if_else()`関数を使ってダミー変数を作成し、`count()`関数でクロス集計表を作成し、`gt`パッケージで表形式で表示します。
+`tidyr`パッケージの`pivot_wider()`関数を使って、クロス集計表が見やすくなるように、縦は産業名、横は広告費が中央値より大きいか否か、で表示するように変形しています。
+
+:::{.column-margin}
+`table()`関数を使うと簡単にクロス集計表が作れますが、あえて`data.frame`型のまま処理できる`dplyr::count()`関数を使っています。そのため、データが矩形データのまま扱えるので、後で他の処理に使いやすくなるものの、表にすると見にくくなるので、`tidyr::pivot_wider()`関数で見やすく変形しています。
+:::
+
+```{r}
+firm2018 <- firm2018 |>
+  mutate(
+    ad_dummy = if_else(adint > median(adint, na.rm = TRUE), 1L, 0L)
+    )
+firm2018 %>%
+  count(ind_en, ad_dummy) |>
+  tidyr::pivot_wider(names_from = ad_dummy, values_from = n, values_fill = 0) |>
+  gt::gt() |>
+  gtExtras::gt_theme_538()
+```
+
+次に、カテゴリ変数ごとに処理を行いたい場合、例えば、産業分類ごとに売上高の平均値や標準偏差を計算したい場合は、`group_by()`関数を使って、カテゴリ変数でグループ化してから、`summarize()`関数で集計します。
+
+```{r}
+
+# コード4-39
+firm2018 |>
+  group_by(ind_en) |>
+  summarize(
+      obs = n(),
+      sales_m = mean(sales),
+      sales_sd = sd(sales),
+      adint_m = mean(adint),
+      adint_sd = sd(adint)
+      ) |>
+  gt::gt() |>
+  gt::fmt_number(
+    columns = c(sales_m, sales_sd, adint_m, adint_sd),
+    decimals = 2
+  ) |>
+  gtExtras::gt_theme_538()
+```
+
+<!-- 
+
+
+# コード4-40
+X <-tibble(
+  x1 = c(-3, -1, 0, 2, 5),
+  y1 = c(16, 12, 10, 6, 0),
+  y2 = c(8, 6, 5, 3, 0)
+)
+X
+
+# コード4-41
+cor(X$x1, X$y1)
+
+# コード4-42
+# For mac users
+# set_theme(theme_gray(base_size = 10, base_family = "HiraMinProN-W3"))
+
+# コード4-43
+ggplot (data = X, mapping = aes(x = x1, y = y1)) +
+  geom_point() +
+  geom_smooth(method = lm)
+
+# コード4-44
+AB <- tibble(A = c(-2, -1, 0, 1, 2), B = c(4, 1, 0, 1, 4))
+AB
+
+
+# コード4-45
+cor(AB$A, AB$B)
+
+# コード4-46
+ggplot(data = AB, mapping = aes(x = A, y = B)) +
+  geom_point() +
+  geom_smooth(
+    method = lm,
+    formula = y ~ x + I(x^2),
+    se = FALSE
+  )
+
+# コード4-47
+idpos <- readr::read_csv("data/2022idpos.csv", na = ".")
+head(idpos)
+
+# コード4-48
+idpos$datediff <-
+  as.numeric(difftime("2019-10-02", idpos$date, units = "days"))
+head(idpos)
+
+# コード4-49
+idpos_cust <- idpos %>%
+  group_by(id) %>%
+  summarize(frequency = n(),
+            monetary = sum(spent),
+            cherry = sum(coupon),
+            recency = min(datediff)
+            )
+head(idpos_cust)
+
+# コード4-50
+idpos_cust_m <- idpos_cust %>%
+  arrange(desc(monetary))
+
+# 上位 10 人の顧客 (Monetary)
+idpos_cust_m[1:10, ]
+
+# コード4-51
+id_data <- readr::read_csv("data/id_data.csv", na = ".")
+str(id_data)
+
+# コード4-52
+idpos_cust <- left_join(idpos_cust, id_data, by = "id")
+head(idpos_cust)
+
+# コード4-53
+idpos_cust_m <- idpos_cust %>%
+  arrange(desc(monetary))
+
+# 上位顧客 20 人中の男女比
+table(idpos_cust_m[1:20, ]$gender)
+
+# コード4-54
+idpos_cust_m$decile_rank <-
+  cut(idpos_cust_m$monetary,
+      quantile(idpos_cust_m$monetary, (0:10) / 10, na.rm = TRUE),
+      label = FALSE, include.lowest = TRUE)
+head(idpos_cust_m)
+
+# コード4-55
+decile <- idpos_cust_m %>%
+  group_by(decile_rank) %>%
+  summarize(freq = n(),
+            monetary = sum(monetary))
+total <- sum(decile$monetary)
+
+decile2 <- decile %>%
+  mutate(percent = monetary / total * 100) %>%
+  arrange(desc(decile_rank))
+
+decile2
+
+# コード4-56
+sales_wide <- readr::read_csv("data/sales_wide.csv", na = ".")
+sales_wide
+
+# コード4-57
+sales_long <- gather(data = sales_wide,
+                     key = "month", value = "sales", starts_with("sales"))
+sales_long
+
+# コード4-58
+sales_long <- sales_wide %>%
+  rename('06'  = sales06,
+         '07'  = sales07,
+         '08'  = sales08,
+         '09'  = sales09,
+         '10'  = sales10) %>%
+  gather(key = "month", value = "sales", '06':'10') %>%
+  arrange(store)
+sales_long
+
+# コード4-59
+wide_test <- sales_long %>%
+  spread(key = "month", value = "sales") %>%
+  rename(sales06 = '06',
+         sales07 = '07',
+         sales08 = '08',
+         sales09 = '09',
+         sales10 = '10')
+wide_test
+
+
+```
+--->
+
+

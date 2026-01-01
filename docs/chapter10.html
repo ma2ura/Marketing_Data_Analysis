@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Soichi Matsuura">
+
+<title>7&nbsp; 第10章 セグメントとクラスター分析 – マーケティング・データ分析の学習メモ</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter11.html" rel="next">
+<link href="./part03.html" rel="prev">
+<link href="./img/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-59a70e526be758e388535452c17524de.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<style>
+.marky {
+  background: linear-gradient(transparent 60%, #FCFFC1 0%);
+}
+.markb {
+  background: linear-gradient(transparent 60%, #88E2EA 0%);
+}
+.markp{
+  background: linear-gradient(transparent 70%, #ffcdd2 0%)
+}
+</style>
+
+
+<meta name="twitter:title" content="7&nbsp; 第10章 セグメントとクラスター分析 – マーケティング・データ分析の学習メモ">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://so-ichi.com/chapter10_files/figure-html/code10-3-1.png">
+<meta name="twitter:image-height" content="4500">
+<meta name="twitter:image-width" content="6300">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part03.html">第3部 探索型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter10.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">マーケティング・データ分析の学習メモ</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/ma2ura/Marketing_Data_Analysis/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./part01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第1部</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./part02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第2部 仮説検証型データ分析</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">第6章</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">第7章</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">第8章 消費者の選択と離散選択モデル</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./part03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第3部 探索型データ分析</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter10.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">第12章</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#階層的クラスター分析" id="toc-階層的クラスター分析" class="nav-link active" data-scroll-target="#階層的クラスター分析"><span class="header-section-number">7.1</span> 階層的クラスター分析</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part03.html">第3部 探索型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter10.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>クラスター分析(cluster analysis)は、観測値をいくつかのグループに分ける手法です。ここでは、階層的クラスター分析と非階層的クラスター分析(K-means法)を学習します。</p>
+<section id="階層的クラスター分析" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="階層的クラスター分析"><span class="header-section-number">7.1</span> 階層的クラスター分析</h2>
+<p>データの中から類似している観測値を段階的にクラスターとしてまとめて、最終的に1つのクラスターになるまで繰り返す方法です。 類似度は距離で測定され、距離が近いほど類似しているとみなされます。 距離概念として、</p>
+<ul>
+<li>ユークリッド距離(Euclidean distance)</li>
+<li>マンハッタン距離(Manhattan distance)</li>
+<li>マハラノビス距離(Mahalanobis distance)</li>
+</ul>
+<p>などがあります。 デンドログラム(dendrogram)という樹形図を使って、クラスターの結合過程を視覚的に表現します。</p>
+<p>2023年実施の消費者調査アンケートデータを使って、階層的クラスター分析を実行してみます。 必要なパッケージを読み込みます。</p>
+<ul>
+<li><code>tidyverse</code>: データ操作と可視化</li>
+<li><code>readxl</code>: Excelデータの読み込み</li>
+<li><code>cluster</code>: クラスター分析</li>
+<li><code>factoextra</code>: クラスター分析の可視化</li>
+<li><code>ggrepel</code>: グラフ上のラベル配置</li>
+<li><code>useful</code>: 便利な関数群</li>
+</ul>
+<p>そしてデータを読み込みます。 <code>read_xlsx()</code>関数の引数として，</p>
+<ul>
+<li><code>path</code>: データファイルのパスとファイル名</li>
+<li><code>sheet</code>: 読み込むシート名</li>
+<li><code>na</code>: 欠損値を表す文字列</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, cluster, factoextra, ggrepel, useful)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># コード10-1</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>df_cons <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="at">path =</span> <span class="st">"data/回答データ【消費者調査2023年度下期調査】.xlsx"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="at">sheet =</span> <span class="st">"回答データ【共通調査2023年度下期】"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="at">na =</span> <span class="st">" "</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>読み込んだデータを<code>str()</code>で確認します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>df_cons <span class="sc">|&gt;</span><span class="fu">str</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [5,364 × 992] (S3: tbl_df/tbl/data.frame)
+ $ 2023年下期no: num [1:5364] 1 2 3 4 7 8 9 10 11 12 ...
+ $ 県番号      : num [1:5364] 13 13 27 14 13 13 14 11 25 14 ...
+ $ 地域分類    : num [1:5364] 3 3 6 3 3 3 3 3 6 3 ...
+ $ 性別        : num [1:5364] 2 1 1 1 1 1 2 2 1 2 ...
+ $ 年齢        : num [1:5364] 38 42 25 26 30 33 52 53 36 26 ...
+ $ 年齢階層    : num [1:5364] 3 4 2 2 3 3 5 5 3 2 ...
+ $ 性年代      : num [1:5364] 11 4 2 2 3 3 13 13 3 10 ...
+ $ 結婚有無    : num [1:5364] 2 2 1 1 1 1 1 2 1 2 ...
+ $ q1          : num [1:5364] 2 1 1 1 1 1 2 2 1 2 ...
+ $ q2t         : num [1:5364] 38 42 25 26 30 33 52 53 36 26 ...
+ $ q3          : num [1:5364] 13 13 27 14 13 13 14 11 25 14 ...
+ $ q4          : num [1:5364] 1 1 2 2 2 2 2 1 2 1 ...
+ $ q5          : num [1:5364] 8 2 7 3 3 3 3 8 4 4 ...
+ $ q6          : num [1:5364] 2 2 3 4 1 1 1 2 1 2 ...
+ $ q7_1        : num [1:5364] 1 8 2 10 3 5 6 1 5 5 ...
+ $ q7_2        : num [1:5364] 4 9 3 10 NA NA NA 4 NA 8 ...
+ $ q8          : num [1:5364] 4 4 2 5 2 2 4 1 4 4 ...
+ $ q9          : num [1:5364] 1 4 1 2 2 4 1 5 6 5 ...
+ $ q10         : num [1:5364] 4 7 2 7 1 1 3 5 NA 5 ...
+ $ q11_1       : num [1:5364] 5 4 1 3 4 2 4 2 3 2 ...
+ $ q11_2       : num [1:5364] 4 5 2 3 4 2 3 2 3 2 ...
+ $ q11_3       : num [1:5364] 4 5 2 3 3 2 4 2 3 2 ...
+ $ q11_4       : num [1:5364] 4 4 3 3 4 2 4 2 3 2 ...
+ $ q11_5       : num [1:5364] 4 4 3 4 4 2 4 2 3 2 ...
+ $ q11_6       : num [1:5364] 4 4 3 3 3 2 4 2 3 2 ...
+ $ q11_7       : num [1:5364] 4 5 2 3 4 1 4 2 3 2 ...
+ $ q11_8       : num [1:5364] 4 4 3 3 4 1 3 2 3 2 ...
+ $ q11_9       : num [1:5364] 4 4 3 2 4 2 5 2 3 3 ...
+ $ q11_10      : num [1:5364] 4 5 4 3 3 2 3 2 3 3 ...
+ $ q11_11      : num [1:5364] 4 5 3 3 4 2 4 2 3 2 ...
+ $ q11_12      : num [1:5364] 4 4 3 3 3 1 4 2 3 2 ...
+ $ q11_13      : num [1:5364] 4 4 2 3 3 1 3 3 3 2 ...
+ $ q11_14      : num [1:5364] 4 4 2 3 4 1 4 4 3 2 ...
+ $ q11_15      : num [1:5364] 4 4 3 4 4 2 3 4 3 2 ...
+ $ q11_16      : num [1:5364] 4 4 3 3 4 2 5 3 3 2 ...
+ $ q11_17      : num [1:5364] 4 5 3 3 5 2 4 3 3 2 ...
+ $ q11_18      : num [1:5364] 4 4 2 3 4 2 4 3 3 3 ...
+ $ q11_19      : num [1:5364] 4 5 2 3 5 2 5 3 3 4 ...
+ $ q11_20      : num [1:5364] 4 4 3 3 4 2 4 3 3 2 ...
+ $ q11_21      : num [1:5364] 4 4 3 3 5 2 3 3 3 4 ...
+ $ q11_22      : num [1:5364] 4 4 3 3 4 2 3 3 3 3 ...
+ $ q11_23      : num [1:5364] 4 4 4 3 4 1 5 3 3 2 ...
+ $ q11_24      : num [1:5364] 4 5 3 3 5 1 4 3 3 2 ...
+ $ q11_25      : num [1:5364] 4 4 3 4 4 1 4 3 3 2 ...
+ $ q12_1       : num [1:5364] 2 2 3 4 1 3 3 2 3 2 ...
+ $ q12_2       : num [1:5364] 2 1 4 3 2 3 2 5 3 4 ...
+ $ q12_3       : num [1:5364] 2 2 3 3 1 4 2 5 3 4 ...
+ $ q12_4       : num [1:5364] 2 2 3 3 1 4 2 5 3 4 ...
+ $ q12_5       : num [1:5364] 2 1 4 3 2 5 3 5 3 4 ...
+ $ q13_1       : num [1:5364] 2 2 3 4 2 4 2 2 2 2 ...
+ $ q13_2       : num [1:5364] 2 2 3 3 2 5 2 2 2 3 ...
+ $ q13_3       : num [1:5364] 2 1 3 3 2 5 2 3 2 2 ...
+ $ q13_4       : num [1:5364] 4 5 3 3 5 1 3 3 1 2 ...
+ $ q14_1       : num [1:5364] 4 3 3 3 3 2 2 4 3 2 ...
+ $ q14_2       : num [1:5364] 4 4 3 3 3 2 2 4 3 3 ...
+ $ q14_3       : num [1:5364] 4 4 3 3 3 1 2 4 3 4 ...
+ $ q14_4       : num [1:5364] 4 4 3 3 2 1 4 4 3 3 ...
+ $ q14_5       : num [1:5364] 4 4 3 3 3 2 5 4 3 3 ...
+ $ q14_6       : num [1:5364] 4 5 2 2 3 2 4 4 4 4 ...
+ $ q14_7       : num [1:5364] 4 4 3 3 4 2 2 3 3 3 ...
+ $ q14_8       : num [1:5364] 4 5 3 4 3 2 2 3 3 3 ...
+ $ q14_9       : num [1:5364] 4 4 3 3 5 2 3 3 3 4 ...
+ $ q14_10      : num [1:5364] 4 5 2 3 5 1 4 3 3 4 ...
+ $ q14_11      : num [1:5364] 4 5 3 3 4 1 2 3 4 2 ...
+ $ q14_12      : num [1:5364] 4 4 3 3 3 1 4 3 3 3 ...
+ $ q14_13      : num [1:5364] 4 4 3 3 4 2 4 3 3 4 ...
+ $ q14_14      : num [1:5364] 4 4 3 3 3 2 2 3 3 3 ...
+ $ q14_15      : num [1:5364] 4 5 3 3 3 2 4 3 4 3 ...
+ $ q14_16      : num [1:5364] 4 5 2 3 4 1 2 3 3 3 ...
+ $ q14_17      : num [1:5364] 4 5 2 3 4 1 4 4 4 3 ...
+ $ q15_1       : num [1:5364] 1 2 3 3 2 4 3 3 3 2 ...
+ $ q15_2       : num [1:5364] 2 2 3 3 3 5 2 3 3 4 ...
+ $ q15_3       : num [1:5364] 2 2 3 3 2 5 2 3 3 3 ...
+ $ q15_4       : num [1:5364] 2 1 3 2 3 5 2 3 3 2 ...
+ $ q15_5       : num [1:5364] 2 2 3 3 3 4 3 3 3 2 ...
+ $ q15_6       : num [1:5364] 2 2 3 2 2 4 1 3 2 3 ...
+ $ q15_7       : num [1:5364] 2 2 5 2 3 4 2 3 3 3 ...
+ $ q16_1       : num [1:5364] 2 1 3 4 3 3 3 2 4 2 ...
+ $ q16_2       : num [1:5364] 2 2 3 3 3 4 4 3 4 2 ...
+ $ q16_3       : num [1:5364] 2 2 3 3 3 4 2 3 3 3 ...
+ $ q16_4       : num [1:5364] 2 2 3 3 3 4 3 3 3 3 ...
+ $ q17_1.01    : num [1:5364] 0 1 0 0 1 1 0 0 0 1 ...
+ $ q17_1.02    : num [1:5364] 0 1 0 0 0 0 0 0 0 0 ...
+ $ q17_1.03    : num [1:5364] 0 0 0 0 0 0 0 0 0 1 ...
+ $ q17_1.04    : num [1:5364] 0 0 0 0 0 0 0 0 0 0 ...
+ $ q17_1.05    : num [1:5364] 0 0 0 0 0 0 0 0 0 0 ...
+ $ q17_1.06    : num [1:5364] 0 0 0 0 0 0 0 0 0 0 ...
+ $ q17_1.07    : num [1:5364] 0 0 0 0 0 0 0 0 0 0 ...
+ $ q17_1.08    : num [1:5364] 0 0 0 0 0 0 0 0 0 0 ...
+ $ q17_1.09    : num [1:5364] 0 0 0 0 0 0 0 0 0 0 ...
+ $ q17_1.10    : num [1:5364] 0 0 0 0 1 0 0 0 0 0 ...
+ $ q17_1.11    : num [1:5364] 0 0 0 0 0 0 0 1 0 0 ...
+ $ q17_1.12    : num [1:5364] 0 0 0 0 0 0 0 0 0 0 ...
+ $ q17_1.13    : num [1:5364] 0 0 0 0 1 0 0 1 0 0 ...
+ $ q17_1.14    : num [1:5364] 0 0 0 0 0 0 0 0 0 0 ...
+ $ q17_1.15    : num [1:5364] 0 0 0 0 0 0 0 0 0 0 ...
+ $ q17_1.16    : num [1:5364] 0 0 0 0 0 0 0 0 0 0 ...
+ $ q17_1.17    : num [1:5364] 0 1 0 0 1 0 0 0 0 0 ...
+ $ q17_1.18    : num [1:5364] 0 0 0 0 0 0 0 0 0 0 ...
+  [list output truncated]</code></pre>
+</div>
+</div>
+<p>992変数，5364観測値からなるデータを読み込みました。 東京都(<code>13</code>)と兵庫県(<code>28</code>)の回答者を対象に，ブランド志向性(<code>q12_4</code>)と価格志向性(<code>q13_3</code>)の2変数を使ってクラスター分析を実行します。</p>
+<p>教科書では，カテゴリー変数の数値を文字列に変換するために，<code>case_when()</code>関数を使っていますが， この処理だと変数の型が文字列となり，カテゴリー変数としてRが認識しなくなります。 そこでここでは，<code>factor()</code>関数を使って，変数の型を因子型に変換し，ラベルを付与する方法を採用します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># 東京と兵庫の県番号リスト作成</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>ken_number   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">28</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># 因子型のラベル作成</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>pref_labels  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Tokyo"</span>, <span class="st">"Hyogo"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>gender_label <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a>marital_label <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Married"</span>, <span class="st">"Not Married"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># 回答者と項目を抽出</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>df_cons <span class="ot">&lt;-</span> df_cons <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">select</span>(県番号, 性別, 年齢, 結婚有無, q12_4, q13_3) <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">filter</span>(</span>
+<span id="cb4-12"><a href="#cb4-12"></a>    県番号 <span class="sc">%in%</span> ken_number, <span class="co"># 東京と兵庫の回答者</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>    q12_4 <span class="sc">!=</span> <span class="dv">999</span>,           <span class="co"># 欠損値は999</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>    q13_3 <span class="sc">!=</span> <span class="dv">999</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="at">q12_4 =</span> <span class="dv">6</span> <span class="sc">-</span> q12_4, <span class="co"># 尺度を反転</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a>    <span class="at">q13_3 =</span> <span class="dv">6</span> <span class="sc">-</span> q13_3, <span class="co"># 尺度を反転</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>    <span class="at">Pref       =</span> <span class="fu">factor</span>(県番号,  <span class="at">levels  =</span> ken_number, <span class="at">labels =</span> pref_labels),</span>
+<span id="cb4-20"><a href="#cb4-20"></a>    <span class="at">Gender     =</span> <span class="fu">factor</span>(性別,    <span class="at">levels  =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">labels =</span> gender_label),</span>
+<span id="cb4-21"><a href="#cb4-21"></a>    <span class="at">MaritalSt. =</span> <span class="fu">factor</span>(結婚有無, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">labels =</span> marital_label)</span>
+<span id="cb4-22"><a href="#cb4-22"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>クラスター分析を実行する関数の引数は数値データのみである必要があるので，<code>select()</code>で必要な変数だけを抽出し，オブジェクト<code>clus_cons</code>に格納します。</p>
+<p><code>agnes()</code>関数を使って階層的クラスター分析を実行します。引数として，</p>
+<ul>
+<li><code>clus_cons</code>: クラスター分析対象データ</li>
+<li><code>metric</code>: 距離尺度</li>
+<li><code>method</code>: クラスター結合方法</li>
+<li><code>stand</code>: 変数の標準化</li>
+</ul>
+<p>を指定します。 実行結果を<code>Hier1</code>に格納し，<code>pltree()</code>関数でデンドログラムを作成します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>clus_cons <span class="ot">&lt;-</span> df_cons <span class="sc">|&gt;</span> <span class="fu">select</span>(q12_4, q13_3)</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>Hier1 <span class="ot">&lt;-</span> <span class="fu">agnes</span>(</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  clus_cons, <span class="co"># クラスター分析対象データ</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="at">metric =</span> <span class="st">"euclidian"</span>, <span class="co"># 距離尺度</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="at">method =</span> <span class="st">"ward"</span>, <span class="co"># クラスター結合方法</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="at">stand =</span> <span class="cn">TRUE</span> <span class="co"># 変数の標準化</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  )</span>
+<span id="cb5-10"><a href="#cb5-10"></a></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="fu">pltree</span>(Hier1) <span class="co"># デンドログラムの作成</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="chapter10_files/figure-html/code10-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>次に，<code>hclust()</code>関数を使って階層的クラスター分析を実行します。 階層別クラスターの分析手順は以下の通りです。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>alt_Hier <span class="ot">&lt;-</span> clus_cons <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">dist</span>(<span class="st">"euclidian"</span>) <span class="sc">|&gt;</span> <span class="co"># ユークリッド距離の計算</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">hclust</span>(<span class="st">"ward.D"</span>)  <span class="co"># ウォード法による階層的クラスター分析</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>alt_Hier <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">fviz_dend</span>(</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="at">k =</span> <span class="dv">4</span>,  <span class="co"># クラスター数</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">rect =</span> <span class="cn">TRUE</span>, <span class="co"># クラスター枠の表示</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">rect_border =</span> <span class="cn">TRUE</span> <span class="co"># クラスター枠の色表示</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="chapter10_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># コード10-5</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">fviz_nbclust</span>(</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  clus_cons,  <span class="co"># クラスター分析対象データ</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  kmeans,  <span class="co"># k-means法</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="at">method =</span> <span class="st">"wss"</span> <span class="co"># クラスター内変動の総和</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="chapter10_files/figure-html/code10-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>alt_Hier <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">fviz_dend</span>(</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="at">k =</span> <span class="dv">5</span>, <span class="co"># クラスター数</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="at">rect =</span> <span class="cn">TRUE</span>, <span class="co"># クラスター枠の表示</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="at">rect_border =</span> <span class="cn">TRUE</span> <span class="co"># クラスター枠の色表示</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="chapter10_files/figure-html/code10-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># 乱数の種を設定</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">set.seed</span>(<span class="dv">343</span>)</span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co"># k-means法による非階層的クラスター分析</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>K_shopping <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(clus_cons, <span class="dv">5</span>)</span>
+<span id="cb10-6"><a href="#cb10-6"></a>K_shopping</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>K-means clustering with 5 clusters of sizes 80, 298, 760, 592, 243
+
+Cluster means:
+     q12_4    q13_3
+1 1.000000 3.850000
+2 2.738255 4.218121
+3 3.417105 2.792105
+4 2.552365 1.876689
+5 4.300412 4.222222
+
+Clustering vector:
+   [1] 5 5 5 4 3 3 3 4 2 3 3 1 3 3 3 3 4 3 3 4 2 4 5 3 2 4 3 4 5 4 3 3 3 4 3 4 3
+  [38] 4 3 3 4 5 4 3 3 4 3 3 4 2 4 2 2 4 4 2 3 3 3 3 4 3 4 3 2 1 2 1 3 4 3 4 2 4
+  [75] 2 3 5 3 4 4 4 3 4 3 2 4 3 2 3 3 3 3 4 2 3 3 3 4 4 3 3 3 4 3 3 3 4 4 3 1 3
+ [112] 3 3 3 4 4 3 4 5 4 4 5 3 3 4 3 4 4 4 3 3 3 4 1 2 4 3 2 3 1 4 3 2 4 3 3 4 4
+ [149] 3 2 5 2 4 2 3 3 3 4 3 3 4 3 4 4 3 4 4 3 3 4 4 3 2 4 5 3 2 4 3 4 3 3 3 3 3
+ [186] 4 3 3 3 3 3 2 4 3 3 2 4 4 4 3 2 3 3 4 4 1 3 3 2 4 3 5 3 3 3 4 4 5 3 2 1 4
+ [223] 5 3 5 3 4 4 5 3 4 5 3 4 3 3 4 4 5 3 3 3 5 4 3 4 2 3 2 4 3 4 3 3 4 5 4 2 3
+ [260] 3 3 3 5 2 5 4 3 2 3 5 1 4 2 3 4 3 4 3 4 3 2 1 3 3 3 2 3 4 4 2 3 4 3 4 4 3
+ [297] 3 3 2 4 3 5 4 2 2 4 4 4 4 5 3 1 3 4 4 4 3 3 5 4 5 4 4 3 2 2 4 4 5 4 3 4 5
+ [334] 3 3 4 4 3 3 3 2 1 4 3 4 3 4 3 5 5 2 3 1 2 1 3 3 3 4 2 3 4 4 2 3 3 2 2 3 3
+ [371] 4 3 3 3 3 3 3 5 3 3 4 4 3 4 3 2 4 3 4 5 3 2 4 2 3 3 4 3 3 3 3 4 4 4 1 4 3
+ [408] 4 3 2 3 3 3 3 3 4 3 1 2 4 2 5 2 3 2 3 2 4 2 3 2 3 4 3 3 3 3 3 2 3 4 3 3 3
+ [445] 3 3 3 5 3 3 3 1 3 3 4 4 3 2 3 5 3 4 1 5 4 4 3 2 3 3 4 3 5 4 3 4 4 3 3 4 5
+ [482] 4 3 4 2 3 5 4 4 4 3 4 3 4 3 3 4 5 5 3 3 3 5 3 3 1 5 3 4 3 4 5 3 2 2 5 5 3
+ [519] 2 3 3 4 2 4 3 3 3 2 5 2 4 5 5 3 3 5 3 4 2 3 3 3 3 3 3 4 4 1 4 3 3 4 2 5 4
+ [556] 3 4 3 3 2 5 4 5 3 3 4 5 4 3 2 2 4 4 3 2 4 2 3 2 3 3 2 3 3 3 4 5 3 4 3 3 4
+ [593] 2 4 3 3 4 3 4 3 4 3 3 4 3 2 2 3 3 3 2 4 3 4 2 5 5 3 5 3 3 5 3 4 3 1 3 2 3
+ [630] 3 5 1 4 3 5 3 2 3 2 4 5 2 3 1 4 4 3 2 4 3 4 3 4 3 2 4 3 4 4 3 4 3 5 4 3 3
+ [667] 3 3 3 5 2 3 2 3 4 4 3 5 3 3 4 1 3 4 1 3 5 3 5 4 5 3 3 4 2 3 3 5 2 3 3 3 4
+ [704] 3 3 4 3 3 3 3 3 5 4 1 2 3 2 4 2 2 3 5 3 3 3 5 3 4 3 5 3 2 3 4 4 5 4 3 1 3
+ [741] 4 3 5 4 3 1 3 3 4 4 3 5 4 3 4 4 4 2 3 4 3 5 3 3 3 4 4 3 1 3 5 2 4 1 2 3 2
+ [778] 3 2 3 4 3 5 5 4 3 4 4 3 2 3 3 3 1 3 3 3 3 2 4 4 3 3 2 3 4 4 3 3 4 3 5 4 3
+ [815] 4 3 4 1 4 1 4 3 4 5 2 4 2 3 4 3 2 5 4 3 4 4 3 4 2 5 3 2 2 4 3 4 4 4 4 3 5
+ [852] 3 2 4 5 4 4 5 2 2 3 1 3 4 5 5 3 2 3 3 5 2 4 3 3 2 4 2 3 1 3 2 2 2 3 2 5 1
+ [889] 4 4 5 5 5 4 2 5 2 3 4 1 4 3 5 5 3 2 4 4 4 3 2 2 4 3 3 4 3 3 3 3 3 2 3 2 3
+ [926] 5 5 4 3 4 3 4 4 3 1 2 4 5 4 3 5 1 2 4 5 4 4 5 3 3 4 3 4 4 3 4 2 4 2 4 5 4
+ [963] 3 2 4 5 4 2 4 2 3 4 3 4 3 2 4 2 3 2 3 4 2 4 2 3 3 3 2 2 4 1 3 4 1 4 3 4 4
+[1000] 3 5 4 2 5 4 5 2 3 3 3 4 3 4 3 3 4 3 3 4 4 2 3 3 5 3 2 5 3 3 3 3 4 3 4 4 5
+[1037] 2 4 3 4 2 3 2 2 4 3 3 3 4 4 2 5 3 3 3 4 3 3 5 4 4 4 2 3 4 5 1 4 3 1 2 5 4
+[1074] 4 3 4 5 4 4 3 4 3 3 4 4 4 3 3 3 4 2 4 2 4 3 2 4 4 3 3 2 3 5 5 4 3 3 5 3 4
+[1111] 2 2 3 4 5 3 4 5 4 4 3 3 3 3 3 3 4 4 3 3 4 4 3 3 4 3 2 4 5 5 5 5 2 4 3 4 3
+[1148] 4 4 2 5 4 3 2 2 3 2 4 3 3 4 4 5 3 2 2 3 4 4 2 4 5 3 5 1 4 3 2 5 3 4 4 3 3
+[1185] 4 1 5 2 4 5 3 3 4 4 3 4 3 5 5 2 3 2 3 4 4 3 2 4 4 3 2 4 3 3 3 2 5 4 1 3 5
+[1222] 4 4 3 3 3 3 4 4 2 3 4 2 5 5 4 5 4 5 2 5 2 5 4 3 3 4 3 5 3 4 4 3 4 4 4 3 3
+[1259] 2 4 2 3 4 4 4 3 4 2 4 2 4 3 4 3 2 2 4 5 5 4 3 3 3 4 4 2 3 3 4 4 3 3 5 1 4
+[1296] 3 4 3 2 3 4 3 3 4 5 3 3 4 3 4 3 2 4 4 3 3 3 5 3 4 3 5 4 4 3 4 3 5 1 4 3 1
+[1333] 2 4 4 5 3 4 4 3 3 3 4 3 3 5 4 3 1 3 3 5 3 3 3 4 2 3 5 3 2 4 3 4 1 3 4 1 5
+[1370] 3 4 3 3 3 4 3 3 5 4 5 4 3 4 2 4 5 2 4 3 3 5 5 3 2 4 5 4 4 3 3 2 3 2 2 3 3
+[1407] 4 4 5 3 4 2 3 2 3 1 2 1 2 3 2 3 3 3 4 4 1 4 2 5 3 5 2 4 4 3 4 4 4 5 3 2 3
+[1444] 1 5 3 4 3 3 3 2 4 3 4 4 3 4 3 2 4 3 4 2 4 3 3 5 4 3 5 4 2 5 4 4 2 3 2 3 3
+[1481] 3 2 5 5 5 4 4 1 3 4 3 4 3 2 5 3 4 3 3 5 1 4 4 4 3 3 3 3 4 3 4 3 4 2 3 3 3
+[1518] 3 5 4 5 5 3 2 4 3 4 4 3 3 4 3 4 3 3 2 4 4 4 5 2 4 4 1 3 3 3 5 3 3 5 3 3 3
+[1555] 3 5 4 3 2 2 4 3 3 2 3 3 3 3 3 4 4 5 5 4 2 4 3 2 3 4 4 3 1 4 2 1 5 4 2 4 3
+[1592] 3 2 3 3 4 5 3 2 2 4 1 3 2 5 3 3 3 2 4 5 5 5 4 3 5 5 4 2 4 3 5 3 1 4 5 3 2
+[1629] 4 5 5 3 2 3 3 4 1 3 5 2 3 3 2 4 3 2 3 2 3 5 3 2 2 5 3 2 4 4 4 3 4 2 4 2 3
+[1666] 2 4 2 5 5 1 3 4 2 3 5 3 3 5 5 3 4 4 2 2 4 2 4 3 4 4 4 3 3 2 2 2 4 5 2 3 3
+[1703] 5 1 3 4 5 2 3 5 5 3 2 2 4 3 3 5 3 4 4 3 3 5 3 4 4 4 3 3 4 4 5 4 4 3 3 3 3
+[1740] 4 3 3 4 2 2 5 3 4 4 2 3 4 4 2 4 3 3 2 3 2 4 2 4 4 4 4 5 2 2 3 4 3 2 4 2 4
+[1777] 4 4 4 4 3 2 4 4 3 4 4 5 4 5 2 2 2 2 3 5 4 5 2 2 1 4 4 2 4 1 3 5 2 4 5 3 1
+[1814] 3 5 4 2 3 3 3 3 2 4 3 5 3 5 3 4 1 5 5 2 3 4 2 5 4 3 5 4 5 3 4 3 4 5 3 4 4
+[1851] 4 3 3 5 1 2 5 3 3 1 2 4 3 4 3 3 4 4 1 5 3 3 3 4 1 2 3 5 5 2 4 3 2 4 4 2 3
+[1888] 2 4 5 4 3 2 3 5 3 1 3 2 3 1 2 3 2 4 3 3 3 3 4 4 3 4 4 3 4 2 4 2 3 3 5 3 4
+[1925] 5 3 4 3 4 4 5 4 1 4 3 3 3 2 2 5 1 4 4 3 3 3 4 4 4 4 2 4 3 4 1 4 5 2 4 3 5
+[1962] 1 3 3 3 4 5 2 3 3 4 3 3
+
+Within cluster sum of squares by cluster:
+[1]  54.2000 108.4060 401.9303 622.3750 127.0700
+ (between_SS / total_SS =  66.7 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+[6] "betweenss"    "size"         "iter"         "ifault"      </code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># コード10-8</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">fviz_cluster</span>(</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  K_shopping,  <span class="co"># k-means法の結果</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="at">data =</span> clus_cons, <span class="co"># クラスター分析対象データ</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="at">geom =</span> <span class="st">"point"</span> <span class="co"># プロットの形状</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="fu">labs</span>( <span class="co"># タイトルと軸ラベル</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="at">title =</span> <span class="st">"k = 5"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10"></a>    <span class="at">x =</span> <span class="st">"Brand switching(Std. score)"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11"></a>    <span class="at">y =</span> <span class="st">"Price orientation(Std. score)"</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="chapter10_files/figure-html/code10-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># コード10-9</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>df_cons<span class="sc">$</span>cluster_id <span class="ot">&lt;-</span> <span class="fu">factor</span>(K_shopping<span class="sc">$</span>cluster)</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(df_cons), <span class="at">caption =</span> <span class="st">"結合データ"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>結合データ</caption>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 16%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">県番号</th>
+<th style="text-align: right;">性別</th>
+<th style="text-align: right;">年齢</th>
+<th style="text-align: right;">結婚有無</th>
+<th style="text-align: right;">q12_4</th>
+<th style="text-align: right;">q13_3</th>
+<th style="text-align: left;">Pref</th>
+<th style="text-align: left;">Gender</th>
+<th style="text-align: left;">MaritalSt.</th>
+<th style="text-align: left;">cluster_id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Tokyo</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Not Married</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Tokyo</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">Not Married</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Tokyo</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">Married</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Tokyo</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">Married</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Hyogo</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">Married</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Hyogo</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">Married</td>
+<td style="text-align: left;">3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># コード10-10</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a>clus_summary <span class="ot">&lt;-</span> df_cons <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">group_by</span>(cluster_id) <span class="sc">|&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb14-6"><a href="#cb14-6"></a>    <span class="at">N =</span> <span class="fu">n</span>(),</span>
+<span id="cb14-7"><a href="#cb14-7"></a>    <span class="at">Loyalty_m =</span> <span class="fu">mean</span>(q12_4),</span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="at">Price_m   =</span> <span class="fu">mean</span>(q13_3),</span>
+<span id="cb14-9"><a href="#cb14-9"></a>    <span class="at">Age_m     =</span> <span class="fu">mean</span>(年齢),</span>
+<span id="cb14-10"><a href="#cb14-10"></a>    <span class="at">Male_r    =</span> <span class="fu">sum</span>(Gender <span class="sc">==</span> <span class="st">"Male"</span>) <span class="sc">/</span> <span class="fu">n</span>(),</span>
+<span id="cb14-11"><a href="#cb14-11"></a>    <span class="at">Tokyo_r   =</span> (<span class="fu">sum</span>(Pref <span class="sc">==</span> <span class="st">"Tokyo"</span>) <span class="sc">/</span> <span class="fu">n</span>()) <span class="sc">/</span> (<span class="dv">1465</span> <span class="sc">/</span> <span class="dv">1973</span>),</span>
+<span id="cb14-12"><a href="#cb14-12"></a>    <span class="at">Married_r =</span> <span class="fu">sum</span>(MaritalSt. <span class="sc">==</span> <span class="st">"Married"</span>) <span class="sc">/</span> <span class="fu">n</span>()</span>
+<span id="cb14-13"><a href="#cb14-13"></a>  )</span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="co"># 表示</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(clus_summary, <span class="at">caption =</span> <span class="st">"クラスターサマリー"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>クラスターサマリー</caption>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 5%">
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">cluster_id</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">Loyalty_m</th>
+<th style="text-align: right;">Price_m</th>
+<th style="text-align: right;">Age_m</th>
+<th style="text-align: right;">Male_r</th>
+<th style="text-align: right;">Tokyo_r</th>
+<th style="text-align: right;">Married_r</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">1.000000</td>
+<td style="text-align: right;">3.850000</td>
+<td style="text-align: right;">42.61250</td>
+<td style="text-align: right;">0.5125000</td>
+<td style="text-align: right;">0.8753925</td>
+<td style="text-align: right;">0.5250000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">298</td>
+<td style="text-align: right;">2.738255</td>
+<td style="text-align: right;">4.218121</td>
+<td style="text-align: right;">38.56040</td>
+<td style="text-align: right;">0.5134228</td>
+<td style="text-align: right;">0.9400188</td>
+<td style="text-align: right;">0.6107383</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">760</td>
+<td style="text-align: right;">3.417105</td>
+<td style="text-align: right;">2.792105</td>
+<td style="text-align: right;">41.88816</td>
+<td style="text-align: right;">0.5065789</td>
+<td style="text-align: right;">1.0100683</td>
+<td style="text-align: right;">0.5618421</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">592</td>
+<td style="text-align: right;">2.552365</td>
+<td style="text-align: right;">1.876689</td>
+<td style="text-align: right;">43.79730</td>
+<td style="text-align: right;">0.4645270</td>
+<td style="text-align: right;">1.0191680</td>
+<td style="text-align: right;">0.4712838</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">243</td>
+<td style="text-align: right;">4.300412</td>
+<td style="text-align: right;">4.222222</td>
+<td style="text-align: right;">34.91770</td>
+<td style="text-align: right;">0.5102881</td>
+<td style="text-align: right;">1.0363938</td>
+<td style="text-align: right;">0.6213992</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/so-ichi\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./part03.html" class="pagination-link" aria-label="第3部 探索型データ分析">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">第3部 探索型データ分析</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter11.html" class="pagination-link" aria-label="第11章">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, Soichi Matsuura</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ma2ura">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/matsuura_rits">
+      <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

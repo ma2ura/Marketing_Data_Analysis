@@ -1,0 +1,6 @@
+img {
+  border: 1px black solid;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5); /* 影を追加 */
+  display: block; /* ブロック要素として扱う */
+  margin: 0 auto; /* 左右の余白を自動設定で中央揃え */
+}

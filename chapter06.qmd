@@ -1,0 +1,53 @@
+## 第6章
+
+```{r}
+pacman::p_load(tidyverse, readxl, GGally, knitr)
+
+# コード6-1
+firmdata <- readxl::read_xlsx("data/MktRes_firmdata.xlsx")
+
+# コード6-2
+library(tidyverse)
+firmdata19 <- firmdata %>%
+  filter(fyear == 2019)
+
+# コード6-3
+# install.packages("GGally")
+
+# コード6-4
+firmdata19 %>%
+  select(sales, mkexp, emp, operating_profit) %>%
+  GGally::ggpairs() + labs(title = "ggpairs example")
+
+# コード6-5
+ds1 <- firmdata19 %>%
+  select(sales, mkexp, emp, operating_profit) %>%
+  summary()
+knitr::kable(ds1, align = "cccc")
+
+# コード6-6
+reg1 <- lm(sales ~ emp, data = firmdata19)
+coef(reg1)
+
+# コード6-7
+summary(reg1)
+
+# コード6-8
+confint(reg1, level = 0.99)
+
+# コード6-9
+reg2 <- lm(operating_profit ~ adv, data = firmdata19)
+summary(reg2)
+
+# コード6-10
+confint(reg2)
+
+# コード6-11
+reg3 <- lm(operating_profit ~ adv + temp + emp + labor_cost
+           + total_assets + rd, data = firmdata19)
+summary(reg3)
+
+# コード6-12
+confint(reg3)
+```
+

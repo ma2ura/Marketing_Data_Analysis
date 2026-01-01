@@ -1,0 +1,85 @@
+## 第11章 
+
+```{r}
+
+pacman::p_load(psych, GPArotation, tidyverse, readxl, gt, gtExtras, dendextend, cluster, factoextra, useful, ggrepel)
+
+# コード11-1
+# install.packages("psych")
+# install.packages("GPArotation")
+
+# コード11-2
+factor_exdata <- readxl::read_excel("data/factor_ex.xlsx", na = ".")
+
+factor_exdata$V5 <- 8 - factor_exdata$V5
+rownames(factor_exdata) <- factor_exdata$ID
+
+factor_exdata2 <- factor_exdata %>%
+  select(-ID)
+knitr::kable(summary(factor_exdata2))
+
+# コード11-3
+knitr::kable(cor(factor_exdata2), caption = "相関行列")
+
+# コード11-4
+cor.exdata <- cor(factor_exdata2)
+
+VSS.scree(cor.exdata)
+
+# コード11-5
+fa <- fa(r = factor_exdata2, nfactors = 2,
+  rotate = "promax", fm = "ml")
+fa
+
+# コード11-6
+fa.diagram(fa)
+
+# コード11-7
+fs <- data.frame(fa$scores)
+factor_exdata2$rowname <- rownames(factor_exdata2)
+fs$rowname <- rownames(fs)
+factor_exdata2 <- left_join(factor_exdata2, fs, by = "rowname")
+knitr::kable(head(factor_exdata2), caption = "結合後データ")
+
+# コード11-8
+
+ex_cluster <- factor_exdata2 %>%
+  select(ML1, ML2)
+Hier1 <- agnes(ex_cluster, metric = "euclidian", stand = TRUE)
+pltree(Hier1)
+
+# コード11-9
+cl_1 <- kmeans(ex_cluster, 3)
+clus_fa <- data.frame(cl_1$cluster)
+clus_fa$rowname <- rownames(clus_fa)
+factor_exdata2 <- left_join(factor_exdata2, clus_fa, by = "rowname")
+factor_exdata2$cl_1.cluster <- factor(factor_exdata2$cl_1.cluster)
+
+# Visualizing the clusters with 2 factors
+p1 <- ggplot(data = factor_exdata2,
+             mapping = aes(x = ML1, y = ML2, color = cl_1.cluster))
+p1 + geom_point() +
+  geom_text_repel(mapping = aes(label = rownames(factor_exdata2))) +
+  labs(x = "Ease of use", y = "Design")
+
+# コード11-10
+factor_exdata3 <- factor_exdata %>%
+  select(-ID)
+pca_res <- pca(factor_exdata3, nfactors = 2, rotate = "none")
+pca_res
+
+# コード11-11
+# データの相関行列から固有値と固有ベクトルを抽出
+cor_ex <- cor(factor_exdata3)
+eigen_list <- eigen(cor_ex)
+
+# 固有ベクトルについての情報をオブジェクトとして定義
+pc1_eig <- eigen_list$vectors[, 1]
+pc2_eig <- eigen_list$vectors[, 2]
+
+# 固有ベクトルに，固有値の平方根を乗じる
+PC1 <- pc1_eig * sqrt(eigen_list$values[1])
+PC2 <- pc2_eig * sqrt(eigen_list$values[2])
+knitr::kable(data.frame(cbind(PC1, PC2)), caption = "計算結果")
+```
+

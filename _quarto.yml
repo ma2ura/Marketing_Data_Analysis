@@ -1,0 +1,158 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "マーケティング・データ分析の学習メモ"
+  reader-mode: true
+  page-footer:
+      border: true
+      background: "#a10000"
+      left: "Copyright 2025, Soichi Matsuura"
+      right:
+        - icon: github
+          href: https://github.com/ma2ura
+        - icon: twitter
+          href: https://twitter.com/matsuura_rits
+          aria-label: Twitter
+  cover-image: img/tagashira.jpg
+  favicon: img/favicon.ico
+  site-url: https://so-ichi.com
+  repo-url: https://github.com/ma2ura/Marketing_Data_Analysis/
+  repo-branch: main
+
+  chapters:
+    - index.qmd
+    - part: part01.qmd
+      chapters:
+        - chapter04.qmd
+    - part: part02.qmd
+      chapters:
+        - chapter05.qmd
+        - chapter06.qmd
+        - chapter07.qmd
+        - chapter08.qmd
+    - part: part03.qmd
+      chapters:
+        - chapter10.qmd
+        - chapter11.qmd
+        - chapter12.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - styles.scss
+    # mainfont: "Noto Sans JP"
+    # monofont: "0xProto"
+    # fontsize: 1.2em
+    # code-ling: true
+    html-math-method: katex
+    author-meta: "Soichi Matsuura"
+    # callout-appearance: simple
+    code-copy: hover
+    code-overflow: scroll
+    # code-link: true
+    code-line-numbers: true
+    link-external-icon: true
+    df-print: paged
+    # grid:
+      # sidebar-width: 350px
+      # body-width: 1200px
+    twitter-card: true
+    page-navigation: true
+    back-to-top-navigation: true
+    include-in-header:
+      text: |
+        <style>
+        .marky {
+          background: linear-gradient(transparent 60%, #FCFFC1 0%);
+        }
+        .markb {
+          background: linear-gradient(transparent 60%, #88E2EA 0%);
+        }
+        .markp{
+          background: linear-gradient(transparent 70%, #ffcdd2 0%)
+        }
+        </style>
+  pdf:
+    pdf-engine: lualatex
+    documentclass: ltjsbook
+    include-in-header:
+      - text: |
+          \usepackage{float}
+          \usepackage{caption}
+          \usepackage{longtable}
+          \usepackage{placeins}
+          \usepackage{booktabs}
+          \usepackage{indentfirst}
+          \setlength{\parindent}{2em}
+          \setlength{\parskip}{0pt}
+          \usepackage{fvextra}
+          \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+  # pdf:
+  #   pdf-engine: lualatex
+  #   documentclass: ltjbook
+  #   classoption:
+  #     - a4paper
+  #     - 10pt
+  #     # - pandoc
+  #     # - twoside
+  #     - ja=standard
+  #     - jafont=hiragino-pron
+
+  #   theme: sandstone
+  #   keep-tex: true
+  #   toc: true
+  #   toc-depth: 3
+  #   number-sections: true
+  #   colorlinks: true
+  #   monofontoptions:
+  #     - Scale=0.8
+
+  #   include-in-header:
+  #     - text: |
+  #         \usepackage{float}
+  #         \usepackage{caption}
+  #         \usepackage{longtable}
+  #         \usepackage{placeins}
+  #         \usepackage{booktabs}
+  #         \usepackage{indentfirst}
+  #         \floatplacement{figure}{H}
+  #         \floatplacement{table}{H}
+  #         \setlength{\parindent}{2em}
+  #         \setlength{\parskip}{0pt}
+
+  #         % 欄外が詰まり過ぎる場合の保険（必要なら）
+  #         \setlength{\marginparpush}{6pt}
+
+  #   geometry:
+  #     # - a4paper
+  #     - inner=10mm
+  #     - outer=50mm
+  #     - top=10mm
+  #     - bottom=10mm
+  #     - marginparsep=2mm
+  #     - marginparwidth=40mm
+
+  #   hyperrefoptions:
+  #     - linktoc=all
+  #     - pdfwindowui
+  #     - pdfpagemode=FullScreen
+
+# engine: knitr
+# webr:
+#   show-startup-message: false    # Disable displaying status of webR initialization
+#   packages: ['ggplot2', 'dplyr', 'tidyr'] # Install R packages on document open
+# filters:
+#     - webr
+# reference-location: margin
+# citation-location: margin
+
+knitr:
+  opts_chunk:
+    dev: ragg_png     # 文字化け防止
+    dpi: 450          # 高解像度の図を使用（サイズ大きめ）
+    fig-align: center # 図は中央揃え
+    warning: false    # 警告メッセージを消す
+    message: false    # 通常メッセージを消す

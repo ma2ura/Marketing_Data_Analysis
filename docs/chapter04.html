@@ -1,0 +1,2884 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Soichi Matsuura">
+
+<title>2&nbsp; データ整理と要約 – マーケティング・データ分析の学習メモ</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./part02.html" rel="next">
+<link href="./part01.html" rel="prev">
+<link href="./img/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-59a70e526be758e388535452c17524de.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<style>
+.marky {
+  background: linear-gradient(transparent 60%, #FCFFC1 0%);
+}
+.markb {
+  background: linear-gradient(transparent 60%, #88E2EA 0%);
+}
+.markp{
+  background: linear-gradient(transparent 70%, #ffcdd2 0%)
+}
+</style>
+
+
+<meta name="twitter:title" content="2&nbsp; データ整理と要約 – マーケティング・データ分析の学習メモ">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part01.html">第1部</a></li><li class="breadcrumb-item"><a href="./chapter04.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">マーケティング・データ分析の学習メモ</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/ma2ura/Marketing_Data_Analysis/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./part01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第1部</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter04.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./part02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第2部 仮説検証型データ分析</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">第6章</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">第7章</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">第8章 消費者の選択と離散選択モデル</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./part03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第3部 探索型データ分析</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">第12章</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#dplyrでデータの要約" id="toc-dplyrでデータの要約" class="nav-link active" data-scroll-target="#dplyrでデータの要約"><span class="header-section-number">2.0.1</span> dplyrでデータの要約</a></li>
+  <li><a href="#企業データの処理" id="toc-企業データの処理" class="nav-link" data-scroll-target="#企業データの処理"><span class="header-section-number">2.0.2</span> 企業データの処理</a></li>
+  <li><a href="#データの要約" id="toc-データの要約" class="nav-link" data-scroll-target="#データの要約"><span class="header-section-number">2.1</span> 4 データの要約</a></li>
+  <li><a href="#カテゴリ変数の要約" id="toc-カテゴリ変数の要約" class="nav-link" data-scroll-target="#カテゴリ変数の要約"><span class="header-section-number">2.2</span> カテゴリ変数の要約</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part01.html">第1部</a></li><li class="breadcrumb-item"><a href="./chapter04.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>第4章は、データを読み込んで、形を整えて、特徴をつかむためのデータを要約する方法を学びます。 Rは最初から用意されている基本関数だけでも十分強力ですが、外部で開発された様々なパッケージを使うと、さらに便利にデータ操作ができます。</p>
+<p>はじめに外部のパッケージをインストールしてRの機能を拡張します。 Rでデータを操作する際に超強力なパッケージ群である<code>tidyverse</code>を読み込みます。 あとで使うExcelファイルを読み込むための<code>readxl</code>パッケージも一緒に読み込みます。</p>
+<p>テキストでは、<code>install.packages()</code>関数でパッケージをインストールして、<code>library()</code>関数で読み込んでいますが、ここでは<span class="markp">pacman`パッケージを使って、必要なパッケージを一括でインストールおよび読み込みをします</span>。</p>
+<p>まず始めに、<code>pacman</code>パッケージをインストールします。 この作業はここで1回だけです。以降はこのコードは実行しなくて大丈夫です。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># first time only</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>次に、<code>pacman</code>パッケージの<code>p_load()</code>関数を使って，<code>tidyverse</code>と<code>readxl</code>パッケージをインストールおよび読み込みします。 <code>::</code>という記法はパッケージ名を明示的に指定して関数を使う方法ですが、ここでは<code>pacman</code>パッケージの<code>p_load()</code>関数を指定して使っています。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, gt, gtExtras)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>一度<code>pacman</code>パッケージをインストールすれば、あとは<code>pacman::p_load()</code>関数を使うだけで、指定したパッケージがインストールされていなければ自動的にインストールし、読み込みまで行ってくれます。非常に便利です。</p>
+</div></div><p>作業ディレクトリ内の<code>data</code>フォルダに入っている<code>2022idpos.csv</code>というデータを読み込みます。 何を読み込んだのか確認するために，基本関数<code>head()</code>でデータの先頭6行を表示させます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>idpos <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/2022idpos.csv"</span>, <span class="at">na =</span> <span class="st">"."</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>idpos <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["id"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["date"],"name":[2],"type":["chr"],"align":["left"]},{"label":["spent"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["coupon"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"12","2":"2019/9/25","3":"14326","4":"1"},{"1":"32","2":"2019/9/10","3":"10232","4":"1"},{"1":"30","2":"2019/9/9","3":"6881","4":"1"},{"1":"29","2":"2019/9/4","3":"6365","4":"0"},{"1":"46","2":"2019/9/10","3":"7595","4":"1"},{"1":"44","2":"2019/9/14","3":"7858","4":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><code>readr</code>パッケージの<code>read_csv()</code>関数は，CSV形式のデータを読み込むための関数です。<code>na = "."</code>という引数は，データ内の<code>.</code>を欠損値として扱うことを指定しています。</p>
+</div></div><p>読み込んだデータに含まれている変数の名前を確認するため，基本関数<code>names()</code>を使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>idpos <span class="sc">|&gt;</span> <span class="fu">names</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "id"     "date"   "spent"  "coupon"</code></pre>
+</div>
+</div>
+<p>データの詳細を確認するため，<code>tidyverse</code>の<code>dplyr</code>パッケージの<code>glimpse()</code>関数を使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>idpos <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 3,000
+Columns: 4
+$ id     &lt;dbl&gt; 12, 32, 30, 29, 46, 44, 44, 32, 3, 34, 36, 3, 42, 18, 38, 4, 19…
+$ date   &lt;chr&gt; "2019/9/25", "2019/9/10", "2019/9/9", "2019/9/4", "2019/9/10", …
+$ spent  &lt;dbl&gt; 14326, 10232, 6881, 6365, 7595, 7858, 9405, 1821, 8375, 1828, 6…
+$ coupon &lt;dbl&gt; 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, …</code></pre>
+</div>
+</div>
+<p>Excelのようにデータを表示させたいなら，基本関数<code>View()</code>を使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">View</span>(idpos)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>これで，自分が読み込んだデータがどんなものかを確認できました。</p>
+<section id="dplyrでデータの要約" class="level3" data-number="2.0.1">
+<h3 data-number="2.0.1" class="anchored" data-anchor-id="dplyrでデータの要約"><span class="header-section-number">2.0.1</span> dplyrでデータの要約</h3>
+<p><code>tidyverse</code>の<code>dplyr</code>パッケージを使うと，データの要約が簡単にできます。 ここでは，</p>
+<ul>
+<li><code>summarise()</code>関数：データの要約統計量を計算する</li>
+<li><code>mutate()</code>関数：新しい変数を作成する</li>
+<li><code>filter()</code>関数：条件に合う行を抽出する</li>
+<li><code>select()</code>関数：特定の変数を抽出する</li>
+<li><code>arrange()</code>関数：データを並び替える</li>
+<li><code>rename()</code>関数：変数の名前を変更する</li>
+</ul>
+<p>の使い方を学びます。</p>
+<p>先ほど読み込んだデータには，</p>
+<ul>
+<li>id：顧客ID</li>
+<li>date：購入日</li>
+<li>spent：購入金額</li>
+<li>coupon：クーポン利用の有無 (1=利用, 0=未利用)</li>
+</ul>
+<p>という4変数に3,000の観測値が含まれています。 このデータを<code>dplyr</code>の各関数を使って，以下のような操作をしてみます。</p>
+<p>まず，</p>
+<ol type="1">
+<li><code>select()</code>関数で<code>spent</code>と<code>coupon</code>を抽出し，</li>
+<li><code>arrange()</code>関数で<code>spent</code>の降順に並び替え，</li>
+<li><code>mutate()</code>関数で<code>spent</code>の金額を10倍した<code>spent10</code>という新しい変数を作成し，</li>
+<li><code>filter()</code>関数で<code>spent10</code>が10000以上の行を抽出し，</li>
+<li><code>summarise()</code>関数で<code>spent10</code>の平均を計算し，</li>
+<li><code>rename()</code>関数で<code>spent10</code>を<code>spent_times10</code>に名前変更する，</li>
+</ol>
+<p>という一連の操作を行います(この処理に意味はないです。)</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># コード4-11（見本コード）</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>idpos <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">select</span>(spent, coupon) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(spent)) <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">mutate</span>(<span class="at">spent10 =</span> spent <span class="sc">*</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">filter</span>(spent10 <span class="sc">&gt;=</span> <span class="dv">10000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">summarise</span>(<span class="at">mean_spent10 =</span> <span class="fu">mean</span>(spent10)) <span class="sc">|&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">rename</span>(<span class="at">spent_times10 =</span> mean_spent10)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["spent_times10"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"82391.01"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>すると，spentを10倍して，1万円以上の買い物の平均値を計算した結果が<code>spent_times10</code>として表示されます。</p>
+<p>このように加工したデータを<code>csv</code>ファイルとして保存するには、<code>readr</code>パッケージの<code>write_csv()</code>関数を使います。 <code>write_csv()</code>関数は、第1引数に保存したいデータフレームを指定し、第2引数に保存先のファイルパスを指定します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(idpos, <span class="at">path =</span> <span class="st">"data/new_data.csv"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="企業データの処理" class="level3 page-columns page-full" data-number="2.0.2">
+<h3 data-number="2.0.2" class="anchored" data-anchor-id="企業データの処理"><span class="header-section-number">2.0.2</span> 企業データの処理</h3>
+<p>MS Excelのファイルを読み込むこともできます。 ここでは，<code>readxl</code>パッケージの<code>read_xlsx()</code>関数を使って，企業データを読み込みます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>firmdata <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,431
+Columns: 31
+$ fyear                  &lt;dbl&gt; 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018,…
+$ legalname              &lt;chr&gt; "ハウステンボス株式会社", "ハウステンボス株式会社", "ハウステンボス株式会社", "ハ…
+$ ind_en                 &lt;chr&gt; "Miscellaneous Services", "Miscellaneous Servic…
+$ parent                 &lt;chr&gt; "エイチ・アイ・エス", "エイチ・アイ・エス", "エイチ・アイ・エス", "エイチ・アイ・…
+$ fiscal_month           &lt;chr&gt; "2011/10", "2012/10", "2013/10", "2014/10", "20…
+$ current_liability      &lt;dbl&gt; 65509, 76206, 85459, 98384, 122993, 102805, 131…
+$ ltloans                &lt;dbl&gt; 0, 4781, 23411, 22780, 14319, 77042, 101603, 11…
+$ total_liability        &lt;dbl&gt; 73428, 96734, 125233, 179036, 194254, 237245, 3…
+$ current_assets         &lt;dbl&gt; 102810, 111697, 137515, 196789, 212979, 233531,…
+$ ppent                  &lt;dbl&gt; 12383, 40554, 45511, 48704, 60761, 62291, 83001…
+$ total_assets           &lt;dbl&gt; 139018, 173497, 215913, 281332, 308245, 332385,…
+$ net_assets_per_capital &lt;dbl&gt; 65589, 76763, 90680, 102295, 113990, 95139, 111…
+$ sales                  &lt;dbl&gt; 380805, 431483, 479478, 523246, 537456, 523705,…
+$ sga                    &lt;dbl&gt; 61158, 65654, 69953, 80033, 88284, 90769, 98822…
+$ operating_profit       &lt;dbl&gt; 9407, 11316, 11843, 15906, 19970, 14274, 15915,…
+$ net_profit             &lt;dbl&gt; 8958, 10881, 11190, 11271, 14025, 1305, 15835, …
+$ pnet_profit            &lt;dbl&gt; 8300, 9331, 8903, 9050, 10890, 267, 13259, 1106…
+$ re                     &lt;dbl&gt; 47658, 55966, 63664, 71612, 82150, 80988, 92731…
+$ adv                    &lt;dbl&gt; 8565, 9691, 10694, 11665, 12969, 12647, 12371, …
+$ labor_cost             &lt;dbl&gt; 30624, 31743, 31648, 37240, 40402, 41505, 46583…
+$ rd                     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 176, 0, 0, 0, 0, 0, 0, 0, …
+$ other_sg               &lt;dbl&gt; 14962, 17078, 19720, 21648, 24043, 24710, 26067…
+$ emp                    &lt;dbl&gt; 6265, 8310, 9026, 9652, 10143, 10845, 13510, 13…
+$ temp                   &lt;dbl&gt; 1751, 2470, 2750, 3071, 3469, 3535, 3422, 3179,…
+$ tempratio              &lt;dbl&gt; 0.2184381, 0.2291280, 0.2335258, 0.2413739, 0.2…
+$ indgrowth              &lt;dbl&gt; -0.0038649153, 0.0780674898, -0.0737512474, 0.0…
+$ adint                  &lt;dbl&gt; 0.02249183, 0.02245975, 0.02230342, 0.02229353,…
+$ rdint                  &lt;dbl&gt; 0.0000000000, 0.0000000000, 0.0000000000, 0.000…
+$ mkexp                  &lt;dbl&gt; 0.16060188, 0.15215895, 0.14589408, 0.15295482,…
+$ op                     &lt;dbl&gt; 0.02470293, 0.02622583, 0.02469978, 0.03039870,…
+$ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0.032…</code></pre>
+</div>
+</div>
+<p>31変数1,431観測値からならなるデータが読み込まれました。 必要な変数が変わることもあるかと思うので、先に必要な変数名をベクトル<code>vars_list</code>として保存しておきます。</p>
+<p>必要な観測値と変数だけを抽出して、新しい変数を作成し、並び替えて、新しいオブジェクト<code>firm2018_check</code>に格納します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># 必要な変数のリスト</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>vars_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"legalname"</span>, <span class="st">"fyear"</span>, <span class="st">"sales"</span>, <span class="st">"labor_cost"</span>, <span class="st">"emp"</span>, <span class="st">"temp"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># コード4-28</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>firm2018_check <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2018</span>) <span class="sc">|&gt;</span> <span class="co"># 2018年のデータを抽出</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(vars_list)) <span class="sc">|&gt;</span> <span class="co"># 必要な変数を選択</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">mutate</span>(<span class="at">wage =</span> labor_cost <span class="sc">/</span> (temp <span class="sc">+</span> emp), <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="co"># 新しい変数wageを作成</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="co"># temp + empが0でないチェックが必要かも</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wage)) <span class="co"># wageの降順に並び替え</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="fu">head</span>(firm2018_check, <span class="at">n =</span> <span class="dv">10</span>) <span class="co"># 先頭10行を表示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["legalname"],"name":[1],"type":["chr"],"align":["left"]},{"label":["fyear"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["sales"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["labor_cost"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["emp"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["temp"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["wage"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["na.rm"],"name":[8],"type":["lgl"],"align":["right"]}],"data":[{"1":"株式会社リクルート","2":"2018","3":"2310756","4":"388583","5":"45856","6":"2449","7":"8.044364","8":"TRUE"},{"1":"株式会社 大丸松坂屋百貨店","2":"2018","3":"459840","4":"62692","5":"6695","6":"3581","7":"6.100817","8":"TRUE"},{"1":"株式会社 帝国ホテル","2":"2018","3":"58426","4":"17307","5":"1940","6":"998","7":"5.890742","8":"TRUE"},{"1":"株式会社 髙島屋","2":"2018","3":"912848","4":"83779","5":"7761","6":"8849","7":"5.043889","8":"TRUE"},{"1":"株式会社コメリ","2":"2018","3":"346862","4":"43991","5":"4646","6":"4777","7":"4.668471","8":"TRUE"},{"1":"株式会社オートバックスセブン","2":"2018","3":"213840","4":"22139","5":"4171","6":"747","7":"4.501627","8":"TRUE"},{"1":"株式会社ロイヤルホテル","2":"2018","3":"40884","4":"13115","5":"2049","6":"894","7":"4.456337","8":"TRUE"},{"1":"オルビス株式会社","2":"2018","3":"248574","4":"28555","5":"4181","6":"2330","7":"4.385655","8":"TRUE"},{"1":"株式会社ファンケル","2":"2018","3":"122496","4":"15103","5":"1381","6":"2213","7":"4.202282","8":"TRUE"},{"1":"近畿日本ツーリスト株式会社","2":"2018","3":"411821","4":"38186","5":"6956","6":"2189","7":"4.175615","8":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><code>all_of()</code>関数は、<code>select()</code>関数内で使用され、変数名のベクトルを指定して、その変数を選択するために使います。これにより、変数名が動的に指定でき、コードの柔軟性が向上します。</p>
+</div></div></section>
+<section id="データの要約" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="データの要約"><span class="header-section-number">2.1</span> 4 データの要約</h2>
+<p>大規模データをあつかうとき、データそのものを眺めていても特徴をつかむことは難しいので、そのデータを特徴付ける代表値を計算して、そこからデータの特徴をつかみます。 主要な代表値として、平均値(mean)や中央値(median)、散らばり具合を示す分散(variance)や標準偏差(standard deviation)があります。 それぞれ、</p>
+<ul>
+<li>平均値：<code>mean()</code>関数</li>
+<li>中央値：<code>median()</code>関数</li>
+<li>分散：<code>var()</code>関数</li>
+<li>標準偏差：<code>sd()</code>関数</li>
+</ul>
+<p>を使って計算します。</p>
+<p>先ほどのデータ<code>firm2018_check</code>の<code>sales</code>変数について、代表値を計算してみます。 ここでは、<code>dplyr</code>パッケージの<code>summarize()</code>関数を使って、平均、中央値、分散、標準偏差を一度に計算します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>firm2018_check <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb14-3"><a href="#cb14-3"></a>    <span class="at">mean_sales   =</span> <span class="fu">mean</span>(sales),</span>
+<span id="cb14-4"><a href="#cb14-4"></a>    <span class="at">median_sales =</span> <span class="fu">median</span>(sales),</span>
+<span id="cb14-5"><a href="#cb14-5"></a>    <span class="at">var_sales    =</span> <span class="fu">var</span>(sales),</span>
+<span id="cb14-6"><a href="#cb14-6"></a>    <span class="at">sd_sales     =</span> <span class="fu">sd</span>(sales)</span>
+<span id="cb14-7"><a href="#cb14-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["mean_sales"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["median_sales"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["var_sales"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd_sales"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1242425","2":"526675","3":"3.69048e+12","4":"1921062"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="カテゴリ変数の要約" class="level2 page-columns page-full" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="カテゴリ変数の要約"><span class="header-section-number">2.2</span> カテゴリ変数の要約</h2>
+<p>つぎに、データ上は数値や文字列として記録されていても、その数値や文字列がカテゴリーを表す名義尺度(nominal scale)である場合を考えましょう。</p>
+<p>例えば、<code>firmdata</code>の中の産業分類を表す<code>ind_en</code>変数は、文字列で表現されていますが、その文字列はある観測値が所属するカテゴリーを表しています。 <code>fyear</code>変数は数値ですが、これは年度を表すカテゴリー変数です。</p>
+<p>カテゴリ内の観測値の頻度を確認するには基本関数<code>table()</code>を使いますが、ここでは、dplyr::<code>count()</code>関数を使って、<code>ind_en</code>変数の各カテゴリーの頻度を計算し、<code>gt</code>パッケージで表形式で表示します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>firm2018 <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2018</span>) <span class="co"># 2018年のデータを抽出</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>firm2018 <span class="sc">|&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(ind_en, <span class="at">name =</span> <span class="st">"企業数"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="ibsbgwyqjx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#ibsbgwyqjx table {
+  font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ibsbgwyqjx thead, #ibsbgwyqjx tbody, #ibsbgwyqjx tfoot, #ibsbgwyqjx tr, #ibsbgwyqjx td, #ibsbgwyqjx th {
+  border-style: none;
+}
+
+#ibsbgwyqjx p {
+  margin: 0;
+  padding: 0;
+}
+
+#ibsbgwyqjx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 3px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ibsbgwyqjx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ibsbgwyqjx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ibsbgwyqjx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ibsbgwyqjx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ibsbgwyqjx .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ibsbgwyqjx .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ibsbgwyqjx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ibsbgwyqjx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ibsbgwyqjx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ibsbgwyqjx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ibsbgwyqjx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ibsbgwyqjx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ibsbgwyqjx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ibsbgwyqjx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  vertical-align: middle;
+}
+
+#ibsbgwyqjx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ibsbgwyqjx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ibsbgwyqjx .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ibsbgwyqjx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ibsbgwyqjx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ibsbgwyqjx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ibsbgwyqjx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ibsbgwyqjx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ibsbgwyqjx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ibsbgwyqjx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ibsbgwyqjx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ibsbgwyqjx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ibsbgwyqjx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ibsbgwyqjx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ibsbgwyqjx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ibsbgwyqjx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ibsbgwyqjx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ibsbgwyqjx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ibsbgwyqjx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ibsbgwyqjx .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ibsbgwyqjx .gt_left {
+  text-align: left;
+}
+
+#ibsbgwyqjx .gt_center {
+  text-align: center;
+}
+
+#ibsbgwyqjx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ibsbgwyqjx .gt_font_normal {
+  font-weight: normal;
+}
+
+#ibsbgwyqjx .gt_font_bold {
+  font-weight: bold;
+}
+
+#ibsbgwyqjx .gt_font_italic {
+  font-style: italic;
+}
+
+#ibsbgwyqjx .gt_super {
+  font-size: 65%;
+}
+
+#ibsbgwyqjx .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ibsbgwyqjx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ibsbgwyqjx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ibsbgwyqjx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ibsbgwyqjx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ibsbgwyqjx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ibsbgwyqjx .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ibsbgwyqjx .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ibsbgwyqjx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="ind_en" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">ind_en</th>
+<th id="a企業数" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">企業数</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Air Transportation</td>
+<td class="gt_row gt_right" headers="企業数">8</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Amusement Services</td>
+<td class="gt_row gt_right" headers="企業数">4</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Bakery Products</td>
+<td class="gt_row gt_right" headers="企業数">1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Communication Services</td>
+<td class="gt_row gt_right" headers="企業数">2</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Cosmetics &amp; Toilet Goods</td>
+<td class="gt_row gt_right" headers="企業数">3</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Department Stores</td>
+<td class="gt_row gt_right" headers="企業数">7</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Foods, NEC</td>
+<td class="gt_row gt_right" headers="企業数">1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Home &amp; Pre-Fabs</td>
+<td class="gt_row gt_right" headers="企業数">2</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Hotels</td>
+<td class="gt_row gt_right" headers="企業数">5</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Miscellaneous Services</td>
+<td class="gt_row gt_right" headers="企業数">27</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Miscellaneous Wholesales</td>
+<td class="gt_row gt_right" headers="企業数">2</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Motor Vehicles</td>
+<td class="gt_row gt_right" headers="企業数">4</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Musical Instrument</td>
+<td class="gt_row gt_right" headers="企業数">1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Railroad (Major)</td>
+<td class="gt_row gt_right" headers="企業数">27</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Railroad (Minor)</td>
+<td class="gt_row gt_right" headers="企業数">2</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Real Estate - Sales</td>
+<td class="gt_row gt_right" headers="企業数">1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Retail Stores, NEC</td>
+<td class="gt_row gt_right" headers="企業数">35</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Supermarket Chains</td>
+<td class="gt_row gt_right" headers="企業数">14</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Trucking</td>
+<td class="gt_row gt_right" headers="企業数">1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>教科書のように<code>table()</code>関数を使うと簡単に頻度表が作れますが、オブジェクトの型が<code>table</code>型になってしまい、後で他の処理に使いにくくなるので、<code>data.frame</code>型のまま処理できる<code>dplyr::count()</code>関数を使いました。</p>
+</div></div><p>広告費を表す<code>adient</code>変数の観測値が全企業の中央値より大きいか否か、でダミー変数<code>ad_dummy</code>を作成し、<code>ind_en</code>変数と<code>ad_dummy</code>変数のクロス集計表を作成します。</p>
+<p>教科書を先取りしますが、<code>if_else()</code>関数を使ってダミー変数を作成し、<code>count()</code>関数でクロス集計表を作成し、<code>gt</code>パッケージで表形式で表示します。 <code>tidyr</code>パッケージの<code>pivot_wider()</code>関数を使って、クロス集計表が見やすくなるように、縦は産業名、横は広告費が中央値より大きいか否か、で表示するように変形しています。</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><code>table()</code>関数を使うと簡単にクロス集計表が作れますが、あえて<code>data.frame</code>型のまま処理できる<code>dplyr::count()</code>関数を使っています。そのため、データが矩形データのまま扱えるので、後で他の処理に使いやすくなるものの、表にすると見にくくなるので、<code>tidyr::pivot_wider()</code>関数で見やすく変形しています。</p>
+</div></div><div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>firm2018 <span class="ot">&lt;-</span> firm2018 <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb16-3"><a href="#cb16-3"></a>    <span class="at">ad_dummy =</span> <span class="fu">if_else</span>(adint <span class="sc">&gt;</span> <span class="fu">median</span>(adint, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>L, <span class="dv">0</span>L)</span>
+<span id="cb16-4"><a href="#cb16-4"></a>    )</span>
+<span id="cb16-5"><a href="#cb16-5"></a>firm2018 <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">count</span>(ind_en, ad_dummy) <span class="sc">|&gt;</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> ad_dummy, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="aulvjewkwn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#aulvjewkwn table {
+  font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#aulvjewkwn thead, #aulvjewkwn tbody, #aulvjewkwn tfoot, #aulvjewkwn tr, #aulvjewkwn td, #aulvjewkwn th {
+  border-style: none;
+}
+
+#aulvjewkwn p {
+  margin: 0;
+  padding: 0;
+}
+
+#aulvjewkwn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 3px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#aulvjewkwn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#aulvjewkwn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#aulvjewkwn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#aulvjewkwn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aulvjewkwn .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aulvjewkwn .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aulvjewkwn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#aulvjewkwn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#aulvjewkwn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#aulvjewkwn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#aulvjewkwn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#aulvjewkwn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#aulvjewkwn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#aulvjewkwn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  vertical-align: middle;
+}
+
+#aulvjewkwn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#aulvjewkwn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#aulvjewkwn .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#aulvjewkwn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aulvjewkwn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#aulvjewkwn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#aulvjewkwn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#aulvjewkwn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aulvjewkwn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#aulvjewkwn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#aulvjewkwn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aulvjewkwn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aulvjewkwn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#aulvjewkwn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aulvjewkwn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#aulvjewkwn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aulvjewkwn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aulvjewkwn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aulvjewkwn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aulvjewkwn .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aulvjewkwn .gt_left {
+  text-align: left;
+}
+
+#aulvjewkwn .gt_center {
+  text-align: center;
+}
+
+#aulvjewkwn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#aulvjewkwn .gt_font_normal {
+  font-weight: normal;
+}
+
+#aulvjewkwn .gt_font_bold {
+  font-weight: bold;
+}
+
+#aulvjewkwn .gt_font_italic {
+  font-style: italic;
+}
+
+#aulvjewkwn .gt_super {
+  font-size: 65%;
+}
+
+#aulvjewkwn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#aulvjewkwn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#aulvjewkwn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#aulvjewkwn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#aulvjewkwn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#aulvjewkwn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#aulvjewkwn .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#aulvjewkwn .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#aulvjewkwn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="ind_en" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">ind_en</th>
+<th id="a0" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">0</th>
+<th id="a1" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">1</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Air Transportation</td>
+<td class="gt_row gt_right" headers="0">4</td>
+<td class="gt_row gt_right" headers="1">4</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Amusement Services</td>
+<td class="gt_row gt_right" headers="0">4</td>
+<td class="gt_row gt_right" headers="1">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Bakery Products</td>
+<td class="gt_row gt_right" headers="0">0</td>
+<td class="gt_row gt_right" headers="1">1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Communication Services</td>
+<td class="gt_row gt_right" headers="0">1</td>
+<td class="gt_row gt_right" headers="1">1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Cosmetics &amp; Toilet Goods</td>
+<td class="gt_row gt_right" headers="0">0</td>
+<td class="gt_row gt_right" headers="1">3</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Department Stores</td>
+<td class="gt_row gt_right" headers="0">0</td>
+<td class="gt_row gt_right" headers="1">7</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Foods, NEC</td>
+<td class="gt_row gt_right" headers="0">0</td>
+<td class="gt_row gt_right" headers="1">1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Home &amp; Pre-Fabs</td>
+<td class="gt_row gt_right" headers="0">0</td>
+<td class="gt_row gt_right" headers="1">2</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Hotels</td>
+<td class="gt_row gt_right" headers="0">5</td>
+<td class="gt_row gt_right" headers="1">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Miscellaneous Services</td>
+<td class="gt_row gt_right" headers="0">17</td>
+<td class="gt_row gt_right" headers="1">10</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Miscellaneous Wholesales</td>
+<td class="gt_row gt_right" headers="0">1</td>
+<td class="gt_row gt_right" headers="1">1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Motor Vehicles</td>
+<td class="gt_row gt_right" headers="0">0</td>
+<td class="gt_row gt_right" headers="1">4</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Musical Instrument</td>
+<td class="gt_row gt_right" headers="0">0</td>
+<td class="gt_row gt_right" headers="1">1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Railroad (Major)</td>
+<td class="gt_row gt_right" headers="0">27</td>
+<td class="gt_row gt_right" headers="1">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Railroad (Minor)</td>
+<td class="gt_row gt_right" headers="0">2</td>
+<td class="gt_row gt_right" headers="1">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Real Estate - Sales</td>
+<td class="gt_row gt_right" headers="0">0</td>
+<td class="gt_row gt_right" headers="1">1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Retail Stores, NEC</td>
+<td class="gt_row gt_right" headers="0">11</td>
+<td class="gt_row gt_right" headers="1">24</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Supermarket Chains</td>
+<td class="gt_row gt_right" headers="0">2</td>
+<td class="gt_row gt_right" headers="1">12</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Trucking</td>
+<td class="gt_row gt_right" headers="0">1</td>
+<td class="gt_row gt_right" headers="1">0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>次に、カテゴリ変数ごとに処理を行いたい場合、例えば、産業分類ごとに売上高の平均値や標準偏差を計算したい場合は、<code>group_by()</code>関数を使って、カテゴリ変数でグループ化してから、<code>summarize()</code>関数で集計します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># コード4-39</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>firm2018 <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">group_by</span>(ind_en) <span class="sc">|&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb17-5"><a href="#cb17-5"></a>      <span class="at">obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb17-6"><a href="#cb17-6"></a>      <span class="at">sales_m =</span> <span class="fu">mean</span>(sales),</span>
+<span id="cb17-7"><a href="#cb17-7"></a>      <span class="at">sales_sd =</span> <span class="fu">sd</span>(sales),</span>
+<span id="cb17-8"><a href="#cb17-8"></a>      <span class="at">adint_m =</span> <span class="fu">mean</span>(adint),</span>
+<span id="cb17-9"><a href="#cb17-9"></a>      <span class="at">adint_sd =</span> <span class="fu">sd</span>(adint)</span>
+<span id="cb17-10"><a href="#cb17-10"></a>      ) <span class="sc">|&gt;</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
+<span id="cb17-13"><a href="#cb17-13"></a>    <span class="at">columns =</span> <span class="fu">c</span>(sales_m, sales_sd, adint_m, adint_sd),</span>
+<span id="cb17-14"><a href="#cb17-14"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="kcggaziikf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#kcggaziikf table {
+  font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kcggaziikf thead, #kcggaziikf tbody, #kcggaziikf tfoot, #kcggaziikf tr, #kcggaziikf td, #kcggaziikf th {
+  border-style: none;
+}
+
+#kcggaziikf p {
+  margin: 0;
+  padding: 0;
+}
+
+#kcggaziikf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 3px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kcggaziikf .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kcggaziikf .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kcggaziikf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kcggaziikf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kcggaziikf .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kcggaziikf .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kcggaziikf .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kcggaziikf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kcggaziikf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kcggaziikf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kcggaziikf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kcggaziikf .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kcggaziikf .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kcggaziikf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  vertical-align: middle;
+}
+
+#kcggaziikf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kcggaziikf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kcggaziikf .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kcggaziikf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kcggaziikf .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kcggaziikf .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kcggaziikf .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kcggaziikf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kcggaziikf .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kcggaziikf .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kcggaziikf .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kcggaziikf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kcggaziikf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kcggaziikf .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kcggaziikf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kcggaziikf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kcggaziikf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kcggaziikf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kcggaziikf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kcggaziikf .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kcggaziikf .gt_left {
+  text-align: left;
+}
+
+#kcggaziikf .gt_center {
+  text-align: center;
+}
+
+#kcggaziikf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kcggaziikf .gt_font_normal {
+  font-weight: normal;
+}
+
+#kcggaziikf .gt_font_bold {
+  font-weight: bold;
+}
+
+#kcggaziikf .gt_font_italic {
+  font-style: italic;
+}
+
+#kcggaziikf .gt_super {
+  font-size: 65%;
+}
+
+#kcggaziikf .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kcggaziikf .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kcggaziikf .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kcggaziikf .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kcggaziikf .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kcggaziikf .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kcggaziikf .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#kcggaziikf .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#kcggaziikf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="ind_en" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">ind_en</th>
+<th id="obs" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">obs</th>
+<th id="sales_m" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">sales_m</th>
+<th id="sales_sd" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">sales_sd</th>
+<th id="adint_m" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">adint_m</th>
+<th id="adint_sd" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">adint_sd</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Air Transportation</td>
+<td class="gt_row gt_right" headers="obs">8</td>
+<td class="gt_row gt_right" headers="sales_m">1,772,786.50</td>
+<td class="gt_row gt_right" headers="sales_sd">305,239.60</td>
+<td class="gt_row gt_right" headers="adint_m">0.00</td>
+<td class="gt_row gt_right" headers="adint_sd">0.00</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Amusement Services</td>
+<td class="gt_row gt_right" headers="obs">4</td>
+<td class="gt_row gt_right" headers="sales_m">298,137.50</td>
+<td class="gt_row gt_right" headers="sales_sd">263,017.35</td>
+<td class="gt_row gt_right" headers="adint_m">0.00</td>
+<td class="gt_row gt_right" headers="adint_sd">0.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Bakery Products</td>
+<td class="gt_row gt_right" headers="obs">1</td>
+<td class="gt_row gt_right" headers="sales_m">1,059,442.00</td>
+<td class="gt_row gt_right" headers="sales_sd">NA</td>
+<td class="gt_row gt_right" headers="adint_m">0.01</td>
+<td class="gt_row gt_right" headers="adint_sd">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Communication Services</td>
+<td class="gt_row gt_right" headers="obs">2</td>
+<td class="gt_row gt_right" headers="sales_m">547,087.50</td>
+<td class="gt_row gt_right" headers="sales_sd">172,735.58</td>
+<td class="gt_row gt_right" headers="adint_m">0.02</td>
+<td class="gt_row gt_right" headers="adint_sd">0.03</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Cosmetics &amp; Toilet Goods</td>
+<td class="gt_row gt_right" headers="obs">3</td>
+<td class="gt_row gt_right" headers="sales_m">140,669.33</td>
+<td class="gt_row gt_right" headers="sales_sd">100,063.48</td>
+<td class="gt_row gt_right" headers="adint_m">0.11</td>
+<td class="gt_row gt_right" headers="adint_sd">0.05</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Department Stores</td>
+<td class="gt_row gt_right" headers="obs">7</td>
+<td class="gt_row gt_right" headers="sales_m">843,248.29</td>
+<td class="gt_row gt_right" headers="sales_sd">348,818.99</td>
+<td class="gt_row gt_right" headers="adint_m">0.02</td>
+<td class="gt_row gt_right" headers="adint_sd">0.01</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Foods, NEC</td>
+<td class="gt_row gt_right" headers="obs">1</td>
+<td class="gt_row gt_right" headers="sales_m">504,153.00</td>
+<td class="gt_row gt_right" headers="sales_sd">NA</td>
+<td class="gt_row gt_right" headers="adint_m">0.02</td>
+<td class="gt_row gt_right" headers="adint_sd">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Home &amp; Pre-Fabs</td>
+<td class="gt_row gt_right" headers="obs">2</td>
+<td class="gt_row gt_right" headers="sales_m">4,143,505.00</td>
+<td class="gt_row gt_right" headers="sales_sd">0.00</td>
+<td class="gt_row gt_right" headers="adint_m">0.01</td>
+<td class="gt_row gt_right" headers="adint_sd">0.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Hotels</td>
+<td class="gt_row gt_right" headers="obs">5</td>
+<td class="gt_row gt_right" headers="sales_m">62,134.80</td>
+<td class="gt_row gt_right" headers="sales_sd">58,060.28</td>
+<td class="gt_row gt_right" headers="adint_m">0.00</td>
+<td class="gt_row gt_right" headers="adint_sd">0.00</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Miscellaneous Services</td>
+<td class="gt_row gt_right" headers="obs">27</td>
+<td class="gt_row gt_right" headers="sales_m">311,867.22</td>
+<td class="gt_row gt_right" headers="sales_sd">456,036.57</td>
+<td class="gt_row gt_right" headers="adint_m">0.01</td>
+<td class="gt_row gt_right" headers="adint_sd">0.02</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Miscellaneous Wholesales</td>
+<td class="gt_row gt_right" headers="obs">2</td>
+<td class="gt_row gt_right" headers="sales_m">176,520.00</td>
+<td class="gt_row gt_right" headers="sales_sd">52,778.45</td>
+<td class="gt_row gt_right" headers="adint_m">0.02</td>
+<td class="gt_row gt_right" headers="adint_sd">0.03</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Motor Vehicles</td>
+<td class="gt_row gt_right" headers="obs">4</td>
+<td class="gt_row gt_right" headers="sales_m">5,279,121.75</td>
+<td class="gt_row gt_right" headers="sales_sd">4,233,187.72</td>
+<td class="gt_row gt_right" headers="adint_m">0.03</td>
+<td class="gt_row gt_right" headers="adint_sd">0.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Musical Instrument</td>
+<td class="gt_row gt_right" headers="obs">1</td>
+<td class="gt_row gt_right" headers="sales_m">434,373.00</td>
+<td class="gt_row gt_right" headers="sales_sd">NA</td>
+<td class="gt_row gt_right" headers="adint_m">0.04</td>
+<td class="gt_row gt_right" headers="adint_sd">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Railroad (Major)</td>
+<td class="gt_row gt_right" headers="obs">27</td>
+<td class="gt_row gt_right" headers="sales_m">1,302,920.52</td>
+<td class="gt_row gt_right" headers="sales_sd">1,037,834.05</td>
+<td class="gt_row gt_right" headers="adint_m">0.00</td>
+<td class="gt_row gt_right" headers="adint_sd">0.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Railroad (Minor)</td>
+<td class="gt_row gt_right" headers="obs">2</td>
+<td class="gt_row gt_right" headers="sales_m">260,502.00</td>
+<td class="gt_row gt_right" headers="sales_sd">0.00</td>
+<td class="gt_row gt_right" headers="adint_m">0.00</td>
+<td class="gt_row gt_right" headers="adint_sd">0.00</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Real Estate - Sales</td>
+<td class="gt_row gt_right" headers="obs">1</td>
+<td class="gt_row gt_right" headers="sales_m">1,861,195.00</td>
+<td class="gt_row gt_right" headers="sales_sd">NA</td>
+<td class="gt_row gt_right" headers="adint_m">0.01</td>
+<td class="gt_row gt_right" headers="adint_sd">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Retail Stores, NEC</td>
+<td class="gt_row gt_right" headers="obs">35</td>
+<td class="gt_row gt_right" headers="sales_m">571,019.17</td>
+<td class="gt_row gt_right" headers="sales_sd">547,246.68</td>
+<td class="gt_row gt_right" headers="adint_m">0.02</td>
+<td class="gt_row gt_right" headers="adint_sd">0.03</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ind_en">Supermarket Chains</td>
+<td class="gt_row gt_right" headers="obs">14</td>
+<td class="gt_row gt_right" headers="sales_m">4,335,164.07</td>
+<td class="gt_row gt_right" headers="sales_sd">3,511,346.59</td>
+<td class="gt_row gt_right" headers="adint_m">0.01</td>
+<td class="gt_row gt_right" headers="adint_sd">0.01</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ind_en">Trucking</td>
+<td class="gt_row gt_right" headers="obs">1</td>
+<td class="gt_row gt_right" headers="sales_m">1,118,094.00</td>
+<td class="gt_row gt_right" headers="sales_sd">NA</td>
+<td class="gt_row gt_right" headers="adint_m">0.00</td>
+<td class="gt_row gt_right" headers="adint_sd">NA</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<!-- 
+
+
+# コード4-40
+X <-tibble(
+  x1 = c(-3, -1, 0, 2, 5),
+  y1 = c(16, 12, 10, 6, 0),
+  y2 = c(8, 6, 5, 3, 0)
+)
+X
+
+# コード4-41
+cor(X$x1, X$y1)
+
+# コード4-42
+# For mac users
+# set_theme(theme_gray(base_size = 10, base_family = "HiraMinProN-W3"))
+
+# コード4-43
+ggplot (data = X, mapping = aes(x = x1, y = y1)) +
+  geom_point() +
+  geom_smooth(method = lm)
+
+# コード4-44
+AB <- tibble(A = c(-2, -1, 0, 1, 2), B = c(4, 1, 0, 1, 4))
+AB
+
+
+# コード4-45
+cor(AB$A, AB$B)
+
+# コード4-46
+ggplot(data = AB, mapping = aes(x = A, y = B)) +
+  geom_point() +
+  geom_smooth(
+    method = lm,
+    formula = y ~ x + I(x^2),
+    se = FALSE
+  )
+
+# コード4-47
+idpos <- readr::read_csv("data/2022idpos.csv", na = ".")
+head(idpos)
+
+# コード4-48
+idpos$datediff <-
+  as.numeric(difftime("2019-10-02", idpos$date, units = "days"))
+head(idpos)
+
+# コード4-49
+idpos_cust <- idpos %>%
+  group_by(id) %>%
+  summarize(frequency = n(),
+            monetary = sum(spent),
+            cherry = sum(coupon),
+            recency = min(datediff)
+            )
+head(idpos_cust)
+
+# コード4-50
+idpos_cust_m <- idpos_cust %>%
+  arrange(desc(monetary))
+
+# 上位 10 人の顧客 (Monetary)
+idpos_cust_m[1:10, ]
+
+# コード4-51
+id_data <- readr::read_csv("data/id_data.csv", na = ".")
+str(id_data)
+
+# コード4-52
+idpos_cust <- left_join(idpos_cust, id_data, by = "id")
+head(idpos_cust)
+
+# コード4-53
+idpos_cust_m <- idpos_cust %>%
+  arrange(desc(monetary))
+
+# 上位顧客 20 人中の男女比
+table(idpos_cust_m[1:20, ]$gender)
+
+# コード4-54
+idpos_cust_m$decile_rank <-
+  cut(idpos_cust_m$monetary,
+      quantile(idpos_cust_m$monetary, (0:10) / 10, na.rm = TRUE),
+      label = FALSE, include.lowest = TRUE)
+head(idpos_cust_m)
+
+# コード4-55
+decile <- idpos_cust_m %>%
+  group_by(decile_rank) %>%
+  summarize(freq = n(),
+            monetary = sum(monetary))
+total <- sum(decile$monetary)
+
+decile2 <- decile %>%
+  mutate(percent = monetary / total * 100) %>%
+  arrange(desc(decile_rank))
+
+decile2
+
+# コード4-56
+sales_wide <- readr::read_csv("data/sales_wide.csv", na = ".")
+sales_wide
+
+# コード4-57
+sales_long <- gather(data = sales_wide,
+                     key = "month", value = "sales", starts_with("sales"))
+sales_long
+
+# コード4-58
+sales_long <- sales_wide %>%
+  rename('06'  = sales06,
+         '07'  = sales07,
+         '08'  = sales08,
+         '09'  = sales09,
+         '10'  = sales10) %>%
+  gather(key = "month", value = "sales", '06':'10') %>%
+  arrange(store)
+sales_long
+
+# コード4-59
+wide_test <- sales_long %>%
+  spread(key = "month", value = "sales") %>%
+  rename(sales06 = '06',
+         sales07 = '07',
+         sales08 = '08',
+         sales09 = '09',
+         sales10 = '10')
+wide_test
+
+
+```
+--->
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/so-ichi\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./part01.html" class="pagination-link" aria-label="第1部">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">第1部</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./part02.html" class="pagination-link" aria-label="第2部 仮説検証型データ分析">
+        <span class="nav-page-text">第2部 仮説検証型データ分析</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, Soichi Matsuura</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ma2ura">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/matsuura_rits">
+      <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

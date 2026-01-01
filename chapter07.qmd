@@ -1,0 +1,180 @@
+## 第7章
+
+```{r}
+pacman::p_load(tidyverse, readxl, sjPlot, marginaleffects, car, modelsummary)
+# コード7-1
+# library(tidyverse)
+firmdata <- readxl::read_xlsx("data/MktRes_firmdata.xlsx")
+firmdata19 <- firmdata %>%
+  filter(fyear == 2019)
+#産業名を特定したオブジェクト"Retail"の作成
+retail <- c("Retail Stores, NEC", "Supermarket Chains",
+            "Department Stores")
+# Retail を使ったカテゴリー変数の作成
+firmdata19 <- firmdata19 %>%
+  mutate(format = ifelse(ind_en %in% retail, "Retail", "Other"))
+#カテゴリーの頻度チェック
+with(firmdata19, table(format))
+
+# コード7-2
+fit.d1 <- lm(op ~ mkexp + format, data = firmdata19)
+summary(fit.d1)
+
+# コード7-3
+firmdata19 <- firmdata19 %>%
+  mutate(retail = ifelse(format == "Retail", 1, 0))
+
+# 確認
+with(firmdata19, table(retail, format))
+
+# コード7-4
+fit.d2 <- lm(op ~ mkexp + retail, data = firmdata19)
+summary(fit.d2)
+
+# コード7-5
+fit.d3 <- lm(op ~ mkexp * retail, data = firmdata19)
+summary(fit.d3)
+
+# コード7-6
+# install.packages("sjPlot")
+
+# コード7-7
+# # library(sjPlot)
+pred <- plot_model(fit.d3,
+  type = "pred",
+  terms = c("mkexp", "retail"),
+  ci.lvl = .95) +
+  labs(
+    title = "Slope Analysis",
+    subtitle = "(Predicted Values of Profitability with 95% Confidence Intervals)",
+    x = "Marketing Expense",
+    y = "Profitability"
+  ) + scale_color_discrete(name = "Retail Dummy")
+pred
+
+# コード7-8
+Headphone07 <- readr::read_csv("data/headphone07.csv", na = ".")
+
+#データフレームの確認
+glimpse(Headphone07)
+
+# コード7-9
+fit_int <- lm(sales ~ rd * promotion, data = Headphone07)
+summary(fit_int)
+
+# コード7-10
+Headphone07 <- Headphone07 %>%
+  mutate(promotion_c = promotion - mean(promotion, na.rm = TRUE),
+         rd_c = rd - mean(rd, na.rm = TRUE))
+
+fit_int_c <- lm(sales ~ rd_c * promotion_c , data = Headphone07)
+summary(fit_int_c)
+
+# コード7-11
+leg = c("Mean - 1sd", "Mean", "Mean + 1sd")
+int_fig1 <- plot_model(fit_int_c,
+ type = "int",
+ mdrt.values = "meansd",
+ ci.lvl = .9999999999) +
+  labs(
+    title = "Predicted values of Sales(R&D * Promotion)",
+    x = "R&D Investment",
+    y = "Sales") +
+  scale_color_discrete(
+    name = "Promotion level",
+    labels = leg)
+int_fig1
+
+# コード7-12
+# install.packages("marginaleffects")
+
+# コード7-13
+# library(marginaleffects)
+int_fig2 <- plot_slopes(fit_int_c, variables = "rd_c",
+  condition = "promotion_c", conf_level = .99999999) +
+  labs(title = "Marginal effects of R&D on Sales",
+       x = "Promotion", y = "Slope of R&D on Sales") +
+  geom_hline(aes(yintercept = 0), linetype = "dashed")
+int_fig2
+
+# コード7-14
+firmdata19 <- firmdata19 %>%
+  mutate(mkexp_c = mkexp - mean(mkexp),
+         asset_c = total_assets - mean(total_assets))
+fit_int2 <- lm(op ~ mkexp_c * asset_c, data = firmdata19)
+int_fig3 <- plot_slopes(fit_int2, variables = "mkexp_c",
+  condition = "asset_c", conf_level = 0.99) +
+  geom_hline(aes(yintercept = 0), linetype = "dashed")
+int_fig3
+
+# コード7-15
+firmdata19 <- firmdata19 %>%
+  mutate(adv = (adv - mean(adv)) / sd(adv),
+         rd = (rd - mean(rd)) / sd(rd),
+         ad_rd = adv + rd)
+fit_linear <- lm(sales ~ adv + rd, data = firmdata19)
+summary(fit_linear) 
+
+# コード7-16
+fit_comp <- lm(sales ~ adv + ad_rd, data = firmdata19)
+summary(fit_comp)
+
+# コード7-17
+fit_prod <- lm(log(sales) ~ log(labor_cost) + log(ppent),
+  data = firmdata19)
+
+summary(fit_prod) 
+
+# コード7-18
+price <- readr::read_csv("data/price_data.csv")
+
+fit_q <- lm(log(q) ~ log(p), data = price)
+summary(fit_q) 
+
+# コード7-19
+# install.packages("car")
+
+# コード7-20
+# library(car)
+linearHypothesis(fit_q, c("log(p)= -1"))
+
+# コード7-21
+# install.packages("modelsummary")
+
+# コード7-22
+# library(modelsummary)
+msummary(fit_int, statistic = 'conf.int')
+
+# コード7-23
+msummary(fit_int, gof_omit = "Log.Lik.|AIC|BIC|RMSE")
+
+# コード7-24
+var_nam <- c("rd" = "R&D", "promotion" = "Promotion",
+             "rd:promotion" = "R&D * Promotion",
+             "rd_c" = "R&D_c", "promotion_c" = "Promotion_c",
+             "rd_c:promotion_c" = "R&D_c * Promotion_c",
+             "(Intercept)" = "定数項")
+Int <- list()
+Int[["Without centering"]] <- fit_int
+Int[["With centering"]] <- fit_int_c
+
+msummary(Int,
+  coef_map = var_nam,
+  title = "Comparing Interaction Models",
+  notes = "Values in [ ] show 95% confidence intervals",
+  stars = TRUE,
+  statistic = 'conf.int', conf_level = .95,
+  gof_omit = "Log.Lik.|AIC|BIC|RMSE")
+
+
+# コード7-25
+msummary(Int,
+  title = "Comparing Interaction Models",
+  notes = "Values in [ ] show 95% confidence intervals",
+  stars = TRUE,
+  statistic =  'conf.int', conf_level = .95,
+  gof_omit = "Log.Lik.|AIC|BIC|RMSE",
+  output = "latex")
+
+```
+

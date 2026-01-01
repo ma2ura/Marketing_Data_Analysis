@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Soichi Matsuura">
+
+<title>6&nbsp; 第8章 消費者の選択と離散選択モデル – マーケティング・データ分析の学習メモ</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./part03.html" rel="next">
+<link href="./chapter07.html" rel="prev">
+<link href="./img/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-59a70e526be758e388535452c17524de.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<style>
+.marky {
+  background: linear-gradient(transparent 60%, #FCFFC1 0%);
+}
+.markb {
+  background: linear-gradient(transparent 60%, #88E2EA 0%);
+}
+.markp{
+  background: linear-gradient(transparent 70%, #ffcdd2 0%)
+}
+</style>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta name="twitter:title" content="6&nbsp; 第8章 消費者の選択と離散選択モデル – マーケティング・データ分析の学習メモ">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part02.html">第2部 仮説検証型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter08.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">第8章 消費者の選択と離散選択モデル</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">マーケティング・データ分析の学習メモ</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/ma2ura/Marketing_Data_Analysis/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./part01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第1部</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./part02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第2部 仮説検証型データ分析</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">第6章</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">第7章</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter08.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">第8章 消費者の選択と離散選択モデル</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./part03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第3部 探索型データ分析</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">第12章</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#顕示選好の理論" id="toc-顕示選好の理論" class="nav-link active" data-scroll-target="#顕示選好の理論"><span class="header-section-number">6.1</span> 顕示選好の理論</a>
+  <ul class="collapse">
+  <li><a href="#選好モデル" id="toc-選好モデル" class="nav-link" data-scroll-target="#選好モデル"><span class="header-section-number">6.1.1</span> 選好モデル</a></li>
+  <li><a href="#選好" id="toc-選好" class="nav-link" data-scroll-target="#選好"><span class="header-section-number">6.1.2</span> 選好</a></li>
+  <li><a href="#xが有限集合の場合" id="toc-xが有限集合の場合" class="nav-link" data-scroll-target="#xが有限集合の場合"><span class="header-section-number">6.1.3</span> <span class="math inline">X</span>が有限集合の場合</a></li>
+  </ul></li>
+  <li><a href="#顕示選考理論" id="toc-顕示選考理論" class="nav-link" data-scroll-target="#顕示選考理論"><span class="header-section-number">6.2</span> 顕示選考理論</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part02.html">第2部 仮説検証型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter08.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">第8章 消費者の選択と離散選択モデル</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">第8章 消費者の選択と離散選択モデル</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="顕示選好の理論" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="顕示選好の理論"><span class="header-section-number">6.1</span> 顕示選好の理論</h2>
+<p>Kreps (1988) “Notes on the Theory of Choice”に基づいて，単一個人意思決定モデルの基礎的な考え方を説明します。</p>
+<p><span class="markp">「選択」(choice)という現象は，ある集合<span class="math inline">A</span>がある個人にとっての実際に選択可能な選択肢の集合であったときに，その中から個人によって1つの選択肢<span class="math inline">a \in A</span>が選ばれる，という現象</span>をいいます。 ここに，<span class="markp">「選ぶ」というのは，第三者に観察できる行為として選ぶ，ということに限って用いられます。</span> また，問題となっている集合<span class="math inline">A</span>の各要素<span class="math inline">a \in A</span>を「選択肢」(alternative)と呼びます。</p>
+<p>選択現象を問題にしている選択肢<span class="math inline">a</span>が確率的構造を持っているとき，その選択肢をとくに<strong>クジ</strong>(lottery)と呼びます。</p>
+<p>説明するべき対象を選択肢とします。</p>
+<p><span class="math display">
+X \supseteq A \mapsto a
+</span></p>
+<p>ここで<span class="math inline">A</span>は選択肢の集合で，<span class="math inline">a</span>はその選択肢を選んだ結果となります。<span class="math inline">X</span>は整合性を問題にできる選択肢集合のいちばん最大のもの，となります。</p>
+<p><span class="math inline">X</span>上の，この人の選択関数 <span class="math display">
+C : X \supseteq A \mapsto C(A) \subseteq X
+</span> が安定的に存在すると仮定します。 ここで<span class="math inline">C(A)</span>は，<span class="math inline">A</span>の中からこの人が選んだ選択肢集合を表します。</p>
+<p><span class="math inline">X</span>を考察する選択行動で，選択の対象となりうる潜在的な選択肢を集めた集合を表す。 選択集合とは，ある<span class="math inline">A \in \mathcal{P}(X)</span>が実際に選択可能な選択肢の集合であったときに，その中から1つの選択肢が選ばれる現象をいいます。 「選ばれる」といういうとき，現に選ばれた1つの選択肢以外にも「それでも同様に良かった」というものがあるとき，それらの「そのどれでも良かった」選択肢を全て集めた集合<span class="math inline">C</span>を，<span class="math inline">A</span>からの選択結果とみなします。</p>
+<p>選択関数を定義すると，</p>
+<p><span class="math inline">C: \mathcal{P}(X) \to \mathcal{P}(X)</span>が， <span class="math display">
+\forall A \in \mathcal{P}(X); \  C(A) \subseteq A
+</span> であるとき，<span class="math inline">X</span>上の選択関数(choice function)である，といいます。 ここで，<span class="math inline">\mathcal{P}(X)</span>は，<span class="math inline">X</span>の部分集合1つ1つを全部集めてできる冪集合(power set)のうち，<span class="math inline">X</span>の中から二者択一の結果だけを集めたデータを表します。</p>
+<section id="選好モデル" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="選好モデル"><span class="header-section-number">6.1.1</span> 選好モデル</h3>
+<p>二項関係(binary relation)を定義します。 <span class="math inline">X</span>の（たまたま同じであることを許す）2つの要素について語られた関係が，<span class="math inline">X</span>上の二項関係(binary relation)であるとは， <span class="math inline">X \times X</span>のすべての要素<span class="math inline">(x,y)</span>について，<span class="math inline">x</span>は<span class="math inline">y</span>に対してその関係にあるか，またはその関係にないか，を必ず一方をいうことができる場合を言います。</p>
+<p>つまり，選択肢集合<span class="math inline">A</span>に選択肢<span class="math inline">x</span>と<span class="math inline">y</span>があり，その人の選択結果<span class="math inline">C(\{x,y\}) = ?</span>を見ます。 その人が選択するものは，</p>
+<p><span class="math display">
+\begin{aligned}
+C(\{x,y\}) &amp;= \phi \quad \text{$x$も$y$も選べたのに選ばなかった。}\\
+C(\{x,y\}) &amp;= \{x\} \quad xを選び，yを選ばなかった\\
+C(\{x,y\}) &amp;= \{y\} \quad yを選び，xを選ばなかった\\
+C(\{x,y\}) &amp;= \{x,y\} \quad xもyも選んだ。
+\end{aligned}
+</span></p>
+</section>
+<section id="選好" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="選好"><span class="header-section-number">6.1.2</span> 選好</h3>
+<p><span class="math inline">X</span> 上の選択関数 <span class="math inline">C: \mathcal{P}(X) \rightarrow  \mathcal{P}(X)</span> が与えられたとき，<span class="math inline">X</span> の(それがたまたま同じであることを許す)2つの要素についての関係を，各 <span class="math inline">(x,y) \in X \times X</span> に対して，<span class="math inline">y \not \in C(\{x,y\})</span> なら，<span class="math inline">x</span> は <span class="math inline">y</span> に対してその関係にあり，<span class="math inline">y \in C(\{x,y\})</span> なら <span class="math inline">x</span> は <span class="math inline">y</span> に対してその関係にない，というやり方で定められるとき，その関係(それは二項関係である)を，(選択関数 <span class="math inline">C:\mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> によって生成された) <span class="math inline">X</span> 上の<strong>強選好</strong>(strict preference)といいます。</p>
+<p>この二項関係を記号 <span class="math inline">\succ</span> で表わし，<span class="math inline">x</span> が <span class="math inline">y</span> に対して強選好の関係にあるとき，<span class="math inline">x</span> を <span class="math inline">y</span> よりも厳密に選好する，あるいは <span class="math inline">x</span> は <span class="math inline">y</span> よりも厳密に選好されるといって，<span class="math inline">x \succ y</span> と書き，<span class="math inline">x</span> が <span class="math inline">y</span> に対して強選好の関係にないとき，<span class="math inline">x</span> は <span class="math inline">y</span> よりも厳密に選好されるわけではない，といって <span class="math inline">x \not \succ y</span> と書きます。</p>
+<p>ある <span class="math inline">X</span> 上の強選好 <span class="math inline">\succ</span> は，それが定義されたもとの選択関数 <span class="math inline">C : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>を明示する必要があるときは，<span class="math inline">\succ _c</span>と書く。</p>
+<p><span class="math inline">x,y</span>の二者択一の結果，<span class="math inline">C(\{ x,y \})</span>を， <span class="math display">
+\begin{aligned}
+&amp; x \not \succ y \Longleftrightarrow y \in      C(\{x,y\})\leftarrow \text{$x$は$y$より厳密に選好されるわけではない。}\\
+&amp; x      \succ y \Longleftrightarrow y \not \in C(\{x,y\})\leftarrow xはyより厳密に選好される。
+\end{aligned}
+</span></p>
+<p>のように書いたものを，この人の(強)選好という。</p>
+<p>つぎに、<span class="math inline">X</span> 上の強選好 <span class="math inline">\succ</span> が与えられたとき、各<span class="math inline">A \in \mathcal{P}(X)</span>に対し、 <span class="math display">
+C(A, \succ) = \{ x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}
+</span> を対応づける（集合体集合の）関数 <span class="math inline">C(\cdot , \succ) : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> を、<span class="math inline">X</span> 上の選択の<strong>選好モデル</strong>(preference model)といいます。</p>
+<p>まとめると、 <span class="math display">
+C : \mathcal{P}(X) \rightarrow C(A) \in \mathcal{P}(X)
+</span> のうち、「二者択一の結果を、<span class="math inline">X</span>の各ペア<span class="math inline">(x,y)</span> ごとに、<span class="math inline">x \succ y</span> か <span class="math inline">x \not \succ y</span> かを書いて、書いたものを<span class="math inline">X</span>上の（この人の）強選好」といいます。 選好モデルとは、 <span class="math display">
+C : \mathcal{P}(X) ∋ A \rightarrow C(A) \in \mathcal{P}(X)
+</span> を <span class="math display">
+\begin{aligned}
+&amp; C(\cdot, \succ) : \mathcal{P}(X) ∋ A \rightarrow C(A, \succ) \in \mathcal{P}(X)\\
+&amp; \text{such that} \quad C(A, \succ) = \{ x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}
+\end{aligned}
+</span> となり、この選好<span class="math inline">\succ</span>をもつ人が、実際に<span class="math inline">A</span>に直面したときに選ぶと予測するということを意味します。 これは<span class="math inline">C(\cdot , \succ)</span>のデータから予測されます。</p>
+<p><span class="math inline">C(\cdot , \succ) : \mathcal{P}(X) ∋ A \rightarrow C(A, \succ) \in \mathcal{P}(X)</span>は、<span class="math inline">C : \mathcal{P}(X) ∋ A  \rightarrow C(A) \in \mathcal{P}(X)</span>のうち、<span class="math inline">|X|^2</span>個のデータで、<span class="math inline">C : \mathcal{P}(X) ∋ A  \rightarrow C(A) \in \mathcal{P}(X)</span>全体の<span class="math inline">2^{|X|}</span>個の値を予測しているのです。</p>
+<p>合理性モデルでは、「もし・・・なら、<span class="math inline">\forall A \in \mathcal{P}; C(A, \succ) = C(A)</span>となります。</p>
+<p>ふりかえると、</p>
+<ul>
+<li>説明する対象は、選択関数 <span class="math inline">C : \mathcal{P}(X) \in A  \mapsto C(A) \in \mathcal{P}(X)</span> である。</li>
+<li>データを取ってくるパラメータとしての選好<span class="math inline">\succ</span> (つまり、<span class="math inline">X</span>上のすべての二者択一の結果)を考えます。</li>
+<li>選択を説明するモデルは選好モデルは、 <span class="math display">
+C(A, \succ) = \{x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}
+</span> となります。つまり、「自分より良いものが存在しない」要素だけを集めたものを意味します。</li>
+<li>選択理論とは、「<span class="math inline">C: \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> が･･･の条件を満たすとき、<span class="math inline">C</span>のうち××から作った<span class="math inline">C(A, ××)  = C(A)</span> 」が成り立つような「･･･」と「××」を考えます。</li>
+</ul>
+<p>ただ、選好<span class="math inline">\succ</span>としてどんなものでも認めてしまうと、</p>
+<p><span class="math display">
+\exists \succ, \exists A \quad \text{s.t.} \quad C(A, \succ) = \emptyset
+</span> となる場合があります。 たとえば、<span class="math inline">A = X = \{x, y, z\}</span>で、 <span class="math inline">C(\{x,y\}) = \{x\}</span>、 <span class="math inline">C(\{y,z\}) = \{y\}</span>、 <span class="math inline">C(\{x,z\}) = \{z\}</span> かつ、 <span class="math inline">C(A) \not = \emptyset</span>. 場合、<span class="math inline">C(\{x,y,z\}) = \emptyset</span> となります。</p>
+<p>つまり、</p>
+<ul>
+<li><span class="math inline">z \succ x</span> より <span class="math inline">x \not \in C(\{x,y, z\}, \succ)</span></li>
+<li><span class="math inline">x \succ y</span> より <span class="math inline">y \not \in C(\{x,y, z\}, \succ)</span></li>
+<li><span class="math inline">y \succ z</span> より <span class="math inline">z \not \in C(\{x,y, z\}, \succ)</span></li>
+</ul>
+<p>すなわち、<span class="math inline">C(\{x,y,z\}, \succ) = \emptyset</span> となります。</p>
+<p>では、どのような二者択一行動を示す人なら、その人の選好モデルは完結性があるのかを考えます。 次の2つの条件が満たされるとき、選好<span class="math inline">\succ</span>は<strong>完結性</strong>(completeness)を持つといいます。</p>
+<ol type="1">
+<li><strong>反対称性</strong>(asymmetry) : <span class="math inline">\forall x,y \in X;</span>, 「<span class="math inline">x \succ y</span> かつ <span class="math inline">y \succ x</span>」ということはない。つまり二者択一行動が<span class="math inline">C(\{x,y\}) = \{\emptyset\}</span>ということがない。</li>
+<li><strong>負推移性</strong>(negative transitivity) : <span class="math inline">\forall x,y \in X;</span>, 「もし <span class="math inline">x \not \succ y</span> かつ <span class="math inline">y \not \succ z</span>」ならば「<span class="math inline">x \not \succ z</span>」である。 つまり二者択一行動としては、もし<span class="math inline">y \in C(\{x,y\})</span> かつ <span class="math inline">z \in C(\{y,z\})</span> ならば、<span class="math inline">z \in C(\{x,z\})</span> である。</li>
+</ol>
+<p>これより、<span class="math inline">X</span> 上の強選好 <span class="math inline">\succ</span> は、次のように定義できます。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>反対称性・負推移性
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">
+\nexists (x,y) \in X \times X; \quad \text{s.t} \quad x \succ y,  \quad y \succ x
+</span> であるとき、<strong>反対称的</strong>(assymmetric)である、あるいは反対称性を満たすといい、 <span class="math display">
+\forall x,y,z \in X; \quad \text{if} \quad x \not \succ y,  \quad y \not \succ z, \quad \text{then} \quad x \not \succ z
+</span> であるとき、<strong>負推移的</strong>(negatively transitive)である、あるいは負推移性を満たすといいます</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>選好関係
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">X</span> 上の強選好 <span class="math inline">\succ</span> は、反対称的かつ負推移的であるとき、<span class="math inline">X</span>上の<strong>選好関係</strong>(preference relation)であるといいます。</p>
+</div>
+</div>
+<p>選好<span class="math inline">\succ</span>が反対称的かつ負推移的であるとき、<strong>推移的</strong>(acyclic)であるといい、 <span class="math inline">x_1 \succ x_2</span> かつ <span class="math inline">x_2 \succ x_3</span> かつ <span class="math inline">\cdots</span> かつ <span class="math inline">x_{n-1} \succ x_n</span> なら <span class="math inline">x_1 \not = x_n</span> となります。</p>
+</section>
+<section id="xが有限集合の場合" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="xが有限集合の場合"><span class="header-section-number">6.1.3</span> <span class="math inline">X</span>が有限集合の場合</h3>
+<p><span class="math inline">X</span> 上の強選好 <span class="math inline">\succ</span> が <span class="math display">
+\forall x \in X; \quad x \not \succ x
+</span> であるとき、<strong>非反射的</strong>(irreflexive)である、あるいは非反射性を満たすといいます。</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>推移性
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">X</span> 上の強選好 <span class="math inline">\succ</span> は、 <span class="math display">
+\forall x, y, z \in X; \quad \text{if} \quad x \succ y, \ y \succ x, \quad \text{then} \quad x \succ z
+</span> であるとき、<strong>推移的</strong>(transitive)である、あるいは推移性を満たすといいます。</p>
+<p>証明は省略（背理法により示せます）。</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>非周期性
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>次に、<span class="math inline">X</span> 上の強選好 <span class="math inline">\succ</span> は、</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;\forall x_1, x_2, \cdots, x_n \in X;\\
+&amp;\quad \text{if} \quad x_1 \succ x_2, \ x_2 \succ x_3, \ \dots, \ x_{n-1} \succ x_n, \quad \text{then} \quad x_1 \not = x_n
+\end{aligned}
+</span> であるとき、<strong>非周期的</strong>(acyclic)である、あるいは非周期性を満たすといいます。</p>
+<p>証明は省略（帰納法により示せます）。</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">X</span> 上の強選好 <span class="math inline">\succ</span> は、<span class="math inline">X</span>上の選好関係ならば、非反射的かつ推移的かつ非周期的である。</p>
+</div>
+</div>
+<p><span class="math inline">X</span>上の選択関数 <span class="math inline">C : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>は、</p>
+<p><span class="math display">
+\begin{aligned}
+\forall A \in \mathcal{P}(X); \quad \text{if} \quad A \not = \emptyset \quad \text{then} \quad C(A) \not = \emptyset
+\end{aligned}
+</span> であるとき、<strong>非空</strong>(nonempty)であるといいます。</p>
+<p>これらの定理と定義から、次の定理が示せます。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">X</span> を有限集合(<span class="math inline">|X| &lt; \infty</span>)とします。 <span class="math inline">X</span> 上の強選好<span class="math inline">\succ</span>は、<span class="math inline">X</span>上の(反対称的と負推移性を満たす)選好関係ならば、<span class="math inline">A \not = \emptyset</span>のとき、<span class="math inline">C(\cdot, \succ): \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>は非空となります。</p>
+</div>
+</div>
+<p>が選好関係であるとき、<span class="math inline">X</span>が有限集合であれば、任意の<span class="math inline">A \in \mathcal{P}(X)</span>に対し、<span class="math inline">C(A, \succ) \not = \emptyset</span> となります。</p>
+<p>ここまでの説明により、ある個人の選択行動を説明するために必要な条件は、 <span class="markp">ある個人が(有限の)選択肢の中から選び取るとき、その人の選好が反対称的かつ負推移的であれば、選択肢集合が非空なら、その人がもつ選択関数は非空である</span>、ということがわかりました。</p>
+</section>
+</section>
+<section id="顕示選考理論" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="顕示選考理論"><span class="header-section-number">6.2</span> 顕示選考理論</h2>
+<p>選択肢集合<span class="math inline">X</span>が有限であるとします。 すると、<span class="math inline">X</span>上の強選好<span class="math inline">\succ</span>が<span class="math inline">X</span>上の選好関係であるならば、 <span class="math inline">C(\cdot , \succ) : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>は非空まつ<strong>ハウタッカーの公理</strong>(Houthakker’s axiom)を満たします。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>ハウタッカーの公理
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">X</span>上の選択関数<span class="math inline">C : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>は、 <span class="math display">
+\begin{aligned}
+&amp; \forall x,y \in X, \quad \forall A,B \in \mathcal{P}(X); \\
+&amp; \quad \text{if} \quad x,y \in A \cap B, \quad x \in C(A), \quad  y \in C(B)\\
+&amp; \quad \text{then} \quad x \in C(B), \quad y \in C(A)
+\end{aligned}
+</span> であるとき、<strong>ハウタッカーの公理</strong>を満たす、といいます。</p>
+</div>
+</div>
+<p>具体例で説明します。 たとえば、あなたの買い物の選択肢として</p>
+<ul>
+<li><span class="math inline">A=\{\text{みかん, リンゴ, バナナ}\}</span>、</li>
+<li><span class="math inline">B=\{\text{バナナ, リンゴ, ぶどう}\}</span></li>
+</ul>
+<p>があるとします。</p>
+<p>このとき、あなたは</p>
+<ul>
+<li><span class="math inline">A</span> の中からリンゴを選び（<span class="math inline">C(A)=\{\text{リンゴ}\}</span>）、</li>
+<li><span class="math inline">B</span> の中からバナナを選ぶ（<span class="math inline">C(B)=\{\text{バナナ}\}</span>）</li>
+</ul>
+<p>とします。</p>
+<p>リンゴとバナナはいずれも <span class="math inline">A\cap B</span> に含まれています。 ハウタッカーの公理は、この状況のもとでは、 選択肢集合が <span class="math inline">B</span> に変わってもリンゴが選ばれ、 選択肢集合が <span class="math inline">A</span> に変わってもバナナが選ばれなければならない、 ということを要請します。</p>
+<p>つまり、共通して含まれる選択肢については、 集合ごとに選択の優劣が入れ替わるような行動は許されない、 という選択の一貫性を表しています。</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>センの<span class="math inline">\alpha</span>規則性
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">X</span>上の選択関数<span class="math inline">C : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>は、</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; \forall x \in X, \quad \forall A,B \in \mathcal{P}(X);\\
+&amp; \quad \text{if} \quad x \in B \subset A, \quad x \in C(A),\\
+&amp; \quad \text{then} \quad x \in C(B)
+\end{aligned}
+</span></p>
+<p>であるとき、センの<strong><span class="math inline">\alpha</span>規則性</strong>(Sen’s property <span class="math inline">\alpha</span>)を満たす、といいます。</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>センの<span class="math inline">\alpha</span>規則性の具体例
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>あなたの選択肢の全集合を<span class="math inline">X</span>とし、 <span class="math inline">A=\{\text{みかん, リンゴ, バナナ}\}</span>、 <span class="math inline">B=\{\text{リンゴ, バナナ}\}</span> とします。このとき <span class="math inline">B \subset A</span> が成り立っています。</p>
+<p>いま、あなたが集合 <span class="math inline">A</span> からリンゴを選んでいる、すなわち <span class="math inline">C(A)=\{\text{リンゴ}\}</span> であるとします。リンゴは <span class="math inline">B</span> にも含まれています。</p>
+<p>センの <span class="math inline">\alpha</span> 規則性は、この状況において、選択肢集合が <span class="math inline">A</span> からその部分集合である <span class="math inline">B</span> に縮小されても、リンゴは引き続き選ばれなければならない、すなわち <span class="math inline">C(B)=\{\text{リンゴ}\}</span> であることを要請します。</p>
+<p>言い換えると、ある選択肢がより大きな集合の中で選ばれていたのであれば、その選択肢を排除しない範囲で選択肢集合を減らしても、その選択肢が選ばれなくなることは許されない、という性質を表しています。</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>センの<span class="math inline">\beta</span>規則性
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">X</span>上の選択関数<span class="math inline">C : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>は、 <span class="math display">
+\begin{aligned}
+&amp;\forall x,y \in X, \quad \forall A,B \in \mathcal{P}(X); \\
+&amp;\quad \text{if} \quad x,y \in C(A), \quad  A \subset B, \quad y \in C(B), \\
+&amp;\quad \text{then} \quad x \in C(B)
+\end{aligned}
+</span> であるとき、センの<strong><span class="math inline">\beta</span>規則性</strong>(Sen’s property <span class="math inline">\beta</span>)を満たす、といいます。</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>センの<span class="math inline">\beta</span>規則性の具体例
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>選択肢の全集合を <span class="math inline">X</span> とし、 <span class="math inline">A=\{\text{リンゴ, バナナ}\}</span>、 <span class="math inline">B=\{\text{みかん, リンゴ, バナナ}\}</span> とします。このとき <span class="math inline">A \subset B</span> が成り立っています。</p>
+<p>いま、集合 <span class="math inline">A</span> からはリンゴとバナナの両方を選んでいる、すなわち <span class="math inline">C(A)=\{\text{リンゴ, バナナ}\}</span> とします。</p>
+<p>次に、選択肢が増えた集合 <span class="math inline">B</span> からはバナナを選んでいる、すなわち <span class="math inline">C(B)=\{\text{バナナ}\}</span> であるとします。</p>
+<p>センの <span class="math inline">\beta</span> 規則性は、この状況のもとでは、集合 <span class="math inline">A</span> で同時に選ばれていたリンゴとバナナのうち、集合 <span class="math inline">B</span> に移ってもバナナが選ばれているのであれば、リンゴもまた集合 <span class="math inline">B</span> から選ばれなければならない、ということを要請します。</p>
+<p>したがって、この規則性を満たす選択関数では、 <span class="math inline">C(B)</span> は <span class="math inline">\{\text{バナナ}\}</span> ではなく、少なくともリンゴを含み、たとえば <span class="math inline">C(B)=\{\text{リンゴ, バナナ}\}</span> でなければならない、ということになります。</p>
+<p>この例は、集合を拡大したときに、もともと同時に選ばれていた選択肢の一部だけが残るような振る舞いを排除する性質を具体的に示しています。</p>
+</div>
+</div>
+<p>これらの公理と規則性から次の定理が示せます。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>定理
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">X</span>上の選択関数<span class="math inline">C : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>が非空とします。 このとき、<span class="math inline">C: \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> がハウタッカーの公理を満たすための必要十分条件は、それがセンの<span class="math inline">\alpha</span>規則性と<span class="math inline">\beta</span>規則性を満たすことです。</p>
+</div>
+</div>
+<p>具体例で説明してみます。 たとえばあなたが買い物をしているとき、選択肢集合<span class="math inline">A = \{豚肉, 牛肉, 鶏肉\}</span>の中から何かを選択する、選択問題に直面しているとします。 このとき、センの<span class="math inline">\alpha</span>規則性は、もしあなたが<span class="math inline">A</span>の中から牛肉を選んだとき(<span class="math inline">C(A) = \{牛肉\}</span>)、選択肢集合が<span class="math inline">B = \{牛肉, 鶏肉\} \subset A</span>に変わっても、あなたは牛肉を選ぶ、ということを意味します。</p>
+<p>次にセンの<span class="math inline">\beta</span>規則性は、もしあなたが<span class="math inline">A</span>の中から牛肉と鶏肉を選んだとき(<span class="math inline">C(A) = \{牛肉, 鶏肉\}</span>)、選択肢集合が<span class="math inline">B = \{豚肉, 牛肉, 鶏肉\} \supset A</span>に変わっても、あなたは鶏肉を選ぶ、ということを意味します。</p>
+<p>また、<span class="math inline">X</span>上の選択関数<span class="math inline">C : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> が非空( <span class="math inline">A\not = \emptyset</span>なら<span class="math inline">C(A) \not = \emptyset</span> )かつハウタッカーの公理を満たすならば、<span class="math inline">\succ_c</span>は<span class="math inline">X</span>上の選好関係<span class="math inline">\succ</span>であり(反対称性と負推移性を満たす)であり、しかも<span class="math inline">A \not = \emptyset</span>ならば、</p>
+<p><span class="math display">
+\forall A \in \mathcal{P}(X); \quad C(A, \succ_c) = C(A)
+</span> が成り立ちます。</p>
+<!-- そこで次のように選択関数 $C_{\succ} : \mathcal{P}(X) \rightarrow \mathcal{P}(X)$ を定めます。 -->
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, modelsummary, mfx, DescTools, mlogit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># コード8-1</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">Y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">X =</span> <span class="fu">c</span>(<span class="fl">3.4</span>, <span class="fl">5.22</span>, <span class="fl">7.06</span>, <span class="fl">2.81</span>, <span class="fl">4.11</span>, <span class="fl">10.34</span>, <span class="fl">13.67</span>, <span class="fl">15.99</span>, <span class="fl">9.09</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  )</span>
+<span id="cb2-6"><a href="#cb2-6"></a>lpm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> df1)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>pred_lpm1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lpm1)</span>
+<span id="cb2-8"><a href="#cb2-8"></a>pred_lpm1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           1            2            3            4            5            6 
+-0.006342894  0.173357681  0.355032986 -0.064597476  0.063760077  0.678888967 
+           7            8            9 
+ 1.007681776  1.236750640  0.555468243 </code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># コード8-2</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>choice_df <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/choice_data.xlsx"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">head</span>(choice_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["y1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["y2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["p1"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["p2"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["a1"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["a2"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"0","3":"10.700005","4":"16.794728","5":"0","6":"1"},{"1":"0","2":"1","3":"11.628883","4":"9.150576","5":"1","6":"0"},{"1":"1","2":"0","3":"8.966668","4":"9.312298","5":"1","6":"0"},{"1":"1","2":"0","3":"4.615471","4":"8.030111","5":"0","6":"0"},{"1":"1","2":"0","3":"7.806091","4":"19.193683","5":"1","6":"1"},{"1":"1","2":"0","3":"7.489050","4":"8.835001","5":"0","6":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># コード8-3</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>probit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>               <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> probit),</span>
+<span id="cb5-4"><a href="#cb5-4"></a>               <span class="at">data =</span> choice_df)</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">summary</span>(probit1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = y1 ~ p1 + a1, family = binomial(link = probit), 
+    data = choice_df)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  2.04117    0.22350   9.133  &lt; 2e-16 ***
+p1          -0.24720    0.02213 -11.171  &lt; 2e-16 ***
+a1           0.62763    0.08656   7.251 4.13e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1384.5  on 999  degrees of freedom
+Residual deviance: 1205.5  on 997  degrees of freedom
+AIC: 1211.5
+
+Number of Fisher Scoring iterations: 3</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># コード8-4</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>ols1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>           <span class="at">data =</span> choice_df)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>logit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit),</span>
+<span id="cb7-6"><a href="#cb7-6"></a>              <span class="at">data =</span> choice_df)</span>
+<span id="cb7-7"><a href="#cb7-7"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb7-8"><a href="#cb7-8"></a>models[[<span class="st">"Linear probability model"</span>]] <span class="ot">&lt;-</span> ols1</span>
+<span id="cb7-9"><a href="#cb7-9"></a>models[[<span class="st">"Probit model"</span>]] <span class="ot">&lt;-</span> probit1</span>
+<span id="cb7-10"><a href="#cb7-10"></a>models[[<span class="st">"Logit model"</span>]] <span class="ot">&lt;-</span> logit1</span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="fu">modelsummary</span>(models,</span>
+<span id="cb7-12"><a href="#cb7-12"></a>             <span class="at">title =</span> <span class="st">"モデル比較"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13"></a>             <span class="at">notes =</span> <span class="st">"Values in [ ] show robust standard errors"</span>,</span>
+<span id="cb7-14"><a href="#cb7-14"></a>             <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-15"><a href="#cb7-15"></a>             <span class="at">statistic =</span> <span class="st">"std.error"</span>,</span>
+<span id="cb7-16"><a href="#cb7-16"></a>             <span class="at">vcov =</span> <span class="st">"robust"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17"></a>             <span class="at">gof_map =</span> <span class="st">"nobs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_cy7zyzwfdm9nn7kkzlhc(i, j, css_id) {
+          var table = document.getElementById("tinytable_cy7zyzwfdm9nn7kkzlhc");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_cy7zyzwfdm9nn7kkzlhc');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_cy7zyzwfdm9nn7kkzlhc(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_cy7zyzwfdm9nn7kkzlhc");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 7, j: 3 },  ], css_id: 'tinytable_css_mraek3i1fyee2n01bbmo',}, 
+          { positions: [ { i: 6, j: 1 }, { i: 6, j: 2 }, { i: 6, j: 3 },  ], css_id: 'tinytable_css_vez89u8m40dl04f4jz62',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 2 }, { i: 2, j: 3 }, { i: 3, j: 3 }, { i: 4, j: 1 }, { i: 5, j: 2 }, { i: 4, j: 2 }, { i: 1, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 },  ], css_id: 'tinytable_css_zandvlw7x0xl6z0omod3',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_oq4vq4a2ojbnhctzhoao',}, 
+          { positions: [ { i: 7, j: 0 },  ], css_id: 'tinytable_css_5sl02zh52t7p866s2nzs',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_do8vvlcohgdyy91kphbu',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_l6wr68kvnf89dbri5ixy',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_itqsgay5vxp9hu5ace0d',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_cy7zyzwfdm9nn7kkzlhc(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_mraek3i1fyee2n01bbmo, .table th.tinytable_css_mraek3i1fyee2n01bbmo { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_vez89u8m40dl04f4jz62, .table th.tinytable_css_vez89u8m40dl04f4jz62 { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_zandvlw7x0xl6z0omod3, .table th.tinytable_css_zandvlw7x0xl6z0omod3 { text-align: center; }
+      .table td.tinytable_css_oq4vq4a2ojbnhctzhoao, .table th.tinytable_css_oq4vq4a2ojbnhctzhoao { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_5sl02zh52t7p866s2nzs, .table th.tinytable_css_5sl02zh52t7p866s2nzs { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_do8vvlcohgdyy91kphbu, .table th.tinytable_css_do8vvlcohgdyy91kphbu { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_l6wr68kvnf89dbri5ixy, .table th.tinytable_css_l6wr68kvnf89dbri5ixy { text-align: left; }
+      .table td.tinytable_css_itqsgay5vxp9hu5ace0d, .table th.tinytable_css_itqsgay5vxp9hu5ace0d { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_cy7zyzwfdm9nn7kkzlhc" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        </thead><caption>モデル比較</caption>
+              <tbody><tr>
+                <th scope="col"> </th>
+                <th scope="col">Linear probability model</th>
+                <th scope="col">Probit model</th>
+                <th scope="col">Logit model</th>
+              </tr>
+        
+        </tbody><tfoot><tr><td colspan="4">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr>
+<tr><td colspan="4">Values in [ ] show robust standard errors</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>(Intercept)</td>
+                  <td>1.196***</td>
+                  <td>2.041***</td>
+                  <td>3.332***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.065)</td>
+                  <td>(0.212)</td>
+                  <td>(0.361)</td>
+                </tr>
+                <tr>
+                  <td>p1</td>
+                  <td>-0.085***</td>
+                  <td>-0.247***</td>
+                  <td>-0.404***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.006)</td>
+                  <td>(0.021)</td>
+                  <td>(0.036)</td>
+                </tr>
+                <tr>
+                  <td>a1</td>
+                  <td>0.221***</td>
+                  <td>0.628***</td>
+                  <td>1.035***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.029)</td>
+                  <td>(0.087)</td>
+                  <td>(0.145)</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>1000</td>
+                  <td>1000</td>
+                  <td>1000</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># 適合度指標において，サンプルサイズ ("nobs") のみ表示するという指示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># コード8-5</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co"># Average Marginal Effects（限界効果の平均）</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>probit1_ame <span class="ot">&lt;-</span> <span class="fu">probitmfx</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
+<span id="cb9-4"><a href="#cb9-4"></a>                         <span class="at">data =</span> choice_df, <span class="at">atmean =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>probit1_ame</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+probitmfx(formula = y1 ~ p1 + a1, data = choice_df, atmean = FALSE)
+
+Marginal Effects:
+        dF/dx  Std. Err.        z     P&gt;|z|    
+p1 -0.0847786  0.0060787 -13.9469 &lt; 2.2e-16 ***
+a1  0.2188866  0.0289816   7.5526 4.266e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+dF/dx is for discrete change for the following variables:
+
+[1] "a1"</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># コード8-7</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># Marginal Effects at Mean（平均値における限界効果）</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>probit1_mem <span class="ot">&lt;-</span> <span class="fu">probitmfx</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
+<span id="cb11-4"><a href="#cb11-4"></a>                         <span class="at">data =</span> choice_df, <span class="at">atmean =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-5"><a href="#cb11-5"></a>probit1_mem</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+probitmfx(formula = y1 ~ p1 + a1, data = choice_df, atmean = TRUE)
+
+Marginal Effects:
+        dF/dx  Std. Err.        z     P&gt;|z|    
+p1 -0.0984235  0.0088074 -11.1750 &lt; 2.2e-16 ***
+a1  0.2446609  0.0324366   7.5427 4.602e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+dF/dx is for discrete change for the following variables:
+
+[1] "a1"</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># コード8-8</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>marginal <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="st">"p1 marginal"</span> <span class="ot">=</span> <span class="st">"p1"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="st">"a1 marginal"</span> <span class="ot">=</span> <span class="st">"a1"</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>)</span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a>marg_model <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="st">"(1) Probit_AME"</span> <span class="ot">&lt;-</span> probit1_ame,</span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="st">"(2) Probit_MEM"</span> <span class="ot">&lt;-</span> probit1_mem</span>
+<span id="cb13-10"><a href="#cb13-10"></a>)</span>
+<span id="cb13-11"><a href="#cb13-11"></a></span>
+<span id="cb13-12"><a href="#cb13-12"></a>marg_sum <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(</span>
+<span id="cb13-13"><a href="#cb13-13"></a>  marg_model,</span>
+<span id="cb13-14"><a href="#cb13-14"></a>  <span class="at">statistic =</span> <span class="st">"std.error"</span>,</span>
+<span id="cb13-15"><a href="#cb13-15"></a>  <span class="at">coef_map =</span> marginal,</span>
+<span id="cb13-16"><a href="#cb13-16"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-17"><a href="#cb13-17"></a>  <span class="at">shape =</span> term<span class="sc">:</span>component <span class="sc">~</span> model,</span>
+<span id="cb13-18"><a href="#cb13-18"></a>  <span class="at">add_rows =</span> <span class="fu">data.frame</span>(<span class="st">"Marginal effect type"</span>,</span>
+<span id="cb13-19"><a href="#cb13-19"></a>                        <span class="st">"Average Marginal Effect"</span>,</span>
+<span id="cb13-20"><a href="#cb13-20"></a>                        <span class="st">"Marginal Effect at Mean"</span>),</span>
+<span id="cb13-21"><a href="#cb13-21"></a>  <span class="at">title =</span> <span class="st">"限界効果サマリー"</span>,</span>
+<span id="cb13-22"><a href="#cb13-22"></a>  <span class="at">gof_map =</span> <span class="st">"nobs"</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a>)</span>
+<span id="cb13-24"><a href="#cb13-24"></a>marg_sum</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_w01a72dm125e0xasri8h(i, j, css_id) {
+          var table = document.getElementById("tinytable_w01a72dm125e0xasri8h");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_w01a72dm125e0xasri8h');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_w01a72dm125e0xasri8h(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_w01a72dm125e0xasri8h");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 6, j: 1 }, { i: 6, j: 2 },  ], css_id: 'tinytable_css_czdk5chvpogacqk9ihs6',}, 
+          { positions: [ { i: 4, j: 2 }, { i: 4, j: 1 },  ], css_id: 'tinytable_css_gci4gv2skye3ejchwzdt',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 1, j: 2 }, { i: 5, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 1 }, { i: 5, j: 2 }, { i: 2, j: 2 },  ], css_id: 'tinytable_css_sytavlpi3kjy2tqyiap8',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_5s8m8lyvuamx0trexa1l',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_0sh2hkr91ff4skhxoezc',}, 
+          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_nulbz96tfd1x09itvovp',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_fcxs1qf5jcppxogyef6n',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_hm1yvelonti1w19zwf9c',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_w01a72dm125e0xasri8h(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_czdk5chvpogacqk9ihs6, .table th.tinytable_css_czdk5chvpogacqk9ihs6 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_gci4gv2skye3ejchwzdt, .table th.tinytable_css_gci4gv2skye3ejchwzdt { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_sytavlpi3kjy2tqyiap8, .table th.tinytable_css_sytavlpi3kjy2tqyiap8 { text-align: center; }
+      .table td.tinytable_css_5s8m8lyvuamx0trexa1l, .table th.tinytable_css_5s8m8lyvuamx0trexa1l { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_0sh2hkr91ff4skhxoezc, .table th.tinytable_css_0sh2hkr91ff4skhxoezc { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_nulbz96tfd1x09itvovp, .table th.tinytable_css_nulbz96tfd1x09itvovp { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_fcxs1qf5jcppxogyef6n, .table th.tinytable_css_fcxs1qf5jcppxogyef6n { text-align: left; }
+      .table td.tinytable_css_hm1yvelonti1w19zwf9c, .table th.tinytable_css_hm1yvelonti1w19zwf9c { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_w01a72dm125e0xasri8h" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        </thead><caption>限界効果サマリー</caption>
+              <tbody><tr>
+                <th scope="col"> </th>
+                <th scope="col">(1)</th>
+                <th scope="col">(2)</th>
+              </tr>
+        
+        </tbody><tfoot><tr><td colspan="3">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>p1</td>
+                  <td>-0.085***</td>
+                  <td>-0.098***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.006)</td>
+                  <td>(0.009)</td>
+                </tr>
+                <tr>
+                  <td>a1</td>
+                  <td>0.219***</td>
+                  <td>0.245***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.029)</td>
+                  <td>(0.032)</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>1000</td>
+                  <td>1000</td>
+                </tr>
+                <tr>
+                  <td>Marginal effect type</td>
+                  <td>Average Marginal Effect</td>
+                  <td>Marginal Effect at Mean</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># コード8-9</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(probit1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> McFadden 
+0.1293345 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># コード8-10</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># 価格差変数作成</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>choice_df <span class="ot">&lt;-</span> choice_df <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="fu">mutate</span>(<span class="at">p_ratio =</span> p1 <span class="sc">-</span> p2)</span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a>probit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p_ratio <span class="sc">+</span> a1 <span class="sc">+</span> a2,</span>
+<span id="cb16-8"><a href="#cb16-8"></a>               <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> probit),</span>
+<span id="cb16-9"><a href="#cb16-9"></a>               <span class="at">data =</span> choice_df)</span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="fu">summary</span>(probit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = y1 ~ p_ratio + a1 + a2, family = binomial(link = probit), 
+    data = choice_df)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -0.54634    0.07756  -7.044 1.87e-12 ***
+p_ratio     -0.22180    0.01524 -14.559  &lt; 2e-16 ***
+a1           0.66314    0.09162   7.238 4.55e-13 ***
+a2          -0.32291    0.09884  -3.267  0.00109 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1384.5  on 999  degrees of freedom
+Residual deviance: 1066.9  on 996  degrees of freedom
+AIC: 1074.9
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># コード8-11</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(probit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>McFadden 
+0.229384 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># コード8-12</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>probit2_ame <span class="ot">&lt;-</span> <span class="fu">probitmfx</span>(y1 <span class="sc">~</span> p_ratio <span class="sc">+</span> a1 <span class="sc">+</span> a2,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>                         <span class="at">data =</span> choice_df, <span class="at">atmean =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb20-4"><a href="#cb20-4"></a>probit2_ame</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+probitmfx(formula = y1 ~ p_ratio + a1 + a2, data = choice_df, 
+    atmean = FALSE)
+
+Marginal Effects:
+             dF/dx  Std. Err.        z     P&gt;|z|    
+p_ratio -0.0669199  0.0029405 -22.7581 &lt; 2.2e-16 ***
+a1       0.2036848  0.0270475   7.5306 5.049e-14 ***
+a2      -0.0969891  0.0291848  -3.3233 0.0008897 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+dF/dx is for discrete change for the following variables:
+
+[1] "a1" "a2"</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># コード8-13</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">data</span>(Cracker, <span class="at">package =</span> <span class="st">"mlogit"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="fu">head</span>(Cracker, <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["id"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["disp.sunshine"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp.keebler"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["disp.nabisco"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["disp.private"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["feat.sunshine"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["feat.keebler"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["feat.nabisco"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["feat.private"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["price.sunshine"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["price.keebler"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["price.nabisco"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["price.private"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["choice"],"name":[14],"type":["fct"],"align":["left"]}],"data":[{"1":"1","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"98","11":"88","12":"120","13":"71","14":"nabisco","_rn_":"1"},{"1":"1","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"99","11":"109","12":"99","13":"71","14":"nabisco","_rn_":"2"},{"1":"1","2":"1","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"49","11":"109","12":"109","13":"78","14":"sunshine","_rn_":"3"},{"1":"1","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"103","11":"109","12":"89","13":"78","14":"nabisco","_rn_":"4"},{"1":"1","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"109","11":"109","12":"119","13":"64","14":"nabisco","_rn_":"5"},{"1":"1","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"89","11":"109","12":"119","13":"84","14":"nabisco","_rn_":"6"},{"1":"1","2":"0","3":"0","4":"1","5":"0","6":"0","7":"0","8":"0","9":"0","10":"109","11":"109","12":"129","13":"78","14":"sunshine","_rn_":"7"},{"1":"1","2":"0","3":"0","4":"1","5":"0","6":"0","7":"0","8":"0","9":"0","10":"109","11":"119","12":"129","13":"78","14":"nabisco","_rn_":"8"},{"1":"1","2":"0","3":"0","4":"1","5":"0","6":"0","7":"0","8":"0","9":"0","10":"109","11":"121","12":"109","13":"78","14":"nabisco","_rn_":"9"},{"1":"1","2":"1","3":"0","4":"1","5":"0","6":"0","7":"0","8":"0","9":"0","10":"79","11":"121","12":"109","13":"78","14":"nabisco","_rn_":"10"},{"1":"1","2":"0","3":"0","4":"1","5":"0","6":"0","7":"0","8":"0","9":"0","10":"109","11":"113","12":"109","13":"96","14":"nabisco","_rn_":"11"},{"1":"1","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"109","11":"121","12":"99","13":"86","14":"nabisco","_rn_":"12"},{"1":"1","2":"1","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"89","11":"121","12":"99","13":"86","14":"nabisco","_rn_":"13"},{"1":"1","2":"0","3":"1","4":"1","5":"0","6":"0","7":"0","8":"0","9":"0","10":"109","11":"109","12":"129","13":"96","14":"nabisco","_rn_":"14"},{"1":"1","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"109","11":"109","12":"129","13":"79","14":"nabisco","_rn_":"15"},{"1":"1","2":"0","3":"0","4":"1","5":"0","6":"0","7":"0","8":"0","9":"0","10":"129","11":"104","12":"129","13":"96","14":"nabisco","_rn_":"16"},{"1":"2","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"79","11":"99","12":"69","13":"69","14":"nabisco","_rn_":"17"},{"1":"2","2":"1","3":"0","4":"1","5":"0","6":"1","7":"0","8":"0","9":"0","10":"69","11":"105","12":"89","13":"65","14":"sunshine","_rn_":"18"},{"1":"2","2":"1","3":"0","4":"0","5":"0","6":"1","7":"0","8":"0","9":"0","10":"79","11":"125","12":"106","13":"69","14":"sunshine","_rn_":"19"},{"1":"2","2":"1","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"79","11":"125","12":"106","13":"69","14":"sunshine","_rn_":"20"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># コード8-14</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>cracker <span class="ot">&lt;-</span> <span class="fu">mlogit.data</span>(Cracker, <span class="at">choice =</span> <span class="st">"choice"</span>, <span class="at">shape =</span> <span class="st">"wide"</span>,</span>
+<span id="cb23-3"><a href="#cb23-3"></a>                       <span class="at">varying =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">13</span>))</span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="fu">head</span>(cracker, <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>~~~~~~~
+ first 20 observations out of 13168 
+~~~~~~~
+   id choice      alt disp feat price chid    idx
+1   1  FALSE  keebler    0    0    88    1 1:bler
+2   1   TRUE  nabisco    0    0   120    1 1:isco
+3   1  FALSE  private    0    0    71    1 1:vate
+4   1  FALSE sunshine    0    0    98    1 1:hine
+5   1  FALSE  keebler    0    0   109    2 2:bler
+6   1   TRUE  nabisco    0    0    99    2 2:isco
+7   1  FALSE  private    0    0    71    2 2:vate
+8   1  FALSE sunshine    0    0    99    2 2:hine
+9   1  FALSE  keebler    0    0   109    3 3:bler
+10  1  FALSE  nabisco    0    0   109    3 3:isco
+11  1  FALSE  private    0    0    78    3 3:vate
+12  1   TRUE sunshine    1    0    49    3 3:hine
+13  1  FALSE  keebler    0    0   109    4 4:bler
+14  1   TRUE  nabisco    0    0    89    4 4:isco
+15  1  FALSE  private    0    0    78    4 4:vate
+16  1  FALSE sunshine    0    0   103    4 4:hine
+17  1  FALSE  keebler    0    0   109    5 5:bler
+18  1   TRUE  nabisco    0    0   119    5 5:isco
+19  1  FALSE  private    0    0    64    5 5:vate
+20  1  FALSE sunshine    0    0   109    5 5:hine
+
+~~~ indexes ~~~~
+   chid      alt
+1     1  keebler
+2     1  nabisco
+3     1  private
+4     1 sunshine
+5     2  keebler
+6     2  nabisco
+7     2  private
+8     2 sunshine
+9     3  keebler
+10    3  nabisco
+11    3  private
+12    3 sunshine
+13    4  keebler
+14    4  nabisco
+15    4  private
+16    4 sunshine
+17    5  keebler
+18    5  nabisco
+19    5  private
+20    5 sunshine
+indexes:  1, 2 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># コード8-15</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>ml_cracker <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(choice <span class="sc">~</span> price <span class="sc">|</span> <span class="dv">1</span> <span class="sc">|</span> disp <span class="sc">+</span> feat, <span class="at">probit =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-3"><a href="#cb25-3"></a>                     <span class="at">data =</span> cracker)</span>
+<span id="cb25-4"><a href="#cb25-4"></a></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="fu">summary</span>(ml_cracker)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+mlogit(formula = choice ~ price | 1 | disp + feat, data = cracker, 
+    probit = FALSE, method = "nr")
+
+Frequencies of alternatives:choice
+ keebler  nabisco  private sunshine 
+0.068651 0.544350 0.314399 0.072600 
+
+nr method
+5 iterations, 0h:0m:0s 
+g'(-H)^-1g = 0.000258 
+successive function values within tolerance limits 
+
+Coefficients :
+                       Estimate Std. Error  z-value  Pr(&gt;|z|)    
+(Intercept):nabisco   2.0011226  0.0831336  24.0712 &lt; 2.2e-16 ***
+(Intercept):private   0.3193793  0.1238052   2.5797 0.0098888 ** 
+(Intercept):sunshine -0.5435987  0.1139407  -4.7709 1.834e-06 ***
+price                -0.0300966  0.0021082 -14.2761 &lt; 2.2e-16 ***
+disp:keebler          0.2999316  0.2070369   1.4487 0.1474251    
+disp:nabisco          0.1011111  0.0773633   1.3070 0.1912249    
+disp:private         -0.2244555  0.1495236  -1.5011 0.1333199    
+disp:sunshine         0.4818670  0.1672400   2.8813 0.0039605 ** 
+feat:keebler          0.6678542  0.2581732   2.5868 0.0096859 ** 
+feat:nabisco          0.6047773  0.1404077   4.3073 1.653e-05 ***
+feat:private          0.1726981  0.2004446   0.8616 0.3889213    
+feat:sunshine         0.8304895  0.2340938   3.5477 0.0003886 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Log-Likelihood: -3333.8
+McFadden R^2:  0.052798 
+Likelihood ratio test : chisq = 371.66 (p.value = &lt; 2.22e-16)</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># コード8-16</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="co"># パラメータの推定値（beta）の抽出</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>beta <span class="ot">&lt;-</span> probit2<span class="sc">$</span>coefficients</span>
+<span id="cb27-4"><a href="#cb27-4"></a></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="co"># パラメータbeta と説明変数の線形結合を作成（beta_0 は定数項なので1 をかける）</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a>est_probit2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, choice_df<span class="sc">$</span>p_ratio, choice_df<span class="sc">$</span>a1,</span>
+<span id="cb27-7"><a href="#cb27-7"></a>                     choice_df<span class="sc">$</span>a2) <span class="sc">%*%</span> beta</span>
+<span id="cb27-8"><a href="#cb27-8"></a></span>
+<span id="cb27-9"><a href="#cb27-9"></a><span class="co"># pnorm によって標準正規分布の分布関数による計算を実行する。</span></span>
+<span id="cb27-10"><a href="#cb27-10"></a><span class="co"># 製品1(c1) を選ぶ確率の予測値</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a>pred_probit_c1 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(est_probit2)</span>
+<span id="cb27-12"><a href="#cb27-12"></a><span class="fu">mean</span>(pred_probit_c1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4789384</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># コード8-17</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="co"># ロジットモデルの場合</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>logit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p_ratio <span class="sc">+</span> a1 <span class="sc">+</span> a2,</span>
+<span id="cb29-4"><a href="#cb29-4"></a>              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit),</span>
+<span id="cb29-5"><a href="#cb29-5"></a>              <span class="at">data =</span> choice_df)</span>
+<span id="cb29-6"><a href="#cb29-6"></a>beta_logit <span class="ot">&lt;-</span> logit2<span class="sc">$</span>coefficients</span>
+<span id="cb29-7"><a href="#cb29-7"></a>est_logit2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, choice_df<span class="sc">$</span>p_ratio, choice_df<span class="sc">$</span>a1,</span>
+<span id="cb29-8"><a href="#cb29-8"></a>                    choice_df<span class="sc">$</span>a2) <span class="sc">%*%</span> beta_logit</span>
+<span id="cb29-9"><a href="#cb29-9"></a>pred_logit_c1 <span class="ot">&lt;-</span> (<span class="fu">exp</span>(est_logit2)) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(est_logit2))</span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="fu">mean</span>(pred_logit_c1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.479</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># コード8-18</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>choice_df_v <span class="ot">&lt;-</span> choice_df <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">mutate</span>(<span class="at">p1_v =</span> p1 <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb31-4"><a href="#cb31-4"></a>         <span class="at">p_ratio_v =</span> p1_v <span class="sc">-</span> p2)</span>
+<span id="cb31-5"><a href="#cb31-5"></a>est_probit_v <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, choice_df_v<span class="sc">$</span>p_ratio_v, choice_df_v<span class="sc">$</span>a1,</span>
+<span id="cb31-6"><a href="#cb31-6"></a>                      choice_df_v<span class="sc">$</span>a2) <span class="sc">%*%</span> beta</span>
+<span id="cb31-7"><a href="#cb31-7"></a></span>
+<span id="cb31-8"><a href="#cb31-8"></a><span class="co"># pnorm によって標準正規分布の分布関数による計算を実行する。</span></span>
+<span id="cb31-9"><a href="#cb31-9"></a><span class="co"># 製品1(c1) を選ぶ確率の予測値</span></span>
+<span id="cb31-10"><a href="#cb31-10"></a>pred_probit_v <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(est_probit_v)</span>
+<span id="cb31-11"><a href="#cb31-11"></a><span class="fu">mean</span>(pred_probit_v)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5459071</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/so-ichi\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter07.html" class="pagination-link" aria-label="第7章">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">第7章</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./part03.html" class="pagination-link" aria-label="第3部 探索型データ分析">
+        <span class="nav-page-text">第3部 探索型データ分析</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, Soichi Matsuura</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ma2ura">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/matsuura_rits">
+      <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

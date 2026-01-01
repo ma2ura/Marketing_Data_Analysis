@@ -1,0 +1,357 @@
+## 第5章 基礎統計学復習
+
+経営学部の1回生がおおよそ学んでいるであろう統計学の内容を、Rコードとともに復習します。
+テキストの内容に加えて、コードの効率化や関数化についても解説します。
+
+
+```{r setup}
+# コード5-1
+pacman::p_load(tidyverse, readxl, pwr, knitr)
+```
+
+
+```{r code5-2}
+# コード5-2
+set.seed(442)
+# サイコロ
+die <- 1:6
+# サイコロを1回振る
+d <- sample(die, size = 1, replace = TRUE)
+# 結果の表示
+d
+```
+
+同じコードを3回以上書いているなと思ったら、ループ処理や関数化を検討しましょう。
+`for()`関数を使ったり、サイコロを投げる回数を引数にした関数を作成したりする方法があります。
+
+```{r dice-throw}
+d1 <- sample(die, size = 10, replace = TRUE)
+d2 <- sample(die, size = 10, replace = TRUE)
+d3 <- sample(die, size = 10, replace = TRUE)
+```
+
+をまとめて書くと、次のようになります。
+
+```{r}
+d <- list() # 空のリストを作成
+for (i in 1:3) { # ループ処理
+  d[[i]] <- sample(die, size = 10, replace = TRUE)
+}
+d # 結果の表示
+```
+
+これをさらに発展させて、後で変更する可能性のある変数である試行回数やサイコロを振る回数を別に設定しておいて、コードを読みやすく、また変更しやすくします。
+
+```{r}
+#| code-line-numbers: 1:2
+trials <- 3 # 試行回数
+size <- 10 # サイコロを振る回数
+d_mean <- numeric(trials) # 空のリストを作成
+for (i in 1:trials) {
+  d_mean[i] <- mean(sample(die, size = size, replace = TRUE))
+}
+d_mean
+```
+
+試行回数`trials`とサイコロを振る回数`size`を引数にした関数を作成すると、さらに便利になります。
+ここでは、自作関数`dice_mean()`を定義してみましょう。
+デフォルト値として、試行回数を3回、サイコロを振る回数を10回に設定しています。
+
+```{r}
+dice_mean <- function(trials = 3, size = 10) {
+  d_mean <- numeric(trials) # 空のリストを作成
+  for (i in 1:trials) {
+    d_mean[i] <- mean(sample(die, size = size, replace = TRUE))
+  }
+  return(d_mean)
+}
+```
+
+```{r use_dice_mean}
+dice_mean() # デフォルト値で実行
+dice_mean(trials = 5, size = 20) # 引数を指定して実行
+dice_mean(5, 20) # 省略形でもOK
+```
+
+この関数を使って、サイコロを10回、100回、1,000回振ったときの平均をそれぞれ3回ずつ試行してみましょう。
+
+```{r}
+set.seed(352)
+size = c(10, 100, 1000)
+d_mean <- list()
+
+for (i in seq_along(size)) {
+  d_mean[[i]] <- dice_mean(trials = 3, size = size[i])
+}
+
+d_mean_mat <- do.call(rbind, d_mean)
+
+# 列名を付与
+colnames(d_mean_mat) <- paste0("試行", 1:ncol(d_mean_mat))
+# 行名を付与
+rownames(d_mean_mat) <- paste0("サイコロを", size, "回振る")
+# 表として出力
+knitr::kable(
+  d_mean_mat,
+  caption = "サイコロの標本平均（各サイズ3回ずつ）",
+  align = "ccc"
+)
+```
+
+`tidyverse`の`purrr`パッケージを使うと、さらに簡潔に書けます。
+
+```{r}
+set.seed(352)
+trials <- 3 # 試行回数
+sizes <- c(10, 100, 1000) # サイコロを振る回数
+# map_dfr()でデータフレームを直接作成
+d_mean_df <- map_dfr(sizes, function(n) {
+  # replicate()で3回繰り返し試行
+  results <- replicate(
+    trials, 
+    mean(sample(die, size = n, replace = TRUE))
+    )
+  set_names(results, paste0("試行", 1:3))
+  })
+
+result <- d_mean_df |> 
+  mutate(条件 = paste0("サイコロを", sizes, "回振る")) |> 
+  relocate(条件) # 「条件」列を一番左へ移動
+
+# 出力
+kable(
+  result,
+  caption = "サイコロの標本平均（各サイズ3回ずつ）",
+  align = "cccc"
+)
+```
+
+<!--- 
+
+```{r}
+set.seed(352)
+d_mean <- numeric(3) # 空のリストを作成
+# 繰り返し処理
+for (i in 1:3) {
+  d_mean[i] <- mean(sample(die, size = 10, replace = TRUE))
+}
+# 各試行の平均を計算
+d_lln <- matrix(d_mean, nrow = 1)
+colnames(d_lln) <- c("10回試行の平均", "100回試行の平均", "1,000回試行の平均")
+# kableで結果の表示
+knitr::kable(
+  d_mean, # 表示するオブジェクト
+  caption = "サイコロの標本平均比較",  
+  align = "ccc" # 3行を中央揃え
+  )
+```
+
+```{r code5-3}
+# コード5-3
+set.seed(352)
+
+# サイコロを10回振る
+d1 <- sample(die, size = 10, replace = TRUE)
+d2 <- sample(die, size = 10, replace = TRUE)
+d3 <- sample(die, size = 10, replace = TRUE)
+# 各試行の平均を計算
+d_mean <- matrix(c(mean(d1), mean(d2), mean(d3)), nrow = 1)
+# 列名の設定
+colnames(d_mean) <- c("d1の平均", "d2の平均", "d3の平均")
+# kableで結果の表示
+knitr::kable(
+  d_mean, # 表示するオブジェクト
+  caption = "サイコロの標本平均比較",  
+  align = "ccc" # 3行を中央揃え
+  )
+```
+
+
+```{r code5-4}
+# コード5-4
+set.seed(541)
+# サイコロをそれぞれ10回、100回、1000回振る
+d10 <- sample(die, size = 10, replace = TRUE)
+d100 <- sample(die, size = 100, replace = TRUE)
+d1000 <- sample(die, size = 1000, replace = TRUE)
+
+d_lln <- matrix(c(mean(d10), mean(d100), mean(d1000)), nrow = 1)
+
+colnames(d_lln) <- c("10回試行の平均", "100回試行の平均", "1,000回試行の平均")
+knitr::kable(
+  d_lln, 
+  caption = "サイコロの標本平均比較 2", 
+  align = "ccc"
+  )
+```
+
+--->
+
+## 区間推定
+
+いま、標準正規分布に従う母集団から抽出した無作為標本$Z_1, Z_2, ..., Z_n$を考えます。
+標準正規分布の確率分布関数$\phi(z)$を用いると、次のように表せます。
+$$
+P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq z_{\frac{\alpha}{2}} \right) = 1 - \alpha
+$$
+
+
+### 電球の寿命データで区間推定
+
+例として、次のような白熱電球の寿命データが手元にあるものとしましょう。
+ここで、以下のことが分かっているものとします。
+
+- 平均寿命が1800時間である。
+- 寿命の標準偏差$\sigma $は180時間である。
+- 平均寿命は正規分布に従う。
+
+図にすると次のようになります。
+
+```{r normal_dist}
+averate <- 1800
+standard_dev <- 180
+rnorm(1000, mean = averate, sd = standard_dev) |>
+  as_tibble() |>
+  ggplot(aes(x = value)) +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = averate, sd = standard_dev),
+    color = "red",
+    size = 1
+    ) +
+  theme_minimal()
+```
+
+
+この分布から抽出したと想定される16個の電球の寿命データが以下の通りです。
+
+```{r code5-5}
+# コード5-5
+bulb <- c(# 白熱電球の寿命データ
+    1939.6, 1680.3, 1982.1, 2215.6,
+    2092.5, 1928.9, 2003.8, 1955.5,
+    1800.1, 1659.5, 2066.2, 2107.2,
+    2085.5, 1878.6, 2007.6, 1816.1
+  )
+mean(bulb)
+sd(bulb)
+```
+
+先ほどの分布にこのデータのヒストグラムを重ねると、次のようになります。
+
+```{r}
+# ヒストグラムの作成
+bulb_df <- tibble(lifetime = bulb)
+bulb_df |> 
+  ggplot(aes(x = lifetime)) +
+  geom_histogram(
+    aes(y = ..density..),
+    bins = 8,
+    fill = "lightblue",
+    color = "black",
+    alpha = 0.7
+    ) +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = averate, sd = standard_dev),
+    color = "red",
+    size = 1
+    ) +
+  theme_minimal()
+```
+
+そのとき、この手元にある16個の電球の寿命データの平均値が、母平均1800の周りでどの範囲に入るかを95％の信頼水準で推定してみましょう。
+
+
+
+
+```{r t-test_bulb}
+# t検定の実施
+bulb_ci <- t.test(bulb)
+bulb_ci$conf.int 
+# 信頼区間の出力（デフォルトで 95％信頼水準）
+```
+
+
+
+```{r code5-6}
+# コード5-6
+qnorm(0.025, lower.tail = FALSE)
+# 標準正規分布における上側 2.5％点の分位点を求める。
+```
+
+```{r code5-7}
+# コード5-7
+n <- length(bulb) # 標本サイズの計算
+z <- qnorm(0.025, lower.tail = FALSE) # 上側2.5％点の分位点
+xbar <- mean(bulb) # 標本平均の計算
+sigma <- 180 # 母標準偏差の設定
+
+# 信頼区間の計算
+upper <- xbar + z * (sigma / sqrt(n))
+lower <- xbar - z * (sigma / sqrt(n))
+
+# 結果のまとめと出力
+ci.bulb <- matrix(c(lower, upper), nrow = 1)
+colnames(ci.bulb) <- c("ci.lower", "ci.upper")
+knitr::kable(
+  ci.bulb, 
+  caption = "Bulb data CI (95％)", 
+  align = "cc"
+  )
+```
+
+```{r code5-8}
+# コード5-8
+mean(bulb)
+
+# コード5-9
+t.test(bulb, alternative = "two.sided", mu = 1800)
+
+# コード5-10
+n <- length(bulb) # 標本サイズの計算
+z <- qnorm(0.025, lower.tail = FALSE) # 上側2.5％点の分位点
+xbar <- mean(bulb) # 標本平均の計算
+sigma <- 180 # 母標準偏差の設定
+mu <- 1800 # 帰無仮説の平均値 
+# Z値の計算
+Z <- (xbar - mu) / (sigma / sqrt(n))
+Z
+```
+
+```{r code5-11}
+# コード5-11
+# データの読み込みと前処理
+firmdata <- readxl::read_xlsx("data/MktRes_firmdata.xlsx")
+firm2018 <- firmdata |>
+  filter(fyear == 2018) |>
+  mutate(
+    ad_dummy = ifelse(adint > median(adint), 1, 0)
+    )
+# t検定の実施
+t.test(sales ~ ad_dummy, data = firm2018)
+```
+
+```{r code5-12}
+# コード5-12
+var.test(sales ~ ad_dummy, data = firm2018, ratio = 1)
+```
+
+
+```{r code5-14}
+# 効果量d=0.8、検出力0.8、有意水準0.05の場合の
+# 必要標本サイズの推定
+est_n <- pwr.t.test(d = 0.8, power = 0.8, sig.level = 0.05)
+est_n
+```
+
+
+```{r code5-15}
+# コード5-15
+plot(est_n)
+```
+
+```{r code5-16}
+# コード5-16
+pwr.t.test(d = 0.8, n = 26, sig.level = 0.05)
+```
