@@ -177,7 +177,7 @@ window.Quarto = {
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -324,7 +324,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part02.html">第2部 仮説検証型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter05.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></a></li></ol></nav>
 <div class="quarto-title">
@@ -350,13 +350,22 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># コード5-1</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, pwr, knitr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="cell" data-layout-align="center">
+<p>まずサイコロを作ります。 1から6の数値からなるベクトル<code>dice</code>を作ります。 つぎに<code>sample()</code>関数を用いて、<code>dice</code>の中から1つの数をランダムに取り出します。</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p><code>sample()</code>関数の引数は以下の通りです。</p>
+<ul>
+<li><code>x</code>: 抽出元のベクトル</li>
+<li><code>size</code>: 抽出する数</li>
+<li><code>replace</code>: 置換を許可するかどうか</li>
+</ul>
+</div></div><div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># コード5-2</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">set.seed</span>(<span class="dv">442</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="co"># サイコロ</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>die <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>dice <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="co"># サイコロを1回振る</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>d <span class="ot">&lt;-</span> <span class="fu">sample</span>(die, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>d <span class="ot">&lt;-</span> <span class="fu">sample</span>(dice, <span class="at">size =</span> <span class="dv">1</span>)</span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="co"># 結果の表示</span></span>
 <span id="cb2-8"><a href="#cb2-8"></a>d</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -365,15 +374,15 @@ window.Quarto = {
 </div>
 <p>同じコードを3回以上書いているなと思ったら、ループ処理や関数化を検討しましょう。 <code>for()</code>関数を使ったり、サイコロを投げる回数を引数にした関数を作成したりする方法があります。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(die, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a>d2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(die, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a>d3 <span class="ot">&lt;-</span> <span class="fu">sample</span>(die, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(dice, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>d2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(dice, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>d3 <span class="ot">&lt;-</span> <span class="fu">sample</span>(dice, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>をまとめて書くと、次のようになります。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>d <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="co"># 空のリストを作成</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) { <span class="co"># ループ処理</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  d[[i]] <span class="ot">&lt;-</span> <span class="fu">sample</span>(die, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  d[[i]] <span class="ot">&lt;-</span> <span class="fu">sample</span>(dice, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb5-4"><a href="#cb5-4"></a>}</span>
 <span id="cb5-5"><a href="#cb5-5"></a>d <span class="co"># 結果の表示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -389,23 +398,25 @@ window.Quarto = {
 </div>
 <p>これをさらに発展させて、後で変更する可能性のある変数である試行回数やサイコロを振る回数を別に設定しておいて、コードを読みやすく、また変更しやすくします。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>trials <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># 試行回数</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>size <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># サイコロを振る回数</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>d_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trials) <span class="co"># 空のリストを作成</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trials) {</span>
-<span id="cb7-5"><a href="#cb7-5"></a>  d_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">sample</span>(die, <span class="at">size =</span> size, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb7-6"><a href="#cb7-6"></a>}</span>
-<span id="cb7-7"><a href="#cb7-7"></a>d_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>trial_count <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># 試行回数</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>sample_sizes <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># サイコロを振る回数</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># 空の数列を作成</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>d_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial_count) </span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial_count) {</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  d_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">sample</span>(dice, <span class="at">size =</span> sample_sizes, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb7-8"><a href="#cb7-8"></a>}</span>
+<span id="cb7-9"><a href="#cb7-9"></a>d_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.2 3.3 4.0</code></pre>
 </div>
 </div>
-<p>試行回数<code>trials</code>とサイコロを振る回数<code>size</code>を引数にした関数を作成すると、さらに便利になります。 ここでは、自作関数<code>dice_mean()</code>を定義してみましょう。 デフォルト値として、試行回数を3回、サイコロを振る回数を10回に設定しています。</p>
+<p>試行回数<code>trials</code>とサイコロを振る回数<code>sample_sizes</code>を引数にした関数を作成すると、さらに便利になります。 ここでは、自作関数<code>dice_mean()</code>を定義してみましょう。 デフォルト値として、試行回数を3回、サイコロを振る回数を10回に設定しています。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>dice_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">trials =</span> <span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>) {</span>
-<span id="cb9-2"><a href="#cb9-2"></a>  d_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trials) <span class="co"># 空のリストを作成</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trials) {</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    d_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">sample</span>(die, <span class="at">size =</span> size, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>dice_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">trial_count =</span> <span class="dv">3</span>, <span class="at">sample_sizes =</span> <span class="dv">10</span>) {</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  d_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial_count) <span class="co"># 空のリストを作成</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial_count) {</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    d_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">sample</span>(dice, <span class="at">size =</span> sample_sizes, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb9-5"><a href="#cb9-5"></a>  }</span>
 <span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">return</span>(d_mean)</span>
 <span id="cb9-7"><a href="#cb9-7"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -415,7 +426,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.4 2.5 4.4</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">dice_mean</span>(<span class="at">trials =</span> <span class="dv">5</span>, <span class="at">size =</span> <span class="dv">20</span>) <span class="co"># 引数を指定して実行</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">dice_mean</span>(<span class="at">trial_count =</span> <span class="dv">5</span>, <span class="at">sample_sizes =</span> <span class="dv">20</span>) <span class="co"># 引数を指定して実行</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.15 3.55 3.65 3.50 3.25</code></pre>
 </div>
@@ -431,7 +442,7 @@ window.Quarto = {
 <span id="cb16-3"><a href="#cb16-3"></a>d_mean <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
 <span id="cb16-4"><a href="#cb16-4"></a></span>
 <span id="cb16-5"><a href="#cb16-5"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(size)) {</span>
-<span id="cb16-6"><a href="#cb16-6"></a>  d_mean[[i]] <span class="ot">&lt;-</span> <span class="fu">dice_mean</span>(<span class="at">trials =</span> <span class="dv">3</span>, <span class="at">size =</span> size[i])</span>
+<span id="cb16-6"><a href="#cb16-6"></a>  d_mean[[i]] <span class="ot">&lt;-</span> <span class="fu">dice_mean</span>(<span class="at">trial_count =</span> <span class="dv">3</span>, <span class="at">sample_sizes =</span> size[i])</span>
 <span id="cb16-7"><a href="#cb16-7"></a>}</span>
 <span id="cb16-8"><a href="#cb16-8"></a></span>
 <span id="cb16-9"><a href="#cb16-9"></a>d_mean_mat <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, d_mean)</span>
@@ -483,16 +494,16 @@ window.Quarto = {
 <p><code>tidyverse</code>の<code>purrr</code>パッケージを使うと、さらに簡潔に書けます。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">set.seed</span>(<span class="dv">352</span>)</span>
-<span id="cb17-2"><a href="#cb17-2"></a>trials <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># 試行回数</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>trial_count <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># 試行回数</span></span>
 <span id="cb17-3"><a href="#cb17-3"></a>sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>) <span class="co"># サイコロを振る回数</span></span>
 <span id="cb17-4"><a href="#cb17-4"></a><span class="co"># map_dfr()でデータフレームを直接作成</span></span>
 <span id="cb17-5"><a href="#cb17-5"></a>d_mean_df <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(sizes, <span class="cf">function</span>(n) {</span>
-<span id="cb17-6"><a href="#cb17-6"></a>  <span class="co"># replicate()で3回繰り返し試行</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>  <span class="co"># replicate()で3回繰り返し試行    </span></span>
 <span id="cb17-7"><a href="#cb17-7"></a>  results <span class="ot">&lt;-</span> <span class="fu">replicate</span>(</span>
-<span id="cb17-8"><a href="#cb17-8"></a>    trials, </span>
-<span id="cb17-9"><a href="#cb17-9"></a>    <span class="fu">mean</span>(<span class="fu">sample</span>(die, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb17-8"><a href="#cb17-8"></a>    trial_count, </span>
+<span id="cb17-9"><a href="#cb17-9"></a>    <span class="fu">mean</span>(<span class="fu">sample</span>(dice, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb17-10"><a href="#cb17-10"></a>    )</span>
-<span id="cb17-11"><a href="#cb17-11"></a>  <span class="fu">set_names</span>(results, <span class="fu">paste0</span>(<span class="st">"試行"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span>
+<span id="cb17-11"><a href="#cb17-11"></a>  <span class="fu">set_names</span>(results, <span class="fu">paste0</span>(<span class="st">"試行"</span>, <span class="dv">1</span><span class="sc">:</span>trial_count))</span>
 <span id="cb17-12"><a href="#cb17-12"></a>  })</span>
 <span id="cb17-13"><a href="#cb17-13"></a></span>
 <span id="cb17-14"><a href="#cb17-14"></a>result <span class="ot">&lt;-</span> d_mean_df <span class="sc">|&gt;</span> </span>
@@ -549,7 +560,7 @@ set.seed(352)
 d_mean <- numeric(3) # 空のリストを作成
 # 繰り返し処理
 for (i in 1:3) {
-  d_mean[i] <- mean(sample(die, size = 10, replace = TRUE))
+  d_mean[i] <- mean(sample(dice, size = 10, replace = TRUE))
 }
 # 各試行の平均を計算
 d_lln <- matrix(d_mean, nrow = 1)
@@ -586,9 +597,9 @@ Table: サイコロの標本平均比較
 set.seed(352)
 
 # サイコロを10回振る
-d1 <- sample(die, size = 10, replace = TRUE)
-d2 <- sample(die, size = 10, replace = TRUE)
-d3 <- sample(die, size = 10, replace = TRUE)
+d1 <- sample(dice, size = 10, replace = TRUE)
+d2 <- sample(dice, size = 10, replace = TRUE)
+d3 <- sample(dice, size = 10, replace = TRUE)
 # 各試行の平均を計算
 d_mean <- matrix(c(mean(d1), mean(d2), mean(d3)), nrow = 1)
 # 列名の設定
@@ -623,9 +634,9 @@ Table: サイコロの標本平均比較
 # コード5-4
 set.seed(541)
 # サイコロをそれぞれ10回、100回、1000回振る
-d10 <- sample(die, size = 10, replace = TRUE)
-d100 <- sample(die, size = 100, replace = TRUE)
-d1000 <- sample(die, size = 1000, replace = TRUE)
+d10 <- sample(dice, size = 10, replace = TRUE)
+d100 <- sample(dice, size = 100, replace = TRUE)
+d1000 <- sample(dice, size = 1000, replace = TRUE)
 
 d_lln <- matrix(c(mean(d10), mean(d100), mean(d1000)), nrow = 1)
 
@@ -728,7 +739,7 @@ P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="chapter05_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+<p><img src="chapter05_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
 </figure>
 </div>
 </div>
