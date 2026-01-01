@@ -88,19 +88,19 @@ $$
 のうち、「二者択一の結果を、$X$の各ペア$(x,y)$ ごとに、$x \succ y$ か $x \not \succ y$ かを書いて、書いたものを$X$上の（この人の）強選好」といいます。
 選好モデルとは、
 $$
-C : \mathcal{P}(X) ∋ A \rightarrow C(A) \in \mathcal{P}(X)
+C : \mathcal{P}(X) \ni A \rightarrow C(A) \in \mathcal{P}(X)
 $$
 を
 $$
 \begin{aligned}
-& C(\cdot, \succ) : \mathcal{P}(X) ∋ A \rightarrow C(A, \succ) \in \mathcal{P}(X)\\
+& C(\cdot, \succ) : \mathcal{P}(X) \ni A \rightarrow C(A, \succ) \in \mathcal{P}(X)\\
 & \text{such that} \quad C(A, \succ) = \{ x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}
 \end{aligned}
 $$
 となり、この選好$\succ$をもつ人が、実際に$A$に直面したときに選ぶと予測するということを意味します。
 これは$C(\cdot , \succ)$のデータから予測されます。
 
-$C(\cdot , \succ) : \mathcal{P}(X) ∋ A \rightarrow C(A, \succ) \in \mathcal{P}(X)$は、$C : \mathcal{P}(X) ∋ A  \rightarrow C(A) \in \mathcal{P}(X)$のうち、$|X|^2$個のデータで、$C : \mathcal{P}(X) ∋ A  \rightarrow C(A) \in \mathcal{P}(X)$全体の$2^{|X|}$個の値を予測しているのです。
+$C(\cdot , \succ) : \mathcal{P}(X) \ni A \rightarrow C(A, \succ) \in \mathcal{P}(X)$は、$C : \mathcal{P}(X) \ni A  \rightarrow C(A) \in \mathcal{P}(X)$のうち、$|X|^2$個のデータで、$C : \mathcal{P}(X) \ni A  \rightarrow C(A) \in \mathcal{P}(X)$全体の$2^{|X|}$個の値を予測しているのです。
 
 合理性モデルでは、「もし・・・なら、$\forall A \in \mathcal{P}; C(A, \succ) = C(A)$となります。
 
@@ -385,7 +385,7 @@ pacman::p_load(tidyverse, readxl, modelsummary, mfx, DescTools, mlogit)
 df1 <- data.frame(
     Y = c(0, 0, 0, 0, 0, 1, 1, 1, 1),
     X = c(3.4, 5.22, 7.06, 2.81, 4.11, 10.34, 13.67, 15.99, 9.09)
-  )
+)
 lpm1 <- lm(Y ~ X, data = df1)
 pred_lpm1 <- predict(lpm1)
 pred_lpm1
@@ -401,29 +401,33 @@ head(choice_df)
 ```{r}
 # コード8-3
 probit1 <- glm(y1 ~ p1 + a1,
-               family = binomial(link = probit),
-               data = choice_df)
+    family = binomial(link = probit),
+    data = choice_df
+)
 summary(probit1)
 ```
 
 ```{r}
 # コード8-4
 ols1 <- lm(y1 ~ p1 + a1,
-           data = choice_df)
+    data = choice_df
+)
 logit1 <- glm(y1 ~ p1 + a1,
-              family = binomial(link = logit),
-              data = choice_df)
+    family = binomial(link = logit),
+    data = choice_df
+)
 models <- list()
 models[["Linear probability model"]] <- ols1
 models[["Probit model"]] <- probit1
 models[["Logit model"]] <- logit1
 modelsummary(models,
-             title = "モデル比較",
-             notes = "Values in [ ] show robust standard errors",
-             stars = TRUE,
-             statistic = "std.error",
-             vcov = "robust",
-             gof_map = "nobs")
+    title = "モデル比較",
+    notes = "Values in [ ] show robust standard errors",
+    stars = TRUE,
+    statistic = "std.error",
+    vcov = "robust",
+    gof_map = "nobs"
+)
 # 適合度指標において，サンプルサイズ ("nobs") のみ表示するという指示
 ```
 
@@ -431,7 +435,8 @@ modelsummary(models,
 # コード8-5
 # Average Marginal Effects（限界効果の平均）
 probit1_ame <- probitmfx(y1 ~ p1 + a1,
-                         data = choice_df, atmean = FALSE)
+    data = choice_df, atmean = FALSE
+)
 probit1_ame
 ```
 
@@ -440,33 +445,36 @@ probit1_ame
 # コード8-7
 # Marginal Effects at Mean（平均値における限界効果）
 probit1_mem <- probitmfx(y1 ~ p1 + a1,
-                         data = choice_df, atmean = TRUE)
+    data = choice_df, atmean = TRUE
+)
 probit1_mem
 ```
 
 ```{r}
 # コード8-8
 marginal <- c(
-  "p1 marginal" = "p1",
-  "a1 marginal" = "a1"
+    "p1 marginal" = "p1",
+    "a1 marginal" = "a1"
 )
 
 marg_model <- list(
-  "(1) Probit_AME" <- probit1_ame,
-  "(2) Probit_MEM" <- probit1_mem
+    "(1) Probit_AME" <- probit1_ame,
+    "(2) Probit_MEM" <- probit1_mem
 )
 
 marg_sum <- modelsummary(
-  marg_model,
-  statistic = "std.error",
-  coef_map = marginal,
-  stars = TRUE,
-  shape = term:component ~ model,
-  add_rows = data.frame("Marginal effect type",
-                        "Average Marginal Effect",
-                        "Marginal Effect at Mean"),
-  title = "限界効果サマリー",
-  gof_map = "nobs"
+    marg_model,
+    statistic = "std.error",
+    coef_map = marginal,
+    stars = TRUE,
+    shape = term:component ~ model,
+    add_rows = data.frame(
+        "Marginal effect type",
+        "Average Marginal Effect",
+        "Marginal Effect at Mean"
+    ),
+    title = "限界効果サマリー",
+    gof_map = "nobs"
 )
 marg_sum
 ```
@@ -480,11 +488,12 @@ DescTools::PseudoR2(probit1)
 
 # 価格差変数作成
 choice_df <- choice_df %>%
-  mutate(p_ratio = p1 - p2)
+    mutate(p_ratio = p1 - p2)
 
 probit2 <- glm(y1 ~ p_ratio + a1 + a2,
-               family = binomial(link = probit),
-               data = choice_df)
+    family = binomial(link = probit),
+    data = choice_df
+)
 summary(probit2)
 
 # コード8-11
@@ -492,7 +501,8 @@ DescTools::PseudoR2(probit2)
 
 # コード8-12
 probit2_ame <- probitmfx(y1 ~ p_ratio + a1 + a2,
-                         data = choice_df, atmean = FALSE)
+    data = choice_df, atmean = FALSE
+)
 probit2_ame
 ```
 
@@ -503,13 +513,17 @@ data(Cracker, package = "mlogit")
 head(Cracker, n = 20)
 
 # コード8-14
-cracker <- mlogit.data(Cracker, choice = "choice", shape = "wide",
-                       varying = c(2:13))
+cracker <- mlogit.data(Cracker,
+    choice = "choice", shape = "wide",
+    varying = c(2:13)
+)
 head(cracker, n = 20)
 
 # コード8-15
-ml_cracker <- mlogit(choice ~ price | 1 | disp + feat, probit = FALSE,
-                     data = cracker)
+ml_cracker <- mlogit(choice ~ price | 1 | disp + feat,
+    probit = FALSE,
+    data = cracker
+)
 
 summary(ml_cracker)
 ```
@@ -521,8 +535,10 @@ summary(ml_cracker)
 beta <- probit2$coefficients
 
 # パラメータbeta と説明変数の線形結合を作成（beta_0 は定数項なので1 をかける）
-est_probit2 <- cbind(1, choice_df$p_ratio, choice_df$a1,
-                     choice_df$a2) %*% beta
+est_probit2 <- cbind(
+    1, choice_df$p_ratio, choice_df$a1,
+    choice_df$a2
+) %*% beta
 
 # pnorm によって標準正規分布の分布関数による計算を実行する。
 # 製品1(c1) を選ぶ確率の予測値
@@ -532,20 +548,27 @@ mean(pred_probit_c1)
 # コード8-17
 # ロジットモデルの場合
 logit2 <- glm(y1 ~ p_ratio + a1 + a2,
-              family = binomial(link = logit),
-              data = choice_df)
+    family = binomial(link = logit),
+    data = choice_df
+)
 beta_logit <- logit2$coefficients
-est_logit2 <- cbind(1, choice_df$p_ratio, choice_df$a1,
-                    choice_df$a2) %*% beta_logit
+est_logit2 <- cbind(
+    1, choice_df$p_ratio, choice_df$a1,
+    choice_df$a2
+) %*% beta_logit
 pred_logit_c1 <- (exp(est_logit2)) / (1 + exp(est_logit2))
 mean(pred_logit_c1)
 
 # コード8-18
 choice_df_v <- choice_df %>%
-  mutate(p1_v = p1 - 1,
-         p_ratio_v = p1_v - p2)
-est_probit_v <- cbind(1, choice_df_v$p_ratio_v, choice_df_v$a1,
-                      choice_df_v$a2) %*% beta
+    mutate(
+        p1_v = p1 - 1,
+        p_ratio_v = p1_v - p2
+    )
+est_probit_v <- cbind(
+    1, choice_df_v$p_ratio_v, choice_df_v$a1,
+    choice_df_v$a2
+) %*% beta
 
 # pnorm によって標準正規分布の分布関数による計算を実行する。
 # 製品1(c1) を選ぶ確率の予測値
