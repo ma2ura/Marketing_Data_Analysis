@@ -39,11 +39,20 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# pkgdown site
-docs/
-
 # translation temp files
 po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# data folder not include
+/data/
+/.quarto/
+
+
+# latex
+*.aux
+*.log
+*.out
+# *.pdf
+*.synctex.gz
