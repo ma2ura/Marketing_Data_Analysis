@@ -1,8 +1,8 @@
-# 第8章 消費者の選択と離散選択モデル
+## 第8章 消費者の選択と離散選択モデル
 
 ## 顕示選好の理論
-この節は読まなくても問題ありません。
-個人的な勉強がてらKreps (1988) "Notes on the Theory of Choice"に基づいて，単一個人意思決定モデルの基礎的な考え方を説明します。
+
+Kreps (1988) "Notes on the Theory of Choice"に基づいて，単一個人意思決定モデルの基礎的な考え方を説明します。
 
 <span class="markp">「選択」(choice)という現象は，ある集合$A$がある個人にとっての実際に選択可能な選択肢の集合であったときに，その中から個人によって1つの選択肢$a \in A$が選ばれる，という現象</span>をいいます。
 ここに，<span class="markp">「選ぶ」というのは，第三者に観察できる行為として選ぶ，ということに限って用いられます。</span>
@@ -20,7 +20,7 @@ $$
 
 $X$上の，この人の選択関数
 $$
-C : X \supseteq A \mapsto C(A) \subseteq X
+C : X \subseteq A \mapsto C(A) \subseteq X
 $$
 が安定的に存在すると仮定します。
 ここで$C(A)$は，$A$の中からこの人が選んだ選択肢集合を表します。
@@ -88,32 +88,28 @@ $$
 のうち、「二者択一の結果を、$X$の各ペア$(x,y)$ ごとに、$x \succ y$ か $x \not \succ y$ かを書いて、書いたものを$X$上の（この人の）強選好」といいます。
 選好モデルとは、
 $$
-C : \mathcal{P}(X) \ni A \rightarrow C(A) \in \mathcal{P}(X)
+C : \mathcal{P}(X) ∋ A \rightarrow C(A) \in \mathcal{P}(X)
 $$
 を
 $$
 \begin{aligned}
-& C(\cdot, \succ) : \mathcal{P}(X) \ni A \rightarrow C(A, \succ) \in \mathcal{P}(X)\\
+& C(\cdot, \succ) : \mathcal{P}(X) ∋ A \rightarrow C(A, \succ) \in \mathcal{P}(X)\\
 & \text{such that} \quad C(A, \succ) = \{ x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}
 \end{aligned}
 $$
 となり、この選好$\succ$をもつ人が、実際に$A$に直面したときに選ぶと予測するということを意味します。
 これは$C(\cdot , \succ)$のデータから予測されます。
 
-$C(\cdot , \succ) : \mathcal{P}(X) \ni A \rightarrow C(A, \succ) \in \mathcal{P}(X)$は、$C : \mathcal{P}(X) \ni A  \rightarrow C(A) \in \mathcal{P}(X)$のうち、$|X|^2$個のデータで、$C : \mathcal{P}(X) \ni A  \rightarrow C(A) \in \mathcal{P}(X)$全体の$2^{|X|}$個の値を予測しているのです。
+$C(\cdot , \succ) : \mathcal{P}(X) ∋ A \rightarrow C(A, \succ) \in \mathcal{P}(X)$は、$C : \mathcal{P}(X) ∋ A  \rightarrow C(A) \in \mathcal{P}(X)$のうち、$|X|^2$個のデータで、$C : \mathcal{P}(X) ∋ A  \rightarrow C(A) \in \mathcal{P}(X)$全体の$2^{|X|}$個の値を予測しているのです。
 
 合理性モデルでは、「もし・・・なら、$\forall A \in \mathcal{P}; C(A, \succ) = C(A)$となります。
 
 ふりかえると、
 
 - 説明する対象は、選択関数 $C : \mathcal{P}(X) \in A  \mapsto C(A) \in \mathcal{P}(X)$ である。
-- データを取ってくるパラメータとしての選好$\succ$ (つまり、$X$上のすべての二者択一の結果)を考えます。
-- 選択を説明するモデルは選好モデルは、
-  $$
-  C(A, \succ) = \{x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}
-  $$
-  となります。つまり、「自分より良いものが存在しない」要素だけを集めたものを意味します。
-- 選択理論とは、「$C: \mathcal{P}(X) \rightarrow \mathcal{P}(X)$ が･･･の条件を満たすとき、$C$のうち××から作った$C(A, ××)  = C(A)$ 」が成り立つような「･･･」と「××」を考えます。
+- データを取ってくるパラメータとしての選好$\succ$ (つまり、$X$上のすべての二者択一の結果)を考える。
+- 選択を説明するモデルは選好モデル$C(A, \succ) = \{x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}$
+- 選択理論とは、「$C: \mathcal{P}(X) \rightarrow \mathcal{P}(X)$ が・・・の条件を満たすとき、$C$のうち××から作った$C(A, ××)  = C(A)」が成り立つような「･･･」と「××」を考えます。
 
 ただ、選好$\succ$としてどんなものでも認めてしまうと、
 
@@ -134,6 +130,8 @@ $C(A) \not = \emptyset$. 場合、$C(\{x,y,z\}) = \emptyset$ となります。
 - $y \succ z$ より $z \not \in C(\{x,y, z\}, \succ)$
 
 すなわち、$C(\{x,y,z\}, \succ) = \emptyset$ となります。
+
+て、次のように選択関数 $C_{\succ} : \mathcal{P}(X) \rightarrow \mathcal{P}(X)$ を定めます。
 
 では、どのような二者択一行動を示す人なら、その人の選好モデルは完結性があるのかを考えます。
 次の2つの条件が満たされるとき、選好$\succ$は**完結性**(completeness)を持つといいます。
@@ -234,7 +232,7 @@ $X$ 上の強選好$\succ$は、$X$上の(反対称的と負推移性を満た�
 
 選択肢集合$X$が有限であるとします。
 すると、$X$上の強選好$\succ$が$X$上の選好関係であるならば、
-$C(\cdot , \succ) : \mathcal{P}(X) \rightarrow \mathcal{P}(X)$は非空かつ**ハウタッカーの公理**(Houthakker's axiom)を満たします。
+$C(\cdot , \succ) : \mathcal{P}(X) \rightarrow \mathcal{P}(X)$は非空まつ**ハウタッカーの公理**(Houthakker's axiom)を満たします。
 
 :::{.callout-important}
 ## ハウタッカーの公理
@@ -359,10 +357,46 @@ $X$上の選択関数$C : \mathcal{P}(X) \rightarrow \mathcal{P}(X)$が非空と
 :::
 
 具体例で説明してみます。
-たとえばあなたが買い物をしているとき、選択肢集合$A = \{豚肉, 牛肉, 鶏肉\}$の中から何かを選択する、選択問題に直面しているとします。
-このとき、センの$\alpha$規則性は、もしあなたが$A$の中から牛肉を選んだとき($C(A) = \{牛肉\}$)、選択肢集合が$B = \{牛肉, 鶏肉\} \subset A$に変わっても、あなたは牛肉を選ぶ、ということを意味します。
 
-次にセンの$\beta$規則性は、もしあなたが$A$の中から牛肉と鶏肉を選んだとき($C(A) = \{牛肉, 鶏肉\}$)、選択肢集合が$B = \{豚肉, 牛肉, 鶏肉\} \supset A$に変わっても、あなたは鶏肉を選ぶ、ということを意味します。
+$X=\{\text{みかん, リンゴ, バナナ, ぶどう}\}$ とします。あなたの好みが
+
+$$
+\text{リンゴ} \sim \text{バナナ} \succ \text{みかん} \succ \text{ぶどう}
+$$
+
+だとします。
+つまりリンゴとバナナは同程度に最も好ましく、次にみかん、最後にぶどう、という順番です。
+
+この好みに基づく選択関数 $C$ を、「与えられた集合の中の“最も好ましいもの”をすべて選ぶ」と定めます。
+つまり任意の $A\subseteq X$ に対して
+
+- $A$ にリンゴまたはバナナが含まれていれば、$C(A) = A\cap\{\text{リンゴ, バナナ}\}$
+- そうでなければ（リンゴもバナナも無いなら）、残りの中で最上位のもの（ここではみかん、なければぶどう）を選ぶ
+
+というルールです。たとえば
+
+- $C(\{\text{みかん, リンゴ, バナナ}\})=\{\text{リンゴ, バナナ}\}$,
+- $C(\{\text{バナナ, ぶどう}\})=\{\text{バナナ}\}$,
+- $C(\{\text{みかん, ぶどう}\})=\{\text{みかん}\}$
+
+のようになります。
+
+この選択関数$C$ はセンの $\alpha$ 規則性を満たします。理由は、ある集合 A で選ばれた x は A の中で「最上位」なので、x を含む部分集合 B\subset A に選択肢を減らしても、x より上位のものが新たに現れることはなく、x は依然として最上位（最大元）だからです。
+
+また \beta 規則性も満たします。実際、ある集合 A で x,y\in C(A) ということは、x と y がともに A の中で最上位（この例ではリンゴとバナナのように同率首位）ということです。集合を広げた B\supset A でも、もし y が依然として選ばれているなら（y\in C(B)）、y より上位の選択肢は B に存在しないので、同率首位である x も排除されず x\in C(B) となります。
+
+ここから、ハウタッカーの公理を満たしていることを、同じ果物で具体的に確かめます。たとえば
+
+A=\{\text{みかん, リンゴ, バナナ}\},\quad
+B=\{\text{リンゴ, バナナ, ぶどう}\}
+
+とおくと、
+
+C(A)=\{\text{リンゴ, バナナ}\},\quad
+C(B)=\{\text{リンゴ, バナナ}\}
+
+です。いま x=\text{リンゴ},\ y=\text{バナナ} とすると、確かに x,y\in A\cap B かつ x\in C(A)、y\in C(B) が成り立ちます。そして結論として要求される x\in C(B)、y\in C(A) も実際に成り立っています（どちらの集合でもリンゴとバナナが選ばれているため）。
+
 
 
 
@@ -373,70 +407,17 @@ $$
 $$
 が成り立ちます。
 
-<!-- そこで次のように選択関数 $C_{\succ} : \mathcal{P}(X) \rightarrow \mathcal{P}(X)$ を定めます。 -->
-
-## 二値選択モデル
-
-長々と単一個人の意思決定モデルとして、選択行動を説明してきました。
-つぎに、この顕示選考理論を背景として、消費者が「買う・買わない」という観察可能な行動の結果をデータとして入手した場合の統計分析について考えてみましょう。
-
-いま、観察可能な行動の結果として購入したか否かを表す二値変数$y_i$と、その購入行動に影響を与える要因を表す連続変数$x_i$のデータが手元にあるとします。
-$y_i$は0または1と取る二値変数であり、実現値を$y$と表すとします。
-$x_i$は連続変数であり、実現値を$x$と表すとします。
-確率変数の条件付期待値は、
-$$
-E[y_i \mid x_i] = \sum_{y} y \cdot P(y_i = y \mid x_i)
-$$
-で定義されます。
-いま、$y_i \in \{0,1\}$なので、上の式は、
-$$
-\begin{aligned}
-E[y_i \mid x_i] &= 0 \cdot P(y_i = 0 \mid x_i) + 1 \cdot P(y_i = 1 \mid x_i)\\
-&= P(y_i = 1 \mid x_i)
-\end{aligned}
-$$
-となります。
-これは$X$を条件として、$Y$が1である確率、つまり消費者が商品を購入する確率を表します。
-これを**反応確率**と呼びます。
-
-次に、$x_i$が1単位増えると、$y_i = 1$ となる確率が $\beta_1$ だけ変化する、ということを表す線形確率モデルは、
-
-$$
-P(y_i = 1 \mid x_i) = \beta_0 + \beta_1 x_i
-$$
-
-となります。
-この$\beta_1$の意味について考えます。
-$x_i$ が $\Delta x_i$ だけ変化したとき、確率の変化は，
-
-$$
-\begin{aligned}
-\Delta P &= P(y_i = 1 \mid x_i + \Delta x_i) - P(y_i = 1 \mid x_i) \\ 
- &= [\beta_0 + \beta_1 (x_i + \Delta x_i)] - [\beta_0 + \beta_1 x_i]\\
- &= \beta_1 \Delta x_i
-\end{aligned}
-$$
-
-
-
-
-
 
 ```{r}
 pacman::p_load(tidyverse, readxl, modelsummary, mfx, DescTools, mlogit)
 ```
+
 ```{r}
 # コード8-1
 df1 <- data.frame(
     Y = c(0, 0, 0, 0, 0, 1, 1, 1, 1),
     X = c(3.4, 5.22, 7.06, 2.81, 4.11, 10.34, 13.67, 15.99, 9.09)
-)
-```
-
-従属変数$y_i$を説明変数$x_i$で線形回帰します。
-線形回帰は、`lm()`関数で行います。
-
-```{r}
+  )
 lpm1 <- lm(Y ~ X, data = df1)
 pred_lpm1 <- predict(lpm1)
 pred_lpm1
@@ -452,33 +433,29 @@ head(choice_df)
 ```{r}
 # コード8-3
 probit1 <- glm(y1 ~ p1 + a1,
-    family = binomial(link = probit),
-    data = choice_df
-)
+               family = binomial(link = probit),
+               data = choice_df)
 summary(probit1)
 ```
 
 ```{r}
 # コード8-4
 ols1 <- lm(y1 ~ p1 + a1,
-    data = choice_df
-)
+           data = choice_df)
 logit1 <- glm(y1 ~ p1 + a1,
-    family = binomial(link = logit),
-    data = choice_df
-)
+              family = binomial(link = logit),
+              data = choice_df)
 models <- list()
 models[["Linear probability model"]] <- ols1
 models[["Probit model"]] <- probit1
 models[["Logit model"]] <- logit1
 modelsummary(models,
-    title = "モデル比較",
-    notes = "Values in [ ] show robust standard errors",
-    stars = TRUE,
-    statistic = "std.error",
-    vcov = "robust",
-    gof_map = "nobs"
-)
+             title = "モデル比較",
+             notes = "Values in [ ] show robust standard errors",
+             stars = TRUE,
+             statistic = "std.error",
+             vcov = "robust",
+             gof_map = "nobs")
 # 適合度指標において，サンプルサイズ ("nobs") のみ表示するという指示
 ```
 
@@ -486,8 +463,7 @@ modelsummary(models,
 # コード8-5
 # Average Marginal Effects（限界効果の平均）
 probit1_ame <- probitmfx(y1 ~ p1 + a1,
-    data = choice_df, atmean = FALSE
-)
+                         data = choice_df, atmean = FALSE)
 probit1_ame
 ```
 
@@ -496,36 +472,33 @@ probit1_ame
 # コード8-7
 # Marginal Effects at Mean（平均値における限界効果）
 probit1_mem <- probitmfx(y1 ~ p1 + a1,
-    data = choice_df, atmean = TRUE
-)
+                         data = choice_df, atmean = TRUE)
 probit1_mem
 ```
 
 ```{r}
 # コード8-8
 marginal <- c(
-    "p1 marginal" = "p1",
-    "a1 marginal" = "a1"
+  "p1 marginal" = "p1",
+  "a1 marginal" = "a1"
 )
 
 marg_model <- list(
-    "(1) Probit_AME" <- probit1_ame,
-    "(2) Probit_MEM" <- probit1_mem
+  "(1) Probit_AME" <- probit1_ame,
+  "(2) Probit_MEM" <- probit1_mem
 )
 
 marg_sum <- modelsummary(
-    marg_model,
-    statistic = "std.error",
-    coef_map = marginal,
-    stars = TRUE,
-    shape = term:component ~ model,
-    add_rows = data.frame(
-        "Marginal effect type",
-        "Average Marginal Effect",
-        "Marginal Effect at Mean"
-    ),
-    title = "限界効果サマリー",
-    gof_map = "nobs"
+  marg_model,
+  statistic = "std.error",
+  coef_map = marginal,
+  stars = TRUE,
+  shape = term:component ~ model,
+  add_rows = data.frame("Marginal effect type",
+                        "Average Marginal Effect",
+                        "Marginal Effect at Mean"),
+  title = "限界効果サマリー",
+  gof_map = "nobs"
 )
 marg_sum
 ```
@@ -539,12 +512,11 @@ DescTools::PseudoR2(probit1)
 
 # 価格差変数作成
 choice_df <- choice_df %>%
-    mutate(p_ratio = p1 - p2)
+  mutate(p_ratio = p1 - p2)
 
 probit2 <- glm(y1 ~ p_ratio + a1 + a2,
-    family = binomial(link = probit),
-    data = choice_df
-)
+               family = binomial(link = probit),
+               data = choice_df)
 summary(probit2)
 
 # コード8-11
@@ -552,8 +524,7 @@ DescTools::PseudoR2(probit2)
 
 # コード8-12
 probit2_ame <- probitmfx(y1 ~ p_ratio + a1 + a2,
-    data = choice_df, atmean = FALSE
-)
+                         data = choice_df, atmean = FALSE)
 probit2_ame
 ```
 
@@ -564,17 +535,13 @@ data(Cracker, package = "mlogit")
 head(Cracker, n = 20)
 
 # コード8-14
-cracker <- mlogit.data(Cracker,
-    choice = "choice", shape = "wide",
-    varying = c(2:13)
-)
+cracker <- mlogit.data(Cracker, choice = "choice", shape = "wide",
+                       varying = c(2:13))
 head(cracker, n = 20)
 
 # コード8-15
-ml_cracker <- mlogit(choice ~ price | 1 | disp + feat,
-    probit = FALSE,
-    data = cracker
-)
+ml_cracker <- mlogit(choice ~ price | 1 | disp + feat, probit = FALSE,
+                     data = cracker)
 
 summary(ml_cracker)
 ```
@@ -586,10 +553,8 @@ summary(ml_cracker)
 beta <- probit2$coefficients
 
 # パラメータbeta と説明変数の線形結合を作成（beta_0 は定数項なので1 をかける）
-est_probit2 <- cbind(
-    1, choice_df$p_ratio, choice_df$a1,
-    choice_df$a2
-) %*% beta
+est_probit2 <- cbind(1, choice_df$p_ratio, choice_df$a1,
+                     choice_df$a2) %*% beta
 
 # pnorm によって標準正規分布の分布関数による計算を実行する。
 # 製品1(c1) を選ぶ確率の予測値
@@ -599,27 +564,20 @@ mean(pred_probit_c1)
 # コード8-17
 # ロジットモデルの場合
 logit2 <- glm(y1 ~ p_ratio + a1 + a2,
-    family = binomial(link = logit),
-    data = choice_df
-)
+              family = binomial(link = logit),
+              data = choice_df)
 beta_logit <- logit2$coefficients
-est_logit2 <- cbind(
-    1, choice_df$p_ratio, choice_df$a1,
-    choice_df$a2
-) %*% beta_logit
+est_logit2 <- cbind(1, choice_df$p_ratio, choice_df$a1,
+                    choice_df$a2) %*% beta_logit
 pred_logit_c1 <- (exp(est_logit2)) / (1 + exp(est_logit2))
 mean(pred_logit_c1)
 
 # コード8-18
 choice_df_v <- choice_df %>%
-    mutate(
-        p1_v = p1 - 1,
-        p_ratio_v = p1_v - p2
-    )
-est_probit_v <- cbind(
-    1, choice_df_v$p_ratio_v, choice_df_v$a1,
-    choice_df_v$a2
-) %*% beta
+  mutate(p1_v = p1 - 1,
+         p_ratio_v = p1_v - p2)
+est_probit_v <- cbind(1, choice_df_v$p_ratio_v, choice_df_v$a1,
+                      choice_df_v$a2) %*% beta
 
 # pnorm によって標準正規分布の分布関数による計算を実行する。
 # 製品1(c1) を選ぶ確率の予測値
