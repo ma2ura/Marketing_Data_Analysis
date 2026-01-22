@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0f3842d524a25ead62fa3485ecdbacb2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-0f3842d524a25ead62fa3485ecdbacb2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0f3842d524a25ead62fa3485ecdbacb2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -348,7 +348,7 @@ window.Quarto = {
 
 <section id="顕示選好の理論" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="顕示選好の理論"><span class="header-section-number">6.1</span> 顕示選好の理論</h2>
-<p>Kreps (1988) “Notes on the Theory of Choice”に基づいて，単一個人意思決定モデルの基礎的な考え方を説明します。</p>
+<p>この節は読まなくても問題ありません。 個人的な勉強がてらKreps (1988) “Notes on the Theory of Choice”に基づいて，単一個人意思決定モデルの基礎的な考え方を説明します。</p>
 <p><span class="markp">「選択」(choice)という現象は，ある集合<span class="math inline">A</span>がある個人にとっての実際に選択可能な選択肢の集合であったときに，その中から個人によって1つの選択肢<span class="math inline">a \in A</span>が選ばれる，という現象</span>をいいます。 ここに，<span class="markp">「選ぶ」というのは，第三者に観察できる行為として選ぶ，ということに限って用いられます。</span> また，問題となっている集合<span class="math inline">A</span>の各要素<span class="math inline">a \in A</span>を「選択肢」(alternative)と呼びます。</p>
 <p>選択現象を問題にしている選択肢<span class="math inline">a</span>が確率的構造を持っているとき，その選択肢をとくに<strong>クジ</strong>(lottery)と呼びます。</p>
 <p>説明するべき対象を選択肢とします。</p>
@@ -675,10 +675,29 @@ Important
 <section id="二値選択モデル" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="二値選択モデル"><span class="header-section-number">6.3</span> 二値選択モデル</h2>
 <p>長々と単一個人の意思決定モデルとして、選択行動を説明してきました。 つぎに、この顕示選考理論を背景として、消費者が「買う・買わない」という観察可能な行動の結果をデータとして入手した場合の統計分析について考えてみましょう。</p>
+<p>いま、観察可能な行動の結果として購入したか否かを表す二値変数<span class="math inline">y_i</span>と、その購入行動に影響を与える要因を表す連続変数<span class="math inline">x_i</span>のデータが手元にあるとします。 <span class="math inline">y_i</span>は0または1と取る二値変数であり、実現値を<span class="math inline">y</span>と表すとします。 <span class="math inline">x_i</span>は連続変数であり、実現値を<span class="math inline">x</span>と表すとします。 確率変数の条件付期待値は、 <span class="math display">
+E[y_i \mid x_i] = \sum_{y} y \cdot P(y_i = y \mid x_i)
+</span> で定義されます。 いま、<span class="math inline">y_i \in \{0,1\}</span>なので、上の式は、 <span class="math display">
+\begin{aligned}
+E[y_i \mid x_i] &amp;= 0 \cdot P(y_i = 0 \mid x_i) + 1 \cdot P(y_i = 1 \mid x_i)\\
+&amp;= P(y_i = 1 \mid x_i)
+\end{aligned}
+</span> となります。 これは<span class="math inline">X</span>を条件として、<span class="math inline">Y</span>が1である確率、つまり消費者が商品を購入する確率を表します。 これを<strong>反応確率</strong>と呼びます。</p>
+<p>次に、<span class="math inline">x_i</span>が1単位増えると、<span class="math inline">y_i = 1</span> となる確率が <span class="math inline">\beta_1</span> だけ変化する、ということを表す線形確率モデルは、</p>
+<p><span class="math display">
+P(y_i = 1 \mid x_i) = \beta_0 + \beta_1 x_i
+</span></p>
+<p>となります。 この<span class="math inline">\beta_1</span>の意味について考えます。 <span class="math inline">x_i</span> が <span class="math inline">\Delta x_i</span> だけ変化したとき、確率の変化は，</p>
+<p><span class="math display">
+\begin{aligned}
+\Delta P &amp;= P(y_i = 1 \mid x_i + \Delta x_i) - P(y_i = 1 \mid x_i) \\
+&amp;= [\beta_0 + \beta_1 (x_i + \Delta x_i)] - [\beta_0 + \beta_1 x_i]\\
+&amp;= \beta_1 \Delta x_i
+\end{aligned}
+</span></p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, modelsummary, mfx, DescTools, mlogit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>従属変数<span class="math inline">Y</span>が<span class="math inline">0</span>か<span class="math inline">1</span>の二値であるという観察可能な行動の結果を示すものとします。 独立変数<span class="math inline">X</span>は、その選択に影響を与える要因を示す連続変数とします。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># コード8-1</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -686,7 +705,7 @@ Important
 <span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">X =</span> <span class="fu">c</span>(<span class="fl">3.4</span>, <span class="fl">5.22</span>, <span class="fl">7.06</span>, <span class="fl">2.81</span>, <span class="fl">4.11</span>, <span class="fl">10.34</span>, <span class="fl">13.67</span>, <span class="fl">15.99</span>, <span class="fl">9.09</span>)</span>
 <span id="cb2-5"><a href="#cb2-5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>従属変数<span class="math inline">Y</span>を説明変数<span class="math inline">X</span>で線形回帰します。 線形回帰は、<code>lm()</code>関数で行います。</p>
+<p>従属変数<span class="math inline">y_i</span>を説明変数<span class="math inline">x_i</span>で線形回帰します。 線形回帰は、<code>lm()</code>関数で行います。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>lpm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> df1)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>pred_lpm1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lpm1)</span>
@@ -766,8 +785,8 @@ Number of Fisher Scoring iterations: 3</code></pre>
 
     <script>
 
-      function styleCell_cv34zvu70ewu0z4rxbv1(i, j, css_id) {
-          var table = document.getElementById("tinytable_cv34zvu70ewu0z4rxbv1");
+      function styleCell_5g1ccm4tmxbd5uhlinvk(i, j, css_id) {
+          var table = document.getElementById("tinytable_5g1ccm4tmxbd5uhlinvk");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -777,7 +796,7 @@ Number of Fisher Scoring iterations: 3</code></pre>
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_cv34zvu70ewu0z4rxbv1');
+        var table = document.getElementById('tinytable_5g1ccm4tmxbd5uhlinvk');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -785,8 +804,8 @@ Number of Fisher Scoring iterations: 3</code></pre>
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_cv34zvu70ewu0z4rxbv1(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_cv34zvu70ewu0z4rxbv1");
+      function spanCell_5g1ccm4tmxbd5uhlinvk(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_5g1ccm4tmxbd5uhlinvk");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -816,20 +835,20 @@ Number of Fisher Scoring iterations: 3</code></pre>
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 7, j: 3 },  ], css_id: 'tinytable_css_7trf8kz5lc3q3crj2j8s',}, 
-          { positions: [ { i: 6, j: 1 }, { i: 6, j: 2 }, { i: 6, j: 3 },  ], css_id: 'tinytable_css_ylgizv02f36777ikry63',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 2 }, { i: 2, j: 3 }, { i: 3, j: 3 }, { i: 4, j: 1 }, { i: 5, j: 2 }, { i: 4, j: 2 }, { i: 1, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 },  ], css_id: 'tinytable_css_t3jpafc3bsn0leqrpmwj',}, 
-          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_vvsy6xre8unktlkofbd1',}, 
-          { positions: [ { i: 7, j: 0 },  ], css_id: 'tinytable_css_tfuc9z3e3z0krtn14n1u',}, 
-          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_38hpdavfs9bx6h3p5ezf',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_mnftqkha35iagqn1cvsf',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_subkzs0omyrromfwxw9b',}, 
+          { positions: [ { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 7, j: 3 },  ], css_id: 'tinytable_css_mqxrtngt9ophm34qqr0m',}, 
+          { positions: [ { i: 6, j: 1 }, { i: 6, j: 2 }, { i: 6, j: 3 },  ], css_id: 'tinytable_css_0age3vof36an3toa0b95',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 2 }, { i: 2, j: 3 }, { i: 3, j: 3 }, { i: 4, j: 1 }, { i: 5, j: 2 }, { i: 4, j: 2 }, { i: 1, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 },  ], css_id: 'tinytable_css_10ldpbn694e32u7vwoqf',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_gg7k88ffaykyacn9n2bf',}, 
+          { positions: [ { i: 7, j: 0 },  ], css_id: 'tinytable_css_fxcp52ig5lknhau0b1df',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_kmw7vf3zrr05eip67yt7',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_3583olbpsvsx2xt0i4ei',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_0qjxeex9knb3z11onmj3',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_cv34zvu70ewu0z4rxbv1(cell.i, cell.j, group.css_id);
+                  styleCell_5g1ccm4tmxbd5uhlinvk(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -837,17 +856,17 @@ Number of Fisher Scoring iterations: 3</code></pre>
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_7trf8kz5lc3q3crj2j8s, .table th.tinytable_css_7trf8kz5lc3q3crj2j8s { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_ylgizv02f36777ikry63, .table th.tinytable_css_ylgizv02f36777ikry63 { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_t3jpafc3bsn0leqrpmwj, .table th.tinytable_css_t3jpafc3bsn0leqrpmwj { text-align: center; }
-      .table td.tinytable_css_vvsy6xre8unktlkofbd1, .table th.tinytable_css_vvsy6xre8unktlkofbd1 { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_tfuc9z3e3z0krtn14n1u, .table th.tinytable_css_tfuc9z3e3z0krtn14n1u { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_38hpdavfs9bx6h3p5ezf, .table th.tinytable_css_38hpdavfs9bx6h3p5ezf { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_mnftqkha35iagqn1cvsf, .table th.tinytable_css_mnftqkha35iagqn1cvsf { text-align: left; }
-      .table td.tinytable_css_subkzs0omyrromfwxw9b, .table th.tinytable_css_subkzs0omyrromfwxw9b { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_mqxrtngt9ophm34qqr0m, .table th.tinytable_css_mqxrtngt9ophm34qqr0m { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_0age3vof36an3toa0b95, .table th.tinytable_css_0age3vof36an3toa0b95 { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_10ldpbn694e32u7vwoqf, .table th.tinytable_css_10ldpbn694e32u7vwoqf { text-align: center; }
+      .table td.tinytable_css_gg7k88ffaykyacn9n2bf, .table th.tinytable_css_gg7k88ffaykyacn9n2bf { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_fxcp52ig5lknhau0b1df, .table th.tinytable_css_fxcp52ig5lknhau0b1df { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_kmw7vf3zrr05eip67yt7, .table th.tinytable_css_kmw7vf3zrr05eip67yt7 { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_3583olbpsvsx2xt0i4ei, .table th.tinytable_css_3583olbpsvsx2xt0i4ei { text-align: left; }
+      .table td.tinytable_css_0qjxeex9knb3z11onmj3, .table th.tinytable_css_0qjxeex9knb3z11onmj3 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_cv34zvu70ewu0z4rxbv1" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_5g1ccm4tmxbd5uhlinvk" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         </thead><caption>モデル比較</caption>
               <tbody><tr>
@@ -987,8 +1006,8 @@ dF/dx is for discrete change for the following variables:
 
     <script>
 
-      function styleCell_8z86muz7c2irgyv7nvyi(i, j, css_id) {
-          var table = document.getElementById("tinytable_8z86muz7c2irgyv7nvyi");
+      function styleCell_97gvzuso7g971att8g08(i, j, css_id) {
+          var table = document.getElementById("tinytable_97gvzuso7g971att8g08");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -998,7 +1017,7 @@ dF/dx is for discrete change for the following variables:
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_8z86muz7c2irgyv7nvyi');
+        var table = document.getElementById('tinytable_97gvzuso7g971att8g08');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -1006,8 +1025,8 @@ dF/dx is for discrete change for the following variables:
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_8z86muz7c2irgyv7nvyi(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_8z86muz7c2irgyv7nvyi");
+      function spanCell_97gvzuso7g971att8g08(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_97gvzuso7g971att8g08");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -1037,20 +1056,20 @@ dF/dx is for discrete change for the following variables:
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 6, j: 1 }, { i: 6, j: 2 },  ], css_id: 'tinytable_css_1khmr9w8njg2om1mirp5',}, 
-          { positions: [ { i: 4, j: 2 }, { i: 4, j: 1 },  ], css_id: 'tinytable_css_wndoauvzja9oa606dnlv',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 1, j: 2 }, { i: 5, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 1 }, { i: 5, j: 2 }, { i: 2, j: 2 },  ], css_id: 'tinytable_css_5p0m30gv1j5gmiu4cw4w',}, 
-          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_kebzyino3a1hv30vj8oo',}, 
-          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_a3kuxfj7l0cku8wgnoj6',}, 
-          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_2j2b8rcse0nwug247nc9',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_bryv8sc1qj4nve67mvbw',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_fmzzwzilp2hsoozsd9pu',}, 
+          { positions: [ { i: 6, j: 1 }, { i: 6, j: 2 },  ], css_id: 'tinytable_css_2rvyyy758ppfu3i87i4a',}, 
+          { positions: [ { i: 4, j: 2 }, { i: 4, j: 1 },  ], css_id: 'tinytable_css_v95g2jt2weztqzp8sglu',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 1, j: 2 }, { i: 5, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 1 }, { i: 5, j: 2 }, { i: 2, j: 2 },  ], css_id: 'tinytable_css_3q21y0fr1s08evjff7pv',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_t4bksefispzmehaj8q7n',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_hb0x8gr0lyfzigtmb3a7',}, 
+          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_s54qhhndpu7mtqvjph2n',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_s849qon39yh7vn7foqgw',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_szrmmz1akdsd3hzpamdx',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_8z86muz7c2irgyv7nvyi(cell.i, cell.j, group.css_id);
+                  styleCell_97gvzuso7g971att8g08(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -1058,17 +1077,17 @@ dF/dx is for discrete change for the following variables:
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_1khmr9w8njg2om1mirp5, .table th.tinytable_css_1khmr9w8njg2om1mirp5 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_wndoauvzja9oa606dnlv, .table th.tinytable_css_wndoauvzja9oa606dnlv { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_5p0m30gv1j5gmiu4cw4w, .table th.tinytable_css_5p0m30gv1j5gmiu4cw4w { text-align: center; }
-      .table td.tinytable_css_kebzyino3a1hv30vj8oo, .table th.tinytable_css_kebzyino3a1hv30vj8oo { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_a3kuxfj7l0cku8wgnoj6, .table th.tinytable_css_a3kuxfj7l0cku8wgnoj6 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_2j2b8rcse0nwug247nc9, .table th.tinytable_css_2j2b8rcse0nwug247nc9 { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_bryv8sc1qj4nve67mvbw, .table th.tinytable_css_bryv8sc1qj4nve67mvbw { text-align: left; }
-      .table td.tinytable_css_fmzzwzilp2hsoozsd9pu, .table th.tinytable_css_fmzzwzilp2hsoozsd9pu { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_2rvyyy758ppfu3i87i4a, .table th.tinytable_css_2rvyyy758ppfu3i87i4a { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_v95g2jt2weztqzp8sglu, .table th.tinytable_css_v95g2jt2weztqzp8sglu { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_3q21y0fr1s08evjff7pv, .table th.tinytable_css_3q21y0fr1s08evjff7pv { text-align: center; }
+      .table td.tinytable_css_t4bksefispzmehaj8q7n, .table th.tinytable_css_t4bksefispzmehaj8q7n { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_hb0x8gr0lyfzigtmb3a7, .table th.tinytable_css_hb0x8gr0lyfzigtmb3a7 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_s54qhhndpu7mtqvjph2n, .table th.tinytable_css_s54qhhndpu7mtqvjph2n { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_s849qon39yh7vn7foqgw, .table th.tinytable_css_s849qon39yh7vn7foqgw { text-align: left; }
+      .table td.tinytable_css_szrmmz1akdsd3hzpamdx, .table th.tinytable_css_szrmmz1akdsd3hzpamdx { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_8z86muz7c2irgyv7nvyi" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_97gvzuso7g971att8g08" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         </thead><caption>限界効果サマリー</caption>
               <tbody><tr>

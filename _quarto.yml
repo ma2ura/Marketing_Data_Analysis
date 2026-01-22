@@ -43,8 +43,8 @@ format:
     theme:
       - cosmo
       - styles.scss
-    # mainfont: "Noto Sans JP"
-    # monofont: "0xProto"
+    mainfont: "Noto Sans JP"
+    monofont: "0xProto"
     # fontsize: 1.2em
     # code-ling: true
     html-math-method: katex

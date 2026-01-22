@@ -1,53 +1,269 @@
-## 第6章
+## 第6章 回帰分析
 
-```{r}
-pacman::p_load(tidyverse, readxl, GGally, knitr)
+6章は変数間の関係を考察する手法の1つである**回帰分析** (Regression Analysis) について説明します。
 
-# コード6-1
+いま手元に売上高($y$とする)と従業員数($x$とする)という2つのデータの組 $(y_i, x_i)$ があるとします。
+$i$ は企業の番号を表しており，$n$ 社のデータがあるとします。
+こんな感じのデータです。
+
+| 企業番号 | 売上高 | 従業員数 |
+|---|---|---|
+| 1 | 1000 | 5 |
+| 2 | 2000 | 10 |
+| 3 | 3000 | 15 |
+| ... | ... | ... |
+| n | 4500 | 25 |
+
+
+
+:::{.aside}
+$n$ はサンプルサイズといいます。サンプル数という言い方は誤りです。サンプル数は1です。
+:::
+
+<!-- たとえば、$i = 1$の会社の売上高と従業員数は$(y_1, x_1) = (1000, 5)$ と表します。 -->
+
+いま、<span class="markp">従業員数$x$が増えると売上高$y$は増えるのか否か</span>、という分析をしたいとしましょう。
+つまり、従業員数と売上高との間には**関係**があるのかどうかを調べたい、ということです。
+しかし、関係があるといってもいろんな関係がある可能性があります。
+そこで、変数間の関係で最も基本的なものとして**線形関係** (linear relation) を考えます。
+
+:::{.aside}
+中学校の数学で学ぶ$y = ax + b$です。
+:::
+
+$y$ は $x$ と線形関係であると考え分析のモデルを構築します。
+これを「単回帰モデル」と呼び、次のように表します。
+
+$$
+y_i = \beta_0 + \beta_1 x_i + u_i
+$$
+
+ここで各変数は以下のように定義されます。
+
+- $y_i$: **従属変数** (dependent variable)、応答変数、または目的変数。
+- $x_i$: **独立変数** (independent variable)、または説明変数。
+- $\beta_0$: **切片** (intercept)。
+- $\beta_1$: **傾き** (slope) または回帰係数。
+- $u_i$: **誤差項** (error term)。モデルがデータを説明できない確率的な変動部分を表します。
+
+手元にある売上高$y$と従業員数$x$のデータを使って、横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。
+
+```{r fig01}
+#| code-fold: true
+#| warning: false
+#| message: false
+pacman::p_load(tidyverse, ggthemes, GGally, gt, gtExtra, knitr, kableExtra)
+
+set.seed(123) # 乱数のタネ
+n <- 15 # サンプルサイズ
+x <- seq(1, 10, length.out = n) # 独立変数
+y <- 3 + 1.5 * x + rnorm(n, mean = 0, sd = 2) # 従属変数
+data <- data.frame(x = x, y = y) # データフレームの作成
+my_font <- if (Sys.info()["sysname"] == "Darwin") "HiraKakuProN-W3" else "sans"
+
+# 作図
+g <- ggplot(data, aes(x = x, y = y)) +
+    geom_point(size = 2.5, color = "black", alpha = 0.8) +
+    theme_economist_white(base_family = my_font) + 
+        labs(
+        title = "データの散布図",
+        x = "従業員数 (x)",
+        y = "売上高 (y)"
+    )
+
+print(g)
+```
+
+散布図をみると右肩上がりの関係があるように見えますが、もっと明確に変数間の関係を表すために、<span class="markp">そのデータを最も良く説明できる直線</span>をひこうと思います。
+つまり、<span class="markp">切片の$\beta_0$と傾きの$\beta_1$を決めるということ</span>です。
+この直線が「モデル」で、それぞれの黒い点とモデルの直線との縦軸方向への距離を「誤差」または「残差」と呼びます。
+
+
+```{r fig02}
+#| code-fold: true
+#| warning: false
+#| message: false
+#| # 回帰式をlm()で推定
+model <- lm(y ~ x, data = data)
+# 予測値をpredictedに格納
+data$predicted <- predict(model)
+# OSに合わせてフォントを自動選択（Macならヒラギノ、それ以外ならデフォルト）
+
+g <- ggplot(data, aes(x = x, y = y)) +
+    geom_segment(
+        aes(xend = x, yend = predicted),
+        color = "#D55E00", linetype = "dashed", alpha = 0.8, linewidth = 0.8
+    ) + 
+    geom_point(size = 2.5, color = "black", alpha = 0.8) +
+    theme_calc(base_family = my_font) +
+    labs(
+        title = "データの散布図",
+        x = "従業員数 (x)",
+        y = "売上高 (y)"
+    ) +
+    geom_smooth(method = "lm", se = FALSE, color = "#0072B2", linewidth = 1.2) +
+    theme(
+        plot.title = element_text(face = "bold", size = 16),
+        axis.title = element_text(size = 12),
+    ) +
+    annotate("text",
+        x = min(data$x) + 2,
+        y = max(data$y) + 1,
+        label = "y[i] == beta[0] + beta[1] * x[i] + u[i]",
+        parse = TRUE,
+        size = 6, family = my_font
+    )
+print(g)
+```
+
+望ましい性質を備えた直線の引き方の1つとして、ガウス(Gauss)が構築した最小二乗法(Ordinaly Least Square Methods: OLS)について説明します。
+
+
+## 分析準備
+
+サンプルデータを読み込みます。
+MS Excelのファイル `.xlsx` なので、`readxl::read_xlsx()` 関数を使います。
+読み込んだデータから、2019年のデータを抽出します。
+
+```{r code6-1}
 firmdata <- readxl::read_xlsx("data/MktRes_firmdata.xlsx")
+firmdata19 <- firmdata |>
+    filter(fyear == 2019) # 2019年を抽出
+```
 
-# コード6-2
-library(tidyverse)
-firmdata19 <- firmdata %>%
-  filter(fyear == 2019)
+探索的なデータ分析として、変数間の関係を概観するために `GGally` パッケージの `ggpairs()` 関数を使います。
 
-# コード6-3
-# install.packages("GGally")
+```{r code6-4}
+#| message: false
+firmdata19 |>
+    select(sales, mkexp, emp, operating_profit) |>
+    GGally::ggpairs() +
+    labs(title = "2変数の関係の概略")
+```
+    
+出力された図を見てみます。
 
-# コード6-4
-firmdata19 %>%
-  select(sales, mkexp, emp, operating_profit) %>%
-  GGally::ggpairs() + labs(title = "ggpairs example")
+* **対角線 (分布)**: 売上高 `sales` や従業員数 `emp`、営業利益 `operating_profit` は値の小さい左側にデータが集まっており、右側に裾を引く歪んだ分布であることがわかります。
+* **右上 (相関係数)**: `Corr:` として相関係数が表示されています。売上高 `sales` と従業員数 `emp` や営業利益 `operating_profit` の相関が高く、また営業利益と従業員数にも強い正の相関があります。
+* **左下 (散布図)**: 2変数間の散布図が表示されています。異常値の有無などを確認できます。
 
-# コード6-5
-ds1 <- firmdata19 %>%
-  select(sales, mkexp, emp, operating_profit) %>%
-  summary()
-knitr::kable(ds1, align = "cccc")
+次に、記述統計量を基本関数 `summary()` を使って計算します。
 
-# コード6-6
+```{r code6-5}
+ds1 <- firmdata19 |>
+    select(sales, mkexp, emp, operating_profit) |>
+    summary()
+
+knitr::kable(ds1, format = "html", align = "cccc") |>
+    kableExtra::kable_styling()
+```
+
+
+## 単回帰モデルと予測値
+
+膨大なデータを目の前にした我々は、そのデータを最も良く「説明」できるシンプルなモデルを特定したいと考えます。
+最も基本的な関数 $f:x \rightarrow y$ として1次関数を考えます。
+
+$$
+y = \beta_0 + \beta_1 x
+$$
+
+ここで、$\beta_0$ は切片、$\beta_1$ は傾きを表します。
+何らかの方法で$\beta_0$と$\beta_1$を決めたとしよう。
+その切片を $\hat{\beta}_0$、傾きを $\hat{\beta}_1$ とします。
+$x$ に手元にあるデータ $x_i$ を代入して計算できる値を**予測値** (predicted value) といい、$\hat{y}_i$ と表します。
+
+$$
+\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i
+$$
+
+このとき、実際の観測値 $y_i$ と予測値 $\hat{y}_i$ の差を**残差** (residual) といい、$e_i$ で表します。
+
+$$
+e_i = y_i - \hat{y}_i
+$$
+
+回帰分析で最も良く用いられており、望ましい性質をもつ推定値を計算できる方法は最小二乗法といい、この残差$e_i$の二乗和 $\sum e_i^2$ を最小にするように $\hat{\beta}_0$ と $\hat{\beta}_1$ を決定します。
+
+Rでは `lm()` 関数を使って計算できます。
+ここでは、売上高が従業員数で説明できるかを調べる単回帰モデルを構築します。
+$$
+sales_i = \beta_0 + \beta_1 emp_i + u_i
+$$
+```{r code6-6}
 reg1 <- lm(sales ~ emp, data = firmdata19)
 coef(reg1)
+```
+最小二乗法で推定された係数は以下のようになります。
 
-# コード6-7
+$$
+\hat{sales}_i = 22113.98050 + 58.14081 \times emp_i
+$$
+
+従業員が10名のときの売上高の予測値は22695.3886となり、従業員が1名増えるごとに売上高が約58.14増加すると予測されます。
+
+
+## 回帰分析における推定と検定
+
+### 回帰分析と統計的推測
+
+この節は回帰分析の理屈を学習する上で重要な章なので、時間を掛けて学習することをオススメします。
+
+### 企業データを用いた回帰分析の実行
+
+上で推定した回帰分析の結果をみていきます。
+`lm()`関数で推定した結果を`reg1`というオブジェクトに格納しているので、その中身をみてみましょう。
+```{r code6-7}
 summary(reg1)
+```
 
-# コード6-8
+
+```{r code6-8}
 confint(reg1, level = 0.99)
+```
 
-# コード6-9
+
+### 回帰係数の解釈
+
+この節は難しいので、教科書の解説に補足を加えながら説明します。
+例として次のような重回帰モデルを考えます。
+
+$$
+y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
+$$
+
+ここで$x_{1i}$の微少な変化が$y_i$に与える影響を知りたいとします。
+この回帰モデルを$x_{1i}$で偏微分すると、次のようになります。
+
+$$
+\frac{\partial y_i}{\partial x_{1i}} = \beta_1
+$$
+
+つまり$x_{2i}$を一定として$x_{1i}$が1単位変化した場合の$y_i$の変化量は$\beta_1$である、ということです。このことを**他の変数を一定とした場合の効果** (ceteris paribus effect) といい、様々な要因で決定されているであろう従属変数に対して、特定の独立変数が与える影響を測定する際に重要な考え方となります。
+
+
+
+
+
+### 単回帰モデルと重回帰モデルの比較
+
+```{r code6-9}
 reg2 <- lm(operating_profit ~ adv, data = firmdata19)
 summary(reg2)
+```
 
-# コード6-10
+
+```{r code6-10}
 confint(reg2)
+```
 
-# コード6-11
-reg3 <- lm(operating_profit ~ adv + temp + emp + labor_cost
-           + total_assets + rd, data = firmdata19)
+
+```{r code6-11}
+reg3 <- lm(operating_profit ~ adv + temp + emp + labor_cost + total_assets + rd, data = firmdata19)
 summary(reg3)
+```
 
-# コード6-12
+```{r code6-12}
 confint(reg3)
 ```
 
