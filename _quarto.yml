@@ -2,9 +2,26 @@ project:
   type: book
   output-dir: docs
 
+lightbox: auto
+
 book:
   title: "マーケティング・データ分析の学習メモ"
+  author: "Soichi Matsuura"
+  search: true
+  date: "2026-01-01"
+  license: "CC BY-NC-SA"
+  favicon: img/favicon.ico
+  cover-image: img/tagashira.jpg
+  site-url: https://ma2ura.github.io/Marketing_Data_Analysis/
+  repo-url: https://github.com/ma2ura/Marketing_Data_Analysis/
+  repo-branch: main
+
   reader-mode: true
+
+  google-analytics: "G-SFB56VHK63"
+
+  page-navigation: true
+
   page-footer:
         border: true
         background: "#a10000"
@@ -17,11 +34,13 @@ book:
           - icon: twitter
             href: https://twitter.com/matsuura_rits
             aria-label: Twitter
-  cover-image: img/tagashira.jpg
-  favicon: img/favicon.ico
-  site-url: https://so-ichi.com/r.html
-  repo-url: https://github.com/ma2ura/Marketing_Data_Analysis/
-  repo-branch: main
+
+  sidebar:
+    style: docked
+    background: light
+    collapse: true
+
+
 
   chapters:
     - index.qmd
@@ -40,6 +59,9 @@ book:
         - chapter11.qmd
         - chapter12.qmd
 
+website:
+  back-to-top-navigation: true
+
 format:
   html:
     theme:
@@ -47,20 +69,27 @@ format:
       - styles.scss
     mainfont: "Noto Sans JP"
     monofont: "0xProto"
+    toc: true
+    toc-depth: 3
+    toc-expand: 2
+    code-tools: true
+    code-link: true
+    code-block-bg: true
+    code-block-border-left: "#002D72"
     # fontsize: 1.2em
-    # code-ling: true
+
     html-math-method: katex
     author-meta: "Soichi Matsuura"
     # callout-appearance: simple
-    code-copy: hover
-    code-overflow: scroll
+    # code-copy: hover
+    # code-overflow: scroll
     # code-link: true
     code-line-numbers: true
     link-external-icon: true
     df-print: paged
+
     twitter-card: true
-    page-navigation: true
-    back-to-top-navigation: true
+
     include-in-header:
       text: |
         <style>
@@ -90,6 +119,10 @@ format:
           \setlength{\parskip}{0pt}
           \usepackage{fvextra}
           \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+
+execute: 
+  freeze: false
+
 knitr:
   opts_chunk:
     dev: ragg_png     # 文字化け防止

@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Soichi Matsuura">
-
 <title>8&nbsp; 第11章 – マーケティング・データ分析の学習メモ</title>
 <style>
 code{white-space: pre-wrap;}
@@ -58,7 +55,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -81,10 +77,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0e4011db0d5ff3215bcba912988fbc37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-0e4011db0d5ff3215bcba912988fbc37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-0e4011db0d5ff3215bcba912988fbc37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-52f3d4fb16f1c2def925e31e907c07ee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-52f3d4fb16f1c2def925e31e907c07ee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-52f3d4fb16f1c2def925e31e907c07ee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -110,10 +108,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<style>
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-SFB56VHK63"></script><script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SFB56VHK63', { 'anonymize_ip': true});
+</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
 .marky {
   background: linear-gradient(transparent 60%, #FCFFC1 0%);
 }
@@ -124,21 +126,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   background: linear-gradient(transparent 70%, #ffcdd2 0%)
 }
 </style>
-
-
 <meta name="twitter:title" content="8&nbsp; 第11章 – マーケティング・データ分析の学習メモ">
-<meta name="twitter:image" content="https://so-ichi.com/r.html/chapter11_files/figure-html/unnamed-chunk-1-1.png">
+<meta name="twitter:image" content="https://ma2ura.github.io/Marketing_Data_Analysis/chapter11_files/figure-html/unnamed-chunk-1-1.png">
 <meta name="twitter:image-height" content="4500">
 <meta name="twitter:image-width" content="6300">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -149,13 +146,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">マーケティング・データ分析の学習メモ</a> 
         <div class="sidebar-tools-main">
@@ -175,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></span></a>
@@ -189,15 +182,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part02.html" class="sidebar-item-text sidebar-link">
@@ -206,8 +199,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></span></a>
@@ -232,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part03.html" class="sidebar-item-text sidebar-link">
@@ -241,8 +234,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></span></a>
@@ -261,21 +254,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part03.html">第3部 探索型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter11.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part03.html">第3部 探索型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter11.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">
+<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章</span>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -289,10 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header>
-
-
-<div class="cell" data-layout-align="center">
+</header><div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(psych, GPArotation, tidyverse, readxl, gt, gtExtras, dendextend, cluster, factoextra, useful, ggrepel)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="co"># コード11-1</span></span>
@@ -319,8 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <col style="width: 15%">
 <col style="width: 17%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: left;">V1</th>
 <th style="text-align: left;">V2</th>
@@ -328,8 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th style="text-align: left;">V4</th>
 <th style="text-align: left;">V5</th>
 <th style="text-align: left;">V6</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"></td>
@@ -402,8 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <col style="width: 15%">
 <col style="width: 15%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: right;">V1</th>
 <th style="text-align: right;">V2</th>
@@ -411,8 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th style="text-align: right;">V4</th>
 <th style="text-align: right;">V5</th>
 <th style="text-align: right;">V6</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">V1</td>
@@ -477,8 +461,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4"></a><span class="fu">VSS.scree</span>(cor.exdata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="chapter11_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+<figure class="figure"><p><a href="chapter11_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter11_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
@@ -536,8 +519,7 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="fu">fa.diagram</span>(fa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="chapter11_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+<figure class="figure"><p><a href="chapter11_files/figure-html/unnamed-chunk-1-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter11_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
@@ -550,8 +532,7 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>結合後データ</caption>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: right;">V1</th>
 <th style="text-align: right;">V2</th>
 <th style="text-align: right;">V3</th>
@@ -561,8 +542,7 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <th style="text-align: left;">rowname</th>
 <th style="text-align: right;">ML1</th>
 <th style="text-align: right;">ML2</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">7</td>
@@ -641,8 +621,7 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <span id="cb8-6"><a href="#cb8-6"></a><span class="fu">pltree</span>(Hier1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="chapter11_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+<figure class="figure"><p><a href="chapter11_files/figure-html/unnamed-chunk-1-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="chapter11_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
@@ -661,8 +640,7 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <span id="cb9-13"><a href="#cb9-13"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ease of use"</span>, <span class="at">y =</span> <span class="st">"Design"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="chapter11_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+<figure class="figure"><p><a href="chapter11_files/figure-html/unnamed-chunk-1-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="chapter11_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
@@ -717,12 +695,10 @@ Fit based upon off diagonal values = 0.98</code></pre>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>計算結果</caption>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: right;">PC1</th>
 <th style="text-align: right;">PC2</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">0.9283425</td>
@@ -754,9 +730,10 @@ Fit based upon off diagonal values = 0.98</code></pre>
 </div>
 
 
+<!-- -->
 
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -827,9 +804,60 @@ Fit based upon off diagonal values = 0.98</code></pre>
       });
       clipboardModal.on('success', onCopySuccess);
     }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/so-ichi\.com\/r\.html");
+        var filterRegex = new RegExp("https:\/\/ma2ura\.github\.io\/Marketing_Data_Analysis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1157,9 +1185,7 @@ Fit based upon off diagonal values = 0.98</code></pre>
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./chapter10.html" class="pagination-link" aria-label="第10章 セグメントとクラスター分析">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></span>
       </a>          
@@ -1169,10 +1195,94 @@ Fit based upon off diagonal values = 0.98</code></pre>
         <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">第12章</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">## 第11章 </span></span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="in">```{r}</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(psych, GPArotation, tidyverse, readxl, gt, gtExtras, dendextend, cluster, factoextra, useful, ggrepel)</span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co"># コード11-1</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co"># install.packages("psych")</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co"># install.packages("GPArotation")</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co"># コード11-2</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>factor_exdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"data/factor_ex.xlsx"</span>, <span class="at">na =</span> <span class="st">"."</span>)</span>
+<span id="cb13-14"><a href="#cb13-14"></a></span>
+<span id="cb13-15"><a href="#cb13-15"></a>factor_exdata<span class="sc">$</span>V5 <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">-</span> factor_exdata<span class="sc">$</span>V5</span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="fu">rownames</span>(factor_exdata) <span class="ot">&lt;-</span> factor_exdata<span class="sc">$</span>ID</span>
+<span id="cb13-17"><a href="#cb13-17"></a></span>
+<span id="cb13-18"><a href="#cb13-18"></a>factor_exdata2 <span class="ot">&lt;-</span> factor_exdata <span class="sc">%&gt;%</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a>  <span class="fu">select</span>(<span class="sc">-</span>ID)</span>
+<span id="cb13-20"><a href="#cb13-20"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(factor_exdata2))</span>
+<span id="cb13-21"><a href="#cb13-21"></a></span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="co"># コード11-3</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cor</span>(factor_exdata2), <span class="at">caption =</span> <span class="st">"相関行列"</span>)</span>
+<span id="cb13-24"><a href="#cb13-24"></a></span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="co"># コード11-4</span></span>
+<span id="cb13-26"><a href="#cb13-26"></a>cor.exdata <span class="ot">&lt;-</span> <span class="fu">cor</span>(factor_exdata2)</span>
+<span id="cb13-27"><a href="#cb13-27"></a></span>
+<span id="cb13-28"><a href="#cb13-28"></a><span class="fu">VSS.scree</span>(cor.exdata)</span>
+<span id="cb13-29"><a href="#cb13-29"></a></span>
+<span id="cb13-30"><a href="#cb13-30"></a><span class="co"># コード11-5</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a>fa <span class="ot">&lt;-</span> <span class="fu">fa</span>(<span class="at">r =</span> factor_exdata2, <span class="at">nfactors =</span> <span class="dv">2</span>,</span>
+<span id="cb13-32"><a href="#cb13-32"></a>  <span class="at">rotate =</span> <span class="st">"promax"</span>, <span class="at">fm =</span> <span class="st">"ml"</span>)</span>
+<span id="cb13-33"><a href="#cb13-33"></a>fa</span>
+<span id="cb13-34"><a href="#cb13-34"></a></span>
+<span id="cb13-35"><a href="#cb13-35"></a><span class="co"># コード11-6</span></span>
+<span id="cb13-36"><a href="#cb13-36"></a><span class="fu">fa.diagram</span>(fa)</span>
+<span id="cb13-37"><a href="#cb13-37"></a></span>
+<span id="cb13-38"><a href="#cb13-38"></a><span class="co"># コード11-7</span></span>
+<span id="cb13-39"><a href="#cb13-39"></a>fs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(fa<span class="sc">$</span>scores)</span>
+<span id="cb13-40"><a href="#cb13-40"></a>factor_exdata2<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(factor_exdata2)</span>
+<span id="cb13-41"><a href="#cb13-41"></a>fs<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(fs)</span>
+<span id="cb13-42"><a href="#cb13-42"></a>factor_exdata2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(factor_exdata2, fs, <span class="at">by =</span> <span class="st">"rowname"</span>)</span>
+<span id="cb13-43"><a href="#cb13-43"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(factor_exdata2), <span class="at">caption =</span> <span class="st">"結合後データ"</span>)</span>
+<span id="cb13-44"><a href="#cb13-44"></a></span>
+<span id="cb13-45"><a href="#cb13-45"></a><span class="co"># コード11-8</span></span>
+<span id="cb13-46"><a href="#cb13-46"></a></span>
+<span id="cb13-47"><a href="#cb13-47"></a>ex_cluster <span class="ot">&lt;-</span> factor_exdata2 <span class="sc">%&gt;%</span></span>
+<span id="cb13-48"><a href="#cb13-48"></a>  <span class="fu">select</span>(ML1, ML2)</span>
+<span id="cb13-49"><a href="#cb13-49"></a>Hier1 <span class="ot">&lt;-</span> <span class="fu">agnes</span>(ex_cluster, <span class="at">metric =</span> <span class="st">"euclidian"</span>, <span class="at">stand =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-50"><a href="#cb13-50"></a><span class="fu">pltree</span>(Hier1)</span>
+<span id="cb13-51"><a href="#cb13-51"></a></span>
+<span id="cb13-52"><a href="#cb13-52"></a><span class="co"># コード11-9</span></span>
+<span id="cb13-53"><a href="#cb13-53"></a>cl_1 <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(ex_cluster, <span class="dv">3</span>)</span>
+<span id="cb13-54"><a href="#cb13-54"></a>clus_fa <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(cl_1<span class="sc">$</span>cluster)</span>
+<span id="cb13-55"><a href="#cb13-55"></a>clus_fa<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(clus_fa)</span>
+<span id="cb13-56"><a href="#cb13-56"></a>factor_exdata2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(factor_exdata2, clus_fa, <span class="at">by =</span> <span class="st">"rowname"</span>)</span>
+<span id="cb13-57"><a href="#cb13-57"></a>factor_exdata2<span class="sc">$</span>cl_1.cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(factor_exdata2<span class="sc">$</span>cl_1.cluster)</span>
+<span id="cb13-58"><a href="#cb13-58"></a></span>
+<span id="cb13-59"><a href="#cb13-59"></a><span class="co"># Visualizing the clusters with 2 factors</span></span>
+<span id="cb13-60"><a href="#cb13-60"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> factor_exdata2,</span>
+<span id="cb13-61"><a href="#cb13-61"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ML1, <span class="at">y =</span> ML2, <span class="at">color =</span> cl_1.cluster))</span>
+<span id="cb13-62"><a href="#cb13-62"></a>p1 <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-63"><a href="#cb13-63"></a>  <span class="fu">geom_text_repel</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(factor_exdata2))) <span class="sc">+</span></span>
+<span id="cb13-64"><a href="#cb13-64"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ease of use"</span>, <span class="at">y =</span> <span class="st">"Design"</span>)</span>
+<span id="cb13-65"><a href="#cb13-65"></a></span>
+<span id="cb13-66"><a href="#cb13-66"></a><span class="co"># コード11-10</span></span>
+<span id="cb13-67"><a href="#cb13-67"></a>factor_exdata3 <span class="ot">&lt;-</span> factor_exdata <span class="sc">%&gt;%</span></span>
+<span id="cb13-68"><a href="#cb13-68"></a>  <span class="fu">select</span>(<span class="sc">-</span>ID)</span>
+<span id="cb13-69"><a href="#cb13-69"></a>pca_res <span class="ot">&lt;-</span> <span class="fu">pca</span>(factor_exdata3, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">rotate =</span> <span class="st">"none"</span>)</span>
+<span id="cb13-70"><a href="#cb13-70"></a>pca_res</span>
+<span id="cb13-71"><a href="#cb13-71"></a></span>
+<span id="cb13-72"><a href="#cb13-72"></a><span class="co"># コード11-11</span></span>
+<span id="cb13-73"><a href="#cb13-73"></a><span class="co"># データの相関行列から固有値と固有ベクトルを抽出</span></span>
+<span id="cb13-74"><a href="#cb13-74"></a>cor_ex <span class="ot">&lt;-</span> <span class="fu">cor</span>(factor_exdata3)</span>
+<span id="cb13-75"><a href="#cb13-75"></a>eigen_list <span class="ot">&lt;-</span> <span class="fu">eigen</span>(cor_ex)</span>
+<span id="cb13-76"><a href="#cb13-76"></a></span>
+<span id="cb13-77"><a href="#cb13-77"></a><span class="co"># 固有ベクトルについての情報をオブジェクトとして定義</span></span>
+<span id="cb13-78"><a href="#cb13-78"></a>pc1_eig <span class="ot">&lt;-</span> eigen_list<span class="sc">$</span>vectors[, <span class="dv">1</span>]</span>
+<span id="cb13-79"><a href="#cb13-79"></a>pc2_eig <span class="ot">&lt;-</span> eigen_list<span class="sc">$</span>vectors[, <span class="dv">2</span>]</span>
+<span id="cb13-80"><a href="#cb13-80"></a></span>
+<span id="cb13-81"><a href="#cb13-81"></a><span class="co"># 固有ベクトルに，固有値の平方根を乗じる</span></span>
+<span id="cb13-82"><a href="#cb13-82"></a>PC1 <span class="ot">&lt;-</span> pc1_eig <span class="sc">*</span> <span class="fu">sqrt</span>(eigen_list<span class="sc">$</span>values[<span class="dv">1</span>])</span>
+<span id="cb13-83"><a href="#cb13-83"></a>PC2 <span class="ot">&lt;-</span> pc2_eig <span class="sc">*</span> <span class="fu">sqrt</span>(eigen_list<span class="sc">$</span>values[<span class="dv">2</span>])</span>
+<span id="cb13-84"><a href="#cb13-84"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">data.frame</span>(<span class="fu">cbind</span>(PC1, PC2)), <span class="at">caption =</span> <span class="st">"計算結果"</span>)</span>
+<span id="cb13-85"><a href="#cb13-85"></a><span class="in">```</span></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
 <p>Copyright 2025, Soichi Matsuura</p>
 </div>   
@@ -1181,7 +1291,7 @@ Fit based upon off diagonal values = 0.98</code></pre>
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+<li class="nav-item compact">
     <a class="nav-link" href="https://so-ichi.com/r.html">
       <i class="bi bi-house" role="img">
 </i> 
@@ -1200,11 +1310,40 @@ Fit based upon off diagonal values = 0.98</code></pre>
     </a>
   </li>  
 </ul>
-    </div>
+</div>
   </div>
-</footer>
-
-
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 </body></html>

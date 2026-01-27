@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Soichi Matsuura">
-
 <title>3&nbsp; 第5章 基礎統計学復習 – マーケティング・データ分析の学習メモ</title>
 <style>
 code{white-space: pre-wrap;}
@@ -58,7 +55,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -81,10 +77,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0e4011db0d5ff3215bcba912988fbc37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-0e4011db0d5ff3215bcba912988fbc37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-0e4011db0d5ff3215bcba912988fbc37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-52f3d4fb16f1c2def925e31e907c07ee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-52f3d4fb16f1c2def925e31e907c07ee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-52f3d4fb16f1c2def925e31e907c07ee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -110,10 +108,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<style>
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-SFB56VHK63"></script><script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SFB56VHK63', { 'anonymize_ip': true});
+</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
 .marky {
   background: linear-gradient(transparent 60%, #FCFFC1 0%);
 }
@@ -124,9 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   background: linear-gradient(transparent 70%, #ffcdd2 0%)
 }
 </style>
-
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
+<script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
  for (var i = 0; i < mathElements.length; i++) {
@@ -139,9 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     fleqn: false
    });
 }}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
-
+  </script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 <script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
@@ -168,21 +166,17 @@ window.Quarto = {
   typesetMath
 };
 </script>
-
 <meta name="twitter:title" content="3&nbsp; 第5章 基礎統計学復習 – マーケティング・データ分析の学習メモ">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://so-ichi.com/r.html/chapter05_files/figure-html/normal_dist-1.png">
+<meta name="twitter:image" content="https://ma2ura.github.io/Marketing_Data_Analysis/chapter05_files/figure-html/normal_dist-1.png">
 <meta name="twitter:image-height" content="4500">
 <meta name="twitter:image-width" content="6300">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-
-<body class="nav-sidebar floating slimcontent quarto-light">
+<body class="nav-sidebar docked slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -193,13 +187,9 @@ window.Quarto = {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">マーケティング・データ分析の学習メモ</a> 
         <div class="sidebar-tools-main">
@@ -219,7 +209,7 @@ window.Quarto = {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></span></a>
@@ -233,15 +223,15 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part02.html" class="sidebar-item-text sidebar-link">
@@ -250,8 +240,8 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter05.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></span></a>
@@ -276,7 +266,7 @@ window.Quarto = {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part03.html" class="sidebar-item-text sidebar-link">
@@ -285,8 +275,8 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></span></a>
@@ -305,30 +295,28 @@ window.Quarto = {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#区間推定" id="toc-区間推定" class="nav-link active" data-scroll-target="#区間推定"><span class="header-section-number">3.1</span> 区間推定</a>
+<li>
+<a href="#%E5%8C%BA%E9%96%93%E6%8E%A8%E5%AE%9A" id="toc-区間推定" class="nav-link active" data-scroll-target="#%E5%8C%BA%E9%96%93%E6%8E%A8%E5%AE%9A"><span class="header-section-number">3.1</span> 区間推定</a>
   <ul class="collapse">
-  <li><a href="#電球の寿命データで区間推定" id="toc-電球の寿命データで区間推定" class="nav-link" data-scroll-target="#電球の寿命データで区間推定"><span class="header-section-number">3.1.1</span> 電球の寿命データで区間推定</a></li>
-  </ul></li>
+<li><a href="#%E9%9B%BB%E7%90%83%E3%81%AE%E5%AF%BF%E5%91%BD%E3%83%87%E3%83%BC%E3%82%BF%E3%81%A7%E5%8C%BA%E9%96%93%E6%8E%A8%E5%AE%9A" id="toc-電球の寿命データで区間推定" class="nav-link" data-scroll-target="#%E9%9B%BB%E7%90%83%E3%81%AE%E5%AF%BF%E5%91%BD%E3%83%87%E3%83%BC%E3%82%BF%E3%81%A7%E5%8C%BA%E9%96%93%E6%8E%A8%E5%AE%9A"><span class="header-section-number">3.1.1</span> 電球の寿命データで区間推定</a></li>
   </ul>
-</nav>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part02.html">第2部 仮説検証型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter05.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part02.html">第2部 仮説検証型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter05.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">
+<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -342,22 +330,22 @@ window.Quarto = {
   
 
 
-</header>
-
-
-<p>経営学部の1回生がおおよそ学んでいるであろう統計学の内容を、Rコードとともに復習します。 テキストの内容に加えて、コードの効率化や関数化についても解説します。</p>
+</header><p>経営学部の1回生がおおよそ学んでいるであろう統計学の内容を、Rコードとともに復習します。 テキストの内容に加えて、コードの効率化や関数化についても解説します。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># コード5-1</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, pwr, knitr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>まずサイコロを作ります。 1から6の数値からなるベクトル<code>dice</code>を作ります。 つぎに<code>sample()</code>関数を用いて、<code>dice</code>の中から1つの数をランダムに取り出します。</p>
+<p>まずサイコロを作ります。 1から6の数値からなるベクトル<code>dice</code>を作ります。 つぎに<code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code>関数を用いて、<code>dice</code>の中から1つの数をランダムに取り出します。</p>
 
 <div class="no-row-height column-margin column-container"><div class="margin-aside">
-<p><code>sample()</code>関数の引数は以下の通りです。</p>
+<p><code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code>関数の引数は以下の通りです。</p>
 <ul>
-<li><code>x</code>: 抽出元のベクトル</li>
-<li><code>size</code>: 抽出する数</li>
-<li><code>replace</code>: 置換を許可するかどうか</li>
+<li>
+<code>x</code>: 抽出元のベクトル</li>
+<li>
+<code>size</code>: 抽出する数</li>
+<li>
+<code>replace</code>: 置換を許可するかどうか</li>
 </ul>
 </div></div><div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># コード5-2</span></span>
@@ -460,14 +448,12 @@ window.Quarto = {
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>サイコロの標本平均（各サイズ3回ずつ）</caption>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: center;">試行1</th>
 <th style="text-align: center;">試行2</th>
 <th style="text-align: center;">試行3</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">サイコロを10回振る</td>
@@ -519,14 +505,12 @@ window.Quarto = {
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>サイコロの標本平均（各サイズ3回ずつ）</caption>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: center;">条件</th>
 <th style="text-align: center;">試行1</th>
 <th style="text-align: center;">試行2</th>
 <th style="text-align: center;">試行3</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">サイコロを10回振る</td>
@@ -663,13 +647,13 @@ Table: サイコロの標本平均比較 2
 
 
 --->
-<section id="区間推定" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="区間推定"><span class="header-section-number">3.1</span> 区間推定</h2>
+<section id="区間推定" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="区間推定">
+<span class="header-section-number">3.1</span> 区間推定</h2>
 <p>いま、標準正規分布に従う母集団から抽出した無作為標本<span class="math inline">Z_1, Z_2, ..., Z_n</span>を考えます。 標準正規分布の確率分布関数<span class="math inline">\phi(z)</span>を用いると、次のように表せます。 <span class="math display">
 P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq z_{\frac{\alpha}{2}} \right) = 1 - \alpha
 </span></p>
-<section id="電球の寿命データで区間推定" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="電球の寿命データで区間推定"><span class="header-section-number">3.1.1</span> 電球の寿命データで区間推定</h3>
+<section id="電球の寿命データで区間推定" class="level3" data-number="3.1.1"><h3 data-number="3.1.1" class="anchored" data-anchor-id="電球の寿命データで区間推定">
+<span class="header-section-number">3.1.1</span> 電球の寿命データで区間推定</h3>
 <p>例として、次のような白熱電球の寿命データが手元にあるものとしましょう。 ここで、以下のことが分かっているものとします。</p>
 <ul>
 <li>平均寿命が1800時間である。</li>
@@ -692,8 +676,7 @@ P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}
 <span id="cb18-12"><a href="#cb18-12"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="chapter05_files/figure-html/normal_dist-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+<figure class="figure"><p><a href="chapter05_files/figure-html/normal_dist-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter05_files/figure-html/normal_dist-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
@@ -738,8 +721,7 @@ P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}
 <span id="cb23-18"><a href="#cb23-18"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="chapter05_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+<figure class="figure"><p><a href="chapter05_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter05_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
@@ -786,18 +768,14 @@ attr(,"conf.level")
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>Bulb data CI (95％)</caption>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: center;">ci.lower</th>
 <th style="text-align: center;">ci.upper</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
+</tr></thead>
+<tbody><tr class="odd">
 <td style="text-align: center;">1862.995</td>
 <td style="text-align: center;">2039.392</td>
-</tr>
-</tbody>
+</tr></tbody>
 </table>
 </div>
 </div>
@@ -900,8 +878,7 @@ NOTE: n is number in *each* group</code></pre>
 <span id="cb43-2"><a href="#cb43-2"></a><span class="fu">plot</span>(est_n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="chapter05_files/figure-html/code5-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></p>
+<figure class="figure"><p><a href="chapter05_files/figure-html/code5-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="chapter05_files/figure-html/code5-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
@@ -924,11 +901,9 @@ NOTE: n is number in *each* group</code></pre>
 </div>
 
 
-</section>
-</section>
+<!-- -->
 
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -999,9 +974,60 @@ NOTE: n is number in *each* group</code></pre>
       });
       clipboardModal.on('success', onCopySuccess);
     }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/so-ichi\.com\/r\.html");
+        var filterRegex = new RegExp("https:\/\/ma2ura\.github\.io\/Marketing_Data_Analysis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1329,9 +1355,7 @@ NOTE: n is number in *each* group</code></pre>
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./part02.html" class="pagination-link" aria-label="第2部 仮説検証型データ分析">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">第2部 仮説検証型データ分析</span>
       </a>          
@@ -1341,10 +1365,382 @@ NOTE: n is number in *each* group</code></pre>
         <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">第6章 回帰分析</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">## 第5章 基礎統計学復習</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a></span>
+<span id="cb46-3"><a href="#cb46-3"></a>経営学部の1回生がおおよそ学んでいるであろう統計学の内容を、Rコードとともに復習します。</span>
+<span id="cb46-4"><a href="#cb46-4"></a>テキストの内容に加えて、コードの効率化や関数化についても解説します。</span>
+<span id="cb46-5"><a href="#cb46-5"></a></span>
+<span id="cb46-6"><a href="#cb46-6"></a></span>
+<span id="cb46-7"><a href="#cb46-7"></a><span class="in">```{r setup}</span></span>
+<span id="cb46-8"><a href="#cb46-8"></a><span class="co"># コード5-1</span></span>
+<span id="cb46-9"><a href="#cb46-9"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, pwr, knitr)</span>
+<span id="cb46-10"><a href="#cb46-10"></a><span class="in">```</span></span>
+<span id="cb46-11"><a href="#cb46-11"></a></span>
+<span id="cb46-12"><a href="#cb46-12"></a>まずサイコロを作ります。</span>
+<span id="cb46-13"><a href="#cb46-13"></a>1から6の数値からなるベクトル<span class="in">`dice`</span>を作ります。</span>
+<span id="cb46-14"><a href="#cb46-14"></a>つぎに<span class="in">`sample()`</span>関数を用いて、<span class="in">`dice`</span>の中から1つの数をランダムに取り出します。</span>
+<span id="cb46-15"><a href="#cb46-15"></a></span>
+<span id="cb46-16"><a href="#cb46-16"></a>:::{.aside}</span>
+<span id="cb46-17"><a href="#cb46-17"></a><span class="in">`sample()`</span>関数の引数は以下の通りです。</span>
+<span id="cb46-18"><a href="#cb46-18"></a></span>
+<span id="cb46-19"><a href="#cb46-19"></a><span class="ss">- </span><span class="in">`x`</span>: 抽出元のベクトル</span>
+<span id="cb46-20"><a href="#cb46-20"></a><span class="ss">- </span><span class="in">`size`</span>: 抽出する数</span>
+<span id="cb46-21"><a href="#cb46-21"></a><span class="ss">- </span><span class="in">`replace`</span>: 置換を許可するかどうか</span>
+<span id="cb46-22"><a href="#cb46-22"></a></span>
+<span id="cb46-23"><a href="#cb46-23"></a>:::</span>
+<span id="cb46-24"><a href="#cb46-24"></a></span>
+<span id="cb46-25"><a href="#cb46-25"></a><span class="in">```{r code5-2}</span></span>
+<span id="cb46-26"><a href="#cb46-26"></a><span class="co"># コード5-2</span></span>
+<span id="cb46-27"><a href="#cb46-27"></a><span class="fu">set.seed</span>(<span class="dv">442</span>)</span>
+<span id="cb46-28"><a href="#cb46-28"></a><span class="co"># サイコロ</span></span>
+<span id="cb46-29"><a href="#cb46-29"></a>dice <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb46-30"><a href="#cb46-30"></a><span class="co"># サイコロを1回振る</span></span>
+<span id="cb46-31"><a href="#cb46-31"></a>d <span class="ot">&lt;-</span> <span class="fu">sample</span>(dice, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb46-32"><a href="#cb46-32"></a><span class="co"># 結果の表示</span></span>
+<span id="cb46-33"><a href="#cb46-33"></a>d</span>
+<span id="cb46-34"><a href="#cb46-34"></a><span class="in">```</span></span>
+<span id="cb46-35"><a href="#cb46-35"></a></span>
+<span id="cb46-36"><a href="#cb46-36"></a>同じコードを3回以上書いているなと思ったら、ループ処理や関数化を検討しましょう。</span>
+<span id="cb46-37"><a href="#cb46-37"></a><span class="in">`for()`</span>関数を使ったり、サイコロを投げる回数を引数にした関数を作成したりする方法があります。</span>
+<span id="cb46-38"><a href="#cb46-38"></a></span>
+<span id="cb46-39"><a href="#cb46-39"></a><span class="in">```{r dice-throw}</span></span>
+<span id="cb46-40"><a href="#cb46-40"></a>d1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(dice, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb46-41"><a href="#cb46-41"></a>d2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(dice, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb46-42"><a href="#cb46-42"></a>d3 <span class="ot">&lt;-</span> <span class="fu">sample</span>(dice, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb46-43"><a href="#cb46-43"></a><span class="in">```</span></span>
+<span id="cb46-44"><a href="#cb46-44"></a></span>
+<span id="cb46-45"><a href="#cb46-45"></a>をまとめて書くと、次のようになります。</span>
+<span id="cb46-46"><a href="#cb46-46"></a></span>
+<span id="cb46-49"><a href="#cb46-49"></a><span class="in">```{r}</span></span>
+<span id="cb46-50"><a href="#cb46-50"></a>d <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="co"># 空のリストを作成</span></span>
+<span id="cb46-51"><a href="#cb46-51"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) { <span class="co"># ループ処理</span></span>
+<span id="cb46-52"><a href="#cb46-52"></a>  d[[i]] <span class="ot">&lt;-</span> <span class="fu">sample</span>(dice, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb46-53"><a href="#cb46-53"></a>}</span>
+<span id="cb46-54"><a href="#cb46-54"></a>d <span class="co"># 結果の表示</span></span>
+<span id="cb46-55"><a href="#cb46-55"></a><span class="in">```</span></span>
+<span id="cb46-56"><a href="#cb46-56"></a></span>
+<span id="cb46-57"><a href="#cb46-57"></a>これをさらに発展させて、後で変更する可能性のある変数である試行回数やサイコロを振る回数を別に設定しておいて、コードを読みやすく、また変更しやすくします。</span>
+<span id="cb46-58"><a href="#cb46-58"></a></span>
+<span id="cb46-61"><a href="#cb46-61"></a><span class="in">```{r}</span></span>
+<span id="cb46-62"><a href="#cb46-62"></a><span class="co">#| code-line-numbers: 1:2</span></span>
+<span id="cb46-63"><a href="#cb46-63"></a>trial_count <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># 試行回数</span></span>
+<span id="cb46-64"><a href="#cb46-64"></a>sample_sizes <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># サイコロを振る回数</span></span>
+<span id="cb46-65"><a href="#cb46-65"></a></span>
+<span id="cb46-66"><a href="#cb46-66"></a><span class="co"># 空の数列を作成</span></span>
+<span id="cb46-67"><a href="#cb46-67"></a>d_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial_count) </span>
+<span id="cb46-68"><a href="#cb46-68"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial_count) {</span>
+<span id="cb46-69"><a href="#cb46-69"></a>  d_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">sample</span>(dice, <span class="at">size =</span> sample_sizes, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb46-70"><a href="#cb46-70"></a>}</span>
+<span id="cb46-71"><a href="#cb46-71"></a>d_mean</span>
+<span id="cb46-72"><a href="#cb46-72"></a><span class="in">```</span></span>
+<span id="cb46-73"><a href="#cb46-73"></a></span>
+<span id="cb46-74"><a href="#cb46-74"></a>試行回数<span class="in">`trials`</span>とサイコロを振る回数<span class="in">`sample_sizes`</span>を引数にした関数を作成すると、さらに便利になります。</span>
+<span id="cb46-75"><a href="#cb46-75"></a>ここでは、自作関数<span class="in">`dice_mean()`</span>を定義してみましょう。</span>
+<span id="cb46-76"><a href="#cb46-76"></a>デフォルト値として、試行回数を3回、サイコロを振る回数を10回に設定しています。</span>
+<span id="cb46-77"><a href="#cb46-77"></a></span>
+<span id="cb46-78"><a href="#cb46-78"></a><span class="in">```{r dice_mean_function}</span></span>
+<span id="cb46-79"><a href="#cb46-79"></a>dice_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">trial_count =</span> <span class="dv">3</span>, <span class="at">sample_sizes =</span> <span class="dv">10</span>) {</span>
+<span id="cb46-80"><a href="#cb46-80"></a>  d_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial_count) <span class="co"># 空のリストを作成</span></span>
+<span id="cb46-81"><a href="#cb46-81"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial_count) {</span>
+<span id="cb46-82"><a href="#cb46-82"></a>    d_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">sample</span>(dice, <span class="at">size =</span> sample_sizes, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb46-83"><a href="#cb46-83"></a>  }</span>
+<span id="cb46-84"><a href="#cb46-84"></a>  <span class="fu">return</span>(d_mean)</span>
+<span id="cb46-85"><a href="#cb46-85"></a>}</span>
+<span id="cb46-86"><a href="#cb46-86"></a><span class="in">```</span></span>
+<span id="cb46-87"><a href="#cb46-87"></a></span>
+<span id="cb46-88"><a href="#cb46-88"></a><span class="in">```{r use_dice_mean}</span></span>
+<span id="cb46-89"><a href="#cb46-89"></a><span class="fu">dice_mean</span>() <span class="co"># デフォルト値で実行</span></span>
+<span id="cb46-90"><a href="#cb46-90"></a><span class="fu">dice_mean</span>(<span class="at">trial_count =</span> <span class="dv">5</span>, <span class="at">sample_sizes =</span> <span class="dv">20</span>) <span class="co"># 引数を指定して実行</span></span>
+<span id="cb46-91"><a href="#cb46-91"></a><span class="fu">dice_mean</span>(<span class="dv">5</span>, <span class="dv">20</span>) <span class="co"># 省略形でもOK</span></span>
+<span id="cb46-92"><a href="#cb46-92"></a><span class="in">```</span></span>
+<span id="cb46-93"><a href="#cb46-93"></a></span>
+<span id="cb46-94"><a href="#cb46-94"></a>この関数を使って、サイコロを10回、100回、1,000回振ったときの平均をそれぞれ3回ずつ試行してみましょう。</span>
+<span id="cb46-95"><a href="#cb46-95"></a></span>
+<span id="cb46-98"><a href="#cb46-98"></a><span class="in">```{r}</span></span>
+<span id="cb46-99"><a href="#cb46-99"></a><span class="fu">set.seed</span>(<span class="dv">352</span>)</span>
+<span id="cb46-100"><a href="#cb46-100"></a>size <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>)</span>
+<span id="cb46-101"><a href="#cb46-101"></a>d_mean <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb46-102"><a href="#cb46-102"></a></span>
+<span id="cb46-103"><a href="#cb46-103"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(size)) {</span>
+<span id="cb46-104"><a href="#cb46-104"></a>  d_mean[[i]] <span class="ot">&lt;-</span> <span class="fu">dice_mean</span>(<span class="at">trial_count =</span> <span class="dv">3</span>, <span class="at">sample_sizes =</span> size[i])</span>
+<span id="cb46-105"><a href="#cb46-105"></a>}</span>
+<span id="cb46-106"><a href="#cb46-106"></a></span>
+<span id="cb46-107"><a href="#cb46-107"></a>d_mean_mat <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, d_mean)</span>
+<span id="cb46-108"><a href="#cb46-108"></a></span>
+<span id="cb46-109"><a href="#cb46-109"></a><span class="co"># 列名を付与</span></span>
+<span id="cb46-110"><a href="#cb46-110"></a><span class="fu">colnames</span>(d_mean_mat) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"試行"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(d_mean_mat))</span>
+<span id="cb46-111"><a href="#cb46-111"></a><span class="co"># 行名を付与</span></span>
+<span id="cb46-112"><a href="#cb46-112"></a><span class="fu">rownames</span>(d_mean_mat) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"サイコロを"</span>, size, <span class="st">"回振る"</span>)</span>
+<span id="cb46-113"><a href="#cb46-113"></a><span class="co"># 表として出力</span></span>
+<span id="cb46-114"><a href="#cb46-114"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb46-115"><a href="#cb46-115"></a>  d_mean_mat,</span>
+<span id="cb46-116"><a href="#cb46-116"></a>  <span class="at">caption =</span> <span class="st">"サイコロの標本平均（各サイズ3回ずつ）"</span>,</span>
+<span id="cb46-117"><a href="#cb46-117"></a>  <span class="at">align =</span> <span class="st">"ccc"</span></span>
+<span id="cb46-118"><a href="#cb46-118"></a>)</span>
+<span id="cb46-119"><a href="#cb46-119"></a><span class="in">```</span></span>
+<span id="cb46-120"><a href="#cb46-120"></a></span>
+<span id="cb46-121"><a href="#cb46-121"></a><span class="in">`tidyverse`</span>の<span class="in">`purrr`</span>パッケージを使うと、さらに簡潔に書けます。</span>
+<span id="cb46-122"><a href="#cb46-122"></a></span>
+<span id="cb46-125"><a href="#cb46-125"></a><span class="in">```{r}</span></span>
+<span id="cb46-126"><a href="#cb46-126"></a><span class="fu">set.seed</span>(<span class="dv">352</span>)</span>
+<span id="cb46-127"><a href="#cb46-127"></a>trial_count <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># 試行回数</span></span>
+<span id="cb46-128"><a href="#cb46-128"></a>sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>) <span class="co"># サイコロを振る回数</span></span>
+<span id="cb46-129"><a href="#cb46-129"></a><span class="co"># map_dfr()でデータフレームを直接作成</span></span>
+<span id="cb46-130"><a href="#cb46-130"></a>d_mean_df <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(sizes, <span class="cf">function</span>(n) {</span>
+<span id="cb46-131"><a href="#cb46-131"></a>  <span class="co"># replicate()で3回繰り返し試行    </span></span>
+<span id="cb46-132"><a href="#cb46-132"></a>  results <span class="ot">&lt;-</span> <span class="fu">replicate</span>(</span>
+<span id="cb46-133"><a href="#cb46-133"></a>    trial_count, </span>
+<span id="cb46-134"><a href="#cb46-134"></a>    <span class="fu">mean</span>(<span class="fu">sample</span>(dice, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb46-135"><a href="#cb46-135"></a>    )</span>
+<span id="cb46-136"><a href="#cb46-136"></a>  <span class="fu">set_names</span>(results, <span class="fu">paste0</span>(<span class="st">"試行"</span>, <span class="dv">1</span><span class="sc">:</span>trial_count))</span>
+<span id="cb46-137"><a href="#cb46-137"></a>  })</span>
+<span id="cb46-138"><a href="#cb46-138"></a></span>
+<span id="cb46-139"><a href="#cb46-139"></a>result <span class="ot">&lt;-</span> d_mean_df <span class="sc">|&gt;</span> </span>
+<span id="cb46-140"><a href="#cb46-140"></a>  <span class="fu">mutate</span>(条件 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"サイコロを"</span>, sizes, <span class="st">"回振る"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb46-141"><a href="#cb46-141"></a>  <span class="fu">relocate</span>(条件) <span class="co"># 「条件」列を一番左へ移動</span></span>
+<span id="cb46-142"><a href="#cb46-142"></a></span>
+<span id="cb46-143"><a href="#cb46-143"></a><span class="co"># 出力</span></span>
+<span id="cb46-144"><a href="#cb46-144"></a><span class="fu">kable</span>(</span>
+<span id="cb46-145"><a href="#cb46-145"></a>  result,</span>
+<span id="cb46-146"><a href="#cb46-146"></a>  <span class="at">caption =</span> <span class="st">"サイコロの標本平均（各サイズ3回ずつ）"</span>,</span>
+<span id="cb46-147"><a href="#cb46-147"></a>  <span class="at">align =</span> <span class="st">"cccc"</span></span>
+<span id="cb46-148"><a href="#cb46-148"></a>)</span>
+<span id="cb46-149"><a href="#cb46-149"></a><span class="in">```</span></span>
+<span id="cb46-150"><a href="#cb46-150"></a></span>
+<span id="cb46-151"><a href="#cb46-151"></a><span class="co">&lt;!--- </span></span>
+<span id="cb46-152"><a href="#cb46-152"></a></span>
+<span id="cb46-155"><a href="#cb46-155"></a><span class="in">```{r}</span></span>
+<span id="cb46-156"><a href="#cb46-156"></a><span class="co">set.seed(352)</span></span>
+<span id="cb46-157"><a href="#cb46-157"></a><span class="co">d_mean &lt;- numeric(3) # 空のリストを作成</span></span>
+<span id="cb46-158"><a href="#cb46-158"></a><span class="co"># 繰り返し処理</span></span>
+<span id="cb46-159"><a href="#cb46-159"></a><span class="co">for (i in 1:3) {</span></span>
+<span id="cb46-160"><a href="#cb46-160"></a><span class="co">  d_mean[i] &lt;- mean(sample(dice, size = 10, replace = TRUE))</span></span>
+<span id="cb46-161"><a href="#cb46-161"></a><span class="co">}</span></span>
+<span id="cb46-162"><a href="#cb46-162"></a><span class="co"># 各試行の平均を計算</span></span>
+<span id="cb46-163"><a href="#cb46-163"></a><span class="co">d_lln &lt;- matrix(d_mean, nrow = 1)</span></span>
+<span id="cb46-164"><a href="#cb46-164"></a><span class="co">colnames(d_lln) &lt;- c("10回試行の平均", "100回試行の平均", "1,000回試行の平均")</span></span>
+<span id="cb46-165"><a href="#cb46-165"></a><span class="co"># kableで結果の表示</span></span>
+<span id="cb46-166"><a href="#cb46-166"></a><span class="co">knitr::kable(</span></span>
+<span id="cb46-167"><a href="#cb46-167"></a><span class="co">  d_mean, # 表示するオブジェクト</span></span>
+<span id="cb46-168"><a href="#cb46-168"></a><span class="co">  caption = "サイコロの標本平均比較",  </span></span>
+<span id="cb46-169"><a href="#cb46-169"></a><span class="co">  align = "ccc" # 3行を中央揃え</span></span>
+<span id="cb46-170"><a href="#cb46-170"></a><span class="co">  )</span></span>
+<span id="cb46-171"><a href="#cb46-171"></a><span class="co">```</span></span>
+<span id="cb46-172"><a href="#cb46-172"></a></span>
+<span id="cb46-173"><a href="#cb46-173"></a><span class="co">```{r code5-3}</span></span>
+<span id="cb46-174"><a href="#cb46-174"></a><span class="co"># コード5-3</span></span>
+<span id="cb46-175"><a href="#cb46-175"></a><span class="co">set.seed(352)</span></span>
+<span id="cb46-176"><a href="#cb46-176"></a></span>
+<span id="cb46-177"><a href="#cb46-177"></a><span class="co"># サイコロを10回振る</span></span>
+<span id="cb46-178"><a href="#cb46-178"></a><span class="co">d1 &lt;- sample(dice, size = 10, replace = TRUE)</span></span>
+<span id="cb46-179"><a href="#cb46-179"></a><span class="co">d2 &lt;- sample(dice, size = 10, replace = TRUE)</span></span>
+<span id="cb46-180"><a href="#cb46-180"></a><span class="co">d3 &lt;- sample(dice, size = 10, replace = TRUE)</span></span>
+<span id="cb46-181"><a href="#cb46-181"></a><span class="co"># 各試行の平均を計算</span></span>
+<span id="cb46-182"><a href="#cb46-182"></a><span class="co">d_mean &lt;- matrix(c(mean(d1), mean(d2), mean(d3)), nrow = 1)</span></span>
+<span id="cb46-183"><a href="#cb46-183"></a><span class="co"># 列名の設定</span></span>
+<span id="cb46-184"><a href="#cb46-184"></a><span class="co">colnames(d_mean) &lt;- c("d1の平均", "d2の平均", "d3の平均")</span></span>
+<span id="cb46-185"><a href="#cb46-185"></a><span class="co"># kableで結果の表示</span></span>
+<span id="cb46-186"><a href="#cb46-186"></a><span class="co">knitr::kable(</span></span>
+<span id="cb46-187"><a href="#cb46-187"></a><span class="co">  d_mean, # 表示するオブジェクト</span></span>
+<span id="cb46-188"><a href="#cb46-188"></a><span class="co">  caption = "サイコロの標本平均比較",  </span></span>
+<span id="cb46-189"><a href="#cb46-189"></a><span class="co">  align = "ccc" # 3行を中央揃え</span></span>
+<span id="cb46-190"><a href="#cb46-190"></a><span class="co">  )</span></span>
+<span id="cb46-191"><a href="#cb46-191"></a><span class="co">```</span></span>
+<span id="cb46-192"><a href="#cb46-192"></a></span>
+<span id="cb46-193"><a href="#cb46-193"></a></span>
+<span id="cb46-194"><a href="#cb46-194"></a><span class="co">```{r code5-4}</span></span>
+<span id="cb46-195"><a href="#cb46-195"></a><span class="co"># コード5-4</span></span>
+<span id="cb46-196"><a href="#cb46-196"></a><span class="co">set.seed(541)</span></span>
+<span id="cb46-197"><a href="#cb46-197"></a><span class="co"># サイコロをそれぞれ10回、100回、1000回振る</span></span>
+<span id="cb46-198"><a href="#cb46-198"></a><span class="co">d10 &lt;- sample(dice, size = 10, replace = TRUE)</span></span>
+<span id="cb46-199"><a href="#cb46-199"></a><span class="co">d100 &lt;- sample(dice, size = 100, replace = TRUE)</span></span>
+<span id="cb46-200"><a href="#cb46-200"></a><span class="co">d1000 &lt;- sample(dice, size = 1000, replace = TRUE)</span></span>
+<span id="cb46-201"><a href="#cb46-201"></a></span>
+<span id="cb46-202"><a href="#cb46-202"></a><span class="co">d_lln &lt;- matrix(c(mean(d10), mean(d100), mean(d1000)), nrow = 1)</span></span>
+<span id="cb46-203"><a href="#cb46-203"></a></span>
+<span id="cb46-204"><a href="#cb46-204"></a><span class="co">colnames(d_lln) &lt;- c("10回試行の平均", "100回試行の平均", "1,000回試行の平均")</span></span>
+<span id="cb46-205"><a href="#cb46-205"></a><span class="co">knitr::kable(</span></span>
+<span id="cb46-206"><a href="#cb46-206"></a><span class="co">  d_lln, </span></span>
+<span id="cb46-207"><a href="#cb46-207"></a><span class="co">  caption = "サイコロの標本平均比較 2", </span></span>
+<span id="cb46-208"><a href="#cb46-208"></a><span class="co">  align = "ccc"</span></span>
+<span id="cb46-209"><a href="#cb46-209"></a><span class="co">  )</span></span>
+<span id="cb46-210"><a href="#cb46-210"></a><span class="co">```</span></span>
+<span id="cb46-211"><a href="#cb46-211"></a></span>
+<span id="cb46-212"><a href="#cb46-212"></a><span class="co">---&gt;</span></span>
+<span id="cb46-213"><a href="#cb46-213"></a></span>
+<span id="cb46-214"><a href="#cb46-214"></a><span class="fu">## 区間推定</span></span>
+<span id="cb46-215"><a href="#cb46-215"></a></span>
+<span id="cb46-216"><a href="#cb46-216"></a>いま、標準正規分布に従う母集団から抽出した無作為標本$Z_1, Z_2, ..., Z_n$を考えます。</span>
+<span id="cb46-217"><a href="#cb46-217"></a>標準正規分布の確率分布関数$\phi(z)$を用いると、次のように表せます。</span>
+<span id="cb46-218"><a href="#cb46-218"></a>$$</span>
+<span id="cb46-219"><a href="#cb46-219"></a>P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq z_{\frac{\alpha}{2}} \right) = 1 - \alpha</span>
+<span id="cb46-220"><a href="#cb46-220"></a>$$</span>
+<span id="cb46-221"><a href="#cb46-221"></a></span>
+<span id="cb46-222"><a href="#cb46-222"></a></span>
+<span id="cb46-223"><a href="#cb46-223"></a><span class="fu">### 電球の寿命データで区間推定</span></span>
+<span id="cb46-224"><a href="#cb46-224"></a></span>
+<span id="cb46-225"><a href="#cb46-225"></a>例として、次のような白熱電球の寿命データが手元にあるものとしましょう。</span>
+<span id="cb46-226"><a href="#cb46-226"></a>ここで、以下のことが分かっているものとします。</span>
+<span id="cb46-227"><a href="#cb46-227"></a></span>
+<span id="cb46-228"><a href="#cb46-228"></a><span class="ss">- </span>平均寿命が1800時間である。</span>
+<span id="cb46-229"><a href="#cb46-229"></a><span class="ss">- </span>寿命の標準偏差$\sigma $は180時間である。</span>
+<span id="cb46-230"><a href="#cb46-230"></a><span class="ss">- </span>平均寿命は正規分布に従う。</span>
+<span id="cb46-231"><a href="#cb46-231"></a></span>
+<span id="cb46-232"><a href="#cb46-232"></a>図にすると次のようになります。</span>
+<span id="cb46-233"><a href="#cb46-233"></a></span>
+<span id="cb46-234"><a href="#cb46-234"></a><span class="in">```{r normal_dist}</span></span>
+<span id="cb46-235"><a href="#cb46-235"></a>averate <span class="ot">&lt;-</span> <span class="dv">1800</span></span>
+<span id="cb46-236"><a href="#cb46-236"></a>standard_dev <span class="ot">&lt;-</span> <span class="dv">180</span></span>
+<span id="cb46-237"><a href="#cb46-237"></a><span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> averate, <span class="at">sd =</span> standard_dev) <span class="sc">|&gt;</span></span>
+<span id="cb46-238"><a href="#cb46-238"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb46-239"><a href="#cb46-239"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
+<span id="cb46-240"><a href="#cb46-240"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb46-241"><a href="#cb46-241"></a>    <span class="at">fun =</span> dnorm,</span>
+<span id="cb46-242"><a href="#cb46-242"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> averate, <span class="at">sd =</span> standard_dev),</span>
+<span id="cb46-243"><a href="#cb46-243"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb46-244"><a href="#cb46-244"></a>    <span class="at">size =</span> <span class="dv">1</span></span>
+<span id="cb46-245"><a href="#cb46-245"></a>    ) <span class="sc">+</span></span>
+<span id="cb46-246"><a href="#cb46-246"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb46-247"><a href="#cb46-247"></a><span class="in">```</span></span>
+<span id="cb46-248"><a href="#cb46-248"></a></span>
+<span id="cb46-249"><a href="#cb46-249"></a></span>
+<span id="cb46-250"><a href="#cb46-250"></a>この分布から抽出したと想定される16個の電球の寿命データが以下の通りです。</span>
+<span id="cb46-251"><a href="#cb46-251"></a></span>
+<span id="cb46-252"><a href="#cb46-252"></a><span class="in">```{r code5-5}</span></span>
+<span id="cb46-253"><a href="#cb46-253"></a><span class="co"># コード5-5</span></span>
+<span id="cb46-254"><a href="#cb46-254"></a>bulb <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="co"># 白熱電球の寿命データ</span></span>
+<span id="cb46-255"><a href="#cb46-255"></a>    <span class="fl">1939.6</span>, <span class="fl">1680.3</span>, <span class="fl">1982.1</span>, <span class="fl">2215.6</span>,</span>
+<span id="cb46-256"><a href="#cb46-256"></a>    <span class="fl">2092.5</span>, <span class="fl">1928.9</span>, <span class="fl">2003.8</span>, <span class="fl">1955.5</span>,</span>
+<span id="cb46-257"><a href="#cb46-257"></a>    <span class="fl">1800.1</span>, <span class="fl">1659.5</span>, <span class="fl">2066.2</span>, <span class="fl">2107.2</span>,</span>
+<span id="cb46-258"><a href="#cb46-258"></a>    <span class="fl">2085.5</span>, <span class="fl">1878.6</span>, <span class="fl">2007.6</span>, <span class="fl">1816.1</span></span>
+<span id="cb46-259"><a href="#cb46-259"></a>  )</span>
+<span id="cb46-260"><a href="#cb46-260"></a><span class="fu">mean</span>(bulb)</span>
+<span id="cb46-261"><a href="#cb46-261"></a><span class="fu">sd</span>(bulb)</span>
+<span id="cb46-262"><a href="#cb46-262"></a><span class="in">```</span></span>
+<span id="cb46-263"><a href="#cb46-263"></a></span>
+<span id="cb46-264"><a href="#cb46-264"></a>先ほどの分布にこのデータのヒストグラムを重ねると、次のようになります。</span>
+<span id="cb46-265"><a href="#cb46-265"></a></span>
+<span id="cb46-268"><a href="#cb46-268"></a><span class="in">```{r}</span></span>
+<span id="cb46-269"><a href="#cb46-269"></a><span class="co"># ヒストグラムの作成</span></span>
+<span id="cb46-270"><a href="#cb46-270"></a>bulb_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">lifetime =</span> bulb)</span>
+<span id="cb46-271"><a href="#cb46-271"></a>bulb_df <span class="sc">|&gt;</span> </span>
+<span id="cb46-272"><a href="#cb46-272"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lifetime)) <span class="sc">+</span></span>
+<span id="cb46-273"><a href="#cb46-273"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb46-274"><a href="#cb46-274"></a>    <span class="fu">aes</span>(<span class="at">y =</span> ..density..),</span>
+<span id="cb46-275"><a href="#cb46-275"></a>    <span class="at">bins =</span> <span class="dv">8</span>,</span>
+<span id="cb46-276"><a href="#cb46-276"></a>    <span class="at">fill =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb46-277"><a href="#cb46-277"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb46-278"><a href="#cb46-278"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb46-279"><a href="#cb46-279"></a>    ) <span class="sc">+</span></span>
+<span id="cb46-280"><a href="#cb46-280"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb46-281"><a href="#cb46-281"></a>    <span class="at">fun =</span> dnorm,</span>
+<span id="cb46-282"><a href="#cb46-282"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> averate, <span class="at">sd =</span> standard_dev),</span>
+<span id="cb46-283"><a href="#cb46-283"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb46-284"><a href="#cb46-284"></a>    <span class="at">size =</span> <span class="dv">1</span></span>
+<span id="cb46-285"><a href="#cb46-285"></a>    ) <span class="sc">+</span></span>
+<span id="cb46-286"><a href="#cb46-286"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb46-287"><a href="#cb46-287"></a><span class="in">```</span></span>
+<span id="cb46-288"><a href="#cb46-288"></a></span>
+<span id="cb46-289"><a href="#cb46-289"></a>そのとき、この手元にある16個の電球の寿命データの平均値が、母平均1800の周りでどの範囲に入るかを95％の信頼水準で推定してみましょう。</span>
+<span id="cb46-290"><a href="#cb46-290"></a></span>
+<span id="cb46-291"><a href="#cb46-291"></a></span>
+<span id="cb46-292"><a href="#cb46-292"></a></span>
+<span id="cb46-293"><a href="#cb46-293"></a></span>
+<span id="cb46-294"><a href="#cb46-294"></a><span class="in">```{r t-test_bulb}</span></span>
+<span id="cb46-295"><a href="#cb46-295"></a><span class="co"># t検定の実施</span></span>
+<span id="cb46-296"><a href="#cb46-296"></a>bulb_ci <span class="ot">&lt;-</span> <span class="fu">t.test</span>(bulb)</span>
+<span id="cb46-297"><a href="#cb46-297"></a>bulb_ci<span class="sc">$</span>conf.int </span>
+<span id="cb46-298"><a href="#cb46-298"></a><span class="co"># 信頼区間の出力（デフォルトで 95％信頼水準）</span></span>
+<span id="cb46-299"><a href="#cb46-299"></a><span class="in">```</span></span>
+<span id="cb46-300"><a href="#cb46-300"></a></span>
+<span id="cb46-301"><a href="#cb46-301"></a></span>
+<span id="cb46-302"><a href="#cb46-302"></a></span>
+<span id="cb46-303"><a href="#cb46-303"></a><span class="in">```{r code5-6}</span></span>
+<span id="cb46-304"><a href="#cb46-304"></a><span class="co"># コード5-6</span></span>
+<span id="cb46-305"><a href="#cb46-305"></a><span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb46-306"><a href="#cb46-306"></a><span class="co"># 標準正規分布における上側 2.5％点の分位点を求める。</span></span>
+<span id="cb46-307"><a href="#cb46-307"></a><span class="in">```</span></span>
+<span id="cb46-308"><a href="#cb46-308"></a></span>
+<span id="cb46-309"><a href="#cb46-309"></a><span class="in">```{r code5-7}</span></span>
+<span id="cb46-310"><a href="#cb46-310"></a><span class="co"># コード5-7</span></span>
+<span id="cb46-311"><a href="#cb46-311"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(bulb) <span class="co"># 標本サイズの計算</span></span>
+<span id="cb46-312"><a href="#cb46-312"></a>z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="co"># 上側2.5％点の分位点</span></span>
+<span id="cb46-313"><a href="#cb46-313"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(bulb) <span class="co"># 標本平均の計算</span></span>
+<span id="cb46-314"><a href="#cb46-314"></a>sigma <span class="ot">&lt;-</span> <span class="dv">180</span> <span class="co"># 母標準偏差の設定</span></span>
+<span id="cb46-315"><a href="#cb46-315"></a></span>
+<span id="cb46-316"><a href="#cb46-316"></a><span class="co"># 信頼区間の計算</span></span>
+<span id="cb46-317"><a href="#cb46-317"></a>upper <span class="ot">&lt;-</span> xbar <span class="sc">+</span> z <span class="sc">*</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb46-318"><a href="#cb46-318"></a>lower <span class="ot">&lt;-</span> xbar <span class="sc">-</span> z <span class="sc">*</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb46-319"><a href="#cb46-319"></a></span>
+<span id="cb46-320"><a href="#cb46-320"></a><span class="co"># 結果のまとめと出力</span></span>
+<span id="cb46-321"><a href="#cb46-321"></a>ci.bulb <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(lower, upper), <span class="at">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb46-322"><a href="#cb46-322"></a><span class="fu">colnames</span>(ci.bulb) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ci.lower"</span>, <span class="st">"ci.upper"</span>)</span>
+<span id="cb46-323"><a href="#cb46-323"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb46-324"><a href="#cb46-324"></a>  ci.bulb, </span>
+<span id="cb46-325"><a href="#cb46-325"></a>  <span class="at">caption =</span> <span class="st">"Bulb data CI (95％)"</span>, </span>
+<span id="cb46-326"><a href="#cb46-326"></a>  <span class="at">align =</span> <span class="st">"cc"</span></span>
+<span id="cb46-327"><a href="#cb46-327"></a>  )</span>
+<span id="cb46-328"><a href="#cb46-328"></a><span class="in">```</span></span>
+<span id="cb46-329"><a href="#cb46-329"></a></span>
+<span id="cb46-330"><a href="#cb46-330"></a><span class="in">```{r code5-8}</span></span>
+<span id="cb46-331"><a href="#cb46-331"></a><span class="co"># コード5-8</span></span>
+<span id="cb46-332"><a href="#cb46-332"></a><span class="fu">mean</span>(bulb)</span>
+<span id="cb46-333"><a href="#cb46-333"></a></span>
+<span id="cb46-334"><a href="#cb46-334"></a><span class="co"># コード5-9</span></span>
+<span id="cb46-335"><a href="#cb46-335"></a><span class="fu">t.test</span>(bulb, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">mu =</span> <span class="dv">1800</span>)</span>
+<span id="cb46-336"><a href="#cb46-336"></a></span>
+<span id="cb46-337"><a href="#cb46-337"></a><span class="co"># コード5-10</span></span>
+<span id="cb46-338"><a href="#cb46-338"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(bulb) <span class="co"># 標本サイズの計算</span></span>
+<span id="cb46-339"><a href="#cb46-339"></a>z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="co"># 上側2.5％点の分位点</span></span>
+<span id="cb46-340"><a href="#cb46-340"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(bulb) <span class="co"># 標本平均の計算</span></span>
+<span id="cb46-341"><a href="#cb46-341"></a>sigma <span class="ot">&lt;-</span> <span class="dv">180</span> <span class="co"># 母標準偏差の設定</span></span>
+<span id="cb46-342"><a href="#cb46-342"></a>mu <span class="ot">&lt;-</span> <span class="dv">1800</span> <span class="co"># 帰無仮説の平均値 </span></span>
+<span id="cb46-343"><a href="#cb46-343"></a><span class="co"># Z値の計算</span></span>
+<span id="cb46-344"><a href="#cb46-344"></a>Z <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu) <span class="sc">/</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb46-345"><a href="#cb46-345"></a>Z</span>
+<span id="cb46-346"><a href="#cb46-346"></a><span class="in">```</span></span>
+<span id="cb46-347"><a href="#cb46-347"></a></span>
+<span id="cb46-348"><a href="#cb46-348"></a><span class="in">```{r code5-11}</span></span>
+<span id="cb46-349"><a href="#cb46-349"></a><span class="co"># コード5-11</span></span>
+<span id="cb46-350"><a href="#cb46-350"></a><span class="co"># データの読み込みと前処理</span></span>
+<span id="cb46-351"><a href="#cb46-351"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
+<span id="cb46-352"><a href="#cb46-352"></a>firm2018 <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
+<span id="cb46-353"><a href="#cb46-353"></a>  <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2018</span>) <span class="sc">|&gt;</span></span>
+<span id="cb46-354"><a href="#cb46-354"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb46-355"><a href="#cb46-355"></a>    <span class="at">ad_dummy =</span> <span class="fu">ifelse</span>(adint <span class="sc">&gt;</span> <span class="fu">median</span>(adint), <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb46-356"><a href="#cb46-356"></a>    )</span>
+<span id="cb46-357"><a href="#cb46-357"></a><span class="co"># t検定の実施</span></span>
+<span id="cb46-358"><a href="#cb46-358"></a><span class="fu">t.test</span>(sales <span class="sc">~</span> ad_dummy, <span class="at">data =</span> firm2018)</span>
+<span id="cb46-359"><a href="#cb46-359"></a><span class="in">```</span></span>
+<span id="cb46-360"><a href="#cb46-360"></a></span>
+<span id="cb46-361"><a href="#cb46-361"></a><span class="in">```{r code5-12}</span></span>
+<span id="cb46-362"><a href="#cb46-362"></a><span class="co"># コード5-12</span></span>
+<span id="cb46-363"><a href="#cb46-363"></a><span class="fu">var.test</span>(sales <span class="sc">~</span> ad_dummy, <span class="at">data =</span> firm2018, <span class="at">ratio =</span> <span class="dv">1</span>)</span>
+<span id="cb46-364"><a href="#cb46-364"></a><span class="in">```</span></span>
+<span id="cb46-365"><a href="#cb46-365"></a></span>
+<span id="cb46-366"><a href="#cb46-366"></a></span>
+<span id="cb46-367"><a href="#cb46-367"></a><span class="in">```{r code5-14}</span></span>
+<span id="cb46-368"><a href="#cb46-368"></a><span class="co"># 効果量d=0.8、検出力0.8、有意水準0.05の場合の</span></span>
+<span id="cb46-369"><a href="#cb46-369"></a><span class="co"># 必要標本サイズの推定</span></span>
+<span id="cb46-370"><a href="#cb46-370"></a>est_n <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.8</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span>
+<span id="cb46-371"><a href="#cb46-371"></a>est_n</span>
+<span id="cb46-372"><a href="#cb46-372"></a><span class="in">```</span></span>
+<span id="cb46-373"><a href="#cb46-373"></a></span>
+<span id="cb46-374"><a href="#cb46-374"></a></span>
+<span id="cb46-375"><a href="#cb46-375"></a><span class="in">```{r code5-15}</span></span>
+<span id="cb46-376"><a href="#cb46-376"></a><span class="co"># コード5-15</span></span>
+<span id="cb46-377"><a href="#cb46-377"></a><span class="fu">plot</span>(est_n)</span>
+<span id="cb46-378"><a href="#cb46-378"></a><span class="in">```</span></span>
+<span id="cb46-379"><a href="#cb46-379"></a></span>
+<span id="cb46-380"><a href="#cb46-380"></a><span class="in">```{r code5-16}</span></span>
+<span id="cb46-381"><a href="#cb46-381"></a><span class="co"># コード5-16</span></span>
+<span id="cb46-382"><a href="#cb46-382"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.8</span>, <span class="at">n =</span> <span class="dv">26</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span>
+<span id="cb46-383"><a href="#cb46-383"></a><span class="in">```</span></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
 <p>Copyright 2025, Soichi Matsuura</p>
 </div>   
@@ -1353,7 +1749,7 @@ NOTE: n is number in *each* group</code></pre>
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+<li class="nav-item compact">
     <a class="nav-link" href="https://so-ichi.com/r.html">
       <i class="bi bi-house" role="img">
 </i> 
@@ -1372,11 +1768,40 @@ NOTE: n is number in *each* group</code></pre>
     </a>
   </li>  
 </ul>
-    </div>
+</div>
   </div>
-</footer>
-
-
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 </body></html>
