@@ -157,8 +157,8 @@ ds1 <- firmdata19 |>
     select(sales, mkexp, emp, operating_profit) |> # 変数を選択
     summary() # 記述統計量
 
-knitr::kable(ds1, format = "html", align = "cccc") |>
-    kableExtra::kable_styling()
+knitr::kable(ds1, align = "cccc") |>
+    kableExtra::kable_styling(latex_options = "hold_position")
 ```
 
 
@@ -272,21 +272,34 @@ $$
 
 ### 単回帰モデルと重回帰モデルの比較
 
+営業利益`operating_profit`を従属変数、広告宣伝費`adv`を独立変数とした単回帰モデルを推定します。
+
 ```{r code6-9}
 reg2 <- lm(operating_profit ~ adv, data = firmdata19)
 summary(reg2)
 ```
 
+`confint()`関数を使って信頼区間を計算します。
 
 ```{r code6-10}
 confint(reg2)
 ```
 
+次に、営業利益`operating_profit`を従属変数、広告宣伝費`adv`、温度`temp`、従業員数`emp`、労働費用`labor_cost`、総資産`total_assets`、研究開発費`rd`を独立変数とした重回帰モデルを推定します。
+教科書とは異なりますが、先にモデルを定義してから`lm()`関数に渡す方法で推定します。
+
+```{r}
+multi_model <- "operating_profit ~ adv + temp + emp + labor_cost + total_assets + rd"
+```
+
+この回帰モデルを`lm()`関数で推定し、結果を`summary()`関数で表示します。
 
 ```{r code6-11}
-reg3 <- lm(operating_profit ~ adv + temp + emp + labor_cost + total_assets + rd, data = firmdata19)
+reg3 <- lm(formula = multi_model, data = firmdata19)
 summary(reg3)
 ```
+
+`confint()`関数を使って信頼区間を計算します。
 
 ```{r code6-12}
 confint(reg3)

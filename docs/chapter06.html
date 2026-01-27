@@ -173,7 +173,7 @@ window.Quarto = {
 
 <meta name="twitter:title" content="4&nbsp; 第6章 回帰分析 – マーケティング・データ分析の学習メモ">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://so-ichi.com/chapter06_files/figure-html/fig01-1.png">
+<meta name="twitter:image" content="https://so-ichi.com/r.html/chapter06_files/figure-html/fig01-1.png">
 <meta name="twitter:image-height" content="4500">
 <meta name="twitter:image-width" content="6300">
 <meta name="twitter:card" content="summary_large_image">
@@ -522,8 +522,8 @@ y_i = \beta_0 + \beta_1 x_i + u_i
 <span id="cb5-2"><a href="#cb5-2"></a>    <span class="fu">select</span>(sales, mkexp, emp, operating_profit) <span class="sc">|&gt;</span> <span class="co"># 変数を選択</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a>    <span class="fu">summary</span>() <span class="co"># 記述統計量</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(ds1, <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">align =</span> <span class="st">"cccc"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>    kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-5"><a href="#cb5-5"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(ds1, <span class="at">align =</span> <span class="st">"cccc"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="st">"hold_position"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="table caption-top table-sm table-striped small">
 <thead>
@@ -606,7 +606,7 @@ sales_i = \beta_0 + \beta_1 emp_i + u_i
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># 回帰モデルを構築</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>ols_model <span class="ot">&lt;-</span> <span class="st">"sales ~ emp"</span> <span class="co"># 回帰式の定義</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>モデルを最小自乗法で推定するには、<code>lm()</code>関数を使います。 <code>lm()</code>関数の第1引数に回帰式を、第2引数にデータフレームを指定します。</p>
+<p>モデルを最小自乗法で推定するには、<code>lm()</code>関数を使います。 <code>lm()</code>関数の第1引数に回帰式を、第2引数にデータフレームを指定します。 推定結果を<code>reg1</code>というオブジェクトに格納し、回帰係数を表示するには<code>coef()</code>関数を使います。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> ols_model, <span class="at">data =</span> firmdata19)</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="fu">coef</span>(reg1) <span class="co"># 回帰係数</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -621,16 +621,19 @@ sales_i = \beta_0 + \beta_1 emp_i + u_i
 </span></p>
 <p>従業員が10名のときの売上高の予測値は22695.3886となり、従業員が1名増えるごとに売上高が約58.14増加すると予測されます。</p>
 </section>
-<section id="回帰分析における推定と検定" class="level2" data-number="4.3">
+<section id="回帰分析における推定と検定" class="level2 page-columns page-full" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="回帰分析における推定と検定"><span class="header-section-number">4.3</span> 回帰分析における推定と検定</h2>
 <section id="回帰分析と統計的推測" class="level3" data-number="4.3.1">
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="回帰分析と統計的推測"><span class="header-section-number">4.3.1</span> 回帰分析と統計的推測</h3>
 <p>この節は回帰分析の理屈を学習する上で重要な章なので、時間を掛けて学習することをオススメします。</p>
 </section>
-<section id="企業データを用いた回帰分析の実行" class="level3" data-number="4.3.2">
+<section id="企業データを用いた回帰分析の実行" class="level3 page-columns page-full" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="企業データを用いた回帰分析の実行"><span class="header-section-number">4.3.2</span> 企業データを用いた回帰分析の実行</h3>
-<p>上で推定した回帰分析の結果をみていきます。 <code>lm()</code>関数で推定した結果を<code>reg1</code>というオブジェクトに格納しているので、その中身をみてみましょう。</p>
-<div class="cell" data-layout-align="center">
+<p>上で推定した回帰分析の結果をみていきます。 <code>lm()</code>関数で推定した結果を<code>reg1</code>というオブジェクトに格納しているので、その中身をみてみましょう。 詳細を表示するには<code>summary()</code>関数を使います。</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p><code>summary()</code>関数は引数に指定するオブジェクトの型により異なる結果を返します。 ここでは、<code>lm</code>オブジェクトを引数に指定しているので、回帰分析の結果が表示されます。</p>
+</div></div><div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">summary</span>(reg1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -676,6 +679,7 @@ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
 </section>
 <section id="単回帰モデルと重回帰モデルの比較" class="level3" data-number="4.3.4">
 <h3 data-number="4.3.4" class="anchored" data-anchor-id="単回帰モデルと重回帰モデルの比較"><span class="header-section-number">4.3.4</span> 単回帰モデルと重回帰モデルの比較</h3>
+<p>営業利益<code>operating_profit</code>を従属変数、広告宣伝費<code>adv</code>を独立変数とした単回帰モデルを推定します。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(operating_profit <span class="sc">~</span> adv, <span class="at">data =</span> firmdata19)</span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="fu">summary</span>(reg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -700,6 +704,7 @@ Multiple R-squared:  0.1906,    Adjusted R-squared:  0.185
 F-statistic: 33.91 on 1 and 144 DF,  p-value: 3.613e-08</code></pre>
 </div>
 </div>
+<p><code>confint()</code>関数を使って信頼区間を計算します。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">confint</span>(reg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -708,14 +713,18 @@ F-statistic: 33.91 on 1 and 144 DF,  p-value: 3.613e-08</code></pre>
 adv             0.830362     1.683719</code></pre>
 </div>
 </div>
+<p>次に、営業利益<code>operating_profit</code>を従属変数、広告宣伝費<code>adv</code>、温度<code>temp</code>、従業員数<code>emp</code>、労働費用<code>labor_cost</code>、総資産<code>total_assets</code>、研究開発費<code>rd</code>を独立変数とした重回帰モデルを推定します。 教科書とは異なりますが、先にモデルを定義してから<code>lm()</code>関数に渡す方法で推定します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(operating_profit <span class="sc">~</span> adv <span class="sc">+</span> temp <span class="sc">+</span> emp <span class="sc">+</span> labor_cost <span class="sc">+</span> total_assets <span class="sc">+</span> rd, <span class="at">data =</span> firmdata19)</span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">summary</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>multi_model <span class="ot">&lt;-</span> <span class="st">"operating_profit ~ adv + temp + emp + labor_cost + total_assets + rd"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>この回帰モデルを<code>lm()</code>関数で推定し、結果を<code>summary()</code>関数で表示します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> multi_model, <span class="at">data =</span> firmdata19)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">summary</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = operating_profit ~ adv + temp + emp + labor_cost + 
-    total_assets + rd, data = firmdata19)
+lm(formula = multi_model, data = firmdata19)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -738,8 +747,9 @@ Multiple R-squared:  0.6479,    Adjusted R-squared:  0.6327
 F-statistic: 42.63 on 6 and 139 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
+<p><code>confint()</code>関数を使って信頼区間を計算します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">confint</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">confint</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                     2.5 %        97.5 %
 (Intercept)  6048.51599480  3.813231e+04
@@ -830,7 +840,7 @@ rd              0.34334525  2.426472e+00</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/so-ichi\.com");
+        var filterRegex = new RegExp("https:\/\/so-ichi\.com\/r\.html");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1182,6 +1192,12 @@ rd              0.34334525  2.426472e+00</code></pre>
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://so-ichi.com/r.html">
+      <i class="bi bi-house" role="img">
+</i> 
+    </a>
+  </li>  
     <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ma2ura">
       <i class="bi bi-github" role="img">

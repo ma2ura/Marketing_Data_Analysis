@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://so-ichi.com/index.html</loc>
-    <lastmod>2026-01-06T01:35:31.717Z</lastmod>
-  </url>
-  <url>
-    <loc>https://so-ichi.com/part01.html</loc>
-    <lastmod>2026-01-06T01:35:31.718Z</lastmod>
-  </url>
-  <url>
-    <loc>https://so-ichi.com/chapter04.html</loc>
+    <loc>https://so-ichi.com/r.html/index.html</loc>
     <lastmod>2026-01-06T01:35:31.000Z</lastmod>
   </url>
   <url>
-    <loc>https://so-ichi.com/part02.html</loc>
-    <lastmod>2026-01-06T01:35:31.718Z</lastmod>
+    <loc>https://so-ichi.com/r.html/part01.html</loc>
+    <lastmod>2026-01-27T04:56:55.325Z</lastmod>
   </url>
   <url>
-    <loc>https://so-ichi.com/chapter05.html</loc>
-    <lastmod>2026-01-01T06:09:26.554Z</lastmod>
+    <loc>https://so-ichi.com/r.html/chapter04.html</loc>
+    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
   </url>
   <url>
-    <loc>https://so-ichi.com/chapter06.html</loc>
-    <lastmod>2026-01-26T08:59:11.843Z</lastmod>
+    <loc>https://so-ichi.com/r.html/part02.html</loc>
+    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
   </url>
   <url>
-    <loc>https://so-ichi.com/chapter07.html</loc>
-    <lastmod>2025-12-20T05:00:19.415Z</lastmod>
+    <loc>https://so-ichi.com/r.html/chapter05.html</loc>
+    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
   </url>
   <url>
-    <loc>https://so-ichi.com/chapter08.html</loc>
-    <lastmod>2026-01-22T16:00:05.309Z</lastmod>
+    <loc>https://so-ichi.com/r.html/chapter06.html</loc>
+    <lastmod>2026-01-27T05:44:04.848Z</lastmod>
   </url>
   <url>
-    <loc>https://so-ichi.com/part03.html</loc>
-    <lastmod>2026-01-06T01:35:31.718Z</lastmod>
+    <loc>https://so-ichi.com/r.html/chapter07.html</loc>
+    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
   </url>
   <url>
-    <loc>https://so-ichi.com/chapter10.html</loc>
-    <lastmod>2025-12-31T06:31:24.882Z</lastmod>
+    <loc>https://so-ichi.com/r.html/chapter08.html</loc>
+    <lastmod>2026-01-27T00:12:05.141Z</lastmod>
   </url>
   <url>
-    <loc>https://so-ichi.com/chapter11.html</loc>
-    <lastmod>2025-12-21T12:28:07.273Z</lastmod>
+    <loc>https://so-ichi.com/r.html/part03.html</loc>
+    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
   </url>
   <url>
-    <loc>https://so-ichi.com/chapter12.html</loc>
-    <lastmod>2026-01-01T02:48:05.598Z</lastmod>
+    <loc>https://so-ichi.com/r.html/chapter10.html</loc>
+    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
   </url>
   <url>
-    <loc>https://so-ichi.com/マーケティング・データ分析の学習メモ.pdf</loc>
-    <lastmod>2025-12-23T16:17:49.903Z</lastmod>
+    <loc>https://so-ichi.com/r.html/chapter11.html</loc>
+    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://so-ichi.com/r.html/chapter12.html</loc>
+    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://so-ichi.com/r.html/マーケティング・データ分析の学習メモ.pdf</loc>
+    <lastmod>2026-01-27T05:53:24.560Z</lastmod>
   </url>
 </urlset>
