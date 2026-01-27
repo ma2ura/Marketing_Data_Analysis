@@ -426,7 +426,7 @@ y_i = \beta_0 + \beta_1 x_i + u_i
 <span id="cb1-10"><a href="#cb1-10"></a><span class="co"># 作図</span></span>
 <span id="cb1-11"><a href="#cb1-11"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
 <span id="cb1-12"><a href="#cb1-12"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span> </span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
 <span id="cb1-14"><a href="#cb1-14"></a>        <span class="fu">labs</span>(</span>
 <span id="cb1-15"><a href="#cb1-15"></a>        <span class="at">title =</span> <span class="st">"データの散布図"</span>,</span>
 <span id="cb1-16"><a href="#cb1-16"></a>        <span class="at">x =</span> <span class="st">"従業員数 (x)"</span>,</span>
@@ -456,11 +456,11 @@ y_i = \beta_0 + \beta_1 x_i + u_i
 <span id="cb2-7"><a href="#cb2-7"></a>    <span class="fu">geom_segment</span>(</span>
 <span id="cb2-8"><a href="#cb2-8"></a>        <span class="fu">aes</span>(<span class="at">xend =</span> x, <span class="at">yend =</span> predicted),</span>
 <span id="cb2-9"><a href="#cb2-9"></a>        <span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>    ) <span class="sc">+</span> </span>
+<span id="cb2-10"><a href="#cb2-10"></a>    ) <span class="sc">+</span></span>
 <span id="cb2-11"><a href="#cb2-11"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>    <span class="fu">theme_calc</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
 <span id="cb2-13"><a href="#cb2-13"></a>    <span class="fu">labs</span>(</span>
-<span id="cb2-14"><a href="#cb2-14"></a>        <span class="at">title =</span> <span class="st">"データの散布図"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>        <span class="at">title =</span> <span class="st">"回帰式と誤差"</span>,</span>
 <span id="cb2-15"><a href="#cb2-15"></a>        <span class="at">x =</span> <span class="st">"従業員数 (x)"</span>,</span>
 <span id="cb2-16"><a href="#cb2-16"></a>        <span class="at">y =</span> <span class="st">"売上高 (y)"</span></span>
 <span id="cb2-17"><a href="#cb2-17"></a>    ) <span class="sc">+</span></span>
@@ -515,11 +515,12 @@ y_i = \beta_0 + \beta_1 x_i + u_i
 <li><strong>右上 (相関係数)</strong>: <code>Corr:</code> として相関係数が表示されています。売上高 <code>sales</code> と従業員数 <code>emp</code> や営業利益 <code>operating_profit</code> の相関が高く、また営業利益と従業員数にも強い正の相関があります。</li>
 <li><strong>左下 (散布図)</strong>: 2変数間の散布図が表示されています。異常値の有無などを確認できます。</li>
 </ul>
-<p>次に、記述統計量を基本関数 <code>summary()</code> を使って計算します。</p>
+<p>こういった図でデータを概観し、線形回帰モデルが適切かどうかを判断したり、異常値の有無を確認して分析結果の解釈に役立てたりします。</p>
+<p>次に、図ではなく数値としてデータの特徴をつかむため記述統計量を計算します。 ここでは基本関数 <code>summary()</code> を使って計算します。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>ds1 <span class="ot">&lt;-</span> firmdata19 <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>    <span class="fu">select</span>(sales, mkexp, emp, operating_profit) <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>    <span class="fu">summary</span>()</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="fu">select</span>(sales, mkexp, emp, operating_profit) <span class="sc">|&gt;</span> <span class="co"># 変数を選択</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="fu">summary</span>() <span class="co"># 記述統計量</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a></span>
 <span id="cb5-5"><a href="#cb5-5"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(ds1, <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">align =</span> <span class="st">"cccc"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a>    kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -600,9 +601,15 @@ e_i = y_i - \hat{y}_i
 <p>Rでは <code>lm()</code> 関数を使って計算できます。 ここでは、売上高が従業員数で説明できるかを調べる単回帰モデルを構築します。 <span class="math display">
 sales_i = \beta_0 + \beta_1 emp_i + u_i
 </span></p>
+<p>Rだと<code>従属変数 ~ 独立変数</code>という形で回帰式を指定します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(sales <span class="sc">~</span> emp, <span class="at">data =</span> firmdata19)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">coef</span>(reg1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># 回帰モデルを構築</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>ols_model <span class="ot">&lt;-</span> <span class="st">"sales ~ emp"</span> <span class="co"># 回帰式の定義</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>モデルを最小自乗法で推定するには、<code>lm()</code>関数を使います。 <code>lm()</code>関数の第1引数に回帰式を、第2引数にデータフレームを指定します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> ols_model, <span class="at">data =</span> firmdata19)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">coef</span>(reg1) <span class="co"># 回帰係数</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)         emp 
 22113.98050    58.14081 </code></pre>
@@ -624,11 +631,11 @@ sales_i = \beta_0 + \beta_1 emp_i + u_i
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="企業データを用いた回帰分析の実行"><span class="header-section-number">4.3.2</span> 企業データを用いた回帰分析の実行</h3>
 <p>上で推定した回帰分析の結果をみていきます。 <code>lm()</code>関数で推定した結果を<code>reg1</code>というオブジェクトに格納しているので、その中身をみてみましょう。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">summary</span>(reg1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">summary</span>(reg1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = sales ~ emp, data = firmdata19)
+lm(formula = ols_model, data = firmdata19)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
@@ -647,7 +654,7 @@ F-statistic:   512 on 1 and 144 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">confint</span>(reg1, <span class="at">level =</span> <span class="fl">0.99</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">confint</span>(reg1, <span class="at">level =</span> <span class="fl">0.99</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    0.5 %       99.5 %
 (Intercept) -210798.52845 255026.48944
@@ -670,8 +677,8 @@ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
 <section id="単回帰モデルと重回帰モデルの比較" class="level3" data-number="4.3.4">
 <h3 data-number="4.3.4" class="anchored" data-anchor-id="単回帰モデルと重回帰モデルの比較"><span class="header-section-number">4.3.4</span> 単回帰モデルと重回帰モデルの比較</h3>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(operating_profit <span class="sc">~</span> adv, <span class="at">data =</span> firmdata19)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">summary</span>(reg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(operating_profit <span class="sc">~</span> adv, <span class="at">data =</span> firmdata19)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">summary</span>(reg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -694,7 +701,7 @@ F-statistic: 33.91 on 1 and 144 DF,  p-value: 3.613e-08</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">confint</span>(reg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">confint</span>(reg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   2.5 %       97.5 %
 (Intercept) 36189.311039 77968.894422
@@ -702,8 +709,8 @@ adv             0.830362     1.683719</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(operating_profit <span class="sc">~</span> adv <span class="sc">+</span> temp <span class="sc">+</span> emp <span class="sc">+</span> labor_cost <span class="sc">+</span> total_assets <span class="sc">+</span> rd, <span class="at">data =</span> firmdata19)</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">summary</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(operating_profit <span class="sc">~</span> adv <span class="sc">+</span> temp <span class="sc">+</span> emp <span class="sc">+</span> labor_cost <span class="sc">+</span> total_assets <span class="sc">+</span> rd, <span class="at">data =</span> firmdata19)</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">summary</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -732,7 +739,7 @@ F-statistic: 42.63 on 6 and 139 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">confint</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">confint</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                     2.5 %        97.5 %
 (Intercept)  6048.51599480  3.813231e+04

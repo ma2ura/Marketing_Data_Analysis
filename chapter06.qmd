@@ -6,13 +6,13 @@
 $i$ は企業の番号を表しており，$n$ 社のデータがあるとします。
 こんな感じのデータです。
 
-| 企業番号 | 売上高 | 従業員数 |
-|---|---|---|
-| 1 | 1000 | 5 |
-| 2 | 2000 | 10 |
-| 3 | 3000 | 15 |
-| ... | ... | ... |
-| n | 4500 | 25 |
+| 企業番号| 売上高 | 従業員数
+| --- | --- | ---
+| 1   | 1000| 5
+| 2   | 2000| 10
+| 3   | 3000| 15
+| ... | ... | ...
+| n   | 4500| 25
 
 
 
@@ -64,7 +64,7 @@ my_font <- if (Sys.info()["sysname"] == "Darwin") "HiraKakuProN-W3" else "sans"
 # 作図
 g <- ggplot(data, aes(x = x, y = y)) +
     geom_point(size = 2.5, color = "black", alpha = 0.8) +
-    theme_economist_white(base_family = my_font) + 
+    theme_economist_white(base_family = my_font) +
         labs(
         title = "データの散布図",
         x = "従業員数 (x)",
@@ -93,11 +93,11 @@ g <- ggplot(data, aes(x = x, y = y)) +
     geom_segment(
         aes(xend = x, yend = predicted),
         color = "#D55E00", linetype = "dashed", alpha = 0.8, linewidth = 0.8
-    ) + 
+    ) +
     geom_point(size = 2.5, color = "black", alpha = 0.8) +
-    theme_calc(base_family = my_font) +
+    theme_economist_white(base_family = my_font) +
     labs(
-        title = "データの散布図",
+        title = "回帰式と誤差",
         x = "従業員数 (x)",
         y = "売上高 (y)"
     ) +
@@ -140,19 +140,22 @@ firmdata19 |>
     GGally::ggpairs() +
     labs(title = "2変数の関係の概略")
 ```
-    
+
 出力された図を見てみます。
 
 * **対角線 (分布)**: 売上高 `sales` や従業員数 `emp`、営業利益 `operating_profit` は値の小さい左側にデータが集まっており、右側に裾を引く歪んだ分布であることがわかります。
 * **右上 (相関係数)**: `Corr:` として相関係数が表示されています。売上高 `sales` と従業員数 `emp` や営業利益 `operating_profit` の相関が高く、また営業利益と従業員数にも強い正の相関があります。
 * **左下 (散布図)**: 2変数間の散布図が表示されています。異常値の有無などを確認できます。
 
-次に、記述統計量を基本関数 `summary()` を使って計算します。
+こういった図でデータを概観し、線形回帰モデルが適切かどうかを判断したり、異常値の有無を確認して分析結果の解釈に役立てたりします。
+
+次に、図ではなく数値としてデータの特徴をつかむため記述統計量を計算します。
+ここでは基本関数 `summary()` を使って計算します。
 
 ```{r code6-5}
 ds1 <- firmdata19 |>
-    select(sales, mkexp, emp, operating_profit) |>
-    summary()
+    select(sales, mkexp, emp, operating_profit) |> # 変数を選択
+    summary() # 記述統計量
 
 knitr::kable(ds1, format = "html", align = "cccc") |>
     kableExtra::kable_styling()
@@ -190,10 +193,23 @@ Rでは `lm()` 関数を使って計算できます。
 $$
 sales_i = \beta_0 + \beta_1 emp_i + u_i
 $$
-```{r code6-6}
-reg1 <- lm(sales ~ emp, data = firmdata19)
-coef(reg1)
+
+Rだと`従属変数 ~ 独立変数`という形で回帰式を指定します。
+
+```{r ols_model}
+# 回帰モデルを構築
+ols_model <- "sales ~ emp" # 回帰式の定義
 ```
+
+モデルを最小自乗法で推定するには、`lm()`関数を使います。
+`lm()`関数の第1引数に回帰式を、第2引数にデータフレームを指定します。
+推定結果を`reg1`というオブジェクトに格納し、回帰係数を表示するには`coef()`関数を使います。
+
+```{r code6-6}
+reg1 <- lm(formula = ols_model, data = firmdata19)
+coef(reg1) # 回帰係数
+```
+
 最小二乗法で推定された係数は以下のようになります。
 
 $$
@@ -213,6 +229,15 @@ $$
 
 上で推定した回帰分析の結果をみていきます。
 `lm()`関数で推定した結果を`reg1`というオブジェクトに格納しているので、その中身をみてみましょう。
+詳細を表示するには`summary()`関数を使います。
+
+:::{.aside}
+`summary()`関数は引数に指定するオブジェクトの型により異なる結果を返します。
+ここでは、`lm`オブジェクトを引数に指定しているので、回帰分析の結果が表示されます。
+:::
+
+
+
 ```{r code6-7}
 summary(reg1)
 ```

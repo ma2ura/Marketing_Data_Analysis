@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0f3842d524a25ead62fa3485ecdbacb2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-0f3842d524a25ead62fa3485ecdbacb2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-0f3842d524a25ead62fa3485ecdbacb2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0e4011db0d5ff3215bcba912988fbc37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-0e4011db0d5ff3215bcba912988fbc37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0e4011db0d5ff3215bcba912988fbc37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -257,7 +257,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter06.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">第6章</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">第6章 回帰分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -320,7 +320,6 @@ window.Quarto = {
   <li><a href="#xが有限集合の場合" id="toc-xが有限集合の場合" class="nav-link" data-scroll-target="#xが有限集合の場合"><span class="header-section-number">6.1.3</span> <span class="math inline">X</span>が有限集合の場合</a></li>
   </ul></li>
   <li><a href="#顕示選考理論" id="toc-顕示選考理論" class="nav-link" data-scroll-target="#顕示選考理論"><span class="header-section-number">6.2</span> 顕示選考理論</a></li>
-  <li><a href="#二値選択モデル" id="toc-二値選択モデル" class="nav-link" data-scroll-target="#二値選択モデル"><span class="header-section-number">6.3</span> 二値選択モデル</a></li>
   </ul>
 </nav>
     </div>
@@ -348,7 +347,7 @@ window.Quarto = {
 
 <section id="顕示選好の理論" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="顕示選好の理論"><span class="header-section-number">6.1</span> 顕示選好の理論</h2>
-<p>この節は読まなくても問題ありません。 個人的な勉強がてらKreps (1988) “Notes on the Theory of Choice”に基づいて，単一個人意思決定モデルの基礎的な考え方を説明します。</p>
+<p>Kreps (1988) “Notes on the Theory of Choice”に基づいて，単一個人意思決定モデルの基礎的な考え方を説明します。</p>
 <p><span class="markp">「選択」(choice)という現象は，ある集合<span class="math inline">A</span>がある個人にとっての実際に選択可能な選択肢の集合であったときに，その中から個人によって1つの選択肢<span class="math inline">a \in A</span>が選ばれる，という現象</span>をいいます。 ここに，<span class="markp">「選ぶ」というのは，第三者に観察できる行為として選ぶ，ということに限って用いられます。</span> また，問題となっている集合<span class="math inline">A</span>の各要素<span class="math inline">a \in A</span>を「選択肢」(alternative)と呼びます。</p>
 <p>選択現象を問題にしている選択肢<span class="math inline">a</span>が確率的構造を持っているとき，その選択肢をとくに<strong>クジ</strong>(lottery)と呼びます。</p>
 <p>説明するべき対象を選択肢とします。</p>
@@ -357,7 +356,7 @@ X \supseteq A \mapsto a
 </span></p>
 <p>ここで<span class="math inline">A</span>は選択肢の集合で，<span class="math inline">a</span>はその選択肢を選んだ結果となります。<span class="math inline">X</span>は整合性を問題にできる選択肢集合のいちばん最大のもの，となります。</p>
 <p><span class="math inline">X</span>上の，この人の選択関数 <span class="math display">
-C : X \supseteq A \mapsto C(A) \subseteq X
+C : X \subseteq A \mapsto C(A) \subseteq X
 </span> が安定的に存在すると仮定します。 ここで<span class="math inline">C(A)</span>は，<span class="math inline">A</span>の中からこの人が選んだ選択肢集合を表します。</p>
 <p><span class="math inline">X</span>を考察する選択行動で，選択の対象となりうる潜在的な選択肢を集めた集合を表す。 選択集合とは，ある<span class="math inline">A \in \mathcal{P}(X)</span>が実際に選択可能な選択肢の集合であったときに，その中から1つの選択肢が選ばれる現象をいいます。 「選ばれる」といういうとき，現に選ばれた1つの選択肢以外にも「それでも同様に良かった」というものがあるとき，それらの「そのどれでも良かった」選択肢を全て集めた集合<span class="math inline">C</span>を，<span class="math inline">A</span>からの選択結果とみなします。</p>
 <p>選択関数を定義すると，</p>
@@ -395,23 +394,21 @@ C(A, \succ) = \{ x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ 
 <p>まとめると、 <span class="math display">
 C : \mathcal{P}(X) \rightarrow C(A) \in \mathcal{P}(X)
 </span> のうち、「二者択一の結果を、<span class="math inline">X</span>の各ペア<span class="math inline">(x,y)</span> ごとに、<span class="math inline">x \succ y</span> か <span class="math inline">x \not \succ y</span> かを書いて、書いたものを<span class="math inline">X</span>上の（この人の）強選好」といいます。 選好モデルとは、 <span class="math display">
-C : \mathcal{P}(X) \ni A \rightarrow C(A) \in \mathcal{P}(X)
+C : \mathcal{P}(X) ∋ A \rightarrow C(A) \in \mathcal{P}(X)
 </span> を <span class="math display">
 \begin{aligned}
-&amp; C(\cdot, \succ) : \mathcal{P}(X) \ni A \rightarrow C(A, \succ) \in \mathcal{P}(X)\\
+&amp; C(\cdot, \succ) : \mathcal{P}(X) ∋ A \rightarrow C(A, \succ) \in \mathcal{P}(X)\\
 &amp; \text{such that} \quad C(A, \succ) = \{ x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}
 \end{aligned}
 </span> となり、この選好<span class="math inline">\succ</span>をもつ人が、実際に<span class="math inline">A</span>に直面したときに選ぶと予測するということを意味します。 これは<span class="math inline">C(\cdot , \succ)</span>のデータから予測されます。</p>
-<p><span class="math inline">C(\cdot , \succ) : \mathcal{P}(X) \ni A \rightarrow C(A, \succ) \in \mathcal{P}(X)</span>は、<span class="math inline">C : \mathcal{P}(X) \ni A  \rightarrow C(A) \in \mathcal{P}(X)</span>のうち、<span class="math inline">|X|^2</span>個のデータで、<span class="math inline">C : \mathcal{P}(X) \ni A  \rightarrow C(A) \in \mathcal{P}(X)</span>全体の<span class="math inline">2^{|X|}</span>個の値を予測しているのです。</p>
+<p><span class="math inline">C(\cdot , \succ) : \mathcal{P}(X) ∋ A \rightarrow C(A, \succ) \in \mathcal{P}(X)</span>は、<span class="math inline">C : \mathcal{P}(X) ∋ A  \rightarrow C(A) \in \mathcal{P}(X)</span>のうち、<span class="math inline">|X|^2</span>個のデータで、<span class="math inline">C : \mathcal{P}(X) ∋ A  \rightarrow C(A) \in \mathcal{P}(X)</span>全体の<span class="math inline">2^{|X|}</span>個の値を予測しているのです。</p>
 <p>合理性モデルでは、「もし・・・なら、<span class="math inline">\forall A \in \mathcal{P}; C(A, \succ) = C(A)</span>となります。</p>
 <p>ふりかえると、</p>
 <ul>
 <li>説明する対象は、選択関数 <span class="math inline">C : \mathcal{P}(X) \in A  \mapsto C(A) \in \mathcal{P}(X)</span> である。</li>
-<li>データを取ってくるパラメータとしての選好<span class="math inline">\succ</span> (つまり、<span class="math inline">X</span>上のすべての二者択一の結果)を考えます。</li>
-<li>選択を説明するモデルは選好モデルは、 <span class="math display">
-C(A, \succ) = \{x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}
-</span> となります。つまり、「自分より良いものが存在しない」要素だけを集めたものを意味します。</li>
-<li>選択理論とは、「<span class="math inline">C: \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> が･･･の条件を満たすとき、<span class="math inline">C</span>のうち××から作った<span class="math inline">C(A, ××)  = C(A)</span> 」が成り立つような「･･･」と「××」を考えます。</li>
+<li>データを取ってくるパラメータとしての選好<span class="math inline">\succ</span> (つまり、<span class="math inline">X</span>上のすべての二者択一の結果)を考える。</li>
+<li>選択を説明するモデルは選好モデル<span class="math inline">C(A, \succ) = \{x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}</span></li>
+<li>選択理論とは、「<span class="math inline">C: \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> が・・・の条件を満たすとき、<span class="math inline">C</span>のうち××から作った$C(A, ××) = C(A)」が成り立つような「･･･」と「××」を考えます。</li>
 </ul>
 <p>ただ、選好<span class="math inline">\succ</span>としてどんなものでも認めてしまうと、</p>
 <p><span class="math display">
@@ -424,6 +421,7 @@ C(A, \succ) = \{x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x
 <li><span class="math inline">y \succ z</span> より <span class="math inline">z \not \in C(\{x,y, z\}, \succ)</span></li>
 </ul>
 <p>すなわち、<span class="math inline">C(\{x,y,z\}, \succ) = \emptyset</span> となります。</p>
+<p>て、次のように選択関数 <span class="math inline">C_{\succ} : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> を定めます。</p>
 <p>では、どのような二者択一行動を示す人なら、その人の選好モデルは完結性があるのかを考えます。 次の2つの条件が満たされるとき、選好<span class="math inline">\succ</span>は<strong>完結性</strong>(completeness)を持つといいます。</p>
 <ol type="1">
 <li><strong>反対称性</strong>(asymmetry) : <span class="math inline">\forall x,y \in X;</span>, 「<span class="math inline">x \succ y</span> かつ <span class="math inline">y \succ x</span>」ということはない。つまり二者択一行動が<span class="math inline">C(\{x,y\}) = \{\emptyset\}</span>ということがない。</li>
@@ -542,7 +540,7 @@ Important
 </section>
 <section id="顕示選考理論" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="顕示選考理論"><span class="header-section-number">6.2</span> 顕示選考理論</h2>
-<p>選択肢集合<span class="math inline">X</span>が有限であるとします。 すると、<span class="math inline">X</span>上の強選好<span class="math inline">\succ</span>が<span class="math inline">X</span>上の選好関係であるならば、 <span class="math inline">C(\cdot , \succ) : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>は非空かつ<strong>ハウタッカーの公理</strong>(Houthakker’s axiom)を満たします。</p>
+<p>選択肢集合<span class="math inline">X</span>が有限であるとします。 すると、<span class="math inline">X</span>上の強選好<span class="math inline">\succ</span>が<span class="math inline">X</span>上の選好関係であるならば、 <span class="math inline">C(\cdot , \succ) : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>は非空まつ<strong>ハウタッカーの公理</strong>(Houthakker’s axiom)を満たします。</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -664,37 +662,35 @@ Important
 <p><span class="math inline">X</span>上の選択関数<span class="math inline">C : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>が非空とします。 このとき、<span class="math inline">C: \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> がハウタッカーの公理を満たすための必要十分条件は、それがセンの<span class="math inline">\alpha</span>規則性と<span class="math inline">\beta</span>規則性を満たすことです。</p>
 </div>
 </div>
-<p>具体例で説明してみます。 たとえばあなたが買い物をしているとき、選択肢集合<span class="math inline">A = \{豚肉, 牛肉, 鶏肉\}</span>の中から何かを選択する、選択問題に直面しているとします。 このとき、センの<span class="math inline">\alpha</span>規則性は、もしあなたが<span class="math inline">A</span>の中から牛肉を選んだとき(<span class="math inline">C(A) = \{牛肉\}</span>)、選択肢集合が<span class="math inline">B = \{牛肉, 鶏肉\} \subset A</span>に変わっても、あなたは牛肉を選ぶ、ということを意味します。</p>
-<p>次にセンの<span class="math inline">\beta</span>規則性は、もしあなたが<span class="math inline">A</span>の中から牛肉と鶏肉を選んだとき(<span class="math inline">C(A) = \{牛肉, 鶏肉\}</span>)、選択肢集合が<span class="math inline">B = \{豚肉, 牛肉, 鶏肉\} \supset A</span>に変わっても、あなたは鶏肉を選ぶ、ということを意味します。</p>
+<p>具体例で説明してみます。</p>
+<p><span class="math inline">X=\{\text{みかん, リンゴ, バナナ, ぶどう}\}</span> とします。あなたの好みが</p>
+<p><span class="math display">
+\text{リンゴ} \sim \text{バナナ} \succ \text{みかん} \succ \text{ぶどう}
+</span></p>
+<p>だとします。 つまりリンゴとバナナは同程度に最も好ましく、次にみかん、最後にぶどう、という順番です。</p>
+<p>この好みに基づく選択関数 <span class="math inline">C</span> を、「与えられた集合の中の“最も好ましいもの”をすべて選ぶ」と定めます。 つまり任意の <span class="math inline">A\subseteq X</span> に対して</p>
+<ul>
+<li><span class="math inline">A</span> にリンゴまたはバナナが含まれていれば、<span class="math inline">C(A) = A\cap\{\text{リンゴ, バナナ}\}</span></li>
+<li>そうでなければ（リンゴもバナナも無いなら）、残りの中で最上位のもの（ここではみかん、なければぶどう）を選ぶ</li>
+</ul>
+<p>というルールです。たとえば</p>
+<ul>
+<li><span class="math inline">C(\{\text{みかん, リンゴ, バナナ}\})=\{\text{リンゴ, バナナ}\}</span>,</li>
+<li><span class="math inline">C(\{\text{バナナ, ぶどう}\})=\{\text{バナナ}\}</span>,</li>
+<li><span class="math inline">C(\{\text{みかん, ぶどう}\})=\{\text{みかん}\}</span></li>
+</ul>
+<p>のようになります。</p>
+<p>この選択関数<span class="math inline">C</span> はセンの <span class="math inline">\alpha</span> 規則性を満たします。理由は、ある集合 A で選ばれた x は A の中で「最上位」なので、x を含む部分集合 BA に選択肢を減らしても、x より上位のものが新たに現れることはなく、x は依然として最上位（最大元）だからです。</p>
+<p>また 規則性も満たします。実際、ある集合 A で x,yC(A) ということは、x と y がともに A の中で最上位（この例ではリンゴとバナナのように同率首位）ということです。集合を広げた BA でも、もし y が依然として選ばれているなら（yC(B)）、y より上位の選択肢は B に存在しないので、同率首位である x も排除されず xC(B) となります。</p>
+<p>ここから、ハウタッカーの公理を満たしていることを、同じ果物で具体的に確かめます。たとえば</p>
+<p>A={}, B={}</p>
+<p>とおくと、</p>
+<p>C(A)={}, C(B)={}</p>
+<p>です。いま x=,&nbsp;y= とすると、確かに x,yAB かつ xC(A)、yC(B) が成り立ちます。そして結論として要求される xC(B)、yC(A) も実際に成り立っています（どちらの集合でもリンゴとバナナが選ばれているため）。</p>
 <p>また、<span class="math inline">X</span>上の選択関数<span class="math inline">C : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> が非空( <span class="math inline">A\not = \emptyset</span>なら<span class="math inline">C(A) \not = \emptyset</span> )かつハウタッカーの公理を満たすならば、<span class="math inline">\succ_c</span>は<span class="math inline">X</span>上の選好関係<span class="math inline">\succ</span>であり(反対称性と負推移性を満たす)であり、しかも<span class="math inline">A \not = \emptyset</span>ならば、</p>
 <p><span class="math display">
 \forall A \in \mathcal{P}(X); \quad C(A, \succ_c) = C(A)
 </span> が成り立ちます。</p>
-<!-- そこで次のように選択関数 $C_{\succ} : \mathcal{P}(X) \rightarrow \mathcal{P}(X)$ を定めます。 -->
-</section>
-<section id="二値選択モデル" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="二値選択モデル"><span class="header-section-number">6.3</span> 二値選択モデル</h2>
-<p>長々と単一個人の意思決定モデルとして、選択行動を説明してきました。 つぎに、この顕示選考理論を背景として、消費者が「買う・買わない」という観察可能な行動の結果をデータとして入手した場合の統計分析について考えてみましょう。</p>
-<p>いま、観察可能な行動の結果として購入したか否かを表す二値変数<span class="math inline">y_i</span>と、その購入行動に影響を与える要因を表す連続変数<span class="math inline">x_i</span>のデータが手元にあるとします。 <span class="math inline">y_i</span>は0または1と取る二値変数であり、実現値を<span class="math inline">y</span>と表すとします。 <span class="math inline">x_i</span>は連続変数であり、実現値を<span class="math inline">x</span>と表すとします。 確率変数の条件付期待値は、 <span class="math display">
-E[y_i \mid x_i] = \sum_{y} y \cdot P(y_i = y \mid x_i)
-</span> で定義されます。 いま、<span class="math inline">y_i \in \{0,1\}</span>なので、上の式は、 <span class="math display">
-\begin{aligned}
-E[y_i \mid x_i] &amp;= 0 \cdot P(y_i = 0 \mid x_i) + 1 \cdot P(y_i = 1 \mid x_i)\\
-&amp;= P(y_i = 1 \mid x_i)
-\end{aligned}
-</span> となります。 これは<span class="math inline">X</span>を条件として、<span class="math inline">Y</span>が1である確率、つまり消費者が商品を購入する確率を表します。 これを<strong>反応確率</strong>と呼びます。</p>
-<p>次に、<span class="math inline">x_i</span>が1単位増えると、<span class="math inline">y_i = 1</span> となる確率が <span class="math inline">\beta_1</span> だけ変化する、ということを表す線形確率モデルは、</p>
-<p><span class="math display">
-P(y_i = 1 \mid x_i) = \beta_0 + \beta_1 x_i
-</span></p>
-<p>となります。 この<span class="math inline">\beta_1</span>の意味について考えます。 <span class="math inline">x_i</span> が <span class="math inline">\Delta x_i</span> だけ変化したとき、確率の変化は，</p>
-<p><span class="math display">
-\begin{aligned}
-\Delta P &amp;= P(y_i = 1 \mid x_i + \Delta x_i) - P(y_i = 1 \mid x_i) \\
-&amp;= [\beta_0 + \beta_1 (x_i + \Delta x_i)] - [\beta_0 + \beta_1 x_i]\\
-&amp;= \beta_1 \Delta x_i
-\end{aligned}
-</span></p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, modelsummary, mfx, DescTools, mlogit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -703,13 +699,10 @@ P(y_i = 1 \mid x_i) = \beta_0 + \beta_1 x_i
 <span id="cb2-2"><a href="#cb2-2"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">Y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
 <span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">X =</span> <span class="fu">c</span>(<span class="fl">3.4</span>, <span class="fl">5.22</span>, <span class="fl">7.06</span>, <span class="fl">2.81</span>, <span class="fl">4.11</span>, <span class="fl">10.34</span>, <span class="fl">13.67</span>, <span class="fl">15.99</span>, <span class="fl">9.09</span>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>従属変数<span class="math inline">y_i</span>を説明変数<span class="math inline">x_i</span>で線形回帰します。 線形回帰は、<code>lm()</code>関数で行います。</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>lpm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> df1)</span>
-<span id="cb3-2"><a href="#cb3-2"></a>pred_lpm1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lpm1)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>pred_lpm1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-5"><a href="#cb2-5"></a>  )</span>
+<span id="cb2-6"><a href="#cb2-6"></a>lpm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> df1)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>pred_lpm1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lpm1)</span>
+<span id="cb2-8"><a href="#cb2-8"></a>pred_lpm1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           1            2            3            4            5            6 
 -0.006342894  0.173357681  0.355032986 -0.064597476  0.063760077  0.678888967 
@@ -718,9 +711,9 @@ P(y_i = 1 \mid x_i) = \beta_0 + \beta_1 x_i
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># コード8-2</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>choice_df <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/choice_data.xlsx"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">head</span>(choice_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># コード8-2</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>choice_df <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/choice_data.xlsx"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">head</span>(choice_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -730,12 +723,11 @@ P(y_i = 1 \mid x_i) = \beta_0 + \beta_1 x_i
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># コード8-3</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>probit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
-<span id="cb6-3"><a href="#cb6-3"></a>    <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> probit),</span>
-<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">data =</span> choice_df</span>
-<span id="cb6-5"><a href="#cb6-5"></a>)</span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">summary</span>(probit1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># コード8-3</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>probit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>               <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> probit),</span>
+<span id="cb5-4"><a href="#cb5-4"></a>               <span class="at">data =</span> choice_df)</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">summary</span>(probit1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -760,33 +752,30 @@ Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># コード8-4</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>ols1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
-<span id="cb8-3"><a href="#cb8-3"></a>    <span class="at">data =</span> choice_df</span>
-<span id="cb8-4"><a href="#cb8-4"></a>)</span>
-<span id="cb8-5"><a href="#cb8-5"></a>logit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
-<span id="cb8-6"><a href="#cb8-6"></a>    <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit),</span>
-<span id="cb8-7"><a href="#cb8-7"></a>    <span class="at">data =</span> choice_df</span>
-<span id="cb8-8"><a href="#cb8-8"></a>)</span>
-<span id="cb8-9"><a href="#cb8-9"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb8-10"><a href="#cb8-10"></a>models[[<span class="st">"Linear probability model"</span>]] <span class="ot">&lt;-</span> ols1</span>
-<span id="cb8-11"><a href="#cb8-11"></a>models[[<span class="st">"Probit model"</span>]] <span class="ot">&lt;-</span> probit1</span>
-<span id="cb8-12"><a href="#cb8-12"></a>models[[<span class="st">"Logit model"</span>]] <span class="ot">&lt;-</span> logit1</span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="fu">modelsummary</span>(models,</span>
-<span id="cb8-14"><a href="#cb8-14"></a>    <span class="at">title =</span> <span class="st">"モデル比較"</span>,</span>
-<span id="cb8-15"><a href="#cb8-15"></a>    <span class="at">notes =</span> <span class="st">"Values in [ ] show robust standard errors"</span>,</span>
-<span id="cb8-16"><a href="#cb8-16"></a>    <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb8-17"><a href="#cb8-17"></a>    <span class="at">statistic =</span> <span class="st">"std.error"</span>,</span>
-<span id="cb8-18"><a href="#cb8-18"></a>    <span class="at">vcov =</span> <span class="st">"robust"</span>,</span>
-<span id="cb8-19"><a href="#cb8-19"></a>    <span class="at">gof_map =</span> <span class="st">"nobs"</span></span>
-<span id="cb8-20"><a href="#cb8-20"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># コード8-4</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>ols1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>           <span class="at">data =</span> choice_df)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>logit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit),</span>
+<span id="cb7-6"><a href="#cb7-6"></a>              <span class="at">data =</span> choice_df)</span>
+<span id="cb7-7"><a href="#cb7-7"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb7-8"><a href="#cb7-8"></a>models[[<span class="st">"Linear probability model"</span>]] <span class="ot">&lt;-</span> ols1</span>
+<span id="cb7-9"><a href="#cb7-9"></a>models[[<span class="st">"Probit model"</span>]] <span class="ot">&lt;-</span> probit1</span>
+<span id="cb7-10"><a href="#cb7-10"></a>models[[<span class="st">"Logit model"</span>]] <span class="ot">&lt;-</span> logit1</span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="fu">modelsummary</span>(models,</span>
+<span id="cb7-12"><a href="#cb7-12"></a>             <span class="at">title =</span> <span class="st">"モデル比較"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13"></a>             <span class="at">notes =</span> <span class="st">"Values in [ ] show robust standard errors"</span>,</span>
+<span id="cb7-14"><a href="#cb7-14"></a>             <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-15"><a href="#cb7-15"></a>             <span class="at">statistic =</span> <span class="st">"std.error"</span>,</span>
+<span id="cb7-16"><a href="#cb7-16"></a>             <span class="at">vcov =</span> <span class="st">"robust"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17"></a>             <span class="at">gof_map =</span> <span class="st">"nobs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_5g1ccm4tmxbd5uhlinvk(i, j, css_id) {
-          var table = document.getElementById("tinytable_5g1ccm4tmxbd5uhlinvk");
+      function styleCell_oad9w3r8a9crb2ojzqfx(i, j, css_id) {
+          var table = document.getElementById("tinytable_oad9w3r8a9crb2ojzqfx");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -796,7 +785,7 @@ Number of Fisher Scoring iterations: 3</code></pre>
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_5g1ccm4tmxbd5uhlinvk');
+        var table = document.getElementById('tinytable_oad9w3r8a9crb2ojzqfx');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -804,8 +793,8 @@ Number of Fisher Scoring iterations: 3</code></pre>
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_5g1ccm4tmxbd5uhlinvk(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_5g1ccm4tmxbd5uhlinvk");
+      function spanCell_oad9w3r8a9crb2ojzqfx(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_oad9w3r8a9crb2ojzqfx");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -835,20 +824,20 @@ Number of Fisher Scoring iterations: 3</code></pre>
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 7, j: 3 },  ], css_id: 'tinytable_css_mqxrtngt9ophm34qqr0m',}, 
-          { positions: [ { i: 6, j: 1 }, { i: 6, j: 2 }, { i: 6, j: 3 },  ], css_id: 'tinytable_css_0age3vof36an3toa0b95',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 2 }, { i: 2, j: 3 }, { i: 3, j: 3 }, { i: 4, j: 1 }, { i: 5, j: 2 }, { i: 4, j: 2 }, { i: 1, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 },  ], css_id: 'tinytable_css_10ldpbn694e32u7vwoqf',}, 
-          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_gg7k88ffaykyacn9n2bf',}, 
-          { positions: [ { i: 7, j: 0 },  ], css_id: 'tinytable_css_fxcp52ig5lknhau0b1df',}, 
-          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_kmw7vf3zrr05eip67yt7',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_3583olbpsvsx2xt0i4ei',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_0qjxeex9knb3z11onmj3',}, 
+          { positions: [ { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 7, j: 3 },  ], css_id: 'tinytable_css_mhtv5s886xlj9aqwr0qr',}, 
+          { positions: [ { i: 6, j: 1 }, { i: 6, j: 2 }, { i: 6, j: 3 },  ], css_id: 'tinytable_css_xld3fu9ssr9308rzhlp8',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 2 }, { i: 2, j: 3 }, { i: 3, j: 3 }, { i: 4, j: 1 }, { i: 5, j: 2 }, { i: 4, j: 2 }, { i: 1, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 },  ], css_id: 'tinytable_css_k46145yznng3ge38qwld',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_vave06l0l11ih8szah8j',}, 
+          { positions: [ { i: 7, j: 0 },  ], css_id: 'tinytable_css_laeszzc7uxhh309iu1ih',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_gfwltnnia7lcv2ky9ag4',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_bmx44zkhdf6qkz6te60g',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_l99a5aaq0lsa573kj5d6',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_5g1ccm4tmxbd5uhlinvk(cell.i, cell.j, group.css_id);
+                  styleCell_oad9w3r8a9crb2ojzqfx(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -856,17 +845,17 @@ Number of Fisher Scoring iterations: 3</code></pre>
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_mqxrtngt9ophm34qqr0m, .table th.tinytable_css_mqxrtngt9ophm34qqr0m { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_0age3vof36an3toa0b95, .table th.tinytable_css_0age3vof36an3toa0b95 { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_10ldpbn694e32u7vwoqf, .table th.tinytable_css_10ldpbn694e32u7vwoqf { text-align: center; }
-      .table td.tinytable_css_gg7k88ffaykyacn9n2bf, .table th.tinytable_css_gg7k88ffaykyacn9n2bf { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_fxcp52ig5lknhau0b1df, .table th.tinytable_css_fxcp52ig5lknhau0b1df { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_kmw7vf3zrr05eip67yt7, .table th.tinytable_css_kmw7vf3zrr05eip67yt7 { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_3583olbpsvsx2xt0i4ei, .table th.tinytable_css_3583olbpsvsx2xt0i4ei { text-align: left; }
-      .table td.tinytable_css_0qjxeex9knb3z11onmj3, .table th.tinytable_css_0qjxeex9knb3z11onmj3 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_mhtv5s886xlj9aqwr0qr, .table th.tinytable_css_mhtv5s886xlj9aqwr0qr { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_xld3fu9ssr9308rzhlp8, .table th.tinytable_css_xld3fu9ssr9308rzhlp8 { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_k46145yznng3ge38qwld, .table th.tinytable_css_k46145yznng3ge38qwld { text-align: center; }
+      .table td.tinytable_css_vave06l0l11ih8szah8j, .table th.tinytable_css_vave06l0l11ih8szah8j { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_laeszzc7uxhh309iu1ih, .table th.tinytable_css_laeszzc7uxhh309iu1ih { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_gfwltnnia7lcv2ky9ag4, .table th.tinytable_css_gfwltnnia7lcv2ky9ag4 { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_bmx44zkhdf6qkz6te60g, .table th.tinytable_css_bmx44zkhdf6qkz6te60g { text-align: left; }
+      .table td.tinytable_css_l99a5aaq0lsa573kj5d6, .table th.tinytable_css_l99a5aaq0lsa573kj5d6 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_5g1ccm4tmxbd5uhlinvk" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_oad9w3r8a9crb2ojzqfx" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         </thead><caption>モデル比較</caption>
               <tbody><tr>
@@ -926,15 +915,14 @@ Number of Fisher Scoring iterations: 3</code></pre>
     </div>
 <!-- hack to avoid NA insertion in last line -->
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># 適合度指標において，サンプルサイズ ("nobs") のみ表示するという指示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># 適合度指標において，サンプルサイズ ("nobs") のみ表示するという指示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># コード8-5</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co"># Average Marginal Effects（限界効果の平均）</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>probit1_ame <span class="ot">&lt;-</span> <span class="fu">probitmfx</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
-<span id="cb10-4"><a href="#cb10-4"></a>    <span class="at">data =</span> choice_df, <span class="at">atmean =</span> <span class="cn">FALSE</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>)</span>
-<span id="cb10-6"><a href="#cb10-6"></a>probit1_ame</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># コード8-5</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co"># Average Marginal Effects（限界効果の平均）</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>probit1_ame <span class="ot">&lt;-</span> <span class="fu">probitmfx</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
+<span id="cb9-4"><a href="#cb9-4"></a>                         <span class="at">data =</span> choice_df, <span class="at">atmean =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>probit1_ame</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 probitmfx(formula = y1 ~ p1 + a1, data = choice_df, atmean = FALSE)
@@ -952,12 +940,11 @@ dF/dx is for discrete change for the following variables:
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># コード8-7</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co"># Marginal Effects at Mean（平均値における限界効果）</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>probit1_mem <span class="ot">&lt;-</span> <span class="fu">probitmfx</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
-<span id="cb12-4"><a href="#cb12-4"></a>    <span class="at">data =</span> choice_df, <span class="at">atmean =</span> <span class="cn">TRUE</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>)</span>
-<span id="cb12-6"><a href="#cb12-6"></a>probit1_mem</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># コード8-7</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># Marginal Effects at Mean（平均値における限界効果）</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>probit1_mem <span class="ot">&lt;-</span> <span class="fu">probitmfx</span>(y1 <span class="sc">~</span> p1 <span class="sc">+</span> a1,</span>
+<span id="cb11-4"><a href="#cb11-4"></a>                         <span class="at">data =</span> choice_df, <span class="at">atmean =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-5"><a href="#cb11-5"></a>probit1_mem</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 probitmfx(formula = y1 ~ p1 + a1, data = choice_df, atmean = TRUE)
@@ -975,39 +962,37 @@ dF/dx is for discrete change for the following variables:
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># コード8-8</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>marginal <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb14-3"><a href="#cb14-3"></a>    <span class="st">"p1 marginal"</span> <span class="ot">=</span> <span class="st">"p1"</span>,</span>
-<span id="cb14-4"><a href="#cb14-4"></a>    <span class="st">"a1 marginal"</span> <span class="ot">=</span> <span class="st">"a1"</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>)</span>
-<span id="cb14-6"><a href="#cb14-6"></a></span>
-<span id="cb14-7"><a href="#cb14-7"></a>marg_model <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb14-8"><a href="#cb14-8"></a>    <span class="st">"(1) Probit_AME"</span> <span class="ot">&lt;-</span> probit1_ame,</span>
-<span id="cb14-9"><a href="#cb14-9"></a>    <span class="st">"(2) Probit_MEM"</span> <span class="ot">&lt;-</span> probit1_mem</span>
-<span id="cb14-10"><a href="#cb14-10"></a>)</span>
-<span id="cb14-11"><a href="#cb14-11"></a></span>
-<span id="cb14-12"><a href="#cb14-12"></a>marg_sum <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(</span>
-<span id="cb14-13"><a href="#cb14-13"></a>    marg_model,</span>
-<span id="cb14-14"><a href="#cb14-14"></a>    <span class="at">statistic =</span> <span class="st">"std.error"</span>,</span>
-<span id="cb14-15"><a href="#cb14-15"></a>    <span class="at">coef_map =</span> marginal,</span>
-<span id="cb14-16"><a href="#cb14-16"></a>    <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb14-17"><a href="#cb14-17"></a>    <span class="at">shape =</span> term<span class="sc">:</span>component <span class="sc">~</span> model,</span>
-<span id="cb14-18"><a href="#cb14-18"></a>    <span class="at">add_rows =</span> <span class="fu">data.frame</span>(</span>
-<span id="cb14-19"><a href="#cb14-19"></a>        <span class="st">"Marginal effect type"</span>,</span>
-<span id="cb14-20"><a href="#cb14-20"></a>        <span class="st">"Average Marginal Effect"</span>,</span>
-<span id="cb14-21"><a href="#cb14-21"></a>        <span class="st">"Marginal Effect at Mean"</span></span>
-<span id="cb14-22"><a href="#cb14-22"></a>    ),</span>
-<span id="cb14-23"><a href="#cb14-23"></a>    <span class="at">title =</span> <span class="st">"限界効果サマリー"</span>,</span>
-<span id="cb14-24"><a href="#cb14-24"></a>    <span class="at">gof_map =</span> <span class="st">"nobs"</span></span>
-<span id="cb14-25"><a href="#cb14-25"></a>)</span>
-<span id="cb14-26"><a href="#cb14-26"></a>marg_sum</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># コード8-8</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>marginal <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="st">"p1 marginal"</span> <span class="ot">=</span> <span class="st">"p1"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="st">"a1 marginal"</span> <span class="ot">=</span> <span class="st">"a1"</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>)</span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a>marg_model <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="st">"(1) Probit_AME"</span> <span class="ot">&lt;-</span> probit1_ame,</span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="st">"(2) Probit_MEM"</span> <span class="ot">&lt;-</span> probit1_mem</span>
+<span id="cb13-10"><a href="#cb13-10"></a>)</span>
+<span id="cb13-11"><a href="#cb13-11"></a></span>
+<span id="cb13-12"><a href="#cb13-12"></a>marg_sum <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(</span>
+<span id="cb13-13"><a href="#cb13-13"></a>  marg_model,</span>
+<span id="cb13-14"><a href="#cb13-14"></a>  <span class="at">statistic =</span> <span class="st">"std.error"</span>,</span>
+<span id="cb13-15"><a href="#cb13-15"></a>  <span class="at">coef_map =</span> marginal,</span>
+<span id="cb13-16"><a href="#cb13-16"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-17"><a href="#cb13-17"></a>  <span class="at">shape =</span> term<span class="sc">:</span>component <span class="sc">~</span> model,</span>
+<span id="cb13-18"><a href="#cb13-18"></a>  <span class="at">add_rows =</span> <span class="fu">data.frame</span>(<span class="st">"Marginal effect type"</span>,</span>
+<span id="cb13-19"><a href="#cb13-19"></a>                        <span class="st">"Average Marginal Effect"</span>,</span>
+<span id="cb13-20"><a href="#cb13-20"></a>                        <span class="st">"Marginal Effect at Mean"</span>),</span>
+<span id="cb13-21"><a href="#cb13-21"></a>  <span class="at">title =</span> <span class="st">"限界効果サマリー"</span>,</span>
+<span id="cb13-22"><a href="#cb13-22"></a>  <span class="at">gof_map =</span> <span class="st">"nobs"</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a>)</span>
+<span id="cb13-24"><a href="#cb13-24"></a>marg_sum</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_97gvzuso7g971att8g08(i, j, css_id) {
-          var table = document.getElementById("tinytable_97gvzuso7g971att8g08");
+      function styleCell_e0zzhrhgkw3qj8neaphz(i, j, css_id) {
+          var table = document.getElementById("tinytable_e0zzhrhgkw3qj8neaphz");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -1017,7 +1002,7 @@ dF/dx is for discrete change for the following variables:
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_97gvzuso7g971att8g08');
+        var table = document.getElementById('tinytable_e0zzhrhgkw3qj8neaphz');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -1025,8 +1010,8 @@ dF/dx is for discrete change for the following variables:
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_97gvzuso7g971att8g08(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_97gvzuso7g971att8g08");
+      function spanCell_e0zzhrhgkw3qj8neaphz(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_e0zzhrhgkw3qj8neaphz");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -1056,20 +1041,20 @@ dF/dx is for discrete change for the following variables:
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 6, j: 1 }, { i: 6, j: 2 },  ], css_id: 'tinytable_css_2rvyyy758ppfu3i87i4a',}, 
-          { positions: [ { i: 4, j: 2 }, { i: 4, j: 1 },  ], css_id: 'tinytable_css_v95g2jt2weztqzp8sglu',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 1, j: 2 }, { i: 5, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 1 }, { i: 5, j: 2 }, { i: 2, j: 2 },  ], css_id: 'tinytable_css_3q21y0fr1s08evjff7pv',}, 
-          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_t4bksefispzmehaj8q7n',}, 
-          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_hb0x8gr0lyfzigtmb3a7',}, 
-          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_s54qhhndpu7mtqvjph2n',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_s849qon39yh7vn7foqgw',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_szrmmz1akdsd3hzpamdx',}, 
+          { positions: [ { i: 6, j: 1 }, { i: 6, j: 2 },  ], css_id: 'tinytable_css_lknzeailjylkwcsmuqrc',}, 
+          { positions: [ { i: 4, j: 2 }, { i: 4, j: 1 },  ], css_id: 'tinytable_css_q835rj8djs5lvvho89kf',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 1, j: 2 }, { i: 5, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 1 }, { i: 5, j: 2 }, { i: 2, j: 2 },  ], css_id: 'tinytable_css_ikjmtq2b71y2v9i3hi55',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_cmi9782vz8yh6vkzxba5',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_2z1xifqn4sh7j9i2s9i2',}, 
+          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_y4mi4hhwph67a2lnocf7',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_j0dj19qj68ujyu2t6mrl',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_hvkv99wcdxqqpipkpxyp',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_97gvzuso7g971att8g08(cell.i, cell.j, group.css_id);
+                  styleCell_e0zzhrhgkw3qj8neaphz(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -1077,17 +1062,17 @@ dF/dx is for discrete change for the following variables:
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_2rvyyy758ppfu3i87i4a, .table th.tinytable_css_2rvyyy758ppfu3i87i4a { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_v95g2jt2weztqzp8sglu, .table th.tinytable_css_v95g2jt2weztqzp8sglu { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_3q21y0fr1s08evjff7pv, .table th.tinytable_css_3q21y0fr1s08evjff7pv { text-align: center; }
-      .table td.tinytable_css_t4bksefispzmehaj8q7n, .table th.tinytable_css_t4bksefispzmehaj8q7n { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_hb0x8gr0lyfzigtmb3a7, .table th.tinytable_css_hb0x8gr0lyfzigtmb3a7 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_s54qhhndpu7mtqvjph2n, .table th.tinytable_css_s54qhhndpu7mtqvjph2n { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_s849qon39yh7vn7foqgw, .table th.tinytable_css_s849qon39yh7vn7foqgw { text-align: left; }
-      .table td.tinytable_css_szrmmz1akdsd3hzpamdx, .table th.tinytable_css_szrmmz1akdsd3hzpamdx { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_lknzeailjylkwcsmuqrc, .table th.tinytable_css_lknzeailjylkwcsmuqrc { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_q835rj8djs5lvvho89kf, .table th.tinytable_css_q835rj8djs5lvvho89kf { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_ikjmtq2b71y2v9i3hi55, .table th.tinytable_css_ikjmtq2b71y2v9i3hi55 { text-align: center; }
+      .table td.tinytable_css_cmi9782vz8yh6vkzxba5, .table th.tinytable_css_cmi9782vz8yh6vkzxba5 { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_2z1xifqn4sh7j9i2s9i2, .table th.tinytable_css_2z1xifqn4sh7j9i2s9i2 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_y4mi4hhwph67a2lnocf7, .table th.tinytable_css_y4mi4hhwph67a2lnocf7 { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_j0dj19qj68ujyu2t6mrl, .table th.tinytable_css_j0dj19qj68ujyu2t6mrl { text-align: left; }
+      .table td.tinytable_css_hvkv99wcdxqqpipkpxyp, .table th.tinytable_css_hvkv99wcdxqqpipkpxyp { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_97gvzuso7g971att8g08" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_e0zzhrhgkw3qj8neaphz" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         </thead><caption>限界効果サマリー</caption>
               <tbody><tr>
@@ -1135,23 +1120,22 @@ dF/dx is for discrete change for the following variables:
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># コード8-9</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(probit1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># コード8-9</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(probit1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> McFadden 
 0.1293345 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># コード8-10</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="co"># 価格差変数作成</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>choice_df <span class="ot">&lt;-</span> choice_df <span class="sc">%&gt;%</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a>    <span class="fu">mutate</span>(<span class="at">p_ratio =</span> p1 <span class="sc">-</span> p2)</span>
-<span id="cb17-6"><a href="#cb17-6"></a></span>
-<span id="cb17-7"><a href="#cb17-7"></a>probit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p_ratio <span class="sc">+</span> a1 <span class="sc">+</span> a2,</span>
-<span id="cb17-8"><a href="#cb17-8"></a>    <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> probit),</span>
-<span id="cb17-9"><a href="#cb17-9"></a>    <span class="at">data =</span> choice_df</span>
-<span id="cb17-10"><a href="#cb17-10"></a>)</span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="fu">summary</span>(probit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># コード8-10</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># 価格差変数作成</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>choice_df <span class="ot">&lt;-</span> choice_df <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="fu">mutate</span>(<span class="at">p_ratio =</span> p1 <span class="sc">-</span> p2)</span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a>probit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p_ratio <span class="sc">+</span> a1 <span class="sc">+</span> a2,</span>
+<span id="cb16-8"><a href="#cb16-8"></a>               <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> probit),</span>
+<span id="cb16-9"><a href="#cb16-9"></a>               <span class="at">data =</span> choice_df)</span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="fu">summary</span>(probit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1175,17 +1159,16 @@ AIC: 1074.9
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># コード8-11</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(probit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># コード8-11</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(probit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>McFadden 
 0.229384 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># コード8-12</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>probit2_ame <span class="ot">&lt;-</span> <span class="fu">probitmfx</span>(y1 <span class="sc">~</span> p_ratio <span class="sc">+</span> a1 <span class="sc">+</span> a2,</span>
-<span id="cb21-3"><a href="#cb21-3"></a>    <span class="at">data =</span> choice_df, <span class="at">atmean =</span> <span class="cn">FALSE</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>)</span>
-<span id="cb21-5"><a href="#cb21-5"></a>probit2_ame</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># コード8-12</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>probit2_ame <span class="ot">&lt;-</span> <span class="fu">probitmfx</span>(y1 <span class="sc">~</span> p_ratio <span class="sc">+</span> a1 <span class="sc">+</span> a2,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>                         <span class="at">data =</span> choice_df, <span class="at">atmean =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb20-4"><a href="#cb20-4"></a>probit2_ame</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 probitmfx(formula = y1 ~ p_ratio + a1 + a2, data = choice_df, 
@@ -1205,9 +1188,9 @@ dF/dx is for discrete change for the following variables:
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># コード8-13</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="fu">data</span>(Cracker, <span class="at">package =</span> <span class="st">"mlogit"</span>)</span>
-<span id="cb23-3"><a href="#cb23-3"></a><span class="fu">head</span>(Cracker, <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># コード8-13</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">data</span>(Cracker, <span class="at">package =</span> <span class="st">"mlogit"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="fu">head</span>(Cracker, <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -1215,12 +1198,10 @@ dF/dx is for discrete change for the following variables:
   </script>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># コード8-14</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>cracker <span class="ot">&lt;-</span> <span class="fu">mlogit.data</span>(Cracker,</span>
-<span id="cb24-3"><a href="#cb24-3"></a>    <span class="at">choice =</span> <span class="st">"choice"</span>, <span class="at">shape =</span> <span class="st">"wide"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4"></a>    <span class="at">varying =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">13</span>)</span>
-<span id="cb24-5"><a href="#cb24-5"></a>)</span>
-<span id="cb24-6"><a href="#cb24-6"></a><span class="fu">head</span>(cracker, <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># コード8-14</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>cracker <span class="ot">&lt;-</span> <span class="fu">mlogit.data</span>(Cracker, <span class="at">choice =</span> <span class="st">"choice"</span>, <span class="at">shape =</span> <span class="st">"wide"</span>,</span>
+<span id="cb23-3"><a href="#cb23-3"></a>                       <span class="at">varying =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">13</span>))</span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="fu">head</span>(cracker, <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>~~~~~~~
  first 20 observations out of 13168 
@@ -1271,13 +1252,11 @@ dF/dx is for discrete change for the following variables:
 20    5 sunshine
 indexes:  1, 2 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># コード8-15</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>ml_cracker <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(choice <span class="sc">~</span> price <span class="sc">|</span> <span class="dv">1</span> <span class="sc">|</span> disp <span class="sc">+</span> feat,</span>
-<span id="cb26-3"><a href="#cb26-3"></a>    <span class="at">probit =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb26-4"><a href="#cb26-4"></a>    <span class="at">data =</span> cracker</span>
-<span id="cb26-5"><a href="#cb26-5"></a>)</span>
-<span id="cb26-6"><a href="#cb26-6"></a></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="fu">summary</span>(ml_cracker)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># コード8-15</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>ml_cracker <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(choice <span class="sc">~</span> price <span class="sc">|</span> <span class="dv">1</span> <span class="sc">|</span> disp <span class="sc">+</span> feat, <span class="at">probit =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-3"><a href="#cb25-3"></a>                     <span class="at">data =</span> cracker)</span>
+<span id="cb25-4"><a href="#cb25-4"></a></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="fu">summary</span>(ml_cracker)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1316,54 +1295,45 @@ Likelihood ratio test : chisq = 371.66 (p.value = &lt; 2.22e-16)</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># コード8-16</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="co"># パラメータの推定値（beta）の抽出</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>beta <span class="ot">&lt;-</span> probit2<span class="sc">$</span>coefficients</span>
-<span id="cb28-4"><a href="#cb28-4"></a></span>
-<span id="cb28-5"><a href="#cb28-5"></a><span class="co"># パラメータbeta と説明変数の線形結合を作成（beta_0 は定数項なので1 をかける）</span></span>
-<span id="cb28-6"><a href="#cb28-6"></a>est_probit2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
-<span id="cb28-7"><a href="#cb28-7"></a>    <span class="dv">1</span>, choice_df<span class="sc">$</span>p_ratio, choice_df<span class="sc">$</span>a1,</span>
-<span id="cb28-8"><a href="#cb28-8"></a>    choice_df<span class="sc">$</span>a2</span>
-<span id="cb28-9"><a href="#cb28-9"></a>) <span class="sc">%*%</span> beta</span>
-<span id="cb28-10"><a href="#cb28-10"></a></span>
-<span id="cb28-11"><a href="#cb28-11"></a><span class="co"># pnorm によって標準正規分布の分布関数による計算を実行する。</span></span>
-<span id="cb28-12"><a href="#cb28-12"></a><span class="co"># 製品1(c1) を選ぶ確率の予測値</span></span>
-<span id="cb28-13"><a href="#cb28-13"></a>pred_probit_c1 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(est_probit2)</span>
-<span id="cb28-14"><a href="#cb28-14"></a><span class="fu">mean</span>(pred_probit_c1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># コード8-16</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="co"># パラメータの推定値（beta）の抽出</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>beta <span class="ot">&lt;-</span> probit2<span class="sc">$</span>coefficients</span>
+<span id="cb27-4"><a href="#cb27-4"></a></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="co"># パラメータbeta と説明変数の線形結合を作成（beta_0 は定数項なので1 をかける）</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a>est_probit2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, choice_df<span class="sc">$</span>p_ratio, choice_df<span class="sc">$</span>a1,</span>
+<span id="cb27-7"><a href="#cb27-7"></a>                     choice_df<span class="sc">$</span>a2) <span class="sc">%*%</span> beta</span>
+<span id="cb27-8"><a href="#cb27-8"></a></span>
+<span id="cb27-9"><a href="#cb27-9"></a><span class="co"># pnorm によって標準正規分布の分布関数による計算を実行する。</span></span>
+<span id="cb27-10"><a href="#cb27-10"></a><span class="co"># 製品1(c1) を選ぶ確率の予測値</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a>pred_probit_c1 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(est_probit2)</span>
+<span id="cb27-12"><a href="#cb27-12"></a><span class="fu">mean</span>(pred_probit_c1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4789384</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># コード8-17</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="co"># ロジットモデルの場合</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a>logit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p_ratio <span class="sc">+</span> a1 <span class="sc">+</span> a2,</span>
-<span id="cb30-4"><a href="#cb30-4"></a>    <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit),</span>
-<span id="cb30-5"><a href="#cb30-5"></a>    <span class="at">data =</span> choice_df</span>
-<span id="cb30-6"><a href="#cb30-6"></a>)</span>
-<span id="cb30-7"><a href="#cb30-7"></a>beta_logit <span class="ot">&lt;-</span> logit2<span class="sc">$</span>coefficients</span>
-<span id="cb30-8"><a href="#cb30-8"></a>est_logit2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
-<span id="cb30-9"><a href="#cb30-9"></a>    <span class="dv">1</span>, choice_df<span class="sc">$</span>p_ratio, choice_df<span class="sc">$</span>a1,</span>
-<span id="cb30-10"><a href="#cb30-10"></a>    choice_df<span class="sc">$</span>a2</span>
-<span id="cb30-11"><a href="#cb30-11"></a>) <span class="sc">%*%</span> beta_logit</span>
-<span id="cb30-12"><a href="#cb30-12"></a>pred_logit_c1 <span class="ot">&lt;-</span> (<span class="fu">exp</span>(est_logit2)) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(est_logit2))</span>
-<span id="cb30-13"><a href="#cb30-13"></a><span class="fu">mean</span>(pred_logit_c1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># コード8-17</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="co"># ロジットモデルの場合</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>logit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y1 <span class="sc">~</span> p_ratio <span class="sc">+</span> a1 <span class="sc">+</span> a2,</span>
+<span id="cb29-4"><a href="#cb29-4"></a>              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit),</span>
+<span id="cb29-5"><a href="#cb29-5"></a>              <span class="at">data =</span> choice_df)</span>
+<span id="cb29-6"><a href="#cb29-6"></a>beta_logit <span class="ot">&lt;-</span> logit2<span class="sc">$</span>coefficients</span>
+<span id="cb29-7"><a href="#cb29-7"></a>est_logit2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, choice_df<span class="sc">$</span>p_ratio, choice_df<span class="sc">$</span>a1,</span>
+<span id="cb29-8"><a href="#cb29-8"></a>                    choice_df<span class="sc">$</span>a2) <span class="sc">%*%</span> beta_logit</span>
+<span id="cb29-9"><a href="#cb29-9"></a>pred_logit_c1 <span class="ot">&lt;-</span> (<span class="fu">exp</span>(est_logit2)) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(est_logit2))</span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="fu">mean</span>(pred_logit_c1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.479</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># コード8-18</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>choice_df_v <span class="ot">&lt;-</span> choice_df <span class="sc">%&gt;%</span></span>
-<span id="cb32-3"><a href="#cb32-3"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb32-4"><a href="#cb32-4"></a>        <span class="at">p1_v =</span> p1 <span class="sc">-</span> <span class="dv">1</span>,</span>
-<span id="cb32-5"><a href="#cb32-5"></a>        <span class="at">p_ratio_v =</span> p1_v <span class="sc">-</span> p2</span>
-<span id="cb32-6"><a href="#cb32-6"></a>    )</span>
-<span id="cb32-7"><a href="#cb32-7"></a>est_probit_v <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
-<span id="cb32-8"><a href="#cb32-8"></a>    <span class="dv">1</span>, choice_df_v<span class="sc">$</span>p_ratio_v, choice_df_v<span class="sc">$</span>a1,</span>
-<span id="cb32-9"><a href="#cb32-9"></a>    choice_df_v<span class="sc">$</span>a2</span>
-<span id="cb32-10"><a href="#cb32-10"></a>) <span class="sc">%*%</span> beta</span>
-<span id="cb32-11"><a href="#cb32-11"></a></span>
-<span id="cb32-12"><a href="#cb32-12"></a><span class="co"># pnorm によって標準正規分布の分布関数による計算を実行する。</span></span>
-<span id="cb32-13"><a href="#cb32-13"></a><span class="co"># 製品1(c1) を選ぶ確率の予測値</span></span>
-<span id="cb32-14"><a href="#cb32-14"></a>pred_probit_v <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(est_probit_v)</span>
-<span id="cb32-15"><a href="#cb32-15"></a><span class="fu">mean</span>(pred_probit_v)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># コード8-18</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>choice_df_v <span class="ot">&lt;-</span> choice_df <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">mutate</span>(<span class="at">p1_v =</span> p1 <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb31-4"><a href="#cb31-4"></a>         <span class="at">p_ratio_v =</span> p1_v <span class="sc">-</span> p2)</span>
+<span id="cb31-5"><a href="#cb31-5"></a>est_probit_v <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, choice_df_v<span class="sc">$</span>p_ratio_v, choice_df_v<span class="sc">$</span>a1,</span>
+<span id="cb31-6"><a href="#cb31-6"></a>                      choice_df_v<span class="sc">$</span>a2) <span class="sc">%*%</span> beta</span>
+<span id="cb31-7"><a href="#cb31-7"></a></span>
+<span id="cb31-8"><a href="#cb31-8"></a><span class="co"># pnorm によって標準正規分布の分布関数による計算を実行する。</span></span>
+<span id="cb31-9"><a href="#cb31-9"></a><span class="co"># 製品1(c1) を選ぶ確率の予測値</span></span>
+<span id="cb31-10"><a href="#cb31-10"></a>pred_probit_v <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(est_probit_v)</span>
+<span id="cb31-11"><a href="#cb31-11"></a><span class="fu">mean</span>(pred_probit_v)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5459071</code></pre>
 </div>
