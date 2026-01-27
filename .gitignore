@@ -25,7 +25,7 @@
 vignettes/*.html
 vignettes/*.pdf
 
-# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+# OAuth2 token (Security)
 .httr-oauth
 
 # knitr and R markdown default cache directories
@@ -36,7 +36,7 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 
-# R Environment Variables
+# R Environment Variables (Security)
 .Renviron
 
 # translation temp files
@@ -45,14 +45,25 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
-# data folder not include
+# data folder (Root directory only)
 /data/
-/.quarto/
 
+# Quarto
+/.quarto/
+.quarto/
+_freeze/
+_site/
+**/*.quarto_ipynb
 
 # latex
 *.aux
 *.log
 *.out
-# *.pdf
+*.fls
+*.fdb_latexmk
+*.pdf
 *.synctex.gz
+
+# OS specific
+.DS_Store
+Thumbs.db
