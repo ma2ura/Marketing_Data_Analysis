@@ -6,18 +6,20 @@ book:
   title: "マーケティング・データ分析の学習メモ"
   reader-mode: true
   page-footer:
-      border: true
-      background: "#a10000"
-      left: "Copyright 2025, Soichi Matsuura"
-      right:
-        - icon: github
-          href: https://github.com/ma2ura
-        - icon: twitter
-          href: https://twitter.com/matsuura_rits
-          aria-label: Twitter
+        border: true
+        background: "#a10000"
+        left: "Copyright 2025, Soichi Matsuura"
+        right:
+          - icon: house
+            href: https://so-ichi.com/r.html
+          - icon: github
+            href: https://github.com/ma2ura
+          - icon: twitter
+            href: https://twitter.com/matsuura_rits
+            aria-label: Twitter
   cover-image: img/tagashira.jpg
   favicon: img/favicon.ico
-  site-url: https://so-ichi.com
+  site-url: https://so-ichi.com/r.html
   repo-url: https://github.com/ma2ura/Marketing_Data_Analysis/
   repo-branch: main
 
@@ -56,9 +58,6 @@ format:
     code-line-numbers: true
     link-external-icon: true
     df-print: paged
-    # grid:
-      # sidebar-width: 350px
-      # body-width: 1200px
     twitter-card: true
     page-navigation: true
     back-to-top-navigation: true
@@ -78,6 +77,7 @@ format:
   pdf:
     pdf-engine: lualatex
     documentclass: ltjsbook
+    prefer-html: true
     include-in-header:
       - text: |
           \usepackage{float}
@@ -90,65 +90,6 @@ format:
           \setlength{\parskip}{0pt}
           \usepackage{fvextra}
           \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
-  # pdf:
-  #   pdf-engine: lualatex
-  #   documentclass: ltjbook
-  #   classoption:
-  #     - a4paper
-  #     - 10pt
-  #     # - pandoc
-  #     # - twoside
-  #     - ja=standard
-  #     - jafont=hiragino-pron
-
-  #   theme: sandstone
-  #   keep-tex: true
-  #   toc: true
-  #   toc-depth: 3
-  #   number-sections: true
-  #   colorlinks: true
-  #   monofontoptions:
-  #     - Scale=0.8
-
-  #   include-in-header:
-  #     - text: |
-  #         \usepackage{float}
-  #         \usepackage{caption}
-  #         \usepackage{longtable}
-  #         \usepackage{placeins}
-  #         \usepackage{booktabs}
-  #         \usepackage{indentfirst}
-  #         \floatplacement{figure}{H}
-  #         \floatplacement{table}{H}
-  #         \setlength{\parindent}{2em}
-  #         \setlength{\parskip}{0pt}
-
-  #         % 欄外が詰まり過ぎる場合の保険（必要なら）
-  #         \setlength{\marginparpush}{6pt}
-
-  #   geometry:
-  #     # - a4paper
-  #     - inner=10mm
-  #     - outer=50mm
-  #     - top=10mm
-  #     - bottom=10mm
-  #     - marginparsep=2mm
-  #     - marginparwidth=40mm
-
-  #   hyperrefoptions:
-  #     - linktoc=all
-  #     - pdfwindowui
-  #     - pdfpagemode=FullScreen
-
-# engine: knitr
-# webr:
-#   show-startup-message: false    # Disable displaying status of webR initialization
-#   packages: ['ggplot2', 'dplyr', 'tidyr'] # Install R packages on document open
-# filters:
-#     - webr
-# reference-location: margin
-# citation-location: margin
-
 knitr:
   opts_chunk:
     dev: ragg_png     # 文字化け防止
