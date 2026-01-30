@@ -1,57 +1,410 @@
-## 第7章
+## 第7章 回帰分析上の工夫
+
+ここでは、次のような回帰分析を行う上で役立ついくつかの工夫について説明しています。
+
+1. ダミー変数
+2. 交差項
+3. 係数比較
+4. 対数変換
+
+準備として、必要なパッケージとデータを読み込みます。
+データは`MktRes_firmdata.xlsx`を使用し、2019年のデータに絞り込みます。
+```{r code7-1, filename="code 7-1 データの読み込みと加工"}
+# パッケージ
+pacman::p_load(
+  tidyverse, readxl, sjPlot, marginaleffects,
+  car, modelsummary, knitr, kableExtra,
+  ggthemes, plotly
+  )
+# データの読み込み
+firmdata <- readxl::read_xlsx("data/MktRes_firmdata.xlsx")
+firmdata19 <- firmdata |>
+  dplyr::filter(fyear == 2019)
+```
+
+1. `pacman::p_load()`で各種パッケージを読み込みます。インストールされていない場合は自動的にインストールされます。
+2. `readxl::read_xlsx()`関数でExcelファイルを読み込みんで、`firmdata`データフレームに格納します。
+3. `dplyr::filter()`関数で2019年のデータに絞り込んで、`firmdata19`データフレームに格納します。
+
+
+次に小売業を表すための変数を作成します。
+産業名を表す変数`ind_en`の値を見てみましょう。
 
 ```{r}
-pacman::p_load(tidyverse, readxl, sjPlot, marginaleffects, car, modelsummary)
-# コード7-1
-# library(tidyverse)
-firmdata <- readxl::read_xlsx("data/MktRes_firmdata.xlsx")
-firmdata19 <- firmdata %>%
-  filter(fyear == 2019)
-#産業名を特定したオブジェクト"Retail"の作成
-retail <- c("Retail Stores, NEC", "Supermarket Chains",
-            "Department Stores")
-# Retail を使ったカテゴリー変数の作成
-firmdata19 <- firmdata19 %>%
-  mutate(format = ifelse(ind_en %in% retail, "Retail", "Other"))
-#カテゴリーの頻度チェック
+#| code-fold: true
+firmdata19$ind_en |>
+  table() |> # 表形式にして
+  as.data.frame() |> # データフレームに変換
+  arrange(desc(Freq)) |> # 頻度順に並び替え
+  knitr::kable() |> # 表として表示
+  # 1行目と4行目と5行目を太字にして、背景を薄い青にする。
+  kableExtra::row_spec(1, bold = TRUE, background = "#D6EAF8") |>
+  kableExtra::row_spec(4, bold = TRUE, background = "#D6EAF8") |>
+  kableExtra::row_spec(5, bold = TRUE, background = "#D6EAF8")
+```
+
+`ind_en`には`r unique(firmdata19$ind_en) |> length()`種類の産業があることが分かります。
+このうち、本書では`Retial Stores, NEC`、`Supermarket Chains`、`Department Stores`の3つを小売業と定義しています。
+これらの産業を`retail`というベクトルにまとめます。
+
+```{r}
+retail <- c("Retail Stores, NEC", "Supermarket Chains", "Department Stores")
+```
+
+変数`ind_en`の値が`retail`に含まれる業種なら`Retail`、そうでなければ`Other`となる変数`format`を作成します。
+ここでは、`dplyr`パッケージの`mutate()`関数と`if_else()`関数を使って新しい変数`format`を作成します。
+
+:::{.column-margin}
+`%in%`演算子は、左側の値が右側のベクトルに含まれているかどうかを論理値（TRUEまたはFALSE）で返します。
+これを使って、`ind_en`の各値が`retail`ベクトルに含まれているかどうかをチェックしています。
+:::
+
+```{r filename="code 7-2 産業を示す変数の作成"}
+firmdata19 <- firmdata19 |>
+  mutate(
+    format = if_else(ind_en %in% retail, "Retail", "Other")
+    )
+```
+
+作成された`format`変数の型を確認します。
+
+```{r filename="code 7-3 変数formatの型確認"}
+class(firmdata19$format)
+```
+
+`format`は文字列(`character`)であることが確認できました。
+次に、変数`format`のカテゴリーごとの企業数を確認します。
+`with()`関数と`table()`関数を使って、カテゴリーごとの企業数を確認します。
+
+:::{.column-margin}
+`with()`関数は、データフレーム内の変数を直接参照できるようにするための関数です。
+つまり`with(データフレーム, 式)`の形式で使用すると、`式`内でデータフレームの変数名を直接使うことができ、いちいち`データフレーム$変数名`と書かなくても済みます。
+ここでは、`firmdata19`データフレーム内の`format`変数を参照しています。
+:::
+
+
+```{r filename="小売業の企業数の確認"}
 with(firmdata19, table(format))
+```
 
-# コード7-2
+次に、`format`変数を使って、営業利益率`op`を従属変数、マーケティング費用`mkexp`と`format`を独立変数とした回帰モデルを推定します。
+
+:::{.callout-caution}
+ここで、「format」変数は「Retail」か「Other」という2種類の文字が入ってる文字列やん！ダミー変数ちゃうやん！と思った人は素晴らしい。その通りです。
+しかし、Rの`lm()`関数は、自動的に文字列やカテゴリ変数をダミー変数に変換して回帰分析を行ってくれます。したがって、ここでは特にダミー変数に変換せず、そのまま`format`変数を使って回帰分析を行っています。教科書p.200で解説しています。
+:::
+
+`summary()`関数を使って`firmdata19`の記述統計量を見てみると、やはり`format`変数が文字列であるため、何も計算されていません。
+カテゴリー変数であることをRに認識させるために、`format`変数を因子型(`factor`)に変換してもよいですし、そもそも`format`変数を作成する際に、0と1のダミー変数として作成してもよいです。
+
+```{r}
+summary(firmdata19)
+```
+
+このカテゴリー変数`format`を使って回帰分析を行います。
+
+$$
+op_i = \beta_0 + \beta_1 mkexp_i + \beta_2 format_i + \varepsilon_i
+$$
+
+`format`を`Rtail`のとき1、`Other`のとき0となるダミー変数として捉えると、上の式は次のように表現できます。
+
+$$
+\begin{aligned}
+\mathrm{E}[op_i \mid Retail = 1]  &= \beta_0 + \beta_1 kexp_i + \beta _2\\
+&= (\beta_0 + \beta_2) + \beta_1 mkexp_i \\
+\mathrm{E}[op_i \mid Retail = 0]  &= \beta_0 + \beta_1 mkexp_i
+\end{aligned}\\
+$$
+
+`format`の回帰係数$\beta_2$は、切片の差を表しています。
+回帰分析の結果を見ながら、切片の差を確認しましょう。
+
+```{r code7-2, filename="code 7-2 ダミー変数を使った回帰分析"}
 fit.d1 <- lm(op ~ mkexp + format, data = firmdata19)
-summary(fit.d1)
+modelsummary(
+  fit.d1,
+  stars = c(`***` = 0.01, `**` = 0.05, `*` = 0.1),
+  gof_omit = "AIC|BIC|Log.Lik|RMSE|F"
+)
+```
 
-# コード7-3
-firmdata19 <- firmdata19 %>%
-  mutate(retail = ifelse(format == "Retail", 1, 0))
+これを図にすると、次のようになります。
 
-# 確認
-with(firmdata19, table(retail, format))
+```{r filename="切片だけが異なる回帰直線のプロット"}
+#| code-fold: true
+# mkexpの全範囲をカバーするグリッドを、全format分作成します
+grid_data <- expand_grid(
+  mkexp = seq(min(firmdata19$mkexp, na.rm = TRUE),
+              max(firmdata19$mkexp, na.rm = TRUE),
+              length.out = 100),
+  format = unique(firmdata19$format)
+)
 
-# コード7-4
-fit.d2 <- lm(op ~ mkexp + retail, data = firmdata19)
-summary(fit.d2)
+# 3. このグリッドに対して予測値を計算
+grid_data$pred <- predict(fit.d1, newdata = grid_data)
 
-# コード7-5
-fit.d3 <- lm(op ~ mkexp * retail, data = firmdata19)
-summary(fit.d3)
-
-# コード7-6
-# install.packages("sjPlot")
-
-# コード7-7
-# # library(sjPlot)
-pred <- plot_model(fit.d3,
-  type = "pred",
-  terms = c("mkexp", "retail"),
-  ci.lvl = .95) +
+# 4. プロット
+ggplot(firmdata19, aes(x = mkexp, y = op, color = format)) +
+  geom_point(alpha = 0.4) +
+  # データの範囲に関わらず、grid_dataに基づいて線を引く
+  geom_line(data = grid_data, aes(y = pred), size = 1) +
   labs(
-    title = "Slope Analysis",
-    subtitle = "(Predicted Values of Profitability with 95% Confidence Intervals)",
+    title = "Parallel Regression Lines (Unified Length)",
     x = "Marketing Expense",
     y = "Profitability"
-  ) + scale_color_discrete(name = "Retail Dummy")
-pred
+  ) +
+  theme_economist_white()
+```
 
+## 交差項
+
+説明変数$X$が大きくなると、従属変数$Y$も大きくなる、という関係があり、その関係は変数$Z$の値によって変わる、という場合があります。
+このような変数間の関係に影響を与える効果を**相互作用効果**(interaction effect)といいます。
+経営学の研究では非常によく使われるモデルの仕様です。
+
+### 傾きダミー
+
+変数$Z$の値によって、回帰直線の切片や**傾き**が変わる場合を考えます。
+次のような回帰モデルを考えます。
+
+$$
+op_i = \beta_0 + \beta_1 mkexp_i + \beta_2 retail_i + \beta_3 mkexp_i \times retail_i +\varepsilon_i
+$$
+
+先ほどと同様に、`retail`を小売業を表すダミー変数です。
+したがって、上の式は次のように表現できます。
+
+$$
+\begin{aligned}
+\mathrm{E}[op_i \mid retail = 1]  &= \beta_0 + \beta_1 mkexp_i + \beta_2 + \beta_3 mkexp_i \\
+&= (\beta_0 + \beta_2) + (\beta_1 + \beta_3) mkexp_i \\
+\mathrm{E}[op_i \mid retail = 0]  &= \beta_0 + \beta_1 mkexp_i
+\end{aligned}
+$$
+
+小売業か否かで差があるのなら、切片だと$\beta_2$、傾きだと$\beta_3$が有意になるはず、と考えられます。
+では、実際に回帰分析を行ってみましょう。
+交差項を回帰モデルに組み込むには、`:`演算子または`*`演算子を使います。
+
+- `:`演算子は、指定した2つの変数の交差項のみをモデルに含めます。
+- `*`演算子は、指定した2つの変数の主効果と交差項の両方をモデルに含めます。
+
+```{r code7-4, filename="code 7-4 傾きダミーを使った回帰分析"}
+fit.d1 <- lm(op ~ mkexp + format, data = firmdata19)
+fit.d2 <- lm(op ~ mkexp + format : mkexp, data = firmdata19)
+```
+
+交差項のみを入れる場合というのはあまりないので、通常は`*`演算子を使って主効果と交差項の両方をモデルに含めます。
+
+```{r code7-5, filename="code 7-5 傾きダミーの可視化"}
+fit.d3 <- lm(op ~ mkexp * format, data = firmdata19)
+```
+
+回帰分析の結果を見てみましょう。
+
+```{r}
+res <- list(fit.d1, fit.d2, fit.d3)
+modelsummary(
+  res,
+  stars = c(`***` = 0.01, `**` = 0.05, `*` = 0.1),
+  gof_omit = "AIC|BIC|Log.Lik|RMSE|F"
+)
+```
+
+一番左のモデル1は切片ダミーのみ、中央のモデル2は傾きダミーのみ、右のモデル3は切片ダミーと傾きダミーの両方を含んでいます。
+回帰係数も決定係数$R^2$も大きく異なっていることが分かります。適切なモデルを使っているかどうかで、分析結果が大きく変わることが分かります。
+
+モデル3の結果を図にしてみましょう。
+
+```{r filename="交差項を含む回帰直線のプロット"}
+#| code-fold: true
+
+# mkexpの全範囲をカバーするグリッドを、全format分作成します
+grid_data <- expand_grid(
+  mkexp = seq(min(firmdata19$mkexp, na.rm = TRUE),
+              max(firmdata19$mkexp, na.rm = TRUE),
+              length.out = 100),
+  format = unique(firmdata19$format)
+)
+# 予測値を計算
+grid_data$pred <- predict(fit.d3, newdata = grid_data)
+# プロット
+ggplot(firmdata19, aes(x = mkexp, y = op, color = format)) +
+  geom_point(alpha = 0.4) +
+  geom_line(data = grid_data, aes(y = pred), size = 1)+
+  theme_economist_white()
+```
+
+交差項の分析結果を可視化するために、`sjPlot`パッケージの`plot_model()`関数を使います。
+引数`type = "pred"`を指定すると、予測値の周辺平均(marginal mean)をプロットできます。つまり全ての観測値が小売業とみなしたときに得られる予測値の平均値です。ようするに条件付期待値なので、上の図と同じです。
+
+```{r code7-6, filename="code 7-6 交差項の可視化"}
+pred <- plot_model(fit.d3,
+  type = "pred",
+  terms = c("mkexp", "format"),
+  ci.lvl = .95) +
+  labs(
+    title = "回帰係数の可視化：交差項",
+    subtitle = "(95%信頼区間をもつ確率の予測値",
+    x = "マーケティング費用",
+    y = "営業利益率"
+  ) + theme_economist_white()
+pred
+```
+
+回帰分析の結果から、小売業ダミーとマーケティング支出の交差項が統計的に有意に正であることから、小売業はその他業種とは異なり、マーケティング支出の増加が営業利益率にプラスの与える、ということが言えます。
+
+しかし、交差項の信頼区間を見てみると、マーケティング費用が低いときは、業種間んで差がありそうだけれど、マーケティング費用が高いときは、業種間で差が出たのはたまたまかもしれない、ということも分かります。
+
+これだけだと，上の図と違いが分かりませんが，重回帰分析の結果でも同様の図を書けます。
+独立変数が2つになると，散布図が次のような三次元の図になります。
+`plotly`パッケージを使うと，インタラクティブな三次元散布図が描けます。
+マーケティング費用`mkexp`と広告宣伝費`adv`を独立変数，営業利益率`op`を従属変数とした三次元散布図を描いてみましょう。
+三次元散布図に回帰平面を追加しています。
+
+```{r filename="三次元散布図の例"}
+#| code-fold: true
+
+library(plotly)
+
+# 1. データの準備
+# format を因子（カテゴリ）として明示的に変換します
+# ※ データの中に "Retail", "Other" という文字列が入っていると仮定します
+firmdata19$format <- factor(firmdata19$format, levels = c("Retail", "Other"))
+
+# 2. 交互作用モデルの構築
+# op = mkexp + adv + mkexp * format (傾きが format によって変わるモデル)
+multi_dummy <- lm(op ~ mkexp + adv + mkexp * format, data = firmdata19)
+
+# 3. 予測用グリッド（軸）の作成
+mk_seq <- seq(min(firmdata19$mkexp, na.rm=T), max(firmdata19$mkexp, na.rm=T), length.out = 30)
+ad_seq <- seq(min(firmdata19$adv, na.rm=T), max(firmdata19$adv, na.rm=T), length.out = 30)
+
+# ---------------------------------------------------------
+# 4. 「Retail」用の予測平面データの作成
+# ---------------------------------------------------------
+grid_retail <- expand.grid(mkexp = mk_seq, adv = ad_seq)
+grid_retail$format <- factor("Retail", levels = levels(firmdata19$format)) # Retailに固定
+
+# 予測して行列化
+z_retail_vec <- predict(multi_dummy, newdata = grid_retail)
+z_retail <- matrix(z_retail_vec, nrow = 30, ncol = 30)
+
+# ---------------------------------------------------------
+# 5. 「Other」用の予測平面データの作成
+# ---------------------------------------------------------
+grid_other <- expand.grid(mkexp = mk_seq, adv = ad_seq)
+grid_other$format <- factor("Other", levels = levels(firmdata19$format)) # Otherに固定
+
+# 予測して行列化
+z_other_vec <- predict(multi_dummy, newdata = grid_other)
+z_other <- matrix(z_other_vec, nrow = 30, ncol = 30)
+
+# ---------------------------------------------------------
+# 6. プロット（2枚の平面を重ねる）
+# ---------------------------------------------------------
+fig <- plot_ly(firmdata19, x = ~mkexp, y = ~adv, z = ~op) %>%
+  # 実測値のプロット（formatごとに色分けすると見やすいです）
+  add_markers(color = ~format, colors = c('blue', 'red'),
+              marker = list(size = 3, opacity = 0.5), name = ~format) %>%
+
+  # 1枚目：Retailの回帰平面（青系）
+  add_surface(x = ~mk_seq, y = ~ad_seq, z = ~t(z_retail),
+              opacity = 0.5,
+              colorscale = list(c(0, 1), c("lightblue", "blue")),
+              showscale = FALSE, # カラーバーを消す
+              name = "Regression (Retail)") %>%
+
+  # 2枚目：Otherの回帰平面（赤系）
+  add_surface(x = ~mk_seq, y = ~ad_seq, z = ~t(z_other),
+              opacity = 0.5,
+              colorscale = list(c(0, 1), c("pink", "red")),
+              showscale = FALSE,
+              name = "Regression (Other)") %>%
+
+  layout(scene = list(xaxis = list(title = 'マーケ費用'),
+                      yaxis = list(title = '広告宣伝費'),
+                      zaxis = list(title = '営業利益率')),
+         title = "店舗形態別(Retail/Other)の回帰平面")
+
+fig
+```
+
+このような多次元空間の回帰式における交差項の効果を取り出して可視化も可能です。
+
+```{r filename="code 7-7 重回帰の交差項の可視化"}
+pred <- plot_model(
+  multi_dummy,
+  type = "pred",
+  terms = c("mkexp", "format"),
+  ci.lvl = .95) +
+  labs(
+    title = "回帰係数の可視化：交差項",
+    subtitle = "(95%信頼区間をもつ確率の予測値",
+    x = "マーケティング費用",
+    y = "営業利益率"
+  ) + theme_economist_white()
+pred
+```
+
+
+### 連続変数の交差項
+
+連続変数同士の交差項もよく使われますが，ダミー変数同士の交差項やダミー変数と連続変数の交差項にはない注意点があります。
+
+$$
+y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 z_{i} + \beta_3 x_{i} \times z_{i} + \varepsilon_i
+$$
+
+という回帰式を考え，$x$や$z$が微少に変化したときの$y$の変化量を考えるため，上の関数を$x$や$z$で偏微分すると，
+
+$$
+\begin{aligned}
+\frac{\partial y_i}{\partial x_i} = \beta_1 + \beta_3 z_i \\
+\frac{\partial y_i}{\partial z_i} = \beta_2 + \beta_3 x_i
+\end{aligned}
+$$
+
+となり，$x$や$z$が$y$に与える影響は，それぞれ$z$や$x$の値によって変わることが分かります。
+
+### 注意点1
+
+$\beta_1$は$z_i = 0$のときの$x$が$y$に与える影響を表しますが，$z_i=0$という値が適切でない場合もあります。
+そこで，変数を平均値で中心化(centering)してから交差項を作成することがよく行われます。
+
+:::{.callout-important}
+## 中心化の効果
+
+この論文では中心化の効果を数学的証明と実証データの両面からみている。
+
+### 数学的・理論的根拠
+
+- 行列の行列式の不変性: 非中心化データの積行列 $X'X$ の行列式と、平均中心化データの積行列の行列式は同一で，多重共線性による計算上の問題は行列式の値がゼロに近づくことで発生するため、平均中心化をしてもこの状況は変わらない。
+- 統計的同等性: 平均中心化は単に座標軸の起点を移動させるだけであり、データ点同士の相対的な位置関係は変わらない。
+- 推計値の同一性: 以下の要素は、平均中心化の有無に関わらず、計算精度、点推定値、標準誤差ともに全く同じ（あるいは数学的に変換可能で同等）であることが証明されている。
+  - 交互作用項の係数とその標準誤差
+  - モデル全体の決定係数（$R^2$）
+  - 主効果および単純効果（一方が分かればもう一方を正確に算出可能）
+### 実証的根拠
+
+例としてあげられているブランド拡張の評価に関する実データを用いた分析では、以下のことが示されている。
+
+- 見かけ上の変化: 未中心化データでは不自然な負の係数が出た変数が、平均中心化によって正の係数に変わった
+- 解釈の相違: これは共線性が解決したからではなく「係数の意味」が変わったため
+- 未中心化の係数は「他方が0の時の単純効果」を、中心化後の係数は「平均的なレベルにおける主効果」を表しているに過ぎない
+
+この論文を参照 [https://pubsonline.informs.org/doi/epdf/10.1287/mksc.1060.0263](https://pubsonline.informs.org/doi/epdf/10.1287/mksc.1060.0263)
+:::
+
+$$
+\begin{aligned}
+\frac{\partial y_i}{\partial x_i} = \beta_1 + \beta_3 z_i
+\end{aligned}
+$$
+
+
+```{r}
 # コード7-8
 Headphone07 <- readr::read_csv("data/headphone07.csv", na = ".")
 
@@ -113,7 +466,7 @@ firmdata19 <- firmdata19 %>%
          rd = (rd - mean(rd)) / sd(rd),
          ad_rd = adv + rd)
 fit_linear <- lm(sales ~ adv + rd, data = firmdata19)
-summary(fit_linear) 
+summary(fit_linear)
 
 # コード7-16
 fit_comp <- lm(sales ~ adv + ad_rd, data = firmdata19)
@@ -123,13 +476,13 @@ summary(fit_comp)
 fit_prod <- lm(log(sales) ~ log(labor_cost) + log(ppent),
   data = firmdata19)
 
-summary(fit_prod) 
+summary(fit_prod)
 
 # コード7-18
 price <- readr::read_csv("data/price_data.csv")
 
 fit_q <- lm(log(q) ~ log(p), data = price)
-summary(fit_q) 
+summary(fit_q)
 
 # コード7-19
 # install.packages("car")
@@ -177,4 +530,3 @@ msummary(Int,
   output = "latex")
 
 ```
-

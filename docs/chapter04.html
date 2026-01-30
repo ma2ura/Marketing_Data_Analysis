@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Soichi Matsuura">
-
 <title>2&nbsp; データ整理と要約 – マーケティング・データ分析の学習メモ</title>
 <style>
 code{white-space: pre-wrap;}
@@ -58,7 +55,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -81,10 +77,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-77ae664bd3cfbdd8ff8bfe75623920d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-b17d4a6032788cbe9ac785a3a47f20ba.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-5939b212ce713193957da7085513f6ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b17d4a6032788cbe9ac785a3a47f20ba.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -110,10 +105,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<style>
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-SFB56VHK63"></script><script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SFB56VHK63', { 'anonymize_ip': true});
+</script><style>
 .marky {
   background: linear-gradient(transparent 60%, #FCFFC1 0%);
 }
@@ -124,19 +122,176 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   background: linear-gradient(transparent 70%, #ffcdd2 0%)
 }
 </style>
-
-
 <meta name="twitter:title" content="2&nbsp; データ整理と要約 – マーケティング・データ分析の学習メモ">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
-
-<body class="nav-sidebar floating slimcontent quarto-light">
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -147,17 +302,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">マーケティング・データ分析の学習メモ</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/ma2ura/Marketing_Data_Analysis/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -173,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></span></a>
@@ -187,15 +339,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter04.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part02.html" class="sidebar-item-text sidebar-link">
@@ -204,8 +356,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></span></a>
@@ -214,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter06.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">第6章</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">第6章 回帰分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -230,7 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part03.html" class="sidebar-item-text sidebar-link">
@@ -239,8 +391,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></span></a>
@@ -259,30 +411,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#dplyrでデータの要約" id="toc-dplyrでデータの要約" class="nav-link active" data-scroll-target="#dplyrでデータの要約"><span class="header-section-number">2.0.1</span> dplyrでデータの要約</a></li>
-  <li><a href="#企業データの処理" id="toc-企業データの処理" class="nav-link" data-scroll-target="#企業データの処理"><span class="header-section-number">2.0.2</span> 企業データの処理</a></li>
-  <li><a href="#データの要約" id="toc-データの要約" class="nav-link" data-scroll-target="#データの要約"><span class="header-section-number">2.1</span> 4 データの要約</a></li>
-  <li><a href="#カテゴリ変数の要約" id="toc-カテゴリ変数の要約" class="nav-link" data-scroll-target="#カテゴリ変数の要約"><span class="header-section-number">2.2</span> カテゴリ変数の要約</a></li>
-  </ul>
-</nav>
+<li><a href="#dplyr%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%A6%81%E7%B4%84" id="toc-dplyrでデータの要約" class="nav-link active" data-scroll-target="#dplyr%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%A6%81%E7%B4%84"><span class="header-section-number">2.0.1</span> dplyrでデータの要約</a></li>
+  <li><a href="#%E4%BC%81%E6%A5%AD%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%87%A6%E7%90%86" id="toc-企業データの処理" class="nav-link" data-scroll-target="#%E4%BC%81%E6%A5%AD%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%87%A6%E7%90%86"><span class="header-section-number">2.0.2</span> 企業データの処理</a></li>
+  <li><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%A6%81%E7%B4%84" id="toc-データの要約" class="nav-link" data-scroll-target="#%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%A6%81%E7%B4%84"><span class="header-section-number">2.1</span> 4 データの要約</a></li>
+  <li><a href="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E5%A4%89%E6%95%B0%E3%81%AE%E8%A6%81%E7%B4%84" id="toc-カテゴリ変数の要約" class="nav-link" data-scroll-target="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E5%A4%89%E6%95%B0%E3%81%AE%E8%A6%81%E7%B4%84"><span class="header-section-number">2.2</span> カテゴリ変数の要約</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part01.html">第1部</a></li><li class="breadcrumb-item"><a href="./chapter04.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part01.html">第1部</a></li><li class="breadcrumb-item"><a href="./chapter04.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">
+<span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -296,12 +444,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header>
-
-
-<p>第4章は、データを読み込んで、形を整えて、特徴をつかむためのデータを要約する方法を学びます。 Rは最初から用意されている基本関数だけでも十分強力ですが、外部で開発された様々なパッケージを使うと、さらに便利にデータ操作ができます。</p>
+</header><p>第4章は、データを読み込んで、形を整えて、特徴をつかむためのデータを要約する方法を学びます。 Rは最初から用意されている基本関数だけでも十分強力ですが、外部で開発された様々なパッケージを使うと、さらに便利にデータ操作ができます。</p>
 <p>はじめに外部のパッケージをインストールしてRの機能を拡張します。 Rでデータを操作する際に超強力なパッケージ群である<code>tidyverse</code>を読み込みます。 あとで使うExcelファイルを読み込むための<code>readxl</code>パッケージも一緒に読み込みます。</p>
-<p>テキストでは、<code>install.packages()</code>関数でパッケージをインストールして、<code>library()</code>関数で読み込んでいますが、ここでは<span class="markp">pacman`パッケージを使って、必要なパッケージを一括でインストールおよび読み込みをします</span>。</p>
+<p>テキストでは、<code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>関数でパッケージをインストールして、<code><a href="https://rdrr.io/r/base/library.html">library()</a></code>関数で読み込んでいますが、ここでは<span class="markp"><code>pacman</code>パッケージを使って、必要なパッケージを一括でインストールおよび読み込みをします</span>。</p>
 <p>まず始めに、<code>pacman</code>パッケージをインストールします。 この作業はここで1回だけです。以降はこのコードは実行しなくて大丈夫です。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># first time only</span></span>
@@ -313,32 +458,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>一度<code>pacman</code>パッケージをインストールすれば、あとは<code>pacman::p_load()</code>関数を使うだけで、指定したパッケージがインストールされていなければ自動的にインストールし、読み込みまで行ってくれます。非常に便利です。</p>
-</div></div><p>作業ディレクトリ内の<code>data</code>フォルダに入っている<code>2022idpos.csv</code>というデータを読み込みます。 何を読み込んだのか確認するために，基本関数<code>head()</code>でデータの先頭6行を表示させます。</p>
+<p>一度<code>pacman</code>パッケージをインストールすれば、あとは<code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">pacman::p_load()</a></code>関数を使うだけで、指定したパッケージがインストールされていなければ自動的にインストールし、読み込みまで行ってくれます。非常に便利です。</p>
+</div></div><p>作業ディレクトリ内の<code>data</code>フォルダに入っている<code>2022idpos.csv</code>というデータを読み込みます。 何を読み込んだのか確認するために，基本関数<code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>でデータの先頭6行を表示させます。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>idpos <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/2022idpos.csv"</span>, <span class="at">na =</span> <span class="st">"."</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>idpos <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["id"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["date"],"name":[2],"type":["chr"],"align":["left"]},{"label":["spent"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["coupon"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"12","2":"2019/9/25","3":"14326","4":"1"},{"1":"32","2":"2019/9/10","3":"10232","4":"1"},{"1":"30","2":"2019/9/9","3":"6881","4":"1"},{"1":"29","2":"2019/9/4","3":"6365","4":"0"},{"1":"46","2":"2019/9/10","3":"7595","4":"1"},{"1":"44","2":"2019/9/14","3":"7858","4":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+     id date      spent coupon
+  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+1    12 2019/9/25 14326      1
+2    32 2019/9/10 10232      1
+3    30 2019/9/9   6881      1
+4    29 2019/9/4   6365      0
+5    46 2019/9/10  7595      1
+6    44 2019/9/14  7858      0</code></pre>
 </div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><code>readr</code>パッケージの<code>read_csv()</code>関数は，CSV形式のデータを読み込むための関数です。<code>na = "."</code>という引数は，データ内の<code>.</code>を欠損値として扱うことを指定しています。</p>
-</div></div><p>読み込んだデータに含まれている変数の名前を確認するため，基本関数<code>names()</code>を使います。</p>
+</div></div><p>読み込んだデータに含まれている変数の名前を確認するため，基本関数<code><a href="https://rdrr.io/r/base/names.html">names()</a></code>を使います。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>idpos <span class="sc">|&gt;</span> <span class="fu">names</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>idpos <span class="sc">|&gt;</span> <span class="fu">names</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "id"     "date"   "spent"  "coupon"</code></pre>
 </div>
 </div>
 <p>データの詳細を確認するため，<code>tidyverse</code>の<code>dplyr</code>パッケージの<code>glimpse()</code>関数を使います。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>idpos <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>idpos <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 3,000
 Columns: 4
@@ -348,21 +497,27 @@ $ spent  &lt;dbl&gt; 14326, 10232, 6881, 6365, 7595, 7858, 9405, 1821, 8375, 182
 $ coupon &lt;dbl&gt; 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, …</code></pre>
 </div>
 </div>
-<p>Excelのようにデータを表示させたいなら，基本関数<code>View()</code>を使います。</p>
+<p>Excelのようにデータを表示させたいなら，基本関数<code><a href="https://rdrr.io/r/utils/View.html">View()</a></code>を使います。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">View</span>(idpos)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">View</span>(idpos)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>これで，自分が読み込んだデータがどんなものかを確認できました。</p>
-<section id="dplyrでデータの要約" class="level3" data-number="2.0.1">
-<h3 data-number="2.0.1" class="anchored" data-anchor-id="dplyrでデータの要約"><span class="header-section-number">2.0.1</span> dplyrでデータの要約</h3>
+<section id="dplyrでデータの要約" class="level3" data-number="2.0.1"><h3 data-number="2.0.1" class="anchored" data-anchor-id="dplyrでデータの要約">
+<span class="header-section-number">2.0.1</span> dplyrでデータの要約</h3>
 <p><code>tidyverse</code>の<code>dplyr</code>パッケージを使うと，データの要約が簡単にできます。 ここでは，</p>
 <ul>
-<li><code>summarise()</code>関数：データの要約統計量を計算する</li>
-<li><code>mutate()</code>関数：新しい変数を作成する</li>
-<li><code>filter()</code>関数：条件に合う行を抽出する</li>
-<li><code>select()</code>関数：特定の変数を抽出する</li>
-<li><code>arrange()</code>関数：データを並び替える</li>
-<li><code>rename()</code>関数：変数の名前を変更する</li>
+<li>
+<code>summarise()</code>関数：データの要約統計量を計算する</li>
+<li>
+<code>mutate()</code>関数：新しい変数を作成する</li>
+<li>
+<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>関数：条件に合う行を抽出する</li>
+<li>
+<code>select()</code>関数：特定の変数を抽出する</li>
+<li>
+<code>arrange()</code>関数：データを並び替える</li>
+<li>
+<code>rename()</code>関数：変数の名前を変更する</li>
 </ul>
 <p>の使い方を学びます。</p>
 <p>先ほど読み込んだデータには，</p>
@@ -375,43 +530,47 @@ $ coupon &lt;dbl&gt; 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0,
 <p>という4変数に3,000の観測値が含まれています。 このデータを<code>dplyr</code>の各関数を使って，以下のような操作をしてみます。</p>
 <p>まず，</p>
 <ol type="1">
-<li><code>select()</code>関数で<code>spent</code>と<code>coupon</code>を抽出し，</li>
-<li><code>arrange()</code>関数で<code>spent</code>の降順に並び替え，</li>
-<li><code>mutate()</code>関数で<code>spent</code>の金額を10倍した<code>spent10</code>という新しい変数を作成し，</li>
-<li><code>filter()</code>関数で<code>spent10</code>が10000以上の行を抽出し，</li>
-<li><code>summarise()</code>関数で<code>spent10</code>の平均を計算し，</li>
-<li><code>rename()</code>関数で<code>spent10</code>を<code>spent_times10</code>に名前変更する，</li>
+<li>
+<code>select()</code>関数で<code>spent</code>と<code>coupon</code>を抽出し，</li>
+<li>
+<code>arrange()</code>関数で<code>spent</code>の降順に並び替え，</li>
+<li>
+<code>mutate()</code>関数で<code>spent</code>の金額を10倍した<code>spent10</code>という新しい変数を作成し，</li>
+<li>
+<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>関数で<code>spent10</code>が10000以上の行を抽出し，</li>
+<li>
+<code>summarise()</code>関数で<code>spent10</code>の平均を計算し，</li>
+<li>
+<code>rename()</code>関数で<code>spent10</code>を<code>spent_times10</code>に名前変更する，</li>
 </ol>
 <p>という一連の操作を行います(この処理に意味はないです。)</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># コード4-11（見本コード）</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>idpos <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">select</span>(spent, coupon) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(spent)) <span class="sc">|&gt;</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">mutate</span>(<span class="at">spent10 =</span> spent <span class="sc">*</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">filter</span>(spent10 <span class="sc">&gt;=</span> <span class="dv">10000</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">summarise</span>(<span class="at">mean_spent10 =</span> <span class="fu">mean</span>(spent10)) <span class="sc">|&gt;</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">rename</span>(<span class="at">spent_times10 =</span> mean_spent10)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["spent_times10"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"82391.01"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># コード4-11（見本コード）</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>idpos <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">select</span>(spent, coupon) <span class="sc">|&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(spent)) <span class="sc">|&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">mutate</span>(<span class="at">spent10 =</span> spent <span class="sc">*</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">filter</span>(spent10 <span class="sc">&gt;=</span> <span class="dv">10000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">summarise</span>(<span class="at">mean_spent10 =</span> <span class="fu">mean</span>(spent10)) <span class="sc">|&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">rename</span>(<span class="at">spent_times10 =</span> mean_spent10)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  spent_times10
+          &lt;dbl&gt;
+1        82391.</code></pre>
 </div>
 </div>
 <p>すると，spentを10倍して，1万円以上の買い物の平均値を計算した結果が<code>spent_times10</code>として表示されます。</p>
 <p>このように加工したデータを<code>csv</code>ファイルとして保存するには、<code>readr</code>パッケージの<code>write_csv()</code>関数を使います。 <code>write_csv()</code>関数は、第1引数に保存したいデータフレームを指定し、第2引数に保存先のファイルパスを指定します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(idpos, <span class="at">path =</span> <span class="st">"data/new_data.csv"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(idpos, <span class="at">path =</span> <span class="st">"data/new_data.csv"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="企業データの処理" class="level3 page-columns page-full" data-number="2.0.2">
-<h3 data-number="2.0.2" class="anchored" data-anchor-id="企業データの処理"><span class="header-section-number">2.0.2</span> 企業データの処理</h3>
+</section><section id="企業データの処理" class="level3 page-columns page-full" data-number="2.0.2"><h3 data-number="2.0.2" class="anchored" data-anchor-id="企業データの処理">
+<span class="header-section-number">2.0.2</span> 企業データの処理</h3>
 <p>MS Excelのファイルを読み込むこともできます。 ここでは，<code>readxl</code>パッケージの<code>read_xlsx()</code>関数を使って，企業データを読み込みます。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a>firmdata <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a>firmdata <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,431
 Columns: 31
@@ -451,91 +610,96 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
 <p>31変数1,431観測値からならなるデータが読み込まれました。 必要な変数が変わることもあるかと思うので、先に必要な変数名をベクトル<code>vars_list</code>として保存しておきます。</p>
 <p>必要な観測値と変数だけを抽出して、新しい変数を作成し、並び替えて、新しいオブジェクト<code>firm2018_check</code>に格納します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># 必要な変数のリスト</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>vars_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"legalname"</span>, <span class="st">"fyear"</span>, <span class="st">"sales"</span>, <span class="st">"labor_cost"</span>, <span class="st">"emp"</span>, <span class="st">"temp"</span>)</span>
-<span id="cb13-3"><a href="#cb13-3"></a></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># コード4-28</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a>firm2018_check <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2018</span>) <span class="sc">|&gt;</span> <span class="co"># 2018年のデータを抽出</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(vars_list)) <span class="sc">|&gt;</span> <span class="co"># 必要な変数を選択</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">mutate</span>(<span class="at">wage =</span> labor_cost <span class="sc">/</span> (temp <span class="sc">+</span> emp), <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="co"># 新しい変数wageを作成</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a>  <span class="co"># temp + empが0でないチェックが必要かも</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wage)) <span class="co"># wageの降順に並び替え</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a><span class="fu">head</span>(firm2018_check, <span class="at">n =</span> <span class="dv">10</span>) <span class="co"># 先頭10行を表示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["legalname"],"name":[1],"type":["chr"],"align":["left"]},{"label":["fyear"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["sales"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["labor_cost"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["emp"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["temp"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["wage"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["na.rm"],"name":[8],"type":["lgl"],"align":["right"]}],"data":[{"1":"株式会社リクルート","2":"2018","3":"2310756","4":"388583","5":"45856","6":"2449","7":"8.044364","8":"TRUE"},{"1":"株式会社 大丸松坂屋百貨店","2":"2018","3":"459840","4":"62692","5":"6695","6":"3581","7":"6.100817","8":"TRUE"},{"1":"株式会社 帝国ホテル","2":"2018","3":"58426","4":"17307","5":"1940","6":"998","7":"5.890742","8":"TRUE"},{"1":"株式会社 髙島屋","2":"2018","3":"912848","4":"83779","5":"7761","6":"8849","7":"5.043889","8":"TRUE"},{"1":"株式会社コメリ","2":"2018","3":"346862","4":"43991","5":"4646","6":"4777","7":"4.668471","8":"TRUE"},{"1":"株式会社オートバックスセブン","2":"2018","3":"213840","4":"22139","5":"4171","6":"747","7":"4.501627","8":"TRUE"},{"1":"株式会社ロイヤルホテル","2":"2018","3":"40884","4":"13115","5":"2049","6":"894","7":"4.456337","8":"TRUE"},{"1":"オルビス株式会社","2":"2018","3":"248574","4":"28555","5":"4181","6":"2330","7":"4.385655","8":"TRUE"},{"1":"株式会社ファンケル","2":"2018","3":"122496","4":"15103","5":"1381","6":"2213","7":"4.202282","8":"TRUE"},{"1":"近畿日本ツーリスト株式会社","2":"2018","3":"411821","4":"38186","5":"6956","6":"2189","7":"4.175615","8":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># 必要な変数のリスト</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>vars_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"legalname"</span>, <span class="st">"fyear"</span>, <span class="st">"sales"</span>, <span class="st">"labor_cost"</span>, <span class="st">"emp"</span>, <span class="st">"temp"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># コード4-28</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>firm2018_check <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2018</span>) <span class="sc">|&gt;</span> <span class="co"># 2018年のデータを抽出</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(vars_list)) <span class="sc">|&gt;</span> <span class="co"># 必要な変数を選択</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">mutate</span>(<span class="at">wage =</span> labor_cost <span class="sc">/</span> (temp <span class="sc">+</span> emp), <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="co"># 新しい変数wageを作成</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>  <span class="co"># temp + empが0でないチェックが必要かも</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wage)) <span class="co"># wageの降順に並び替え</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="fu">head</span>(firm2018_check, <span class="at">n =</span> <span class="dv">10</span>) <span class="co"># 先頭10行を表示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 8
+   legalname                    fyear   sales labor_cost   emp  temp  wage na.rm
+   &lt;chr&gt;                        &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;
+ 1 株式会社リクルート            2018 2310756     388583 45856  2449  8.04 TRUE 
+ 2 株式会社 大丸松坂屋百貨店     2018  459840      62692  6695  3581  6.10 TRUE 
+ 3 株式会社 帝国ホテル           2018   58426      17307  1940   998  5.89 TRUE 
+ 4 株式会社 髙島屋               2018  912848      83779  7761  8849  5.04 TRUE 
+ 5 株式会社コメリ                2018  346862      43991  4646  4777  4.67 TRUE 
+ 6 株式会社オートバックスセブン  2018  213840      22139  4171   747  4.50 TRUE 
+ 7 株式会社ロイヤルホテル        2018   40884      13115  2049   894  4.46 TRUE 
+ 8 オルビス株式会社              2018  248574      28555  4181  2330  4.39 TRUE 
+ 9 株式会社ファンケル            2018  122496      15103  1381  2213  4.20 TRUE 
+10 近畿日本ツーリスト株式会社    2018  411821      38186  6956  2189  4.18 TRUE </code></pre>
 </div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><code>all_of()</code>関数は、<code>select()</code>関数内で使用され、変数名のベクトルを指定して、その変数を選択するために使います。これにより、変数名が動的に指定でき、コードの柔軟性が向上します。</p>
-</div></div></section>
-<section id="データの要約" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="データの要約"><span class="header-section-number">2.1</span> 4 データの要約</h2>
+</div></div></section><section id="データの要約" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="データの要約">
+<span class="header-section-number">2.1</span> 4 データの要約</h2>
 <p>大規模データをあつかうとき、データそのものを眺めていても特徴をつかむことは難しいので、そのデータを特徴付ける代表値を計算して、そこからデータの特徴をつかみます。 主要な代表値として、平均値(mean)や中央値(median)、散らばり具合を示す分散(variance)や標準偏差(standard deviation)があります。 それぞれ、</p>
 <ul>
-<li>平均値：<code>mean()</code>関数</li>
-<li>中央値：<code>median()</code>関数</li>
-<li>分散：<code>var()</code>関数</li>
-<li>標準偏差：<code>sd()</code>関数</li>
+<li>平均値：<code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>関数</li>
+<li>中央値：<code><a href="https://rdrr.io/r/stats/median.html">median()</a></code>関数</li>
+<li>分散：<code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code>関数</li>
+<li>標準偏差：<code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>関数</li>
 </ul>
 <p>を使って計算します。</p>
 <p>先ほどのデータ<code>firm2018_check</code>の<code>sales</code>変数について、代表値を計算してみます。 ここでは、<code>dplyr</code>パッケージの<code>summarize()</code>関数を使って、平均、中央値、分散、標準偏差を一度に計算します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>firm2018_check <span class="sc">|&gt;</span> </span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb14-3"><a href="#cb14-3"></a>    <span class="at">mean_sales   =</span> <span class="fu">mean</span>(sales),</span>
-<span id="cb14-4"><a href="#cb14-4"></a>    <span class="at">median_sales =</span> <span class="fu">median</span>(sales),</span>
-<span id="cb14-5"><a href="#cb14-5"></a>    <span class="at">var_sales    =</span> <span class="fu">var</span>(sales),</span>
-<span id="cb14-6"><a href="#cb14-6"></a>    <span class="at">sd_sales     =</span> <span class="fu">sd</span>(sales)</span>
-<span id="cb14-7"><a href="#cb14-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["mean_sales"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["median_sales"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["var_sales"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd_sales"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1242425","2":"526675","3":"3.69048e+12","4":"1921062"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>firm2018_check <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb17-3"><a href="#cb17-3"></a>    <span class="at">mean_sales   =</span> <span class="fu">mean</span>(sales),</span>
+<span id="cb17-4"><a href="#cb17-4"></a>    <span class="at">median_sales =</span> <span class="fu">median</span>(sales),</span>
+<span id="cb17-5"><a href="#cb17-5"></a>    <span class="at">var_sales    =</span> <span class="fu">var</span>(sales),</span>
+<span id="cb17-6"><a href="#cb17-6"></a>    <span class="at">sd_sales     =</span> <span class="fu">sd</span>(sales)</span>
+<span id="cb17-7"><a href="#cb17-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  mean_sales median_sales var_sales sd_sales
+       &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1   1242425.       526675   3.69e12 1921062.</code></pre>
 </div>
 </div>
-</div>
-</section>
-<section id="カテゴリ変数の要約" class="level2 page-columns page-full" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="カテゴリ変数の要約"><span class="header-section-number">2.2</span> カテゴリ変数の要約</h2>
+</section><section id="カテゴリ変数の要約" class="level2 page-columns page-full" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="カテゴリ変数の要約">
+<span class="header-section-number">2.2</span> カテゴリ変数の要約</h2>
 <p>つぎに、データ上は数値や文字列として記録されていても、その数値や文字列がカテゴリーを表す名義尺度(nominal scale)である場合を考えましょう。</p>
 <p>例えば、<code>firmdata</code>の中の産業分類を表す<code>ind_en</code>変数は、文字列で表現されていますが、その文字列はある観測値が所属するカテゴリーを表しています。 <code>fyear</code>変数は数値ですが、これは年度を表すカテゴリー変数です。</p>
-<p>カテゴリ内の観測値の頻度を確認するには基本関数<code>table()</code>を使いますが、ここでは、dplyr::<code>count()</code>関数を使って、<code>ind_en</code>変数の各カテゴリーの頻度を計算し、<code>gt</code>パッケージで表形式で表示します。</p>
+<p>カテゴリ内の観測値の頻度を確認するには基本関数<code><a href="https://rdrr.io/r/base/table.html">table()</a></code>を使いますが、ここでは、dplyr::<code>count()</code>関数を使って、<code>ind_en</code>変数の各カテゴリーの頻度を計算し、<code>gt</code>パッケージで表形式で表示します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>firm2018 <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2018</span>) <span class="co"># 2018年のデータを抽出</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>firm2018 <span class="sc">|&gt;</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(ind_en, <span class="at">name =</span> <span class="st">"企業数"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>firm2018 <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2018</span>) <span class="co"># 2018年のデータを抽出</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>firm2018 <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(ind_en, <span class="at">name =</span> <span class="st">"企業数"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="ibsbgwyqjx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qnknynieqj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ibsbgwyqjx table {
+#qnknynieqj table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ibsbgwyqjx thead, #ibsbgwyqjx tbody, #ibsbgwyqjx tfoot, #ibsbgwyqjx tr, #ibsbgwyqjx td, #ibsbgwyqjx th {
+#qnknynieqj thead, #qnknynieqj tbody, #qnknynieqj tfoot, #qnknynieqj tr, #qnknynieqj td, #qnknynieqj th {
   border-style: none;
 }
 
-#ibsbgwyqjx p {
+#qnknynieqj p {
   margin: 0;
   padding: 0;
 }
 
-#ibsbgwyqjx .gt_table {
+#qnknynieqj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -561,12 +725,12 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-left-color: #D3D3D3;
 }
 
-#ibsbgwyqjx .gt_caption {
+#qnknynieqj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ibsbgwyqjx .gt_title {
+#qnknynieqj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -578,7 +742,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-width: 0;
 }
 
-#ibsbgwyqjx .gt_subtitle {
+#qnknynieqj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -590,7 +754,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-top-width: 0;
 }
 
-#ibsbgwyqjx .gt_heading {
+#qnknynieqj .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -602,13 +766,13 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#ibsbgwyqjx .gt_bottom_border {
+#qnknynieqj .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ibsbgwyqjx .gt_col_headings {
+#qnknynieqj .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -623,7 +787,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#ibsbgwyqjx .gt_col_heading {
+#qnknynieqj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -643,7 +807,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   overflow-x: hidden;
 }
 
-#ibsbgwyqjx .gt_column_spanner_outer {
+#qnknynieqj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -655,15 +819,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 4px;
 }
 
-#ibsbgwyqjx .gt_column_spanner_outer:first-child {
+#qnknynieqj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ibsbgwyqjx .gt_column_spanner_outer:last-child {
+#qnknynieqj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ibsbgwyqjx .gt_column_spanner {
+#qnknynieqj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -675,11 +839,11 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   width: 100%;
 }
 
-#ibsbgwyqjx .gt_spanner_row {
+#qnknynieqj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ibsbgwyqjx .gt_group_heading {
+#qnknynieqj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -705,7 +869,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   text-align: left;
 }
 
-#ibsbgwyqjx .gt_empty_group_heading {
+#qnknynieqj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -720,15 +884,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   vertical-align: middle;
 }
 
-#ibsbgwyqjx .gt_from_md > :first-child {
+#qnknynieqj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ibsbgwyqjx .gt_from_md > :last-child {
+#qnknynieqj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ibsbgwyqjx .gt_row {
+#qnknynieqj .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -747,7 +911,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   overflow-x: hidden;
 }
 
-#ibsbgwyqjx .gt_stub {
+#qnknynieqj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -760,7 +924,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#ibsbgwyqjx .gt_stub_row_group {
+#qnknynieqj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -774,15 +938,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   vertical-align: top;
 }
 
-#ibsbgwyqjx .gt_row_group_first td {
+#qnknynieqj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ibsbgwyqjx .gt_row_group_first th {
+#qnknynieqj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ibsbgwyqjx .gt_summary_row {
+#qnknynieqj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -792,16 +956,16 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#ibsbgwyqjx .gt_first_summary_row {
+#qnknynieqj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ibsbgwyqjx .gt_first_summary_row.thick {
+#qnknynieqj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ibsbgwyqjx .gt_last_summary_row {
+#qnknynieqj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -811,7 +975,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#ibsbgwyqjx .gt_grand_summary_row {
+#qnknynieqj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -821,7 +985,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#ibsbgwyqjx .gt_first_grand_summary_row {
+#qnknynieqj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -831,7 +995,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-top-color: #D3D3D3;
 }
 
-#ibsbgwyqjx .gt_last_grand_summary_row_top {
+#qnknynieqj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -841,11 +1005,11 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#ibsbgwyqjx .gt_striped {
+#qnknynieqj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ibsbgwyqjx .gt_table_body {
+#qnknynieqj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -854,7 +1018,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#ibsbgwyqjx .gt_footnotes {
+#qnknynieqj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -868,7 +1032,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#ibsbgwyqjx .gt_footnote {
+#qnknynieqj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -877,7 +1041,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#ibsbgwyqjx .gt_sourcenotes {
+#qnknynieqj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -891,7 +1055,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#ibsbgwyqjx .gt_sourcenote {
+#qnknynieqj .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -899,72 +1063,72 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#ibsbgwyqjx .gt_left {
+#qnknynieqj .gt_left {
   text-align: left;
 }
 
-#ibsbgwyqjx .gt_center {
+#qnknynieqj .gt_center {
   text-align: center;
 }
 
-#ibsbgwyqjx .gt_right {
+#qnknynieqj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ibsbgwyqjx .gt_font_normal {
+#qnknynieqj .gt_font_normal {
   font-weight: normal;
 }
 
-#ibsbgwyqjx .gt_font_bold {
+#qnknynieqj .gt_font_bold {
   font-weight: bold;
 }
 
-#ibsbgwyqjx .gt_font_italic {
+#qnknynieqj .gt_font_italic {
   font-style: italic;
 }
 
-#ibsbgwyqjx .gt_super {
+#qnknynieqj .gt_super {
   font-size: 65%;
 }
 
-#ibsbgwyqjx .gt_footnote_marks {
+#qnknynieqj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ibsbgwyqjx .gt_asterisk {
+#qnknynieqj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ibsbgwyqjx .gt_indent_1 {
+#qnknynieqj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ibsbgwyqjx .gt_indent_2 {
+#qnknynieqj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ibsbgwyqjx .gt_indent_3 {
+#qnknynieqj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ibsbgwyqjx .gt_indent_4 {
+#qnknynieqj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ibsbgwyqjx .gt_indent_5 {
+#qnknynieqj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ibsbgwyqjx .katex-display {
+#qnknynieqj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ibsbgwyqjx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qnknynieqj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
@@ -972,14 +1136,11 @@ tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
-
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
+<thead><tr class="gt_col_headings header">
 <th id="ind_en" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">ind_en</th>
 <th id="a企業数" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">企業数</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="ind_en">Air Transportation</td>
@@ -1059,50 +1220,49 @@ tbody tr:last-child {
 </tr>
 </tbody>
 </table>
-
 </div>
 </div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>教科書のように<code>table()</code>関数を使うと簡単に頻度表が作れますが、オブジェクトの型が<code>table</code>型になってしまい、後で他の処理に使いにくくなるので、<code>data.frame</code>型のまま処理できる<code>dplyr::count()</code>関数を使いました。</p>
+<p>教科書のように<code><a href="https://rdrr.io/r/base/table.html">table()</a></code>関数を使うと簡単に頻度表が作れますが、オブジェクトの型が<code>table</code>型になってしまい、後で他の処理に使いにくくなるので、<code>data.frame</code>型のまま処理できる<code><a href="https://dplyr.tidyverse.org/reference/count.html">dplyr::count()</a></code>関数を使いました。</p>
 </div></div><p>広告費を表す<code>adient</code>変数の観測値が全企業の中央値より大きいか否か、でダミー変数<code>ad_dummy</code>を作成し、<code>ind_en</code>変数と<code>ad_dummy</code>変数のクロス集計表を作成します。</p>
 <p>教科書を先取りしますが、<code>if_else()</code>関数を使ってダミー変数を作成し、<code>count()</code>関数でクロス集計表を作成し、<code>gt</code>パッケージで表形式で表示します。 <code>tidyr</code>パッケージの<code>pivot_wider()</code>関数を使って、クロス集計表が見やすくなるように、縦は産業名、横は広告費が中央値より大きいか否か、で表示するように変形しています。</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><code>table()</code>関数を使うと簡単にクロス集計表が作れますが、あえて<code>data.frame</code>型のまま処理できる<code>dplyr::count()</code>関数を使っています。そのため、データが矩形データのまま扱えるので、後で他の処理に使いやすくなるものの、表にすると見にくくなるので、<code>tidyr::pivot_wider()</code>関数で見やすく変形しています。</p>
+<p><code><a href="https://rdrr.io/r/base/table.html">table()</a></code>関数を使うと簡単にクロス集計表が作れますが、あえて<code>data.frame</code>型のまま処理できる<code><a href="https://dplyr.tidyverse.org/reference/count.html">dplyr::count()</a></code>関数を使っています。そのため、データが矩形データのまま扱えるので、後で他の処理に使いやすくなるものの、表にすると見にくくなるので、<code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">tidyr::pivot_wider()</a></code>関数で見やすく変形しています。</p>
 </div></div><div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>firm2018 <span class="ot">&lt;-</span> firm2018 <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb16-3"><a href="#cb16-3"></a>    <span class="at">ad_dummy =</span> <span class="fu">if_else</span>(adint <span class="sc">&gt;</span> <span class="fu">median</span>(adint, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>L, <span class="dv">0</span>L)</span>
-<span id="cb16-4"><a href="#cb16-4"></a>    )</span>
-<span id="cb16-5"><a href="#cb16-5"></a>firm2018 <span class="sc">%&gt;%</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">count</span>(ind_en, ad_dummy) <span class="sc">|&gt;</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> ad_dummy, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>firm2018 <span class="ot">&lt;-</span> firm2018 <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb20-3"><a href="#cb20-3"></a>    <span class="at">ad_dummy =</span> <span class="fu">if_else</span>(adint <span class="sc">&gt;</span> <span class="fu">median</span>(adint, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>L, <span class="dv">0</span>L)</span>
+<span id="cb20-4"><a href="#cb20-4"></a>    )</span>
+<span id="cb20-5"><a href="#cb20-5"></a>firm2018 <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>  <span class="fu">count</span>(ind_en, ad_dummy) <span class="sc">|&gt;</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> ad_dummy, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="aulvjewkwn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="blvyigpfui" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#aulvjewkwn table {
+#blvyigpfui table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aulvjewkwn thead, #aulvjewkwn tbody, #aulvjewkwn tfoot, #aulvjewkwn tr, #aulvjewkwn td, #aulvjewkwn th {
+#blvyigpfui thead, #blvyigpfui tbody, #blvyigpfui tfoot, #blvyigpfui tr, #blvyigpfui td, #blvyigpfui th {
   border-style: none;
 }
 
-#aulvjewkwn p {
+#blvyigpfui p {
   margin: 0;
   padding: 0;
 }
 
-#aulvjewkwn .gt_table {
+#blvyigpfui .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1128,12 +1288,12 @@ tbody tr:last-child {
   border-left-color: #D3D3D3;
 }
 
-#aulvjewkwn .gt_caption {
+#blvyigpfui .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aulvjewkwn .gt_title {
+#blvyigpfui .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1145,7 +1305,7 @@ tbody tr:last-child {
   border-bottom-width: 0;
 }
 
-#aulvjewkwn .gt_subtitle {
+#blvyigpfui .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1157,7 +1317,7 @@ tbody tr:last-child {
   border-top-width: 0;
 }
 
-#aulvjewkwn .gt_heading {
+#blvyigpfui .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1169,13 +1329,13 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#aulvjewkwn .gt_bottom_border {
+#blvyigpfui .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aulvjewkwn .gt_col_headings {
+#blvyigpfui .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1190,7 +1350,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#aulvjewkwn .gt_col_heading {
+#blvyigpfui .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1210,7 +1370,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#aulvjewkwn .gt_column_spanner_outer {
+#blvyigpfui .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1222,15 +1382,15 @@ tbody tr:last-child {
   padding-right: 4px;
 }
 
-#aulvjewkwn .gt_column_spanner_outer:first-child {
+#blvyigpfui .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aulvjewkwn .gt_column_spanner_outer:last-child {
+#blvyigpfui .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aulvjewkwn .gt_column_spanner {
+#blvyigpfui .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1242,11 +1402,11 @@ tbody tr:last-child {
   width: 100%;
 }
 
-#aulvjewkwn .gt_spanner_row {
+#blvyigpfui .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aulvjewkwn .gt_group_heading {
+#blvyigpfui .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1272,7 +1432,7 @@ tbody tr:last-child {
   text-align: left;
 }
 
-#aulvjewkwn .gt_empty_group_heading {
+#blvyigpfui .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1287,15 +1447,15 @@ tbody tr:last-child {
   vertical-align: middle;
 }
 
-#aulvjewkwn .gt_from_md > :first-child {
+#blvyigpfui .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aulvjewkwn .gt_from_md > :last-child {
+#blvyigpfui .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aulvjewkwn .gt_row {
+#blvyigpfui .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1314,7 +1474,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#aulvjewkwn .gt_stub {
+#blvyigpfui .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1327,7 +1487,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#aulvjewkwn .gt_stub_row_group {
+#blvyigpfui .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1341,15 +1501,15 @@ tbody tr:last-child {
   vertical-align: top;
 }
 
-#aulvjewkwn .gt_row_group_first td {
+#blvyigpfui .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aulvjewkwn .gt_row_group_first th {
+#blvyigpfui .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aulvjewkwn .gt_summary_row {
+#blvyigpfui .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1359,16 +1519,16 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#aulvjewkwn .gt_first_summary_row {
+#blvyigpfui .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aulvjewkwn .gt_first_summary_row.thick {
+#blvyigpfui .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aulvjewkwn .gt_last_summary_row {
+#blvyigpfui .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1378,7 +1538,7 @@ tbody tr:last-child {
   border-bottom-color: #D3D3D3;
 }
 
-#aulvjewkwn .gt_grand_summary_row {
+#blvyigpfui .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1388,7 +1548,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#aulvjewkwn .gt_first_grand_summary_row {
+#blvyigpfui .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1398,7 +1558,7 @@ tbody tr:last-child {
   border-top-color: #D3D3D3;
 }
 
-#aulvjewkwn .gt_last_grand_summary_row_top {
+#blvyigpfui .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1408,11 +1568,11 @@ tbody tr:last-child {
   border-bottom-color: #D3D3D3;
 }
 
-#aulvjewkwn .gt_striped {
+#blvyigpfui .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aulvjewkwn .gt_table_body {
+#blvyigpfui .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1421,7 +1581,7 @@ tbody tr:last-child {
   border-bottom-color: #D3D3D3;
 }
 
-#aulvjewkwn .gt_footnotes {
+#blvyigpfui .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1435,7 +1595,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#aulvjewkwn .gt_footnote {
+#blvyigpfui .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1444,7 +1604,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#aulvjewkwn .gt_sourcenotes {
+#blvyigpfui .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1458,7 +1618,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#aulvjewkwn .gt_sourcenote {
+#blvyigpfui .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1466,72 +1626,72 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#aulvjewkwn .gt_left {
+#blvyigpfui .gt_left {
   text-align: left;
 }
 
-#aulvjewkwn .gt_center {
+#blvyigpfui .gt_center {
   text-align: center;
 }
 
-#aulvjewkwn .gt_right {
+#blvyigpfui .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aulvjewkwn .gt_font_normal {
+#blvyigpfui .gt_font_normal {
   font-weight: normal;
 }
 
-#aulvjewkwn .gt_font_bold {
+#blvyigpfui .gt_font_bold {
   font-weight: bold;
 }
 
-#aulvjewkwn .gt_font_italic {
+#blvyigpfui .gt_font_italic {
   font-style: italic;
 }
 
-#aulvjewkwn .gt_super {
+#blvyigpfui .gt_super {
   font-size: 65%;
 }
 
-#aulvjewkwn .gt_footnote_marks {
+#blvyigpfui .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aulvjewkwn .gt_asterisk {
+#blvyigpfui .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aulvjewkwn .gt_indent_1 {
+#blvyigpfui .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aulvjewkwn .gt_indent_2 {
+#blvyigpfui .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aulvjewkwn .gt_indent_3 {
+#blvyigpfui .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aulvjewkwn .gt_indent_4 {
+#blvyigpfui .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aulvjewkwn .gt_indent_5 {
+#blvyigpfui .gt_indent_5 {
   text-indent: 25px;
 }
 
-#aulvjewkwn .katex-display {
+#blvyigpfui .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#aulvjewkwn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#blvyigpfui div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
@@ -1539,15 +1699,12 @@ tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
-
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
+<thead><tr class="gt_col_headings header">
 <th id="ind_en" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">ind_en</th>
 <th id="a0" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">0</th>
 <th id="a1" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">1</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="ind_en">Air Transportation</td>
@@ -1646,50 +1803,49 @@ tbody tr:last-child {
 </tr>
 </tbody>
 </table>
-
 </div>
 </div>
 </div>
 <p>次に、カテゴリ変数ごとに処理を行いたい場合、例えば、産業分類ごとに売上高の平均値や標準偏差を計算したい場合は、<code>group_by()</code>関数を使って、カテゴリ変数でグループ化してから、<code>summarize()</code>関数で集計します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># コード4-39</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>firm2018 <span class="sc">|&gt;</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">group_by</span>(ind_en) <span class="sc">|&gt;</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb17-5"><a href="#cb17-5"></a>      <span class="at">obs =</span> <span class="fu">n</span>(),</span>
-<span id="cb17-6"><a href="#cb17-6"></a>      <span class="at">sales_m =</span> <span class="fu">mean</span>(sales),</span>
-<span id="cb17-7"><a href="#cb17-7"></a>      <span class="at">sales_sd =</span> <span class="fu">sd</span>(sales),</span>
-<span id="cb17-8"><a href="#cb17-8"></a>      <span class="at">adint_m =</span> <span class="fu">mean</span>(adint),</span>
-<span id="cb17-9"><a href="#cb17-9"></a>      <span class="at">adint_sd =</span> <span class="fu">sd</span>(adint)</span>
-<span id="cb17-10"><a href="#cb17-10"></a>      ) <span class="sc">|&gt;</span></span>
-<span id="cb17-11"><a href="#cb17-11"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
-<span id="cb17-13"><a href="#cb17-13"></a>    <span class="at">columns =</span> <span class="fu">c</span>(sales_m, sales_sd, adint_m, adint_sd),</span>
-<span id="cb17-14"><a href="#cb17-14"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
-<span id="cb17-15"><a href="#cb17-15"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb17-16"><a href="#cb17-16"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># コード4-39</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>firm2018 <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">group_by</span>(ind_en) <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb21-5"><a href="#cb21-5"></a>      <span class="at">obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb21-6"><a href="#cb21-6"></a>      <span class="at">sales_m =</span> <span class="fu">mean</span>(sales),</span>
+<span id="cb21-7"><a href="#cb21-7"></a>      <span class="at">sales_sd =</span> <span class="fu">sd</span>(sales),</span>
+<span id="cb21-8"><a href="#cb21-8"></a>      <span class="at">adint_m =</span> <span class="fu">mean</span>(adint),</span>
+<span id="cb21-9"><a href="#cb21-9"></a>      <span class="at">adint_sd =</span> <span class="fu">sd</span>(adint)</span>
+<span id="cb21-10"><a href="#cb21-10"></a>      ) <span class="sc">|&gt;</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
+<span id="cb21-13"><a href="#cb21-13"></a>    <span class="at">columns =</span> <span class="fu">c</span>(sales_m, sales_sd, adint_m, adint_sd),</span>
+<span id="cb21-14"><a href="#cb21-14"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="kcggaziikf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qwersoszmd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#kcggaziikf table {
+#qwersoszmd table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kcggaziikf thead, #kcggaziikf tbody, #kcggaziikf tfoot, #kcggaziikf tr, #kcggaziikf td, #kcggaziikf th {
+#qwersoszmd thead, #qwersoszmd tbody, #qwersoszmd tfoot, #qwersoszmd tr, #qwersoszmd td, #qwersoszmd th {
   border-style: none;
 }
 
-#kcggaziikf p {
+#qwersoszmd p {
   margin: 0;
   padding: 0;
 }
 
-#kcggaziikf .gt_table {
+#qwersoszmd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1715,12 +1871,12 @@ tbody tr:last-child {
   border-left-color: #D3D3D3;
 }
 
-#kcggaziikf .gt_caption {
+#qwersoszmd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kcggaziikf .gt_title {
+#qwersoszmd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1732,7 +1888,7 @@ tbody tr:last-child {
   border-bottom-width: 0;
 }
 
-#kcggaziikf .gt_subtitle {
+#qwersoszmd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1744,7 +1900,7 @@ tbody tr:last-child {
   border-top-width: 0;
 }
 
-#kcggaziikf .gt_heading {
+#qwersoszmd .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1756,13 +1912,13 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#kcggaziikf .gt_bottom_border {
+#qwersoszmd .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kcggaziikf .gt_col_headings {
+#qwersoszmd .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1777,7 +1933,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#kcggaziikf .gt_col_heading {
+#qwersoszmd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1797,7 +1953,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#kcggaziikf .gt_column_spanner_outer {
+#qwersoszmd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1809,15 +1965,15 @@ tbody tr:last-child {
   padding-right: 4px;
 }
 
-#kcggaziikf .gt_column_spanner_outer:first-child {
+#qwersoszmd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kcggaziikf .gt_column_spanner_outer:last-child {
+#qwersoszmd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kcggaziikf .gt_column_spanner {
+#qwersoszmd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1829,11 +1985,11 @@ tbody tr:last-child {
   width: 100%;
 }
 
-#kcggaziikf .gt_spanner_row {
+#qwersoszmd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kcggaziikf .gt_group_heading {
+#qwersoszmd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1859,7 +2015,7 @@ tbody tr:last-child {
   text-align: left;
 }
 
-#kcggaziikf .gt_empty_group_heading {
+#qwersoszmd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1874,15 +2030,15 @@ tbody tr:last-child {
   vertical-align: middle;
 }
 
-#kcggaziikf .gt_from_md > :first-child {
+#qwersoszmd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kcggaziikf .gt_from_md > :last-child {
+#qwersoszmd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kcggaziikf .gt_row {
+#qwersoszmd .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1901,7 +2057,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#kcggaziikf .gt_stub {
+#qwersoszmd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1914,7 +2070,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#kcggaziikf .gt_stub_row_group {
+#qwersoszmd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1928,15 +2084,15 @@ tbody tr:last-child {
   vertical-align: top;
 }
 
-#kcggaziikf .gt_row_group_first td {
+#qwersoszmd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kcggaziikf .gt_row_group_first th {
+#qwersoszmd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kcggaziikf .gt_summary_row {
+#qwersoszmd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1946,16 +2102,16 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#kcggaziikf .gt_first_summary_row {
+#qwersoszmd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kcggaziikf .gt_first_summary_row.thick {
+#qwersoszmd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kcggaziikf .gt_last_summary_row {
+#qwersoszmd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1965,7 +2121,7 @@ tbody tr:last-child {
   border-bottom-color: #D3D3D3;
 }
 
-#kcggaziikf .gt_grand_summary_row {
+#qwersoszmd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1975,7 +2131,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#kcggaziikf .gt_first_grand_summary_row {
+#qwersoszmd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1985,7 +2141,7 @@ tbody tr:last-child {
   border-top-color: #D3D3D3;
 }
 
-#kcggaziikf .gt_last_grand_summary_row_top {
+#qwersoszmd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1995,11 +2151,11 @@ tbody tr:last-child {
   border-bottom-color: #D3D3D3;
 }
 
-#kcggaziikf .gt_striped {
+#qwersoszmd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kcggaziikf .gt_table_body {
+#qwersoszmd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2008,7 +2164,7 @@ tbody tr:last-child {
   border-bottom-color: #D3D3D3;
 }
 
-#kcggaziikf .gt_footnotes {
+#qwersoszmd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2022,7 +2178,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#kcggaziikf .gt_footnote {
+#qwersoszmd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2031,7 +2187,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#kcggaziikf .gt_sourcenotes {
+#qwersoszmd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2045,7 +2201,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#kcggaziikf .gt_sourcenote {
+#qwersoszmd .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2053,72 +2209,72 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#kcggaziikf .gt_left {
+#qwersoszmd .gt_left {
   text-align: left;
 }
 
-#kcggaziikf .gt_center {
+#qwersoszmd .gt_center {
   text-align: center;
 }
 
-#kcggaziikf .gt_right {
+#qwersoszmd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kcggaziikf .gt_font_normal {
+#qwersoszmd .gt_font_normal {
   font-weight: normal;
 }
 
-#kcggaziikf .gt_font_bold {
+#qwersoszmd .gt_font_bold {
   font-weight: bold;
 }
 
-#kcggaziikf .gt_font_italic {
+#qwersoszmd .gt_font_italic {
   font-style: italic;
 }
 
-#kcggaziikf .gt_super {
+#qwersoszmd .gt_super {
   font-size: 65%;
 }
 
-#kcggaziikf .gt_footnote_marks {
+#qwersoszmd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kcggaziikf .gt_asterisk {
+#qwersoszmd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kcggaziikf .gt_indent_1 {
+#qwersoszmd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kcggaziikf .gt_indent_2 {
+#qwersoszmd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kcggaziikf .gt_indent_3 {
+#qwersoszmd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kcggaziikf .gt_indent_4 {
+#qwersoszmd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kcggaziikf .gt_indent_5 {
+#qwersoszmd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kcggaziikf .katex-display {
+#qwersoszmd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kcggaziikf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qwersoszmd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
@@ -2126,18 +2282,15 @@ tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
-
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
+<thead><tr class="gt_col_headings header">
 <th id="ind_en" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">ind_en</th>
 <th id="obs" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">obs</th>
 <th id="sales_m" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">sales_m</th>
 <th id="sales_sd" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">sales_sd</th>
 <th id="adint_m" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">adint_m</th>
 <th id="adint_sd" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">adint_sd</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="ind_en">Air Transportation</td>
@@ -2293,7 +2446,6 @@ tbody tr:last-child {
 </tr>
 </tbody>
 </table>
-
 </div>
 </div>
 </div>
@@ -2433,11 +2585,23 @@ wide_test
 --->
 
 
-</section>
+<!-- -->
 
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -2507,9 +2671,60 @@ wide_test
       });
       clipboardModal.on('success', onCopySuccess);
     }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/so-ichi\.com");
+        var filterRegex = new RegExp("https:\/\/ma2ura\.github\.io\/Marketing_Data_Analysis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -2837,9 +3052,7 @@ wide_test
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./part01.html" class="pagination-link" aria-label="第1部">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">第1部</span>
       </a>          
@@ -2849,10 +3062,390 @@ wide_test
         <span class="nav-page-text">第2部 仮説検証型データ分析</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">## データ整理と要約</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a>第4章は、データを読み込んで、形を整えて、特徴をつかむためのデータを要約する方法を学びます。</span>
+<span id="cb22-4"><a href="#cb22-4"></a>Rは最初から用意されている基本関数だけでも十分強力ですが、外部で開発された様々なパッケージを使うと、さらに便利にデータ操作ができます。</span>
+<span id="cb22-5"><a href="#cb22-5"></a></span>
+<span id="cb22-6"><a href="#cb22-6"></a>はじめに外部のパッケージをインストールしてRの機能を拡張します。</span>
+<span id="cb22-7"><a href="#cb22-7"></a>Rでデータを操作する際に超強力なパッケージ群である<span class="in">`tidyverse`</span>を読み込みます。</span>
+<span id="cb22-8"><a href="#cb22-8"></a>あとで使うExcelファイルを読み込むための<span class="in">`readxl`</span>パッケージも一緒に読み込みます。</span>
+<span id="cb22-9"><a href="#cb22-9"></a></span>
+<span id="cb22-10"><a href="#cb22-10"></a>テキストでは、<span class="in">`install.packages()`</span>関数でパッケージをインストールして、<span class="in">`library()`</span>関数で読み込んでいますが、ここでは<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class </span><span class="op">=</span> <span class="st">"markp"</span><span class="dt">&gt;</span><span class="in">`pacman`</span>パッケージを使って、必要なパッケージを一括でインストールおよび読み込みをします<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>。</span>
+<span id="cb22-11"><a href="#cb22-11"></a></span>
+<span id="cb22-12"><a href="#cb22-12"></a>まず始めに、<span class="in">`pacman`</span>パッケージをインストールします。</span>
+<span id="cb22-13"><a href="#cb22-13"></a>この作業はここで1回だけです。以降はこのコードは実行しなくて大丈夫です。</span>
+<span id="cb22-14"><a href="#cb22-14"></a></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="in">```{r install_pacman}</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="co">#| eval: false</span></span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="co"># first time only</span></span>
+<span id="cb22-18"><a href="#cb22-18"></a><span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
+<span id="cb22-19"><a href="#cb22-19"></a><span class="in">```</span></span>
+<span id="cb22-20"><a href="#cb22-20"></a></span>
+<span id="cb22-21"><a href="#cb22-21"></a>次に、<span class="in">`pacman`</span>パッケージの<span class="in">`p_load()`</span>関数を使って，<span class="in">`tidyverse`</span>と<span class="in">`readxl`</span>パッケージをインストールおよび読み込みします。</span>
+<span id="cb22-22"><a href="#cb22-22"></a><span class="in">`::`</span>という記法はパッケージ名を明示的に指定して関数を使う方法ですが、ここでは<span class="in">`pacman`</span>パッケージの<span class="in">`p_load()`</span>関数を指定して使っています。</span>
+<span id="cb22-23"><a href="#cb22-23"></a></span>
+<span id="cb22-24"><a href="#cb22-24"></a><span class="in">```{r tidyverse}</span></span>
+<span id="cb22-25"><a href="#cb22-25"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, gt, gtExtras)</span>
+<span id="cb22-26"><a href="#cb22-26"></a><span class="in">```</span></span>
+<span id="cb22-27"><a href="#cb22-27"></a></span>
+<span id="cb22-28"><a href="#cb22-28"></a>:::{.column-margin}</span>
+<span id="cb22-29"><a href="#cb22-29"></a>一度<span class="in">`pacman`</span>パッケージをインストールすれば、あとは<span class="in">`pacman::p_load()`</span>関数を使うだけで、指定したパッケージがインストールされていなければ自動的にインストールし、読み込みまで行ってくれます。非常に便利です。</span>
+<span id="cb22-30"><a href="#cb22-30"></a>:::</span>
+<span id="cb22-31"><a href="#cb22-31"></a></span>
+<span id="cb22-32"><a href="#cb22-32"></a>作業ディレクトリ内の<span class="in">`data`</span>フォルダに入っている<span class="in">`2022idpos.csv`</span>というデータを読み込みます。</span>
+<span id="cb22-33"><a href="#cb22-33"></a>何を読み込んだのか確認するために，基本関数<span class="in">`head()`</span>でデータの先頭6行を表示させます。</span>
+<span id="cb22-34"><a href="#cb22-34"></a><span class="in">```{r code4-6}</span></span>
+<span id="cb22-35"><a href="#cb22-35"></a>idpos <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/2022idpos.csv"</span>, <span class="at">na =</span> <span class="st">"."</span>)</span>
+<span id="cb22-36"><a href="#cb22-36"></a>idpos <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
+<span id="cb22-37"><a href="#cb22-37"></a><span class="in">```</span></span>
+<span id="cb22-38"><a href="#cb22-38"></a></span>
+<span id="cb22-39"><a href="#cb22-39"></a>:::{.column-margin}</span>
+<span id="cb22-40"><a href="#cb22-40"></a><span class="in">`readr`</span>パッケージの<span class="in">`read_csv()`</span>関数は，CSV形式のデータを読み込むための関数です。<span class="in">`na = "."`</span>という引数は，データ内の<span class="in">`.`</span>を欠損値として扱うことを指定しています。</span>
+<span id="cb22-41"><a href="#cb22-41"></a>:::</span>
+<span id="cb22-42"><a href="#cb22-42"></a></span>
+<span id="cb22-43"><a href="#cb22-43"></a>読み込んだデータに含まれている変数の名前を確認するため，基本関数<span class="in">`names()`</span>を使います。</span>
+<span id="cb22-44"><a href="#cb22-44"></a></span>
+<span id="cb22-45"><a href="#cb22-45"></a><span class="in">```{r names}</span></span>
+<span id="cb22-46"><a href="#cb22-46"></a>idpos <span class="sc">|&gt;</span> <span class="fu">names</span>()</span>
+<span id="cb22-47"><a href="#cb22-47"></a><span class="in">```</span></span>
+<span id="cb22-48"><a href="#cb22-48"></a></span>
+<span id="cb22-49"><a href="#cb22-49"></a>データの詳細を確認するため，<span class="in">`tidyverse`</span>の<span class="in">`dplyr`</span>パッケージの<span class="in">`glimpse()`</span>関数を使います。</span>
+<span id="cb22-50"><a href="#cb22-50"></a></span>
+<span id="cb22-51"><a href="#cb22-51"></a><span class="in">```{r code4-9}</span></span>
+<span id="cb22-52"><a href="#cb22-52"></a>idpos <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span>
+<span id="cb22-53"><a href="#cb22-53"></a><span class="in">```</span></span>
+<span id="cb22-54"><a href="#cb22-54"></a></span>
+<span id="cb22-55"><a href="#cb22-55"></a>Excelのようにデータを表示させたいなら，基本関数<span class="in">`View()`</span>を使います。</span>
+<span id="cb22-56"><a href="#cb22-56"></a></span>
+<span id="cb22-57"><a href="#cb22-57"></a><span class="in">```{r code4-10}</span></span>
+<span id="cb22-58"><a href="#cb22-58"></a><span class="co">#| eval: false</span></span>
+<span id="cb22-59"><a href="#cb22-59"></a><span class="fu">View</span>(idpos)</span>
+<span id="cb22-60"><a href="#cb22-60"></a><span class="in">```</span></span>
+<span id="cb22-61"><a href="#cb22-61"></a></span>
+<span id="cb22-62"><a href="#cb22-62"></a>これで，自分が読み込んだデータがどんなものかを確認できました。</span>
+<span id="cb22-63"><a href="#cb22-63"></a></span>
+<span id="cb22-64"><a href="#cb22-64"></a><span class="fu">### dplyrでデータの要約</span></span>
+<span id="cb22-65"><a href="#cb22-65"></a></span>
+<span id="cb22-66"><a href="#cb22-66"></a><span class="in">`tidyverse`</span>の<span class="in">`dplyr`</span>パッケージを使うと，データの要約が簡単にできます。</span>
+<span id="cb22-67"><a href="#cb22-67"></a>ここでは，</span>
+<span id="cb22-68"><a href="#cb22-68"></a></span>
+<span id="cb22-69"><a href="#cb22-69"></a><span class="ss">- </span><span class="in">`summarise()`</span>関数：データの要約統計量を計算する</span>
+<span id="cb22-70"><a href="#cb22-70"></a><span class="ss">- </span><span class="in">`mutate()`</span>関数：新しい変数を作成する</span>
+<span id="cb22-71"><a href="#cb22-71"></a><span class="ss">- </span><span class="in">`filter()`</span>関数：条件に合う行を抽出する</span>
+<span id="cb22-72"><a href="#cb22-72"></a><span class="ss">- </span><span class="in">`select()`</span>関数：特定の変数を抽出する</span>
+<span id="cb22-73"><a href="#cb22-73"></a><span class="ss">- </span><span class="in">`arrange()`</span>関数：データを並び替える</span>
+<span id="cb22-74"><a href="#cb22-74"></a><span class="ss">- </span><span class="in">`rename()`</span>関数：変数の名前を変更する</span>
+<span id="cb22-75"><a href="#cb22-75"></a></span>
+<span id="cb22-76"><a href="#cb22-76"></a>の使い方を学びます。</span>
+<span id="cb22-77"><a href="#cb22-77"></a></span>
+<span id="cb22-78"><a href="#cb22-78"></a>先ほど読み込んだデータには，</span>
+<span id="cb22-79"><a href="#cb22-79"></a></span>
+<span id="cb22-80"><a href="#cb22-80"></a><span class="ss">- </span>id：顧客ID</span>
+<span id="cb22-81"><a href="#cb22-81"></a><span class="ss">- </span>date：購入日</span>
+<span id="cb22-82"><a href="#cb22-82"></a><span class="ss">- </span>spent：購入金額</span>
+<span id="cb22-83"><a href="#cb22-83"></a><span class="ss">- </span>coupon：クーポン利用の有無 (1=利用, 0=未利用)</span>
+<span id="cb22-84"><a href="#cb22-84"></a></span>
+<span id="cb22-85"><a href="#cb22-85"></a>という4変数に3,000の観測値が含まれています。</span>
+<span id="cb22-86"><a href="#cb22-86"></a>このデータを<span class="in">`dplyr`</span>の各関数を使って，以下のような操作をしてみます。</span>
+<span id="cb22-87"><a href="#cb22-87"></a></span>
+<span id="cb22-88"><a href="#cb22-88"></a>まず，</span>
+<span id="cb22-89"><a href="#cb22-89"></a></span>
+<span id="cb22-90"><a href="#cb22-90"></a><span class="ss">1. </span><span class="in">`select()`</span>関数で<span class="in">`spent`</span>と<span class="in">`coupon`</span>を抽出し，</span>
+<span id="cb22-91"><a href="#cb22-91"></a><span class="ss">2. </span><span class="in">`arrange()`</span>関数で<span class="in">`spent`</span>の降順に並び替え，</span>
+<span id="cb22-92"><a href="#cb22-92"></a><span class="ss">3. </span><span class="in">`mutate()`</span>関数で<span class="in">`spent`</span>の金額を10倍した<span class="in">`spent10`</span>という新しい変数を作成し，</span>
+<span id="cb22-93"><a href="#cb22-93"></a><span class="ss">4. </span><span class="in">`filter()`</span>関数で<span class="in">`spent10`</span>が10000以上の行を抽出し，</span>
+<span id="cb22-94"><a href="#cb22-94"></a><span class="ss">5. </span><span class="in">`summarise()`</span>関数で<span class="in">`spent10`</span>の平均を計算し，</span>
+<span id="cb22-95"><a href="#cb22-95"></a><span class="ss">6. </span><span class="in">`rename()`</span>関数で<span class="in">`spent10`</span>を<span class="in">`spent_times10`</span>に名前変更する，</span>
+<span id="cb22-96"><a href="#cb22-96"></a></span>
+<span id="cb22-97"><a href="#cb22-97"></a>という一連の操作を行います(この処理に意味はないです。)</span>
+<span id="cb22-98"><a href="#cb22-98"></a></span>
+<span id="cb22-101"><a href="#cb22-101"></a><span class="in">```{r}</span></span>
+<span id="cb22-102"><a href="#cb22-102"></a><span class="co"># コード4-11（見本コード）</span></span>
+<span id="cb22-103"><a href="#cb22-103"></a>idpos <span class="sc">|&gt;</span></span>
+<span id="cb22-104"><a href="#cb22-104"></a>  <span class="fu">select</span>(spent, coupon) <span class="sc">|&gt;</span></span>
+<span id="cb22-105"><a href="#cb22-105"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(spent)) <span class="sc">|&gt;</span></span>
+<span id="cb22-106"><a href="#cb22-106"></a>  <span class="fu">mutate</span>(<span class="at">spent10 =</span> spent <span class="sc">*</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-107"><a href="#cb22-107"></a>  <span class="fu">filter</span>(spent10 <span class="sc">&gt;=</span> <span class="dv">10000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-108"><a href="#cb22-108"></a>  <span class="fu">summarise</span>(<span class="at">mean_spent10 =</span> <span class="fu">mean</span>(spent10)) <span class="sc">|&gt;</span></span>
+<span id="cb22-109"><a href="#cb22-109"></a>  <span class="fu">rename</span>(<span class="at">spent_times10 =</span> mean_spent10)</span>
+<span id="cb22-110"><a href="#cb22-110"></a><span class="in">```</span></span>
+<span id="cb22-111"><a href="#cb22-111"></a></span>
+<span id="cb22-112"><a href="#cb22-112"></a>すると，spentを10倍して，1万円以上の買い物の平均値を計算した結果が<span class="in">`spent_times10`</span>として表示されます。</span>
+<span id="cb22-113"><a href="#cb22-113"></a></span>
+<span id="cb22-114"><a href="#cb22-114"></a>このように加工したデータを<span class="in">`csv`</span>ファイルとして保存するには、<span class="in">`readr`</span>パッケージの<span class="in">`write_csv()`</span>関数を使います。</span>
+<span id="cb22-115"><a href="#cb22-115"></a><span class="in">`write_csv()`</span>関数は、第1引数に保存したいデータフレームを指定し、第2引数に保存先のファイルパスを指定します。</span>
+<span id="cb22-116"><a href="#cb22-116"></a></span>
+<span id="cb22-119"><a href="#cb22-119"></a><span class="in">```{r}</span></span>
+<span id="cb22-120"><a href="#cb22-120"></a><span class="co">#| eval: false</span></span>
+<span id="cb22-121"><a href="#cb22-121"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(idpos, <span class="at">path =</span> <span class="st">"data/new_data.csv"</span>)  </span>
+<span id="cb22-122"><a href="#cb22-122"></a><span class="in">```</span></span>
+<span id="cb22-123"><a href="#cb22-123"></a></span>
+<span id="cb22-124"><a href="#cb22-124"></a><span class="fu">### 企業データの処理</span></span>
+<span id="cb22-125"><a href="#cb22-125"></a></span>
+<span id="cb22-126"><a href="#cb22-126"></a>MS Excelのファイルを読み込むこともできます。</span>
+<span id="cb22-127"><a href="#cb22-127"></a>ここでは，<span class="in">`readxl`</span>パッケージの<span class="in">`read_xlsx()`</span>関数を使って，企業データを読み込みます。</span>
+<span id="cb22-128"><a href="#cb22-128"></a></span>
+<span id="cb22-129"><a href="#cb22-129"></a><span class="in">```{r code 4-27}</span></span>
+<span id="cb22-130"><a href="#cb22-130"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
+<span id="cb22-131"><a href="#cb22-131"></a>firmdata <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span>
+<span id="cb22-132"><a href="#cb22-132"></a><span class="in">```</span></span>
+<span id="cb22-133"><a href="#cb22-133"></a></span>
+<span id="cb22-134"><a href="#cb22-134"></a>31変数1,431観測値からならなるデータが読み込まれました。</span>
+<span id="cb22-135"><a href="#cb22-135"></a>必要な変数が変わることもあるかと思うので、先に必要な変数名をベクトル<span class="in">`vars_list`</span>として保存しておきます。</span>
+<span id="cb22-136"><a href="#cb22-136"></a></span>
+<span id="cb22-137"><a href="#cb22-137"></a>必要な観測値と変数だけを抽出して、新しい変数を作成し、並び替えて、新しいオブジェクト<span class="in">`firm2018_check`</span>に格納します。</span>
+<span id="cb22-138"><a href="#cb22-138"></a></span>
+<span id="cb22-141"><a href="#cb22-141"></a><span class="in">```{r}</span></span>
+<span id="cb22-142"><a href="#cb22-142"></a><span class="co">#| code-line-numbers: "3"</span></span>
+<span id="cb22-143"><a href="#cb22-143"></a></span>
+<span id="cb22-144"><a href="#cb22-144"></a><span class="co"># 必要な変数のリスト</span></span>
+<span id="cb22-145"><a href="#cb22-145"></a>vars_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"legalname"</span>, <span class="st">"fyear"</span>, <span class="st">"sales"</span>, <span class="st">"labor_cost"</span>, <span class="st">"emp"</span>, <span class="st">"temp"</span>)</span>
+<span id="cb22-146"><a href="#cb22-146"></a></span>
+<span id="cb22-147"><a href="#cb22-147"></a><span class="co"># コード4-28</span></span>
+<span id="cb22-148"><a href="#cb22-148"></a>firm2018_check <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
+<span id="cb22-149"><a href="#cb22-149"></a>  <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2018</span>) <span class="sc">|&gt;</span> <span class="co"># 2018年のデータを抽出</span></span>
+<span id="cb22-150"><a href="#cb22-150"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(vars_list)) <span class="sc">|&gt;</span> <span class="co"># 必要な変数を選択</span></span>
+<span id="cb22-151"><a href="#cb22-151"></a>  <span class="fu">mutate</span>(<span class="at">wage =</span> labor_cost <span class="sc">/</span> (temp <span class="sc">+</span> emp), <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="co"># 新しい変数wageを作成</span></span>
+<span id="cb22-152"><a href="#cb22-152"></a>  <span class="co"># temp + empが0でないチェックが必要かも</span></span>
+<span id="cb22-153"><a href="#cb22-153"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wage)) <span class="co"># wageの降順に並び替え</span></span>
+<span id="cb22-154"><a href="#cb22-154"></a><span class="fu">head</span>(firm2018_check, <span class="at">n =</span> <span class="dv">10</span>) <span class="co"># 先頭10行を表示</span></span>
+<span id="cb22-155"><a href="#cb22-155"></a><span class="in">```</span></span>
+<span id="cb22-156"><a href="#cb22-156"></a></span>
+<span id="cb22-157"><a href="#cb22-157"></a>:::{.column-margin}</span>
+<span id="cb22-158"><a href="#cb22-158"></a><span class="in">`all_of()`</span>関数は、<span class="in">`select()`</span>関数内で使用され、変数名のベクトルを指定して、その変数を選択するために使います。これにより、変数名が動的に指定でき、コードの柔軟性が向上します。</span>
+<span id="cb22-159"><a href="#cb22-159"></a>:::</span>
+<span id="cb22-160"><a href="#cb22-160"></a></span>
+<span id="cb22-161"><a href="#cb22-161"></a><span class="fu">## 4 データの要約</span></span>
+<span id="cb22-162"><a href="#cb22-162"></a></span>
+<span id="cb22-163"><a href="#cb22-163"></a>大規模データをあつかうとき、データそのものを眺めていても特徴をつかむことは難しいので、そのデータを特徴付ける代表値を計算して、そこからデータの特徴をつかみます。</span>
+<span id="cb22-164"><a href="#cb22-164"></a>主要な代表値として、平均値(mean)や中央値(median)、散らばり具合を示す分散(variance)や標準偏差(standard deviation)があります。</span>
+<span id="cb22-165"><a href="#cb22-165"></a>それぞれ、</span>
+<span id="cb22-166"><a href="#cb22-166"></a></span>
+<span id="cb22-167"><a href="#cb22-167"></a><span class="ss">- </span>平均値：<span class="in">`mean()`</span>関数</span>
+<span id="cb22-168"><a href="#cb22-168"></a><span class="ss">- </span>中央値：<span class="in">`median()`</span>関数</span>
+<span id="cb22-169"><a href="#cb22-169"></a><span class="ss">- </span>分散：<span class="in">`var()`</span>関数</span>
+<span id="cb22-170"><a href="#cb22-170"></a><span class="ss">- </span>標準偏差：<span class="in">`sd()`</span>関数</span>
+<span id="cb22-171"><a href="#cb22-171"></a></span>
+<span id="cb22-172"><a href="#cb22-172"></a>を使って計算します。</span>
+<span id="cb22-173"><a href="#cb22-173"></a></span>
+<span id="cb22-174"><a href="#cb22-174"></a>先ほどのデータ<span class="in">`firm2018_check`</span>の<span class="in">`sales`</span>変数について、代表値を計算してみます。</span>
+<span id="cb22-175"><a href="#cb22-175"></a>ここでは、<span class="in">`dplyr`</span>パッケージの<span class="in">`summarize()`</span>関数を使って、平均、中央値、分散、標準偏差を一度に計算します。</span>
+<span id="cb22-178"><a href="#cb22-178"></a><span class="in">```{r}</span></span>
+<span id="cb22-179"><a href="#cb22-179"></a>firm2018_check <span class="sc">|&gt;</span> </span>
+<span id="cb22-180"><a href="#cb22-180"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb22-181"><a href="#cb22-181"></a>    <span class="at">mean_sales   =</span> <span class="fu">mean</span>(sales),</span>
+<span id="cb22-182"><a href="#cb22-182"></a>    <span class="at">median_sales =</span> <span class="fu">median</span>(sales),</span>
+<span id="cb22-183"><a href="#cb22-183"></a>    <span class="at">var_sales    =</span> <span class="fu">var</span>(sales),</span>
+<span id="cb22-184"><a href="#cb22-184"></a>    <span class="at">sd_sales     =</span> <span class="fu">sd</span>(sales)</span>
+<span id="cb22-185"><a href="#cb22-185"></a>  )</span>
+<span id="cb22-186"><a href="#cb22-186"></a><span class="in">```</span></span>
+<span id="cb22-187"><a href="#cb22-187"></a></span>
+<span id="cb22-188"><a href="#cb22-188"></a></span>
+<span id="cb22-189"><a href="#cb22-189"></a><span class="fu">## カテゴリ変数の要約</span></span>
+<span id="cb22-190"><a href="#cb22-190"></a></span>
+<span id="cb22-191"><a href="#cb22-191"></a>つぎに、データ上は数値や文字列として記録されていても、その数値や文字列がカテゴリーを表す名義尺度(nominal scale)である場合を考えましょう。</span>
+<span id="cb22-192"><a href="#cb22-192"></a></span>
+<span id="cb22-193"><a href="#cb22-193"></a>例えば、<span class="in">`firmdata`</span>の中の産業分類を表す<span class="in">`ind_en`</span>変数は、文字列で表現されていますが、その文字列はある観測値が所属するカテゴリーを表しています。</span>
+<span id="cb22-194"><a href="#cb22-194"></a><span class="in">`fyear`</span>変数は数値ですが、これは年度を表すカテゴリー変数です。</span>
+<span id="cb22-195"><a href="#cb22-195"></a></span>
+<span id="cb22-196"><a href="#cb22-196"></a>カテゴリ内の観測値の頻度を確認するには基本関数<span class="in">`table()`</span>を使いますが、ここでは、dplyr::<span class="in">`count()`</span>関数を使って、<span class="in">`ind_en`</span>変数の各カテゴリーの頻度を計算し、<span class="in">`gt`</span>パッケージで表形式で表示します。</span>
+<span id="cb22-197"><a href="#cb22-197"></a></span>
+<span id="cb22-198"><a href="#cb22-198"></a><span class="in">```{r code4-35}</span></span>
+<span id="cb22-199"><a href="#cb22-199"></a>firm2018 <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
+<span id="cb22-200"><a href="#cb22-200"></a>  <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2018</span>) <span class="co"># 2018年のデータを抽出</span></span>
+<span id="cb22-201"><a href="#cb22-201"></a>firm2018 <span class="sc">|&gt;</span></span>
+<span id="cb22-202"><a href="#cb22-202"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(ind_en, <span class="at">name =</span> <span class="st">"企業数"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-203"><a href="#cb22-203"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb22-204"><a href="#cb22-204"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span>
+<span id="cb22-205"><a href="#cb22-205"></a><span class="in">```</span></span>
+<span id="cb22-206"><a href="#cb22-206"></a></span>
+<span id="cb22-207"><a href="#cb22-207"></a>:::{.column-margin}</span>
+<span id="cb22-208"><a href="#cb22-208"></a>教科書のように<span class="in">`table()`</span>関数を使うと簡単に頻度表が作れますが、オブジェクトの型が<span class="in">`table`</span>型になってしまい、後で他の処理に使いにくくなるので、<span class="in">`data.frame`</span>型のまま処理できる<span class="in">`dplyr::count()`</span>関数を使いました。</span>
+<span id="cb22-209"><a href="#cb22-209"></a>:::</span>
+<span id="cb22-210"><a href="#cb22-210"></a></span>
+<span id="cb22-211"><a href="#cb22-211"></a>広告費を表す<span class="in">`adient`</span>変数の観測値が全企業の中央値より大きいか否か、でダミー変数<span class="in">`ad_dummy`</span>を作成し、<span class="in">`ind_en`</span>変数と<span class="in">`ad_dummy`</span>変数のクロス集計表を作成します。</span>
+<span id="cb22-212"><a href="#cb22-212"></a></span>
+<span id="cb22-213"><a href="#cb22-213"></a>教科書を先取りしますが、<span class="in">`if_else()`</span>関数を使ってダミー変数を作成し、<span class="in">`count()`</span>関数でクロス集計表を作成し、<span class="in">`gt`</span>パッケージで表形式で表示します。</span>
+<span id="cb22-214"><a href="#cb22-214"></a><span class="in">`tidyr`</span>パッケージの<span class="in">`pivot_wider()`</span>関数を使って、クロス集計表が見やすくなるように、縦は産業名、横は広告費が中央値より大きいか否か、で表示するように変形しています。</span>
+<span id="cb22-215"><a href="#cb22-215"></a></span>
+<span id="cb22-216"><a href="#cb22-216"></a>:::{.column-margin}</span>
+<span id="cb22-217"><a href="#cb22-217"></a><span class="in">`table()`</span>関数を使うと簡単にクロス集計表が作れますが、あえて<span class="in">`data.frame`</span>型のまま処理できる<span class="in">`dplyr::count()`</span>関数を使っています。そのため、データが矩形データのまま扱えるので、後で他の処理に使いやすくなるものの、表にすると見にくくなるので、<span class="in">`tidyr::pivot_wider()`</span>関数で見やすく変形しています。</span>
+<span id="cb22-218"><a href="#cb22-218"></a>:::</span>
+<span id="cb22-219"><a href="#cb22-219"></a></span>
+<span id="cb22-222"><a href="#cb22-222"></a><span class="in">```{r}</span></span>
+<span id="cb22-223"><a href="#cb22-223"></a>firm2018 <span class="ot">&lt;-</span> firm2018 <span class="sc">|&gt;</span></span>
+<span id="cb22-224"><a href="#cb22-224"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb22-225"><a href="#cb22-225"></a>    <span class="at">ad_dummy =</span> <span class="fu">if_else</span>(adint <span class="sc">&gt;</span> <span class="fu">median</span>(adint, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>L, <span class="dv">0</span>L)</span>
+<span id="cb22-226"><a href="#cb22-226"></a>    )</span>
+<span id="cb22-227"><a href="#cb22-227"></a>firm2018 <span class="sc">%&gt;%</span></span>
+<span id="cb22-228"><a href="#cb22-228"></a>  <span class="fu">count</span>(ind_en, ad_dummy) <span class="sc">|&gt;</span></span>
+<span id="cb22-229"><a href="#cb22-229"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> ad_dummy, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-230"><a href="#cb22-230"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb22-231"><a href="#cb22-231"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span>
+<span id="cb22-232"><a href="#cb22-232"></a><span class="in">```</span></span>
+<span id="cb22-233"><a href="#cb22-233"></a></span>
+<span id="cb22-234"><a href="#cb22-234"></a>次に、カテゴリ変数ごとに処理を行いたい場合、例えば、産業分類ごとに売上高の平均値や標準偏差を計算したい場合は、<span class="in">`group_by()`</span>関数を使って、カテゴリ変数でグループ化してから、<span class="in">`summarize()`</span>関数で集計します。</span>
+<span id="cb22-235"><a href="#cb22-235"></a></span>
+<span id="cb22-238"><a href="#cb22-238"></a><span class="in">```{r}</span></span>
+<span id="cb22-239"><a href="#cb22-239"></a><span class="co"># コード4-39</span></span>
+<span id="cb22-240"><a href="#cb22-240"></a>firm2018 <span class="sc">|&gt;</span></span>
+<span id="cb22-241"><a href="#cb22-241"></a>  <span class="fu">group_by</span>(ind_en) <span class="sc">|&gt;</span></span>
+<span id="cb22-242"><a href="#cb22-242"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb22-243"><a href="#cb22-243"></a>      <span class="at">obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb22-244"><a href="#cb22-244"></a>      <span class="at">sales_m =</span> <span class="fu">mean</span>(sales),</span>
+<span id="cb22-245"><a href="#cb22-245"></a>      <span class="at">sales_sd =</span> <span class="fu">sd</span>(sales),</span>
+<span id="cb22-246"><a href="#cb22-246"></a>      <span class="at">adint_m =</span> <span class="fu">mean</span>(adint),</span>
+<span id="cb22-247"><a href="#cb22-247"></a>      <span class="at">adint_sd =</span> <span class="fu">sd</span>(adint)</span>
+<span id="cb22-248"><a href="#cb22-248"></a>      ) <span class="sc">|&gt;</span></span>
+<span id="cb22-249"><a href="#cb22-249"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb22-250"><a href="#cb22-250"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>(</span>
+<span id="cb22-251"><a href="#cb22-251"></a>    <span class="at">columns =</span> <span class="fu">c</span>(sales_m, sales_sd, adint_m, adint_sd),</span>
+<span id="cb22-252"><a href="#cb22-252"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
+<span id="cb22-253"><a href="#cb22-253"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb22-254"><a href="#cb22-254"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span>
+<span id="cb22-255"><a href="#cb22-255"></a><span class="in">```</span></span>
+<span id="cb22-256"><a href="#cb22-256"></a></span>
+<span id="cb22-257"><a href="#cb22-257"></a><span class="co">&lt;!-- </span></span>
+<span id="cb22-258"><a href="#cb22-258"></a></span>
+<span id="cb22-259"><a href="#cb22-259"></a></span>
+<span id="cb22-260"><a href="#cb22-260"></a><span class="co"># コード4-40</span></span>
+<span id="cb22-261"><a href="#cb22-261"></a><span class="co">X &lt;-tibble(</span></span>
+<span id="cb22-262"><a href="#cb22-262"></a><span class="co">  x1 = c(-3, -1, 0, 2, 5),</span></span>
+<span id="cb22-263"><a href="#cb22-263"></a><span class="co">  y1 = c(16, 12, 10, 6, 0),</span></span>
+<span id="cb22-264"><a href="#cb22-264"></a><span class="co">  y2 = c(8, 6, 5, 3, 0)</span></span>
+<span id="cb22-265"><a href="#cb22-265"></a><span class="co">)</span></span>
+<span id="cb22-266"><a href="#cb22-266"></a><span class="co">X</span></span>
+<span id="cb22-267"><a href="#cb22-267"></a></span>
+<span id="cb22-268"><a href="#cb22-268"></a><span class="co"># コード4-41</span></span>
+<span id="cb22-269"><a href="#cb22-269"></a><span class="co">cor(X$x1, X$y1)</span></span>
+<span id="cb22-270"><a href="#cb22-270"></a></span>
+<span id="cb22-271"><a href="#cb22-271"></a><span class="co"># コード4-42</span></span>
+<span id="cb22-272"><a href="#cb22-272"></a><span class="co"># For mac users</span></span>
+<span id="cb22-273"><a href="#cb22-273"></a><span class="co"># set_theme(theme_gray(base_size = 10, base_family = "HiraMinProN-W3"))</span></span>
+<span id="cb22-274"><a href="#cb22-274"></a></span>
+<span id="cb22-275"><a href="#cb22-275"></a><span class="co"># コード4-43</span></span>
+<span id="cb22-276"><a href="#cb22-276"></a><span class="co">ggplot (data = X, mapping = aes(x = x1, y = y1)) +</span></span>
+<span id="cb22-277"><a href="#cb22-277"></a><span class="co">  geom_point() +</span></span>
+<span id="cb22-278"><a href="#cb22-278"></a><span class="co">  geom_smooth(method = lm)</span></span>
+<span id="cb22-279"><a href="#cb22-279"></a></span>
+<span id="cb22-280"><a href="#cb22-280"></a><span class="co"># コード4-44</span></span>
+<span id="cb22-281"><a href="#cb22-281"></a><span class="co">AB &lt;- tibble(A = c(-2, -1, 0, 1, 2), B = c(4, 1, 0, 1, 4))</span></span>
+<span id="cb22-282"><a href="#cb22-282"></a><span class="co">AB</span></span>
+<span id="cb22-283"><a href="#cb22-283"></a></span>
+<span id="cb22-284"><a href="#cb22-284"></a></span>
+<span id="cb22-285"><a href="#cb22-285"></a><span class="co"># コード4-45</span></span>
+<span id="cb22-286"><a href="#cb22-286"></a><span class="co">cor(AB$A, AB$B)</span></span>
+<span id="cb22-287"><a href="#cb22-287"></a></span>
+<span id="cb22-288"><a href="#cb22-288"></a><span class="co"># コード4-46</span></span>
+<span id="cb22-289"><a href="#cb22-289"></a><span class="co">ggplot(data = AB, mapping = aes(x = A, y = B)) +</span></span>
+<span id="cb22-290"><a href="#cb22-290"></a><span class="co">  geom_point() +</span></span>
+<span id="cb22-291"><a href="#cb22-291"></a><span class="co">  geom_smooth(</span></span>
+<span id="cb22-292"><a href="#cb22-292"></a><span class="co">    method = lm,</span></span>
+<span id="cb22-293"><a href="#cb22-293"></a><span class="co">    formula = y ~ x + I(x^2),</span></span>
+<span id="cb22-294"><a href="#cb22-294"></a><span class="co">    se = FALSE</span></span>
+<span id="cb22-295"><a href="#cb22-295"></a><span class="co">  )</span></span>
+<span id="cb22-296"><a href="#cb22-296"></a></span>
+<span id="cb22-297"><a href="#cb22-297"></a><span class="co"># コード4-47</span></span>
+<span id="cb22-298"><a href="#cb22-298"></a><span class="co">idpos &lt;- readr::read_csv("data/2022idpos.csv", na = ".")</span></span>
+<span id="cb22-299"><a href="#cb22-299"></a><span class="co">head(idpos)</span></span>
+<span id="cb22-300"><a href="#cb22-300"></a></span>
+<span id="cb22-301"><a href="#cb22-301"></a><span class="co"># コード4-48</span></span>
+<span id="cb22-302"><a href="#cb22-302"></a><span class="co">idpos$datediff &lt;-</span></span>
+<span id="cb22-303"><a href="#cb22-303"></a><span class="co">  as.numeric(difftime("2019-10-02", idpos$date, units = "days"))</span></span>
+<span id="cb22-304"><a href="#cb22-304"></a><span class="co">head(idpos)</span></span>
+<span id="cb22-305"><a href="#cb22-305"></a></span>
+<span id="cb22-306"><a href="#cb22-306"></a><span class="co"># コード4-49</span></span>
+<span id="cb22-307"><a href="#cb22-307"></a><span class="co">idpos_cust &lt;- idpos %&gt;%</span></span>
+<span id="cb22-308"><a href="#cb22-308"></a><span class="co">  group_by(id) %&gt;%</span></span>
+<span id="cb22-309"><a href="#cb22-309"></a><span class="co">  summarize(frequency = n(),</span></span>
+<span id="cb22-310"><a href="#cb22-310"></a><span class="co">            monetary = sum(spent),</span></span>
+<span id="cb22-311"><a href="#cb22-311"></a><span class="co">            cherry = sum(coupon),</span></span>
+<span id="cb22-312"><a href="#cb22-312"></a><span class="co">            recency = min(datediff)</span></span>
+<span id="cb22-313"><a href="#cb22-313"></a><span class="co">            )</span></span>
+<span id="cb22-314"><a href="#cb22-314"></a><span class="co">head(idpos_cust)</span></span>
+<span id="cb22-315"><a href="#cb22-315"></a></span>
+<span id="cb22-316"><a href="#cb22-316"></a><span class="co"># コード4-50</span></span>
+<span id="cb22-317"><a href="#cb22-317"></a><span class="co">idpos_cust_m &lt;- idpos_cust %&gt;%</span></span>
+<span id="cb22-318"><a href="#cb22-318"></a><span class="co">  arrange(desc(monetary))</span></span>
+<span id="cb22-319"><a href="#cb22-319"></a></span>
+<span id="cb22-320"><a href="#cb22-320"></a><span class="co"># 上位 10 人の顧客 (Monetary)</span></span>
+<span id="cb22-321"><a href="#cb22-321"></a><span class="co">idpos_cust_m[1:10, ]</span></span>
+<span id="cb22-322"><a href="#cb22-322"></a></span>
+<span id="cb22-323"><a href="#cb22-323"></a><span class="co"># コード4-51</span></span>
+<span id="cb22-324"><a href="#cb22-324"></a><span class="co">id_data &lt;- readr::read_csv("data/id_data.csv", na = ".")</span></span>
+<span id="cb22-325"><a href="#cb22-325"></a><span class="co">str(id_data)</span></span>
+<span id="cb22-326"><a href="#cb22-326"></a></span>
+<span id="cb22-327"><a href="#cb22-327"></a><span class="co"># コード4-52</span></span>
+<span id="cb22-328"><a href="#cb22-328"></a><span class="co">idpos_cust &lt;- left_join(idpos_cust, id_data, by = "id")</span></span>
+<span id="cb22-329"><a href="#cb22-329"></a><span class="co">head(idpos_cust)</span></span>
+<span id="cb22-330"><a href="#cb22-330"></a></span>
+<span id="cb22-331"><a href="#cb22-331"></a><span class="co"># コード4-53</span></span>
+<span id="cb22-332"><a href="#cb22-332"></a><span class="co">idpos_cust_m &lt;- idpos_cust %&gt;%</span></span>
+<span id="cb22-333"><a href="#cb22-333"></a><span class="co">  arrange(desc(monetary))</span></span>
+<span id="cb22-334"><a href="#cb22-334"></a></span>
+<span id="cb22-335"><a href="#cb22-335"></a><span class="co"># 上位顧客 20 人中の男女比</span></span>
+<span id="cb22-336"><a href="#cb22-336"></a><span class="co">table(idpos_cust_m[1:20, ]$gender)</span></span>
+<span id="cb22-337"><a href="#cb22-337"></a></span>
+<span id="cb22-338"><a href="#cb22-338"></a><span class="co"># コード4-54</span></span>
+<span id="cb22-339"><a href="#cb22-339"></a><span class="co">idpos_cust_m$decile_rank &lt;-</span></span>
+<span id="cb22-340"><a href="#cb22-340"></a><span class="co">  cut(idpos_cust_m$monetary,</span></span>
+<span id="cb22-341"><a href="#cb22-341"></a><span class="co">      quantile(idpos_cust_m$monetary, (0:10) / 10, na.rm = TRUE),</span></span>
+<span id="cb22-342"><a href="#cb22-342"></a><span class="co">      label = FALSE, include.lowest = TRUE)</span></span>
+<span id="cb22-343"><a href="#cb22-343"></a><span class="co">head(idpos_cust_m)</span></span>
+<span id="cb22-344"><a href="#cb22-344"></a></span>
+<span id="cb22-345"><a href="#cb22-345"></a><span class="co"># コード4-55</span></span>
+<span id="cb22-346"><a href="#cb22-346"></a><span class="co">decile &lt;- idpos_cust_m %&gt;%</span></span>
+<span id="cb22-347"><a href="#cb22-347"></a><span class="co">  group_by(decile_rank) %&gt;%</span></span>
+<span id="cb22-348"><a href="#cb22-348"></a><span class="co">  summarize(freq = n(),</span></span>
+<span id="cb22-349"><a href="#cb22-349"></a><span class="co">            monetary = sum(monetary))</span></span>
+<span id="cb22-350"><a href="#cb22-350"></a><span class="co">total &lt;- sum(decile$monetary)</span></span>
+<span id="cb22-351"><a href="#cb22-351"></a></span>
+<span id="cb22-352"><a href="#cb22-352"></a><span class="co">decile2 &lt;- decile %&gt;%</span></span>
+<span id="cb22-353"><a href="#cb22-353"></a><span class="co">  mutate(percent = monetary / total * 100) %&gt;%</span></span>
+<span id="cb22-354"><a href="#cb22-354"></a><span class="co">  arrange(desc(decile_rank))</span></span>
+<span id="cb22-355"><a href="#cb22-355"></a></span>
+<span id="cb22-356"><a href="#cb22-356"></a><span class="co">decile2</span></span>
+<span id="cb22-357"><a href="#cb22-357"></a></span>
+<span id="cb22-358"><a href="#cb22-358"></a><span class="co"># コード4-56</span></span>
+<span id="cb22-359"><a href="#cb22-359"></a><span class="co">sales_wide &lt;- readr::read_csv("data/sales_wide.csv", na = ".")</span></span>
+<span id="cb22-360"><a href="#cb22-360"></a><span class="co">sales_wide</span></span>
+<span id="cb22-361"><a href="#cb22-361"></a></span>
+<span id="cb22-362"><a href="#cb22-362"></a><span class="co"># コード4-57</span></span>
+<span id="cb22-363"><a href="#cb22-363"></a><span class="co">sales_long &lt;- gather(data = sales_wide,</span></span>
+<span id="cb22-364"><a href="#cb22-364"></a><span class="co">                     key = "month", value = "sales", starts_with("sales"))</span></span>
+<span id="cb22-365"><a href="#cb22-365"></a><span class="co">sales_long</span></span>
+<span id="cb22-366"><a href="#cb22-366"></a></span>
+<span id="cb22-367"><a href="#cb22-367"></a><span class="co"># コード4-58</span></span>
+<span id="cb22-368"><a href="#cb22-368"></a><span class="co">sales_long &lt;- sales_wide %&gt;%</span></span>
+<span id="cb22-369"><a href="#cb22-369"></a><span class="co">  rename('06'  = sales06,</span></span>
+<span id="cb22-370"><a href="#cb22-370"></a><span class="co">         '07'  = sales07,</span></span>
+<span id="cb22-371"><a href="#cb22-371"></a><span class="co">         '08'  = sales08,</span></span>
+<span id="cb22-372"><a href="#cb22-372"></a><span class="co">         '09'  = sales09,</span></span>
+<span id="cb22-373"><a href="#cb22-373"></a><span class="co">         '10'  = sales10) %&gt;%</span></span>
+<span id="cb22-374"><a href="#cb22-374"></a><span class="co">  gather(key = "month", value = "sales", '06':'10') %&gt;%</span></span>
+<span id="cb22-375"><a href="#cb22-375"></a><span class="co">  arrange(store)</span></span>
+<span id="cb22-376"><a href="#cb22-376"></a><span class="co">sales_long</span></span>
+<span id="cb22-377"><a href="#cb22-377"></a></span>
+<span id="cb22-378"><a href="#cb22-378"></a><span class="co"># コード4-59</span></span>
+<span id="cb22-379"><a href="#cb22-379"></a><span class="co">wide_test &lt;- sales_long %&gt;%</span></span>
+<span id="cb22-380"><a href="#cb22-380"></a><span class="co">  spread(key = "month", value = "sales") %&gt;%</span></span>
+<span id="cb22-381"><a href="#cb22-381"></a><span class="co">  rename(sales06 = '06',</span></span>
+<span id="cb22-382"><a href="#cb22-382"></a><span class="co">         sales07 = '07',</span></span>
+<span id="cb22-383"><a href="#cb22-383"></a><span class="co">         sales08 = '08',</span></span>
+<span id="cb22-384"><a href="#cb22-384"></a><span class="co">         sales09 = '09',</span></span>
+<span id="cb22-385"><a href="#cb22-385"></a><span class="co">         sales10 = '10')</span></span>
+<span id="cb22-386"><a href="#cb22-386"></a><span class="co">wide_test</span></span>
+<span id="cb22-387"><a href="#cb22-387"></a></span>
+<span id="cb22-388"><a href="#cb22-388"></a></span>
+<span id="cb22-389"><a href="#cb22-389"></a><span class="co">```</span></span>
+<span id="cb22-390"><a href="#cb22-390"></a><span class="co">---&gt;</span></span>
+<span id="cb22-391"><a href="#cb22-391"></a></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
 <p>Copyright 2025, Soichi Matsuura</p>
 </div>   
@@ -2861,6 +3454,12 @@ wide_test
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://so-ichi.com/r.html">
+      <i class="bi bi-house" role="img">
+</i> 
+    </a>
+  </li>  
     <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ma2ura">
       <i class="bi bi-github" role="img">
@@ -2874,11 +3473,9 @@ wide_test
     </a>
   </li>  
 </ul>
-    </div>
+</div>
   </div>
 </footer>
-
-
 
 
 </body></html>
