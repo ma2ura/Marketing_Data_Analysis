@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Soichi Matsuura">
 <title>4&nbsp; 第6章 回帰分析 – マーケティング・データ分析の学習メモ</title>
@@ -72,14 +72,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-59a70e526be758e388535452c17524de.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-86a70cd49555e1b72ce199c0e111706a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2faf606acb82b7945c08ef153ee7e46.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8b6ec28c7624df160bce42457c818d22.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2faf606acb82b7945c08ef153ee7e46.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-52f3d4fb16f1c2def925e31e907c07ee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-52f3d4fb16f1c2def925e31e907c07ee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-52f3d4fb16f1c2def925e31e907c07ee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -108,24 +108,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-SFB56VHK63"></script><script type="text/javascript">
-
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-SFB56VHK63', { 'anonymize_ip': true});
-</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+}</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
-.marky {
-  background: linear-gradient(transparent 60%, #FCFFC1 0%);
-}
-.markb {
-  background: linear-gradient(transparent 60%, #88E2EA 0%);
-}
-.markp{
-  background: linear-gradient(transparent 70%, #ffcdd2 0%)
-}
+.marky {background: linear-gradient(transparent 60%, #FCFFC1 0%);}
+.markb {background: linear-gradient(transparent 60%, #88E2EA 0%);}
+.markp {background: linear-gradient(transparent 70%, #ffcdd2 0%);}
 </style>
 <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
@@ -169,12 +157,12 @@ window.Quarto = {
 </script>
 <meta name="twitter:title" content="4&nbsp; 第6章 回帰分析 – マーケティング・データ分析の学習メモ">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://ma2ura.github.io/Marketing_Data_Analysis/chapter06_files/figure-html/fig01-1.png">
+<meta name="twitter:image" content="https://so-ichi.com/chapter06_files/figure-html/fig01-1.png">
 <meta name="twitter:image-height" content="4500">
 <meta name="twitter:image-width" content="6300">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar docked slimcontent quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -190,7 +178,7 @@ window.Quarto = {
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">マーケティング・データ分析の学習メモ</a> 
         <div class="sidebar-tools-main">
@@ -257,7 +245,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter07.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">第7章</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">第7章 回帰分析上の工夫</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -299,30 +287,22 @@ window.Quarto = {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2"><h2 id="toc-title">Table of contents</h2>
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">ここの目次</h2>
    
-  <ul>
+  <ul class="collapse">
 <li><a href="#%E5%88%86%E6%9E%90%E6%BA%96%E5%82%99" id="toc-分析準備" class="nav-link active" data-scroll-target="#%E5%88%86%E6%9E%90%E6%BA%96%E5%82%99"><span class="header-section-number">4.1</span> 分析準備</a></li>
   <li><a href="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB%E3%81%A8%E4%BA%88%E6%B8%AC%E5%80%A4" id="toc-単回帰モデルと予測値" class="nav-link" data-scroll-target="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB%E3%81%A8%E4%BA%88%E6%B8%AC%E5%80%A4"><span class="header-section-number">4.2</span> 単回帰モデルと予測値</a></li>
-  <li>
-<a href="#%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E6%8E%A8%E5%AE%9A%E3%81%A8%E6%A4%9C%E5%AE%9A" id="toc-回帰分析における推定と検定" class="nav-link" data-scroll-target="#%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E6%8E%A8%E5%AE%9A%E3%81%A8%E6%A4%9C%E5%AE%9A"><span class="header-section-number">4.3</span> 回帰分析における推定と検定</a>
-  <ul class="collapse">
-<li><a href="#%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%A8%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E6%B8%AC" id="toc-回帰分析と統計的推測" class="nav-link" data-scroll-target="#%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%A8%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E6%B8%AC"><span class="header-section-number">4.3.1</span> 回帰分析と統計的推測</a></li>
-  <li><a href="#%E4%BC%81%E6%A5%AD%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AE%E5%AE%9F%E8%A1%8C" id="toc-企業データを用いた回帰分析の実行" class="nav-link" data-scroll-target="#%E4%BC%81%E6%A5%AD%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AE%E5%AE%9F%E8%A1%8C"><span class="header-section-number">4.3.2</span> 企業データを用いた回帰分析の実行</a></li>
-  <li><a href="#%E5%9B%9E%E5%B8%B0%E4%BF%82%E6%95%B0%E3%81%AE%E8%A7%A3%E9%87%88" id="toc-回帰係数の解釈" class="nav-link" data-scroll-target="#%E5%9B%9E%E5%B8%B0%E4%BF%82%E6%95%B0%E3%81%AE%E8%A7%A3%E9%87%88"><span class="header-section-number">4.3.3</span> 回帰係数の解釈</a></li>
-  <li><a href="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB%E3%81%A8%E9%87%8D%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AE%E6%AF%94%E8%BC%83" id="toc-単回帰モデルと重回帰モデルの比較" class="nav-link" data-scroll-target="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB%E3%81%A8%E9%87%8D%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AE%E6%AF%94%E8%BC%83"><span class="header-section-number">4.3.4</span> 単回帰モデルと重回帰モデルの比較</a></li>
-  </ul>
-</li>
+  <li><a href="#%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E6%8E%A8%E5%AE%9A%E3%81%A8%E6%A4%9C%E5%AE%9A" id="toc-回帰分析における推定と検定" class="nav-link" data-scroll-target="#%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E6%8E%A8%E5%AE%9A%E3%81%A8%E6%A4%9C%E5%AE%9A"><span class="header-section-number">4.3</span> 回帰分析における推定と検定</a></li>
   </ul></nav>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part02.html">第2部 仮説検証型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter06.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">第6章 回帰分析</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
 <span class="chapter-number">4</span>&nbsp; <span class="chapter-title">第6章 回帰分析</span>
-</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -399,7 +379,11 @@ y_i = \beta_0 + \beta_1 x_i + u_i
 </ul>
 <p>手元にある売上高<span class="math inline">y</span>と従業員数<span class="math inline">x</span>のデータを使って、横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。</p>
 <div class="cell" data-layout-align="center">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, ggthemes, GGally, gt, gtExtra, knitr, kableExtra)</span>
+<div class="code-with-filename">
+<details class="code-fold"><summary>Code</summary><div class="code-with-filename-file">
+<pre><strong>従業員数と売上高の散布図</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, ggthemes, GGally, gt, gtExtra, knitr, kableExtra)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># 乱数のタネ</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a>n <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co"># サンプルサイズ</span></span>
@@ -419,7 +403,9 @@ y_i = \beta_0 + \beta_1 x_i + u_i
 <span id="cb1-18"><a href="#cb1-18"></a>    )</span>
 <span id="cb1-19"><a href="#cb1-19"></a></span>
 <span id="cb1-20"><a href="#cb1-20"></a><span class="fu">print</span>(g)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
+</details>
+</div>
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><a href="chapter06_files/figure-html/fig01-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter06_files/figure-html/fig01-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
@@ -428,7 +414,11 @@ y_i = \beta_0 + \beta_1 x_i + u_i
 </div>
 <p>散布図をみると右肩上がりの関係があるように見えますが、もっと明確に変数間の関係を表すために、<span class="markp">そのデータを最も良く説明できる直線</span>をひこうと思います。 つまり、<span class="markp">切片の<span class="math inline">\beta_0</span>と傾きの<span class="math inline">\beta_1</span>を決めるということ</span>です。 この直線が「モデル」で、それぞれの黒い点とモデルの直線との縦軸方向への距離を「誤差」または「残差」と呼びます。</p>
 <div class="cell" data-layout-align="center">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
+<div class="code-with-filename">
+<details class="code-fold"><summary>Code</summary><div class="code-with-filename-file">
+<pre><strong>回帰式と誤差</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="co"># 予測値をpredictedに格納</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>data<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model)</span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="co"># OSに合わせてフォントを自動選択（Macならヒラギノ、それ以外ならデフォルト）</span></span>
@@ -458,7 +448,9 @@ y_i = \beta_0 + \beta_1 x_i + u_i
 <span id="cb2-28"><a href="#cb2-28"></a>        <span class="at">size =</span> <span class="dv">6</span>, <span class="at">family =</span> my_font</span>
 <span id="cb2-29"><a href="#cb2-29"></a>    )</span>
 <span id="cb2-30"><a href="#cb2-30"></a><span class="fu">print</span>(g)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
+</details>
+</div>
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><a href="chapter06_files/figure-html/fig02-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter06_files/figure-html/fig02-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
@@ -470,16 +462,26 @@ y_i = \beta_0 + \beta_1 x_i + u_i
 <span class="header-section-number">4.1</span> 分析準備</h2>
 <p>サンプルデータを読み込みます。 MS Excelのファイル <code>.xlsx</code> なので、<code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_xlsx()</a></code> 関数を使います。 読み込んだデータから、2019年のデータを抽出します。</p>
 <div class="cell" data-layout-align="center">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>code 6-1 Excelデータの読み込み</strong></pre>
+</div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>firmdata19 <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>    <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2019</span>) <span class="co"># 2019年を抽出</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2019</span>) <span class="co"># 2019年を抽出</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 <p>探索的なデータ分析として、変数間の関係を概観するために <code>GGally</code> パッケージの <code>ggpairs()</code> 関数を使います。</p>
 <div class="cell" data-layout-align="center">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>code 6-4 変数間の関係の概略</strong></pre>
+</div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>firmdata19 <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>    <span class="fu">select</span>(sales, mkexp, emp, operating_profit) <span class="sc">|&gt;</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>    GGally<span class="sc">::</span><span class="fu">ggpairs</span>() <span class="sc">+</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"2変数の関係の概略"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><a href="chapter06_files/figure-html/code6-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="chapter06_files/figure-html/code6-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
@@ -653,86 +655,408 @@ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
 <p>つまり<span class="math inline">x_{2i}</span>を一定として<span class="math inline">x_{1i}</span>が1単位変化した場合の<span class="math inline">y_i</span>の変化量は<span class="math inline">\beta_1</span>である、ということです。このことを<strong>他の変数を一定とした場合の効果</strong> (ceteris paribus effect) といい、様々な要因で決定されているであろう従属変数に対して、特定の独立変数が与える影響を測定する際に重要な考え方となります。</p>
 </section><section id="単回帰モデルと重回帰モデルの比較" class="level3" data-number="4.3.4"><h3 data-number="4.3.4" class="anchored" data-anchor-id="単回帰モデルと重回帰モデルの比較">
 <span class="header-section-number">4.3.4</span> 単回帰モデルと重回帰モデルの比較</h3>
-<p>営業利益<code>operating_profit</code>を従属変数、広告宣伝費<code>adv</code>を独立変数とした単回帰モデルを推定します。</p>
+<p>営業利益<code>operating_profit</code>を従属変数、広告宣伝費<code>adv</code>を独立変数とした単回帰モデルを推定します。 <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>関数で結果を表示するのが簡単ですが、見づらいので、ここでは<code>modelsummary</code>パッケージを使ってきれいに表示します。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(operating_profit <span class="sc">~</span> adv, <span class="at">data =</span> firmdata19)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">summary</span>(reg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = operating_profit ~ adv, data = firmdata19)
+<span id="cb13-2"><a href="#cb13-2"></a>modelsummary<span class="sc">::</span><span class="fu">modelsummary</span>(</span>
+<span id="cb13-3"><a href="#cb13-3"></a>    reg2,</span>
+<span id="cb13-4"><a href="#cb13-4"></a>    <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">***</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.01</span>, <span class="st">`</span><span class="at">**</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.05</span>, <span class="st">`</span><span class="at">*</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.1</span>),</span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="at">gof_omit =</span> <span class="st">"AIC|BIC|Log.Lik|RMSE|F"</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--450526  -55552  -40672    -791  599084 
+    <script>
 
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 5.708e+04  1.057e+04   5.401 2.68e-07 ***
-adv         1.257e+00  2.159e-01   5.823 3.61e-08 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+      function styleCell_3c4olovomytbutydsv62(i, j, css_id) {
+          var table = document.getElementById("tinytable_3c4olovomytbutydsv62");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_3c4olovomytbutydsv62');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_3c4olovomytbutydsv62(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_3c4olovomytbutydsv62");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 7, j: 1 },  ], css_id: 'tinytable_css_n2h1bc5fyzqqym2u1m28',}, 
+          { positions: [ { i: 4, j: 1 },  ], css_id: 'tinytable_css_4o7okhu56gr6jhsgw11c',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 },  ], css_id: 'tinytable_css_spqk6pj5tusgjyow139w',}, 
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_9caop6ompvjn8md5q0pg',}, 
+          { positions: [ { i: 7, j: 0 },  ], css_id: 'tinytable_css_7vzdfmw9o7h8669nmpws',}, 
+          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_30ttofnaj2szlja7k1c5',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 },  ], css_id: 'tinytable_css_pv6q45fnvkaziop86xci',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_mek79x9lbjgytenm6sem',}, 
+          ];
 
-Residual standard error: 117600 on 144 degrees of freedom
-Multiple R-squared:  0.1906,    Adjusted R-squared:  0.185 
-F-statistic: 33.91 on 1 and 144 DF,  p-value: 3.613e-08</code></pre>
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_3c4olovomytbutydsv62(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script><style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_n2h1bc5fyzqqym2u1m28, .table th.tinytable_css_n2h1bc5fyzqqym2u1m28 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_4o7okhu56gr6jhsgw11c, .table th.tinytable_css_4o7okhu56gr6jhsgw11c { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_spqk6pj5tusgjyow139w, .table th.tinytable_css_spqk6pj5tusgjyow139w { text-align: center; }
+      .table td.tinytable_css_9caop6ompvjn8md5q0pg, .table th.tinytable_css_9caop6ompvjn8md5q0pg { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_7vzdfmw9o7h8669nmpws, .table th.tinytable_css_7vzdfmw9o7h8669nmpws { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_30ttofnaj2szlja7k1c5, .table th.tinytable_css_30ttofnaj2szlja7k1c5 { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_pv6q45fnvkaziop86xci, .table th.tinytable_css_pv6q45fnvkaziop86xci { text-align: left; }
+      .table td.tinytable_css_mek79x9lbjgytenm6sem, .table th.tinytable_css_mek79x9lbjgytenm6sem { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+<div class="container">
+      <table class="table table-borderless" id="tinytable_3c4olovomytbutydsv62" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+<thead><tr>
+<th scope="col"> </th>
+                <th scope="col">(1)</th>
+              </tr></thead>
+<tfoot><tr><td colspan="2">* p </td></tr></tfoot>
+<tbody>
+<tr>
+<td>(Intercept)</td>
+                  <td>57079.103***</td>
+                </tr>
+<tr>
+<td></td>
+                  <td>(10568.681)</td>
+                </tr>
+<tr>
+<td>adv</td>
+                  <td>1.257***</td>
+                </tr>
+<tr>
+<td></td>
+                  <td>(0.216)</td>
+                </tr>
+<tr>
+<td>Num.Obs.</td>
+                  <td>146</td>
+                </tr>
+<tr>
+<td>R2</td>
+                  <td>0.191</td>
+                </tr>
+<tr>
+<td>R2 Adj.</td>
+                  <td>0.185</td>
+                </tr>
+</tbody>
+</table>
+</div>
+<!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
-<p><code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>関数を使って信頼区間を計算します。</p>
+<p>近年は回帰分析の結果を適切に解釈するためにp値だけではなく、信頼区間も確認することが推奨されています。 Rでは<code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>関数を使って信頼区間を計算します。 この<code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>関数で計算される信頼区間はデフォルトで95%信頼区間となっています。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">confint</span>(reg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                   2.5 %       97.5 %
-(Intercept) 36189.311039 77968.894422
-adv             0.830362     1.683719</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">confint</span>(reg2) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">4</span>) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">2.5 %</th>
+<th style="text-align: right;">97.5 %</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">36189.3110</td>
+<td style="text-align: right;">77968.8944</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">adv</td>
+<td style="text-align: right;">0.8304</td>
+<td style="text-align: right;">1.6837</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <p>次に、営業利益<code>operating_profit</code>を従属変数、広告宣伝費<code>adv</code>、温度<code>temp</code>、従業員数<code>emp</code>、労働費用<code>labor_cost</code>、総資産<code>total_assets</code>、研究開発費<code>rd</code>を独立変数とした重回帰モデルを推定します。 教科書とは異なりますが、先にモデルを定義してから<code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>関数に渡す方法で推定します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>multi_model <span class="ot">&lt;-</span> <span class="st">"operating_profit ~ adv + temp + emp + labor_cost + total_assets + rd"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>multi_model <span class="ot">&lt;-</span> <span class="st">"operating_profit ~ adv + temp + emp + labor_cost + total_assets + rd"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>この回帰モデルを<code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>関数で推定し、結果を<code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>関数で表示します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> multi_model, <span class="at">data =</span> firmdata19)</span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">summary</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = multi_model, data = firmdata19)
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> multi_model, <span class="at">data =</span> firmdata19)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>reg <span class="ot">&lt;-</span> <span class="fu">list</span>(reg2, reg3)</span>
+<span id="cb16-3"><a href="#cb16-3"></a>modelsummary<span class="sc">::</span><span class="fu">modelsummary</span>(</span>
+<span id="cb16-4"><a href="#cb16-4"></a>    reg,</span>
+<span id="cb16-5"><a href="#cb16-5"></a>    <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">***</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.01</span>, <span class="st">`</span><span class="at">**</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.05</span>, <span class="st">`</span><span class="at">*</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.1</span>),</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="at">gof_omit =</span> <span class="st">"AIC|BIC|Log.Lik|RMSE|F"</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--360544  -27618  -15279    3467  284094 
+    <script>
 
-Coefficients:
-               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   2.209e+04  8.114e+03   2.723  0.00731 ** 
-adv          -1.431e+00  2.954e-01  -4.845 3.34e-06 ***
-temp         -1.878e+00  6.313e-01  -2.975  0.00346 ** 
-emp          -1.510e+00  7.036e-01  -2.146  0.03358 *  
-labor_cost    8.808e-01  1.692e-01   5.207 6.76e-07 ***
-total_assets  3.516e-02  5.840e-03   6.020 1.47e-08 ***
-rd            1.385e+00  5.268e-01   2.629  0.00953 ** 
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+      function styleCell_cutlt9f4zwfrbr1b5fei(i, j, css_id) {
+          var table = document.getElementById("tinytable_cutlt9f4zwfrbr1b5fei");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_cutlt9f4zwfrbr1b5fei');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_cutlt9f4zwfrbr1b5fei(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_cutlt9f4zwfrbr1b5fei");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 17, j: 1 }, { i: 17, j: 2 },  ], css_id: 'tinytable_css_21086csjdf6zboqcj9tb',}, 
+          { positions: [ { i: 14, j: 1 }, { i: 14, j: 2 },  ], css_id: 'tinytable_css_z2wprpgm970f1dbp778w',}, 
+          { positions: [ { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 1, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 11, j: 1 }, { i: 12, j: 1 }, { i: 13, j: 1 }, { i: 9, j: 2 }, { i: 15, j: 1 }, { i: 16, j: 1 }, { i: 12, j: 2 }, { i: 5, j: 1 }, { i: 1, j: 2 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 6, j: 2 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 13, j: 2 }, { i: 10, j: 2 }, { i: 11, j: 2 }, { i: 16, j: 2 }, { i: 15, j: 2 },  ], css_id: 'tinytable_css_yulflswu7ntmvgpmpz7e',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_96zmxn3smaw2wtx1jdo6',}, 
+          { positions: [ { i: 17, j: 0 },  ], css_id: 'tinytable_css_7ak6m79g55rvyrj04aj1',}, 
+          { positions: [ { i: 14, j: 0 },  ], css_id: 'tinytable_css_3elnefi7uf8at9xjd5h1',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 12, j: 0 }, { i: 13, j: 0 }, { i: 15, j: 0 }, { i: 16, j: 0 },  ], css_id: 'tinytable_css_a5vbiqvqt3nr25zt9ozo',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_2wwaz9nrhgj8a74s59p8',}, 
+          ];
 
-Residual standard error: 78940 on 139 degrees of freedom
-Multiple R-squared:  0.6479,    Adjusted R-squared:  0.6327 
-F-statistic: 42.63 on 6 and 139 DF,  p-value: &lt; 2.2e-16</code></pre>
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_cutlt9f4zwfrbr1b5fei(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script><style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_21086csjdf6zboqcj9tb, .table th.tinytable_css_21086csjdf6zboqcj9tb { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_z2wprpgm970f1dbp778w, .table th.tinytable_css_z2wprpgm970f1dbp778w { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_yulflswu7ntmvgpmpz7e, .table th.tinytable_css_yulflswu7ntmvgpmpz7e { text-align: center; }
+      .table td.tinytable_css_96zmxn3smaw2wtx1jdo6, .table th.tinytable_css_96zmxn3smaw2wtx1jdo6 { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_7ak6m79g55rvyrj04aj1, .table th.tinytable_css_7ak6m79g55rvyrj04aj1 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_3elnefi7uf8at9xjd5h1, .table th.tinytable_css_3elnefi7uf8at9xjd5h1 { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_a5vbiqvqt3nr25zt9ozo, .table th.tinytable_css_a5vbiqvqt3nr25zt9ozo { text-align: left; }
+      .table td.tinytable_css_2wwaz9nrhgj8a74s59p8, .table th.tinytable_css_2wwaz9nrhgj8a74s59p8 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+<div class="container">
+      <table class="table table-borderless" id="tinytable_cutlt9f4zwfrbr1b5fei" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+<thead><tr>
+<th scope="col"> </th>
+                <th scope="col">(1)</th>
+                <th scope="col">(2)</th>
+              </tr></thead>
+<tfoot><tr><td colspan="3">* p </td></tr></tfoot>
+<tbody>
+<tr>
+<td>(Intercept)</td>
+                  <td>57079.103***</td>
+                  <td>22090.415***</td>
+                </tr>
+<tr>
+<td></td>
+                  <td>(10568.681)</td>
+                  <td>(8113.534)</td>
+                </tr>
+<tr>
+<td>adv</td>
+                  <td>1.257***</td>
+                  <td>-1.431***</td>
+                </tr>
+<tr>
+<td></td>
+                  <td>(0.216)</td>
+                  <td>(0.295)</td>
+                </tr>
+<tr>
+<td>temp</td>
+                  <td></td>
+                  <td>-1.878***</td>
+                </tr>
+<tr>
+<td></td>
+                  <td></td>
+                  <td>(0.631)</td>
+                </tr>
+<tr>
+<td>emp</td>
+                  <td></td>
+                  <td>-1.510**</td>
+                </tr>
+<tr>
+<td></td>
+                  <td></td>
+                  <td>(0.704)</td>
+                </tr>
+<tr>
+<td>labor_cost</td>
+                  <td></td>
+                  <td>0.881***</td>
+                </tr>
+<tr>
+<td></td>
+                  <td></td>
+                  <td>(0.169)</td>
+                </tr>
+<tr>
+<td>total_assets</td>
+                  <td></td>
+                  <td>0.035***</td>
+                </tr>
+<tr>
+<td></td>
+                  <td></td>
+                  <td>(0.006)</td>
+                </tr>
+<tr>
+<td>rd</td>
+                  <td></td>
+                  <td>1.385***</td>
+                </tr>
+<tr>
+<td></td>
+                  <td></td>
+                  <td>(0.527)</td>
+                </tr>
+<tr>
+<td>Num.Obs.</td>
+                  <td>146</td>
+                  <td>146</td>
+                </tr>
+<tr>
+<td>R2</td>
+                  <td>0.191</td>
+                  <td>0.648</td>
+                </tr>
+<tr>
+<td>R2 Adj.</td>
+                  <td>0.185</td>
+                  <td>0.633</td>
+                </tr>
+</tbody>
+</table>
+</div>
+<!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
 <p><code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>関数を使って信頼区間を計算します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">confint</span>(reg3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                     2.5 %        97.5 %
-(Intercept)  6048.51599480  3.813231e+04
-adv            -2.01511513 -8.470054e-01
-temp           -3.12602311 -6.298318e-01
-emp            -2.90144939 -1.190356e-01
-labor_cost      0.54637427  1.215313e+00
-total_assets    0.02361376  4.670793e-02
-rd              0.34334525  2.426472e+00</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">confint</span>(reg3) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">4</span>) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">2.5 %</th>
+<th style="text-align: right;">97.5 %</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">6048.5160</td>
+<td style="text-align: right;">38132.3132</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">adv</td>
+<td style="text-align: right;">-2.0151</td>
+<td style="text-align: right;">-0.8470</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">temp</td>
+<td style="text-align: right;">-3.1260</td>
+<td style="text-align: right;">-0.6298</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">emp</td>
+<td style="text-align: right;">-2.9014</td>
+<td style="text-align: right;">-0.1190</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">labor_cost</td>
+<td style="text-align: right;">0.5464</td>
+<td style="text-align: right;">1.2153</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">total_assets</td>
+<td style="text-align: right;">0.0236</td>
+<td style="text-align: right;">0.0467</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rd</td>
+<td style="text-align: right;">0.3433</td>
+<td style="text-align: right;">2.4265</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -863,7 +1187,7 @@ rd              0.34334525  2.426472e+00</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/ma2ura\.github\.io\/Marketing_Data_Analysis\/");
+        var filterRegex = new RegExp("https:\/\/so-ichi\.com");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1197,323 +1521,335 @@ rd              0.34334525  2.426472e+00</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapter07.html" class="pagination-link" aria-label="第7章">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">第7章</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./chapter07.html" class="pagination-link" aria-label="第7章 回帰分析上の工夫">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">第7章 回帰分析上の工夫</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">## 第6章 回帰分析</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a></span>
-<span id="cb22-3"><a href="#cb22-3"></a>6章は変数間の関係を考察する手法の1つである**回帰分析** (Regression Analysis) について説明します。</span>
-<span id="cb22-4"><a href="#cb22-4"></a></span>
-<span id="cb22-5"><a href="#cb22-5"></a>いま手元に売上高($y$とする)と従業員数($x$とする)という2つのデータの組 $(y_i, x_i)$ があるとします。</span>
-<span id="cb22-6"><a href="#cb22-6"></a>$i$ は企業の番号を表しており，$n$ 社のデータがあるとします。</span>
-<span id="cb22-7"><a href="#cb22-7"></a>こんな感じのデータです。</span>
-<span id="cb22-8"><a href="#cb22-8"></a></span>
-<span id="cb22-9"><a href="#cb22-9"></a><span class="pp">|</span> 企業番号<span class="pp">|</span> 売上高 <span class="pp">|</span> 従業員数</span>
-<span id="cb22-10"><a href="#cb22-10"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">| ---</span></span>
-<span id="cb22-11"><a href="#cb22-11"></a><span class="pp">|</span> 1   <span class="pp">|</span> 1000<span class="pp">|</span> 5</span>
-<span id="cb22-12"><a href="#cb22-12"></a><span class="pp">|</span> 2   <span class="pp">|</span> 2000<span class="pp">|</span> 10</span>
-<span id="cb22-13"><a href="#cb22-13"></a><span class="pp">|</span> 3   <span class="pp">|</span> 3000<span class="pp">|</span> 15</span>
-<span id="cb22-14"><a href="#cb22-14"></a><span class="pp">|</span> ... <span class="pp">|</span> ... <span class="pp">|</span> ...</span>
-<span id="cb22-15"><a href="#cb22-15"></a><span class="pp">|</span> n   <span class="pp">|</span> 4500<span class="pp">|</span> 25</span>
-<span id="cb22-16"><a href="#cb22-16"></a></span>
-<span id="cb22-17"><a href="#cb22-17"></a></span>
-<span id="cb22-18"><a href="#cb22-18"></a></span>
-<span id="cb22-19"><a href="#cb22-19"></a>:::{.aside}</span>
-<span id="cb22-20"><a href="#cb22-20"></a>$n$ はサンプルサイズといいます。サンプル数という言い方は誤りです。サンプル数は1です。</span>
-<span id="cb22-21"><a href="#cb22-21"></a>:::</span>
-<span id="cb22-22"><a href="#cb22-22"></a></span>
-<span id="cb22-23"><a href="#cb22-23"></a><span class="co">&lt;!-- たとえば、$i = 1$の会社の売上高と従業員数は$(y_1, x_1) = (1000, 5)$ と表します。 --&gt;</span></span>
-<span id="cb22-24"><a href="#cb22-24"></a></span>
-<span id="cb22-25"><a href="#cb22-25"></a>いま、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>従業員数$x$が増えると売上高$y$は増えるのか否か<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>、という分析をしたいとしましょう。</span>
-<span id="cb22-26"><a href="#cb22-26"></a>つまり、従業員数と売上高との間には**関係**があるのかどうかを調べたい、ということです。</span>
-<span id="cb22-27"><a href="#cb22-27"></a>しかし、関係があるといってもいろんな関係がある可能性があります。</span>
-<span id="cb22-28"><a href="#cb22-28"></a>そこで、変数間の関係で最も基本的なものとして**線形関係** (linear relation) を考えます。</span>
-<span id="cb22-29"><a href="#cb22-29"></a></span>
-<span id="cb22-30"><a href="#cb22-30"></a>:::{.aside}</span>
-<span id="cb22-31"><a href="#cb22-31"></a>中学校の数学で学ぶ$y = ax + b$です。</span>
-<span id="cb22-32"><a href="#cb22-32"></a>:::</span>
-<span id="cb22-33"><a href="#cb22-33"></a></span>
-<span id="cb22-34"><a href="#cb22-34"></a>$y$ は $x$ と線形関係であると考え分析のモデルを構築します。</span>
-<span id="cb22-35"><a href="#cb22-35"></a>これを「単回帰モデル」と呼び、次のように表します。</span>
-<span id="cb22-36"><a href="#cb22-36"></a></span>
-<span id="cb22-37"><a href="#cb22-37"></a>$$</span>
-<span id="cb22-38"><a href="#cb22-38"></a>y_i = \beta_0 + \beta_1 x_i + u_i</span>
-<span id="cb22-39"><a href="#cb22-39"></a>$$</span>
-<span id="cb22-40"><a href="#cb22-40"></a></span>
-<span id="cb22-41"><a href="#cb22-41"></a>ここで各変数は以下のように定義されます。</span>
-<span id="cb22-42"><a href="#cb22-42"></a></span>
-<span id="cb22-43"><a href="#cb22-43"></a><span class="ss">- </span>$y_i$: **従属変数** (dependent variable)、応答変数、または目的変数。</span>
-<span id="cb22-44"><a href="#cb22-44"></a><span class="ss">- </span>$x_i$: **独立変数** (independent variable)、または説明変数。</span>
-<span id="cb22-45"><a href="#cb22-45"></a><span class="ss">- </span>$\beta_0$: **切片** (intercept)。</span>
-<span id="cb22-46"><a href="#cb22-46"></a><span class="ss">- </span>$\beta_1$: **傾き** (slope) または回帰係数。</span>
-<span id="cb22-47"><a href="#cb22-47"></a><span class="ss">- </span>$u_i$: **誤差項** (error term)。モデルがデータを説明できない確率的な変動部分を表します。</span>
-<span id="cb22-48"><a href="#cb22-48"></a></span>
-<span id="cb22-49"><a href="#cb22-49"></a>手元にある売上高$y$と従業員数$x$のデータを使って、横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。</span>
-<span id="cb22-50"><a href="#cb22-50"></a></span>
-<span id="cb22-51"><a href="#cb22-51"></a><span class="in">```{r fig01}</span></span>
-<span id="cb22-52"><a href="#cb22-52"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb22-53"><a href="#cb22-53"></a><span class="co">#| warning: false</span></span>
-<span id="cb22-54"><a href="#cb22-54"></a><span class="co">#| message: false</span></span>
-<span id="cb22-55"><a href="#cb22-55"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, ggthemes, GGally, gt, gtExtra, knitr, kableExtra)</span>
-<span id="cb22-56"><a href="#cb22-56"></a></span>
-<span id="cb22-57"><a href="#cb22-57"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># 乱数のタネ</span></span>
-<span id="cb22-58"><a href="#cb22-58"></a>n <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co"># サンプルサイズ</span></span>
-<span id="cb22-59"><a href="#cb22-59"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">length.out =</span> n) <span class="co"># 独立変数</span></span>
-<span id="cb22-60"><a href="#cb22-60"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="co"># 従属変数</span></span>
-<span id="cb22-61"><a href="#cb22-61"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="co"># データフレームの作成</span></span>
-<span id="cb22-62"><a href="#cb22-62"></a>my_font <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">Sys.info</span>()[<span class="st">"sysname"</span>] <span class="sc">==</span> <span class="st">"Darwin"</span>) <span class="st">"HiraKakuProN-W3"</span> <span class="cf">else</span> <span class="st">"sans"</span></span>
-<span id="cb22-63"><a href="#cb22-63"></a></span>
-<span id="cb22-64"><a href="#cb22-64"></a><span class="co"># 作図</span></span>
-<span id="cb22-65"><a href="#cb22-65"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb22-66"><a href="#cb22-66"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb22-67"><a href="#cb22-67"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
-<span id="cb22-68"><a href="#cb22-68"></a>        <span class="fu">labs</span>(</span>
-<span id="cb22-69"><a href="#cb22-69"></a>        <span class="at">title =</span> <span class="st">"データの散布図"</span>,</span>
-<span id="cb22-70"><a href="#cb22-70"></a>        <span class="at">x =</span> <span class="st">"従業員数 (x)"</span>,</span>
-<span id="cb22-71"><a href="#cb22-71"></a>        <span class="at">y =</span> <span class="st">"売上高 (y)"</span></span>
-<span id="cb22-72"><a href="#cb22-72"></a>    )</span>
-<span id="cb22-73"><a href="#cb22-73"></a></span>
-<span id="cb22-74"><a href="#cb22-74"></a><span class="fu">print</span>(g)</span>
-<span id="cb22-75"><a href="#cb22-75"></a><span class="in">```</span></span>
-<span id="cb22-76"><a href="#cb22-76"></a></span>
-<span id="cb22-77"><a href="#cb22-77"></a>散布図をみると右肩上がりの関係があるように見えますが、もっと明確に変数間の関係を表すために、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>そのデータを最も良く説明できる直線<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>をひこうと思います。</span>
-<span id="cb22-78"><a href="#cb22-78"></a>つまり、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>切片の$\beta_0$と傾きの$\beta_1$を決めるということ<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>です。</span>
-<span id="cb22-79"><a href="#cb22-79"></a>この直線が「モデル」で、それぞれの黒い点とモデルの直線との縦軸方向への距離を「誤差」または「残差」と呼びます。</span>
-<span id="cb22-80"><a href="#cb22-80"></a></span>
-<span id="cb22-81"><a href="#cb22-81"></a></span>
-<span id="cb22-82"><a href="#cb22-82"></a><span class="in">```{r fig02}</span></span>
-<span id="cb22-83"><a href="#cb22-83"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb22-84"><a href="#cb22-84"></a><span class="co">#| warning: false</span></span>
-<span id="cb22-85"><a href="#cb22-85"></a><span class="co">#| message: false</span></span>
-<span id="cb22-86"><a href="#cb22-86"></a><span class="co">#| # 回帰式をlm()で推定</span></span>
-<span id="cb22-87"><a href="#cb22-87"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
-<span id="cb22-88"><a href="#cb22-88"></a><span class="co"># 予測値をpredictedに格納</span></span>
-<span id="cb22-89"><a href="#cb22-89"></a>data<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model)</span>
-<span id="cb22-90"><a href="#cb22-90"></a><span class="co"># OSに合わせてフォントを自動選択（Macならヒラギノ、それ以外ならデフォルト）</span></span>
-<span id="cb22-91"><a href="#cb22-91"></a></span>
-<span id="cb22-92"><a href="#cb22-92"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb22-93"><a href="#cb22-93"></a>    <span class="fu">geom_segment</span>(</span>
-<span id="cb22-94"><a href="#cb22-94"></a>        <span class="fu">aes</span>(<span class="at">xend =</span> x, <span class="at">yend =</span> predicted),</span>
-<span id="cb22-95"><a href="#cb22-95"></a>        <span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
-<span id="cb22-96"><a href="#cb22-96"></a>    ) <span class="sc">+</span></span>
-<span id="cb22-97"><a href="#cb22-97"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb22-98"><a href="#cb22-98"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
-<span id="cb22-99"><a href="#cb22-99"></a>    <span class="fu">labs</span>(</span>
-<span id="cb22-100"><a href="#cb22-100"></a>        <span class="at">title =</span> <span class="st">"回帰式と誤差"</span>,</span>
-<span id="cb22-101"><a href="#cb22-101"></a>        <span class="at">x =</span> <span class="st">"従業員数 (x)"</span>,</span>
-<span id="cb22-102"><a href="#cb22-102"></a>        <span class="at">y =</span> <span class="st">"売上高 (y)"</span></span>
-<span id="cb22-103"><a href="#cb22-103"></a>    ) <span class="sc">+</span></span>
-<span id="cb22-104"><a href="#cb22-104"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb22-105"><a href="#cb22-105"></a>    <span class="fu">theme</span>(</span>
-<span id="cb22-106"><a href="#cb22-106"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">16</span>),</span>
-<span id="cb22-107"><a href="#cb22-107"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb22-108"><a href="#cb22-108"></a>    ) <span class="sc">+</span></span>
-<span id="cb22-109"><a href="#cb22-109"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb22-110"><a href="#cb22-110"></a>        <span class="at">x =</span> <span class="fu">min</span>(data<span class="sc">$</span>x) <span class="sc">+</span> <span class="dv">2</span>,</span>
-<span id="cb22-111"><a href="#cb22-111"></a>        <span class="at">y =</span> <span class="fu">max</span>(data<span class="sc">$</span>y) <span class="sc">+</span> <span class="dv">1</span>,</span>
-<span id="cb22-112"><a href="#cb22-112"></a>        <span class="at">label =</span> <span class="st">"y[i] == beta[0] + beta[1] * x[i] + u[i]"</span>,</span>
-<span id="cb22-113"><a href="#cb22-113"></a>        <span class="at">parse =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb22-114"><a href="#cb22-114"></a>        <span class="at">size =</span> <span class="dv">6</span>, <span class="at">family =</span> my_font</span>
-<span id="cb22-115"><a href="#cb22-115"></a>    )</span>
-<span id="cb22-116"><a href="#cb22-116"></a><span class="fu">print</span>(g)</span>
-<span id="cb22-117"><a href="#cb22-117"></a><span class="in">```</span></span>
-<span id="cb22-118"><a href="#cb22-118"></a></span>
-<span id="cb22-119"><a href="#cb22-119"></a>望ましい性質を備えた直線の引き方の1つとして、ガウス(Gauss)が構築した最小二乗法(Ordinaly Least Square Methods: OLS)について説明します。</span>
-<span id="cb22-120"><a href="#cb22-120"></a></span>
-<span id="cb22-121"><a href="#cb22-121"></a></span>
-<span id="cb22-122"><a href="#cb22-122"></a><span class="fu">## 分析準備</span></span>
-<span id="cb22-123"><a href="#cb22-123"></a></span>
-<span id="cb22-124"><a href="#cb22-124"></a>サンプルデータを読み込みます。</span>
-<span id="cb22-125"><a href="#cb22-125"></a>MS Excelのファイル <span class="in">`.xlsx`</span> なので、<span class="in">`readxl::read_xlsx()`</span> 関数を使います。</span>
-<span id="cb22-126"><a href="#cb22-126"></a>読み込んだデータから、2019年のデータを抽出します。</span>
-<span id="cb22-127"><a href="#cb22-127"></a></span>
-<span id="cb22-128"><a href="#cb22-128"></a><span class="in">```{r code6-1}</span></span>
-<span id="cb22-129"><a href="#cb22-129"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
-<span id="cb22-130"><a href="#cb22-130"></a>firmdata19 <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
-<span id="cb22-131"><a href="#cb22-131"></a>    <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2019</span>) <span class="co"># 2019年を抽出</span></span>
-<span id="cb22-132"><a href="#cb22-132"></a><span class="in">```</span></span>
-<span id="cb22-133"><a href="#cb22-133"></a></span>
-<span id="cb22-134"><a href="#cb22-134"></a>探索的なデータ分析として、変数間の関係を概観するために <span class="in">`GGally`</span> パッケージの <span class="in">`ggpairs()`</span> 関数を使います。</span>
-<span id="cb22-135"><a href="#cb22-135"></a></span>
-<span id="cb22-136"><a href="#cb22-136"></a><span class="in">```{r code6-4}</span></span>
-<span id="cb22-137"><a href="#cb22-137"></a><span class="co">#| message: false</span></span>
-<span id="cb22-138"><a href="#cb22-138"></a>firmdata19 <span class="sc">|&gt;</span></span>
-<span id="cb22-139"><a href="#cb22-139"></a>    <span class="fu">select</span>(sales, mkexp, emp, operating_profit) <span class="sc">|&gt;</span></span>
-<span id="cb22-140"><a href="#cb22-140"></a>    GGally<span class="sc">::</span><span class="fu">ggpairs</span>() <span class="sc">+</span></span>
-<span id="cb22-141"><a href="#cb22-141"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"2変数の関係の概略"</span>)</span>
-<span id="cb22-142"><a href="#cb22-142"></a><span class="in">```</span></span>
-<span id="cb22-143"><a href="#cb22-143"></a></span>
-<span id="cb22-144"><a href="#cb22-144"></a>出力された図を見てみます。</span>
-<span id="cb22-145"><a href="#cb22-145"></a></span>
-<span id="cb22-146"><a href="#cb22-146"></a><span class="ss">* </span>**対角線 (分布)**: 売上高 <span class="in">`sales`</span> や従業員数 <span class="in">`emp`</span>、営業利益 <span class="in">`operating_profit`</span> は値の小さい左側にデータが集まっており、右側に裾を引く歪んだ分布であることがわかります。</span>
-<span id="cb22-147"><a href="#cb22-147"></a><span class="ss">* </span>**右上 (相関係数)**: <span class="in">`Corr:`</span> として相関係数が表示されています。売上高 <span class="in">`sales`</span> と従業員数 <span class="in">`emp`</span> や営業利益 <span class="in">`operating_profit`</span> の相関が高く、また営業利益と従業員数にも強い正の相関があります。</span>
-<span id="cb22-148"><a href="#cb22-148"></a><span class="ss">* </span>**左下 (散布図)**: 2変数間の散布図が表示されています。異常値の有無などを確認できます。</span>
-<span id="cb22-149"><a href="#cb22-149"></a></span>
-<span id="cb22-150"><a href="#cb22-150"></a>こういった図でデータを概観し、線形回帰モデルが適切かどうかを判断したり、異常値の有無を確認して分析結果の解釈に役立てたりします。</span>
-<span id="cb22-151"><a href="#cb22-151"></a></span>
-<span id="cb22-152"><a href="#cb22-152"></a>次に、図ではなく数値としてデータの特徴をつかむため記述統計量を計算します。</span>
-<span id="cb22-153"><a href="#cb22-153"></a>ここでは基本関数 <span class="in">`summary()`</span> を使って計算します。</span>
-<span id="cb22-154"><a href="#cb22-154"></a></span>
-<span id="cb22-155"><a href="#cb22-155"></a><span class="in">```{r code6-5}</span></span>
-<span id="cb22-156"><a href="#cb22-156"></a>ds1 <span class="ot">&lt;-</span> firmdata19 <span class="sc">|&gt;</span></span>
-<span id="cb22-157"><a href="#cb22-157"></a>    <span class="fu">select</span>(sales, mkexp, emp, operating_profit) <span class="sc">|&gt;</span> <span class="co"># 変数を選択</span></span>
-<span id="cb22-158"><a href="#cb22-158"></a>    <span class="fu">summary</span>() <span class="co"># 記述統計量</span></span>
-<span id="cb22-159"><a href="#cb22-159"></a></span>
-<span id="cb22-160"><a href="#cb22-160"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(ds1, <span class="at">align =</span> <span class="st">"cccc"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-161"><a href="#cb22-161"></a>    kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="st">"hold_position"</span>)</span>
-<span id="cb22-162"><a href="#cb22-162"></a><span class="in">```</span></span>
-<span id="cb22-163"><a href="#cb22-163"></a></span>
-<span id="cb22-164"><a href="#cb22-164"></a></span>
-<span id="cb22-165"><a href="#cb22-165"></a><span class="fu">## 単回帰モデルと予測値</span></span>
-<span id="cb22-166"><a href="#cb22-166"></a></span>
-<span id="cb22-167"><a href="#cb22-167"></a>膨大なデータを目の前にした我々は、そのデータを最も良く「説明」できるシンプルなモデルを特定したいと考えます。</span>
-<span id="cb22-168"><a href="#cb22-168"></a>最も基本的な関数 $f:x \rightarrow y$ として1次関数を考えます。</span>
-<span id="cb22-169"><a href="#cb22-169"></a></span>
-<span id="cb22-170"><a href="#cb22-170"></a>$$</span>
-<span id="cb22-171"><a href="#cb22-171"></a>y = \beta_0 + \beta_1 x</span>
-<span id="cb22-172"><a href="#cb22-172"></a>$$</span>
-<span id="cb22-173"><a href="#cb22-173"></a></span>
-<span id="cb22-174"><a href="#cb22-174"></a>ここで、$\beta_0$ は切片、$\beta_1$ は傾きを表します。</span>
-<span id="cb22-175"><a href="#cb22-175"></a>何らかの方法で$\beta_0$と$\beta_1$を決めたとしよう。</span>
-<span id="cb22-176"><a href="#cb22-176"></a>その切片を $\hat{\beta}_0$、傾きを $\hat{\beta}_1$ とします。</span>
-<span id="cb22-177"><a href="#cb22-177"></a>$x$ に手元にあるデータ $x_i$ を代入して計算できる値を**予測値** (predicted value) といい、$\hat{y}_i$ と表します。</span>
-<span id="cb22-178"><a href="#cb22-178"></a></span>
-<span id="cb22-179"><a href="#cb22-179"></a>$$</span>
-<span id="cb22-180"><a href="#cb22-180"></a>\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i</span>
-<span id="cb22-181"><a href="#cb22-181"></a>$$</span>
-<span id="cb22-182"><a href="#cb22-182"></a></span>
-<span id="cb22-183"><a href="#cb22-183"></a>このとき、実際の観測値 $y_i$ と予測値 $\hat{y}_i$ の差を**残差** (residual) といい、$e_i$ で表します。</span>
-<span id="cb22-184"><a href="#cb22-184"></a></span>
-<span id="cb22-185"><a href="#cb22-185"></a>$$</span>
-<span id="cb22-186"><a href="#cb22-186"></a>e_i = y_i - \hat{y}_i</span>
-<span id="cb22-187"><a href="#cb22-187"></a>$$</span>
-<span id="cb22-188"><a href="#cb22-188"></a></span>
-<span id="cb22-189"><a href="#cb22-189"></a>回帰分析で最も良く用いられており、望ましい性質をもつ推定値を計算できる方法は最小二乗法といい、この残差$e_i$の二乗和 $\sum e_i^2$ を最小にするように $\hat{\beta}_0$ と $\hat{\beta}_1$ を決定します。</span>
-<span id="cb22-190"><a href="#cb22-190"></a></span>
-<span id="cb22-191"><a href="#cb22-191"></a>Rでは <span class="in">`lm()`</span> 関数を使って計算できます。</span>
-<span id="cb22-192"><a href="#cb22-192"></a>ここでは、売上高が従業員数で説明できるかを調べる単回帰モデルを構築します。</span>
-<span id="cb22-193"><a href="#cb22-193"></a>$$</span>
-<span id="cb22-194"><a href="#cb22-194"></a>sales_i = \beta_0 + \beta_1 emp_i + u_i</span>
-<span id="cb22-195"><a href="#cb22-195"></a>$$</span>
-<span id="cb22-196"><a href="#cb22-196"></a></span>
-<span id="cb22-197"><a href="#cb22-197"></a>Rだと<span class="in">`従属変数 ~ 独立変数`</span>という形で回帰式を指定します。</span>
-<span id="cb22-198"><a href="#cb22-198"></a></span>
-<span id="cb22-199"><a href="#cb22-199"></a><span class="in">```{r ols_model}</span></span>
-<span id="cb22-200"><a href="#cb22-200"></a><span class="co"># 回帰モデルを構築</span></span>
-<span id="cb22-201"><a href="#cb22-201"></a>ols_model <span class="ot">&lt;-</span> <span class="st">"sales ~ emp"</span> <span class="co"># 回帰式の定義</span></span>
-<span id="cb22-202"><a href="#cb22-202"></a><span class="in">```</span></span>
-<span id="cb22-203"><a href="#cb22-203"></a></span>
-<span id="cb22-204"><a href="#cb22-204"></a>モデルを最小自乗法で推定するには、<span class="in">`lm()`</span>関数を使います。</span>
-<span id="cb22-205"><a href="#cb22-205"></a><span class="in">`lm()`</span>関数の第1引数に回帰式を、第2引数にデータフレームを指定します。</span>
-<span id="cb22-206"><a href="#cb22-206"></a>推定結果を<span class="in">`reg1`</span>というオブジェクトに格納し、回帰係数を表示するには<span class="in">`coef()`</span>関数を使います。</span>
-<span id="cb22-207"><a href="#cb22-207"></a></span>
-<span id="cb22-208"><a href="#cb22-208"></a><span class="in">```{r code6-6}</span></span>
-<span id="cb22-209"><a href="#cb22-209"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> ols_model, <span class="at">data =</span> firmdata19)</span>
-<span id="cb22-210"><a href="#cb22-210"></a><span class="fu">coef</span>(reg1) <span class="co"># 回帰係数</span></span>
-<span id="cb22-211"><a href="#cb22-211"></a><span class="in">```</span></span>
-<span id="cb22-212"><a href="#cb22-212"></a></span>
-<span id="cb22-213"><a href="#cb22-213"></a>最小二乗法で推定された係数は以下のようになります。</span>
-<span id="cb22-214"><a href="#cb22-214"></a></span>
-<span id="cb22-215"><a href="#cb22-215"></a>$$</span>
-<span id="cb22-216"><a href="#cb22-216"></a>\hat{sales}_i = 22113.98050 + 58.14081 \times emp_i</span>
-<span id="cb22-217"><a href="#cb22-217"></a>$$</span>
-<span id="cb22-218"><a href="#cb22-218"></a></span>
-<span id="cb22-219"><a href="#cb22-219"></a>従業員が10名のときの売上高の予測値は22695.3886となり、従業員が1名増えるごとに売上高が約58.14増加すると予測されます。</span>
-<span id="cb22-220"><a href="#cb22-220"></a></span>
-<span id="cb22-221"><a href="#cb22-221"></a></span>
-<span id="cb22-222"><a href="#cb22-222"></a><span class="fu">## 回帰分析における推定と検定</span></span>
-<span id="cb22-223"><a href="#cb22-223"></a></span>
-<span id="cb22-224"><a href="#cb22-224"></a><span class="fu">### 回帰分析と統計的推測</span></span>
-<span id="cb22-225"><a href="#cb22-225"></a></span>
-<span id="cb22-226"><a href="#cb22-226"></a>この節は回帰分析の理屈を学習する上で重要な章なので、時間を掛けて学習することをオススメします。</span>
-<span id="cb22-227"><a href="#cb22-227"></a></span>
-<span id="cb22-228"><a href="#cb22-228"></a><span class="fu">### 企業データを用いた回帰分析の実行</span></span>
-<span id="cb22-229"><a href="#cb22-229"></a></span>
-<span id="cb22-230"><a href="#cb22-230"></a>上で推定した回帰分析の結果をみていきます。</span>
-<span id="cb22-231"><a href="#cb22-231"></a><span class="in">`lm()`</span>関数で推定した結果を<span class="in">`reg1`</span>というオブジェクトに格納しているので、その中身をみてみましょう。</span>
-<span id="cb22-232"><a href="#cb22-232"></a>詳細を表示するには<span class="in">`summary()`</span>関数を使います。</span>
-<span id="cb22-233"><a href="#cb22-233"></a></span>
-<span id="cb22-234"><a href="#cb22-234"></a>:::{.aside}</span>
-<span id="cb22-235"><a href="#cb22-235"></a><span class="in">`summary()`</span>関数は引数に指定するオブジェクトの型により異なる結果を返します。</span>
-<span id="cb22-236"><a href="#cb22-236"></a>ここでは、<span class="in">`lm`</span>オブジェクトを引数に指定しているので、回帰分析の結果が表示されます。</span>
-<span id="cb22-237"><a href="#cb22-237"></a>:::</span>
-<span id="cb22-238"><a href="#cb22-238"></a></span>
-<span id="cb22-239"><a href="#cb22-239"></a></span>
-<span id="cb22-240"><a href="#cb22-240"></a></span>
-<span id="cb22-241"><a href="#cb22-241"></a><span class="in">```{r code6-7}</span></span>
-<span id="cb22-242"><a href="#cb22-242"></a><span class="fu">summary</span>(reg1)</span>
-<span id="cb22-243"><a href="#cb22-243"></a><span class="in">```</span></span>
-<span id="cb22-244"><a href="#cb22-244"></a></span>
-<span id="cb22-245"><a href="#cb22-245"></a></span>
-<span id="cb22-246"><a href="#cb22-246"></a><span class="in">```{r code6-8}</span></span>
-<span id="cb22-247"><a href="#cb22-247"></a><span class="fu">confint</span>(reg1, <span class="at">level =</span> <span class="fl">0.99</span>)</span>
-<span id="cb22-248"><a href="#cb22-248"></a><span class="in">```</span></span>
-<span id="cb22-249"><a href="#cb22-249"></a></span>
-<span id="cb22-250"><a href="#cb22-250"></a></span>
-<span id="cb22-251"><a href="#cb22-251"></a><span class="fu">### 回帰係数の解釈</span></span>
-<span id="cb22-252"><a href="#cb22-252"></a></span>
-<span id="cb22-253"><a href="#cb22-253"></a>この節は難しいので、教科書の解説に補足を加えながら説明します。</span>
-<span id="cb22-254"><a href="#cb22-254"></a>例として次のような重回帰モデルを考えます。</span>
-<span id="cb22-255"><a href="#cb22-255"></a></span>
-<span id="cb22-256"><a href="#cb22-256"></a>$$</span>
-<span id="cb22-257"><a href="#cb22-257"></a>y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i</span>
-<span id="cb22-258"><a href="#cb22-258"></a>$$</span>
-<span id="cb22-259"><a href="#cb22-259"></a></span>
-<span id="cb22-260"><a href="#cb22-260"></a>ここで$x_{1i}$の微少な変化が$y_i$に与える影響を知りたいとします。</span>
-<span id="cb22-261"><a href="#cb22-261"></a>この回帰モデルを$x_{1i}$で偏微分すると、次のようになります。</span>
-<span id="cb22-262"><a href="#cb22-262"></a></span>
-<span id="cb22-263"><a href="#cb22-263"></a>$$</span>
-<span id="cb22-264"><a href="#cb22-264"></a>\frac{\partial y_i}{\partial x_{1i}} = \beta_1</span>
-<span id="cb22-265"><a href="#cb22-265"></a>$$</span>
-<span id="cb22-266"><a href="#cb22-266"></a></span>
-<span id="cb22-267"><a href="#cb22-267"></a>つまり$x_{2i}$を一定として$x_{1i}$が1単位変化した場合の$y_i$の変化量は$\beta_1$である、ということです。このことを**他の変数を一定とした場合の効果** (ceteris paribus effect) といい、様々な要因で決定されているであろう従属変数に対して、特定の独立変数が与える影響を測定する際に重要な考え方となります。</span>
-<span id="cb22-268"><a href="#cb22-268"></a></span>
-<span id="cb22-269"><a href="#cb22-269"></a></span>
-<span id="cb22-270"><a href="#cb22-270"></a></span>
-<span id="cb22-271"><a href="#cb22-271"></a></span>
-<span id="cb22-272"><a href="#cb22-272"></a></span>
-<span id="cb22-273"><a href="#cb22-273"></a><span class="fu">### 単回帰モデルと重回帰モデルの比較</span></span>
-<span id="cb22-274"><a href="#cb22-274"></a></span>
-<span id="cb22-275"><a href="#cb22-275"></a>営業利益<span class="in">`operating_profit`</span>を従属変数、広告宣伝費<span class="in">`adv`</span>を独立変数とした単回帰モデルを推定します。</span>
-<span id="cb22-276"><a href="#cb22-276"></a></span>
-<span id="cb22-277"><a href="#cb22-277"></a><span class="in">```{r code6-9}</span></span>
-<span id="cb22-278"><a href="#cb22-278"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(operating_profit <span class="sc">~</span> adv, <span class="at">data =</span> firmdata19)</span>
-<span id="cb22-279"><a href="#cb22-279"></a><span class="fu">summary</span>(reg2)</span>
-<span id="cb22-280"><a href="#cb22-280"></a><span class="in">```</span></span>
-<span id="cb22-281"><a href="#cb22-281"></a></span>
-<span id="cb22-282"><a href="#cb22-282"></a><span class="in">`confint()`</span>関数を使って信頼区間を計算します。</span>
-<span id="cb22-283"><a href="#cb22-283"></a></span>
-<span id="cb22-284"><a href="#cb22-284"></a><span class="in">```{r code6-10}</span></span>
-<span id="cb22-285"><a href="#cb22-285"></a><span class="fu">confint</span>(reg2)</span>
-<span id="cb22-286"><a href="#cb22-286"></a><span class="in">```</span></span>
-<span id="cb22-287"><a href="#cb22-287"></a></span>
-<span id="cb22-288"><a href="#cb22-288"></a>次に、営業利益<span class="in">`operating_profit`</span>を従属変数、広告宣伝費<span class="in">`adv`</span>、温度<span class="in">`temp`</span>、従業員数<span class="in">`emp`</span>、労働費用<span class="in">`labor_cost`</span>、総資産<span class="in">`total_assets`</span>、研究開発費<span class="in">`rd`</span>を独立変数とした重回帰モデルを推定します。</span>
-<span id="cb22-289"><a href="#cb22-289"></a>教科書とは異なりますが、先にモデルを定義してから<span class="in">`lm()`</span>関数に渡す方法で推定します。</span>
-<span id="cb22-290"><a href="#cb22-290"></a></span>
-<span id="cb22-293"><a href="#cb22-293"></a><span class="in">```{r}</span></span>
-<span id="cb22-294"><a href="#cb22-294"></a>multi_model <span class="ot">&lt;-</span> <span class="st">"operating_profit ~ adv + temp + emp + labor_cost + total_assets + rd"</span></span>
-<span id="cb22-295"><a href="#cb22-295"></a><span class="in">```</span></span>
-<span id="cb22-296"><a href="#cb22-296"></a></span>
-<span id="cb22-297"><a href="#cb22-297"></a>この回帰モデルを<span class="in">`lm()`</span>関数で推定し、結果を<span class="in">`summary()`</span>関数で表示します。</span>
-<span id="cb22-298"><a href="#cb22-298"></a></span>
-<span id="cb22-299"><a href="#cb22-299"></a><span class="in">```{r code6-11}</span></span>
-<span id="cb22-300"><a href="#cb22-300"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> multi_model, <span class="at">data =</span> firmdata19)</span>
-<span id="cb22-301"><a href="#cb22-301"></a><span class="fu">summary</span>(reg3)</span>
-<span id="cb22-302"><a href="#cb22-302"></a><span class="in">```</span></span>
-<span id="cb22-303"><a href="#cb22-303"></a></span>
-<span id="cb22-304"><a href="#cb22-304"></a><span class="in">`confint()`</span>関数を使って信頼区間を計算します。</span>
-<span id="cb22-305"><a href="#cb22-305"></a></span>
-<span id="cb22-306"><a href="#cb22-306"></a><span class="in">```{r code6-12}</span></span>
-<span id="cb22-307"><a href="#cb22-307"></a><span class="fu">confint</span>(reg3)</span>
-<span id="cb22-308"><a href="#cb22-308"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">## 第6章 回帰分析</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a>6章は変数間の関係を考察する手法の1つである**回帰分析** (Regression Analysis) について説明します。</span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a>いま手元に売上高($y$とする)と従業員数($x$とする)という2つのデータの組 $(y_i, x_i)$ があるとします。</span>
+<span id="cb18-6"><a href="#cb18-6"></a>$i$ は企業の番号を表しており，$n$ 社のデータがあるとします。</span>
+<span id="cb18-7"><a href="#cb18-7"></a>こんな感じのデータです。</span>
+<span id="cb18-8"><a href="#cb18-8"></a></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="pp">|</span> 企業番号<span class="pp">|</span> 売上高 <span class="pp">|</span> 従業員数</span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">| ---</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="pp">|</span> 1   <span class="pp">|</span> 1000<span class="pp">|</span> 5</span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="pp">|</span> 2   <span class="pp">|</span> 2000<span class="pp">|</span> 10</span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="pp">|</span> 3   <span class="pp">|</span> 3000<span class="pp">|</span> 15</span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="pp">|</span> ... <span class="pp">|</span> ... <span class="pp">|</span> ...</span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="pp">|</span> n   <span class="pp">|</span> 4500<span class="pp">|</span> 25</span>
+<span id="cb18-16"><a href="#cb18-16"></a></span>
+<span id="cb18-17"><a href="#cb18-17"></a></span>
+<span id="cb18-18"><a href="#cb18-18"></a></span>
+<span id="cb18-19"><a href="#cb18-19"></a>:::{.aside}</span>
+<span id="cb18-20"><a href="#cb18-20"></a>$n$ はサンプルサイズといいます。サンプル数という言い方は誤りです。サンプル数は1です。</span>
+<span id="cb18-21"><a href="#cb18-21"></a>:::</span>
+<span id="cb18-22"><a href="#cb18-22"></a></span>
+<span id="cb18-23"><a href="#cb18-23"></a><span class="co">&lt;!-- たとえば、$i = 1$の会社の売上高と従業員数は$(y_1, x_1) = (1000, 5)$ と表します。 --&gt;</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a></span>
+<span id="cb18-25"><a href="#cb18-25"></a>いま、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>従業員数$x$が増えると売上高$y$は増えるのか否か<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>、という分析をしたいとしましょう。</span>
+<span id="cb18-26"><a href="#cb18-26"></a>つまり、従業員数と売上高との間には**関係**があるのかどうかを調べたい、ということです。</span>
+<span id="cb18-27"><a href="#cb18-27"></a>しかし、関係があるといってもいろんな関係がある可能性があります。</span>
+<span id="cb18-28"><a href="#cb18-28"></a>そこで、変数間の関係で最も基本的なものとして**線形関係** (linear relation) を考えます。</span>
+<span id="cb18-29"><a href="#cb18-29"></a></span>
+<span id="cb18-30"><a href="#cb18-30"></a>:::{.aside}</span>
+<span id="cb18-31"><a href="#cb18-31"></a>中学校の数学で学ぶ$y = ax + b$です。</span>
+<span id="cb18-32"><a href="#cb18-32"></a>:::</span>
+<span id="cb18-33"><a href="#cb18-33"></a></span>
+<span id="cb18-34"><a href="#cb18-34"></a>$y$ は $x$ と線形関係であると考え分析のモデルを構築します。</span>
+<span id="cb18-35"><a href="#cb18-35"></a>これを「単回帰モデル」と呼び、次のように表します。</span>
+<span id="cb18-36"><a href="#cb18-36"></a></span>
+<span id="cb18-37"><a href="#cb18-37"></a>$$</span>
+<span id="cb18-38"><a href="#cb18-38"></a>y_i = \beta_0 + \beta_1 x_i + u_i</span>
+<span id="cb18-39"><a href="#cb18-39"></a>$$</span>
+<span id="cb18-40"><a href="#cb18-40"></a></span>
+<span id="cb18-41"><a href="#cb18-41"></a>ここで各変数は以下のように定義されます。</span>
+<span id="cb18-42"><a href="#cb18-42"></a></span>
+<span id="cb18-43"><a href="#cb18-43"></a><span class="ss">- </span>$y_i$: **従属変数** (dependent variable)、応答変数、または目的変数。</span>
+<span id="cb18-44"><a href="#cb18-44"></a><span class="ss">- </span>$x_i$: **独立変数** (independent variable)、または説明変数。</span>
+<span id="cb18-45"><a href="#cb18-45"></a><span class="ss">- </span>$\beta_0$: **切片** (intercept)。</span>
+<span id="cb18-46"><a href="#cb18-46"></a><span class="ss">- </span>$\beta_1$: **傾き** (slope) または回帰係数。</span>
+<span id="cb18-47"><a href="#cb18-47"></a><span class="ss">- </span>$u_i$: **誤差項** (error term)。モデルがデータを説明できない確率的な変動部分を表します。</span>
+<span id="cb18-48"><a href="#cb18-48"></a></span>
+<span id="cb18-49"><a href="#cb18-49"></a>手元にある売上高$y$と従業員数$x$のデータを使って、横軸を従業員数、縦軸を売上高とした散布図に描くと次のようになります。</span>
+<span id="cb18-50"><a href="#cb18-50"></a></span>
+<span id="cb18-51"><a href="#cb18-51"></a><span class="in">```{r fig01, filename="従業員数と売上高の散布図"}</span></span>
+<span id="cb18-52"><a href="#cb18-52"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb18-53"><a href="#cb18-53"></a><span class="co">#| warning: false</span></span>
+<span id="cb18-54"><a href="#cb18-54"></a><span class="co">#| message: false</span></span>
+<span id="cb18-55"><a href="#cb18-55"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, ggthemes, GGally, gt, gtExtra, knitr, kableExtra)</span>
+<span id="cb18-56"><a href="#cb18-56"></a></span>
+<span id="cb18-57"><a href="#cb18-57"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># 乱数のタネ</span></span>
+<span id="cb18-58"><a href="#cb18-58"></a>n <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co"># サンプルサイズ</span></span>
+<span id="cb18-59"><a href="#cb18-59"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">length.out =</span> n) <span class="co"># 独立変数</span></span>
+<span id="cb18-60"><a href="#cb18-60"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="co"># 従属変数</span></span>
+<span id="cb18-61"><a href="#cb18-61"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="co"># データフレームの作成</span></span>
+<span id="cb18-62"><a href="#cb18-62"></a>my_font <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">Sys.info</span>()[<span class="st">"sysname"</span>] <span class="sc">==</span> <span class="st">"Darwin"</span>) <span class="st">"HiraKakuProN-W3"</span> <span class="cf">else</span> <span class="st">"sans"</span></span>
+<span id="cb18-63"><a href="#cb18-63"></a></span>
+<span id="cb18-64"><a href="#cb18-64"></a><span class="co"># 作図</span></span>
+<span id="cb18-65"><a href="#cb18-65"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb18-66"><a href="#cb18-66"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb18-67"><a href="#cb18-67"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
+<span id="cb18-68"><a href="#cb18-68"></a>        <span class="fu">labs</span>(</span>
+<span id="cb18-69"><a href="#cb18-69"></a>        <span class="at">title =</span> <span class="st">"データの散布図"</span>,</span>
+<span id="cb18-70"><a href="#cb18-70"></a>        <span class="at">x =</span> <span class="st">"従業員数 (x)"</span>,</span>
+<span id="cb18-71"><a href="#cb18-71"></a>        <span class="at">y =</span> <span class="st">"売上高 (y)"</span></span>
+<span id="cb18-72"><a href="#cb18-72"></a>    )</span>
+<span id="cb18-73"><a href="#cb18-73"></a></span>
+<span id="cb18-74"><a href="#cb18-74"></a><span class="fu">print</span>(g)</span>
+<span id="cb18-75"><a href="#cb18-75"></a><span class="in">```</span></span>
+<span id="cb18-76"><a href="#cb18-76"></a></span>
+<span id="cb18-77"><a href="#cb18-77"></a>散布図をみると右肩上がりの関係があるように見えますが、もっと明確に変数間の関係を表すために、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>そのデータを最も良く説明できる直線<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>をひこうと思います。</span>
+<span id="cb18-78"><a href="#cb18-78"></a>つまり、<span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"markp"</span><span class="dt">&gt;</span>切片の$\beta_0$と傾きの$\beta_1$を決めるということ<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span>です。</span>
+<span id="cb18-79"><a href="#cb18-79"></a>この直線が「モデル」で、それぞれの黒い点とモデルの直線との縦軸方向への距離を「誤差」または「残差」と呼びます。</span>
+<span id="cb18-80"><a href="#cb18-80"></a></span>
+<span id="cb18-81"><a href="#cb18-81"></a></span>
+<span id="cb18-82"><a href="#cb18-82"></a><span class="in">```{r fig02, filename="回帰式と誤差"}</span></span>
+<span id="cb18-83"><a href="#cb18-83"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb18-84"><a href="#cb18-84"></a><span class="co">#| warning: false</span></span>
+<span id="cb18-85"><a href="#cb18-85"></a><span class="co">#| message: false</span></span>
+<span id="cb18-86"><a href="#cb18-86"></a><span class="co">#| # 回帰式をlm()で推定</span></span>
+<span id="cb18-87"><a href="#cb18-87"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
+<span id="cb18-88"><a href="#cb18-88"></a><span class="co"># 予測値をpredictedに格納</span></span>
+<span id="cb18-89"><a href="#cb18-89"></a>data<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model)</span>
+<span id="cb18-90"><a href="#cb18-90"></a><span class="co"># OSに合わせてフォントを自動選択（Macならヒラギノ、それ以外ならデフォルト）</span></span>
+<span id="cb18-91"><a href="#cb18-91"></a></span>
+<span id="cb18-92"><a href="#cb18-92"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb18-93"><a href="#cb18-93"></a>    <span class="fu">geom_segment</span>(</span>
+<span id="cb18-94"><a href="#cb18-94"></a>        <span class="fu">aes</span>(<span class="at">xend =</span> x, <span class="at">yend =</span> predicted),</span>
+<span id="cb18-95"><a href="#cb18-95"></a>        <span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
+<span id="cb18-96"><a href="#cb18-96"></a>    ) <span class="sc">+</span></span>
+<span id="cb18-97"><a href="#cb18-97"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb18-98"><a href="#cb18-98"></a>    <span class="fu">theme_economist_white</span>(<span class="at">base_family =</span> my_font) <span class="sc">+</span></span>
+<span id="cb18-99"><a href="#cb18-99"></a>    <span class="fu">labs</span>(</span>
+<span id="cb18-100"><a href="#cb18-100"></a>        <span class="at">title =</span> <span class="st">"回帰式と誤差"</span>,</span>
+<span id="cb18-101"><a href="#cb18-101"></a>        <span class="at">x =</span> <span class="st">"従業員数 (x)"</span>,</span>
+<span id="cb18-102"><a href="#cb18-102"></a>        <span class="at">y =</span> <span class="st">"売上高 (y)"</span></span>
+<span id="cb18-103"><a href="#cb18-103"></a>    ) <span class="sc">+</span></span>
+<span id="cb18-104"><a href="#cb18-104"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb18-105"><a href="#cb18-105"></a>    <span class="fu">theme</span>(</span>
+<span id="cb18-106"><a href="#cb18-106"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">16</span>),</span>
+<span id="cb18-107"><a href="#cb18-107"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb18-108"><a href="#cb18-108"></a>    ) <span class="sc">+</span></span>
+<span id="cb18-109"><a href="#cb18-109"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb18-110"><a href="#cb18-110"></a>        <span class="at">x =</span> <span class="fu">min</span>(data<span class="sc">$</span>x) <span class="sc">+</span> <span class="dv">2</span>,</span>
+<span id="cb18-111"><a href="#cb18-111"></a>        <span class="at">y =</span> <span class="fu">max</span>(data<span class="sc">$</span>y) <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb18-112"><a href="#cb18-112"></a>        <span class="at">label =</span> <span class="st">"y[i] == beta[0] + beta[1] * x[i] + u[i]"</span>,</span>
+<span id="cb18-113"><a href="#cb18-113"></a>        <span class="at">parse =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-114"><a href="#cb18-114"></a>        <span class="at">size =</span> <span class="dv">6</span>, <span class="at">family =</span> my_font</span>
+<span id="cb18-115"><a href="#cb18-115"></a>    )</span>
+<span id="cb18-116"><a href="#cb18-116"></a><span class="fu">print</span>(g)</span>
+<span id="cb18-117"><a href="#cb18-117"></a><span class="in">```</span></span>
+<span id="cb18-118"><a href="#cb18-118"></a></span>
+<span id="cb18-119"><a href="#cb18-119"></a>望ましい性質を備えた直線の引き方の1つとして、ガウス(Gauss)が構築した最小二乗法(Ordinaly Least Square Methods: OLS)について説明します。</span>
+<span id="cb18-120"><a href="#cb18-120"></a></span>
+<span id="cb18-121"><a href="#cb18-121"></a></span>
+<span id="cb18-122"><a href="#cb18-122"></a><span class="fu">## 分析準備</span></span>
+<span id="cb18-123"><a href="#cb18-123"></a></span>
+<span id="cb18-124"><a href="#cb18-124"></a>サンプルデータを読み込みます。</span>
+<span id="cb18-125"><a href="#cb18-125"></a>MS Excelのファイル <span class="in">`.xlsx`</span> なので、<span class="in">`readxl::read_xlsx()`</span> 関数を使います。</span>
+<span id="cb18-126"><a href="#cb18-126"></a>読み込んだデータから、2019年のデータを抽出します。</span>
+<span id="cb18-127"><a href="#cb18-127"></a></span>
+<span id="cb18-128"><a href="#cb18-128"></a><span class="in">```{r code6-1, filename="code 6-1 Excelデータの読み込み"}</span></span>
+<span id="cb18-129"><a href="#cb18-129"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
+<span id="cb18-130"><a href="#cb18-130"></a>firmdata19 <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
+<span id="cb18-131"><a href="#cb18-131"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2019</span>) <span class="co"># 2019年を抽出</span></span>
+<span id="cb18-132"><a href="#cb18-132"></a><span class="in">```</span></span>
+<span id="cb18-133"><a href="#cb18-133"></a></span>
+<span id="cb18-134"><a href="#cb18-134"></a>探索的なデータ分析として、変数間の関係を概観するために <span class="in">`GGally`</span> パッケージの <span class="in">`ggpairs()`</span> 関数を使います。</span>
+<span id="cb18-135"><a href="#cb18-135"></a></span>
+<span id="cb18-136"><a href="#cb18-136"></a><span class="in">```{r code6-4, filename="code 6-4 変数間の関係の概略"}</span></span>
+<span id="cb18-137"><a href="#cb18-137"></a><span class="co">#| message: false</span></span>
+<span id="cb18-138"><a href="#cb18-138"></a>firmdata19 <span class="sc">|&gt;</span></span>
+<span id="cb18-139"><a href="#cb18-139"></a>    <span class="fu">select</span>(sales, mkexp, emp, operating_profit) <span class="sc">|&gt;</span></span>
+<span id="cb18-140"><a href="#cb18-140"></a>    GGally<span class="sc">::</span><span class="fu">ggpairs</span>() <span class="sc">+</span></span>
+<span id="cb18-141"><a href="#cb18-141"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"2変数の関係の概略"</span>)</span>
+<span id="cb18-142"><a href="#cb18-142"></a><span class="in">```</span></span>
+<span id="cb18-143"><a href="#cb18-143"></a></span>
+<span id="cb18-144"><a href="#cb18-144"></a>出力された図を見てみます。</span>
+<span id="cb18-145"><a href="#cb18-145"></a></span>
+<span id="cb18-146"><a href="#cb18-146"></a><span class="ss">* </span>**対角線 (分布)**: 売上高 <span class="in">`sales`</span> や従業員数 <span class="in">`emp`</span>、営業利益 <span class="in">`operating_profit`</span> は値の小さい左側にデータが集まっており、右側に裾を引く歪んだ分布であることがわかります。</span>
+<span id="cb18-147"><a href="#cb18-147"></a><span class="ss">* </span>**右上 (相関係数)**: <span class="in">`Corr:`</span> として相関係数が表示されています。売上高 <span class="in">`sales`</span> と従業員数 <span class="in">`emp`</span> や営業利益 <span class="in">`operating_profit`</span> の相関が高く、また営業利益と従業員数にも強い正の相関があります。</span>
+<span id="cb18-148"><a href="#cb18-148"></a><span class="ss">* </span>**左下 (散布図)**: 2変数間の散布図が表示されています。異常値の有無などを確認できます。</span>
+<span id="cb18-149"><a href="#cb18-149"></a></span>
+<span id="cb18-150"><a href="#cb18-150"></a>こういった図でデータを概観し、線形回帰モデルが適切かどうかを判断したり、異常値の有無を確認して分析結果の解釈に役立てたりします。</span>
+<span id="cb18-151"><a href="#cb18-151"></a></span>
+<span id="cb18-152"><a href="#cb18-152"></a>次に、図ではなく数値としてデータの特徴をつかむため記述統計量を計算します。</span>
+<span id="cb18-153"><a href="#cb18-153"></a>ここでは基本関数 <span class="in">`summary()`</span> を使って計算します。</span>
+<span id="cb18-154"><a href="#cb18-154"></a></span>
+<span id="cb18-155"><a href="#cb18-155"></a><span class="in">```{r code6-5}</span></span>
+<span id="cb18-156"><a href="#cb18-156"></a>ds1 <span class="ot">&lt;-</span> firmdata19 <span class="sc">|&gt;</span></span>
+<span id="cb18-157"><a href="#cb18-157"></a>    <span class="fu">select</span>(sales, mkexp, emp, operating_profit) <span class="sc">|&gt;</span> <span class="co"># 変数を選択</span></span>
+<span id="cb18-158"><a href="#cb18-158"></a>    <span class="fu">summary</span>() <span class="co"># 記述統計量</span></span>
+<span id="cb18-159"><a href="#cb18-159"></a></span>
+<span id="cb18-160"><a href="#cb18-160"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(ds1, <span class="at">align =</span> <span class="st">"cccc"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-161"><a href="#cb18-161"></a>    kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="st">"hold_position"</span>)</span>
+<span id="cb18-162"><a href="#cb18-162"></a><span class="in">```</span></span>
+<span id="cb18-163"><a href="#cb18-163"></a></span>
+<span id="cb18-164"><a href="#cb18-164"></a></span>
+<span id="cb18-165"><a href="#cb18-165"></a><span class="fu">## 単回帰モデルと予測値</span></span>
+<span id="cb18-166"><a href="#cb18-166"></a></span>
+<span id="cb18-167"><a href="#cb18-167"></a>膨大なデータを目の前にした我々は、そのデータを最も良く「説明」できるシンプルなモデルを特定したいと考えます。</span>
+<span id="cb18-168"><a href="#cb18-168"></a>最も基本的な関数 $f:x \rightarrow y$ として1次関数を考えます。</span>
+<span id="cb18-169"><a href="#cb18-169"></a></span>
+<span id="cb18-170"><a href="#cb18-170"></a>$$</span>
+<span id="cb18-171"><a href="#cb18-171"></a>y = \beta_0 + \beta_1 x</span>
+<span id="cb18-172"><a href="#cb18-172"></a>$$</span>
+<span id="cb18-173"><a href="#cb18-173"></a></span>
+<span id="cb18-174"><a href="#cb18-174"></a>ここで、$\beta_0$ は切片、$\beta_1$ は傾きを表します。</span>
+<span id="cb18-175"><a href="#cb18-175"></a>何らかの方法で$\beta_0$と$\beta_1$を決めたとしよう。</span>
+<span id="cb18-176"><a href="#cb18-176"></a>その切片を $\hat{\beta}_0$、傾きを $\hat{\beta}_1$ とします。</span>
+<span id="cb18-177"><a href="#cb18-177"></a>$x$ に手元にあるデータ $x_i$ を代入して計算できる値を**予測値** (predicted value) といい、$\hat{y}_i$ と表します。</span>
+<span id="cb18-178"><a href="#cb18-178"></a></span>
+<span id="cb18-179"><a href="#cb18-179"></a>$$</span>
+<span id="cb18-180"><a href="#cb18-180"></a>\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i</span>
+<span id="cb18-181"><a href="#cb18-181"></a>$$</span>
+<span id="cb18-182"><a href="#cb18-182"></a></span>
+<span id="cb18-183"><a href="#cb18-183"></a>このとき、実際の観測値 $y_i$ と予測値 $\hat{y}_i$ の差を**残差** (residual) といい、$e_i$ で表します。</span>
+<span id="cb18-184"><a href="#cb18-184"></a></span>
+<span id="cb18-185"><a href="#cb18-185"></a>$$</span>
+<span id="cb18-186"><a href="#cb18-186"></a>e_i = y_i - \hat{y}_i</span>
+<span id="cb18-187"><a href="#cb18-187"></a>$$</span>
+<span id="cb18-188"><a href="#cb18-188"></a></span>
+<span id="cb18-189"><a href="#cb18-189"></a>回帰分析で最も良く用いられており、望ましい性質をもつ推定値を計算できる方法は最小二乗法といい、この残差$e_i$の二乗和 $\sum e_i^2$ を最小にするように $\hat{\beta}_0$ と $\hat{\beta}_1$ を決定します。</span>
+<span id="cb18-190"><a href="#cb18-190"></a></span>
+<span id="cb18-191"><a href="#cb18-191"></a>Rでは <span class="in">`lm()`</span> 関数を使って計算できます。</span>
+<span id="cb18-192"><a href="#cb18-192"></a>ここでは、売上高が従業員数で説明できるかを調べる単回帰モデルを構築します。</span>
+<span id="cb18-193"><a href="#cb18-193"></a>$$</span>
+<span id="cb18-194"><a href="#cb18-194"></a>sales_i = \beta_0 + \beta_1 emp_i + u_i</span>
+<span id="cb18-195"><a href="#cb18-195"></a>$$</span>
+<span id="cb18-196"><a href="#cb18-196"></a></span>
+<span id="cb18-197"><a href="#cb18-197"></a>Rだと<span class="in">`従属変数 ~ 独立変数`</span>という形で回帰式を指定します。</span>
+<span id="cb18-198"><a href="#cb18-198"></a></span>
+<span id="cb18-199"><a href="#cb18-199"></a><span class="in">```{r ols_model}</span></span>
+<span id="cb18-200"><a href="#cb18-200"></a><span class="co"># 回帰モデルを構築</span></span>
+<span id="cb18-201"><a href="#cb18-201"></a>ols_model <span class="ot">&lt;-</span> <span class="st">"sales ~ emp"</span> <span class="co"># 回帰式の定義</span></span>
+<span id="cb18-202"><a href="#cb18-202"></a><span class="in">```</span></span>
+<span id="cb18-203"><a href="#cb18-203"></a></span>
+<span id="cb18-204"><a href="#cb18-204"></a>モデルを最小自乗法で推定するには、<span class="in">`lm()`</span>関数を使います。</span>
+<span id="cb18-205"><a href="#cb18-205"></a><span class="in">`lm()`</span>関数の第1引数に回帰式を、第2引数にデータフレームを指定します。</span>
+<span id="cb18-206"><a href="#cb18-206"></a>推定結果を<span class="in">`reg1`</span>というオブジェクトに格納し、回帰係数を表示するには<span class="in">`coef()`</span>関数を使います。</span>
+<span id="cb18-207"><a href="#cb18-207"></a></span>
+<span id="cb18-208"><a href="#cb18-208"></a><span class="in">```{r code6-6}</span></span>
+<span id="cb18-209"><a href="#cb18-209"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> ols_model, <span class="at">data =</span> firmdata19)</span>
+<span id="cb18-210"><a href="#cb18-210"></a><span class="fu">coef</span>(reg1) <span class="co"># 回帰係数</span></span>
+<span id="cb18-211"><a href="#cb18-211"></a><span class="in">```</span></span>
+<span id="cb18-212"><a href="#cb18-212"></a></span>
+<span id="cb18-213"><a href="#cb18-213"></a>最小二乗法で推定された係数は以下のようになります。</span>
+<span id="cb18-214"><a href="#cb18-214"></a></span>
+<span id="cb18-215"><a href="#cb18-215"></a>$$</span>
+<span id="cb18-216"><a href="#cb18-216"></a>\hat{sales}_i = 22113.98050 + 58.14081 \times emp_i</span>
+<span id="cb18-217"><a href="#cb18-217"></a>$$</span>
+<span id="cb18-218"><a href="#cb18-218"></a></span>
+<span id="cb18-219"><a href="#cb18-219"></a>従業員が10名のときの売上高の予測値は22695.3886となり、従業員が1名増えるごとに売上高が約58.14増加すると予測されます。</span>
+<span id="cb18-220"><a href="#cb18-220"></a></span>
+<span id="cb18-221"><a href="#cb18-221"></a></span>
+<span id="cb18-222"><a href="#cb18-222"></a><span class="fu">## 回帰分析における推定と検定</span></span>
+<span id="cb18-223"><a href="#cb18-223"></a></span>
+<span id="cb18-224"><a href="#cb18-224"></a><span class="fu">### 回帰分析と統計的推測</span></span>
+<span id="cb18-225"><a href="#cb18-225"></a></span>
+<span id="cb18-226"><a href="#cb18-226"></a>この節は回帰分析の理屈を学習する上で重要な章なので、時間を掛けて学習することをオススメします。</span>
+<span id="cb18-227"><a href="#cb18-227"></a></span>
+<span id="cb18-228"><a href="#cb18-228"></a><span class="fu">### 企業データを用いた回帰分析の実行</span></span>
+<span id="cb18-229"><a href="#cb18-229"></a></span>
+<span id="cb18-230"><a href="#cb18-230"></a>上で推定した回帰分析の結果をみていきます。</span>
+<span id="cb18-231"><a href="#cb18-231"></a><span class="in">`lm()`</span>関数で推定した結果を<span class="in">`reg1`</span>というオブジェクトに格納しているので、その中身をみてみましょう。</span>
+<span id="cb18-232"><a href="#cb18-232"></a>詳細を表示するには<span class="in">`summary()`</span>関数を使います。</span>
+<span id="cb18-233"><a href="#cb18-233"></a></span>
+<span id="cb18-234"><a href="#cb18-234"></a>:::{.aside}</span>
+<span id="cb18-235"><a href="#cb18-235"></a><span class="in">`summary()`</span>関数は引数に指定するオブジェクトの型により異なる結果を返します。</span>
+<span id="cb18-236"><a href="#cb18-236"></a>ここでは、<span class="in">`lm`</span>オブジェクトを引数に指定しているので、回帰分析の結果が表示されます。</span>
+<span id="cb18-237"><a href="#cb18-237"></a>:::</span>
+<span id="cb18-238"><a href="#cb18-238"></a></span>
+<span id="cb18-239"><a href="#cb18-239"></a></span>
+<span id="cb18-240"><a href="#cb18-240"></a></span>
+<span id="cb18-241"><a href="#cb18-241"></a><span class="in">```{r code6-7}</span></span>
+<span id="cb18-242"><a href="#cb18-242"></a><span class="fu">summary</span>(reg1)</span>
+<span id="cb18-243"><a href="#cb18-243"></a><span class="in">```</span></span>
+<span id="cb18-244"><a href="#cb18-244"></a></span>
+<span id="cb18-245"><a href="#cb18-245"></a></span>
+<span id="cb18-246"><a href="#cb18-246"></a><span class="in">```{r code6-8}</span></span>
+<span id="cb18-247"><a href="#cb18-247"></a><span class="fu">confint</span>(reg1, <span class="at">level =</span> <span class="fl">0.99</span>)</span>
+<span id="cb18-248"><a href="#cb18-248"></a><span class="in">```</span></span>
+<span id="cb18-249"><a href="#cb18-249"></a></span>
+<span id="cb18-250"><a href="#cb18-250"></a></span>
+<span id="cb18-251"><a href="#cb18-251"></a><span class="fu">### 回帰係数の解釈</span></span>
+<span id="cb18-252"><a href="#cb18-252"></a></span>
+<span id="cb18-253"><a href="#cb18-253"></a>この節は難しいので、教科書の解説に補足を加えながら説明します。</span>
+<span id="cb18-254"><a href="#cb18-254"></a>例として次のような重回帰モデルを考えます。</span>
+<span id="cb18-255"><a href="#cb18-255"></a></span>
+<span id="cb18-256"><a href="#cb18-256"></a>$$</span>
+<span id="cb18-257"><a href="#cb18-257"></a>y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i</span>
+<span id="cb18-258"><a href="#cb18-258"></a>$$</span>
+<span id="cb18-259"><a href="#cb18-259"></a></span>
+<span id="cb18-260"><a href="#cb18-260"></a>ここで$x_{1i}$の微少な変化が$y_i$に与える影響を知りたいとします。</span>
+<span id="cb18-261"><a href="#cb18-261"></a>この回帰モデルを$x_{1i}$で偏微分すると、次のようになります。</span>
+<span id="cb18-262"><a href="#cb18-262"></a></span>
+<span id="cb18-263"><a href="#cb18-263"></a>$$</span>
+<span id="cb18-264"><a href="#cb18-264"></a>\frac{\partial y_i}{\partial x_{1i}} = \beta_1</span>
+<span id="cb18-265"><a href="#cb18-265"></a>$$</span>
+<span id="cb18-266"><a href="#cb18-266"></a></span>
+<span id="cb18-267"><a href="#cb18-267"></a>つまり$x_{2i}$を一定として$x_{1i}$が1単位変化した場合の$y_i$の変化量は$\beta_1$である、ということです。このことを**他の変数を一定とした場合の効果** (ceteris paribus effect) といい、様々な要因で決定されているであろう従属変数に対して、特定の独立変数が与える影響を測定する際に重要な考え方となります。</span>
+<span id="cb18-268"><a href="#cb18-268"></a></span>
+<span id="cb18-269"><a href="#cb18-269"></a></span>
+<span id="cb18-270"><a href="#cb18-270"></a></span>
+<span id="cb18-271"><a href="#cb18-271"></a></span>
+<span id="cb18-272"><a href="#cb18-272"></a></span>
+<span id="cb18-273"><a href="#cb18-273"></a><span class="fu">### 単回帰モデルと重回帰モデルの比較</span></span>
+<span id="cb18-274"><a href="#cb18-274"></a></span>
+<span id="cb18-275"><a href="#cb18-275"></a>営業利益<span class="in">`operating_profit`</span>を従属変数、広告宣伝費<span class="in">`adv`</span>を独立変数とした単回帰モデルを推定します。</span>
+<span id="cb18-276"><a href="#cb18-276"></a><span class="in">`summary()`</span>関数で結果を表示するのが簡単ですが、見づらいので、ここでは<span class="in">`modelsummary`</span>パッケージを使ってきれいに表示します。</span>
+<span id="cb18-277"><a href="#cb18-277"></a></span>
+<span id="cb18-278"><a href="#cb18-278"></a><span class="in">```{r code6-9}</span></span>
+<span id="cb18-279"><a href="#cb18-279"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(operating_profit <span class="sc">~</span> adv, <span class="at">data =</span> firmdata19)</span>
+<span id="cb18-280"><a href="#cb18-280"></a>modelsummary<span class="sc">::</span><span class="fu">modelsummary</span>(</span>
+<span id="cb18-281"><a href="#cb18-281"></a>    reg2,</span>
+<span id="cb18-282"><a href="#cb18-282"></a>    <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">***</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.01</span>, <span class="st">`</span><span class="at">**</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.05</span>, <span class="st">`</span><span class="at">*</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.1</span>),</span>
+<span id="cb18-283"><a href="#cb18-283"></a>    <span class="at">gof_omit =</span> <span class="st">"AIC|BIC|Log.Lik|RMSE|F"</span></span>
+<span id="cb18-284"><a href="#cb18-284"></a>    )</span>
+<span id="cb18-285"><a href="#cb18-285"></a><span class="in">```</span></span>
+<span id="cb18-286"><a href="#cb18-286"></a></span>
+<span id="cb18-287"><a href="#cb18-287"></a>近年は回帰分析の結果を適切に解釈するためにp値だけではなく、信頼区間も確認することが推奨されています。</span>
+<span id="cb18-288"><a href="#cb18-288"></a>Rでは<span class="in">`confint()`</span>関数を使って信頼区間を計算します。</span>
+<span id="cb18-289"><a href="#cb18-289"></a>この<span class="in">`confint()`</span>関数で計算される信頼区間はデフォルトで95%信頼区間となっています。</span>
+<span id="cb18-290"><a href="#cb18-290"></a></span>
+<span id="cb18-291"><a href="#cb18-291"></a><span class="in">```{r code6-10}</span></span>
+<span id="cb18-292"><a href="#cb18-292"></a><span class="fu">confint</span>(reg2) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">4</span>) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span>
+<span id="cb18-293"><a href="#cb18-293"></a><span class="in">```</span></span>
+<span id="cb18-294"><a href="#cb18-294"></a></span>
+<span id="cb18-295"><a href="#cb18-295"></a>次に、営業利益<span class="in">`operating_profit`</span>を従属変数、広告宣伝費<span class="in">`adv`</span>、温度<span class="in">`temp`</span>、従業員数<span class="in">`emp`</span>、労働費用<span class="in">`labor_cost`</span>、総資産<span class="in">`total_assets`</span>、研究開発費<span class="in">`rd`</span>を独立変数とした重回帰モデルを推定します。</span>
+<span id="cb18-296"><a href="#cb18-296"></a>教科書とは異なりますが、先にモデルを定義してから<span class="in">`lm()`</span>関数に渡す方法で推定します。</span>
+<span id="cb18-297"><a href="#cb18-297"></a></span>
+<span id="cb18-300"><a href="#cb18-300"></a><span class="in">```{r}</span></span>
+<span id="cb18-301"><a href="#cb18-301"></a>multi_model <span class="ot">&lt;-</span> <span class="st">"operating_profit ~ adv + temp + emp + labor_cost + total_assets + rd"</span></span>
+<span id="cb18-302"><a href="#cb18-302"></a><span class="in">```</span></span>
+<span id="cb18-303"><a href="#cb18-303"></a></span>
+<span id="cb18-304"><a href="#cb18-304"></a>この回帰モデルを<span class="in">`lm()`</span>関数で推定し、結果を<span class="in">`summary()`</span>関数で表示します。</span>
+<span id="cb18-305"><a href="#cb18-305"></a></span>
+<span id="cb18-306"><a href="#cb18-306"></a><span class="in">```{r code6-11}</span></span>
+<span id="cb18-307"><a href="#cb18-307"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> multi_model, <span class="at">data =</span> firmdata19)</span>
+<span id="cb18-308"><a href="#cb18-308"></a>reg <span class="ot">&lt;-</span> <span class="fu">list</span>(reg2, reg3)</span>
+<span id="cb18-309"><a href="#cb18-309"></a>modelsummary<span class="sc">::</span><span class="fu">modelsummary</span>(</span>
+<span id="cb18-310"><a href="#cb18-310"></a>    reg,</span>
+<span id="cb18-311"><a href="#cb18-311"></a>    <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">***</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.01</span>, <span class="st">`</span><span class="at">**</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.05</span>, <span class="st">`</span><span class="at">*</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.1</span>),</span>
+<span id="cb18-312"><a href="#cb18-312"></a>    <span class="at">gof_omit =</span> <span class="st">"AIC|BIC|Log.Lik|RMSE|F"</span></span>
+<span id="cb18-313"><a href="#cb18-313"></a>    )</span>
+<span id="cb18-314"><a href="#cb18-314"></a><span class="in">```</span></span>
+<span id="cb18-315"><a href="#cb18-315"></a></span>
+<span id="cb18-316"><a href="#cb18-316"></a><span class="in">`confint()`</span>関数を使って信頼区間を計算します。</span>
+<span id="cb18-317"><a href="#cb18-317"></a></span>
+<span id="cb18-318"><a href="#cb18-318"></a><span class="in">```{r code6-12}</span></span>
+<span id="cb18-319"><a href="#cb18-319"></a><span class="fu">confint</span>(reg3) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">4</span>) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span>
+<span id="cb18-320"><a href="#cb18-320"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2025, Soichi Matsuura</p>
+<p>Copyright 2026, Soichi Matsuura</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

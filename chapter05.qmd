@@ -369,3 +369,4 @@ plot(est_n)
 # コード5-16
 pwr.t.test(d = 0.8, n = 26, sig.level = 0.05)
 ```
+

@@ -1,33 +1,188 @@
-## 第11章 
+## 第11章 探索的因子分析
 
 ```{r}
+pacman::p_load(
+  psych, # 因子分析のためのパッケージ
+  GPArotation, # 因子分析の回転方法を提供するパッケージ
+  tidyverse, # データ操作と可視化のためのパッケージ群
+  readxl, # Excelファイルの読み込みのためのパッケージ
+  gt, # 表の作成のためのパッケージ
+  gtExtras, # gtパッケージの拡張機能を提供するパッケージ
+  dendextend, # 階層的クラスタリングのためのパッケージ
+  cluster, # クラスタリングのためのパッケージ
+  factoextra, # クラスタリングの可視化のためのパッケージ
+  useful, # PCAのためのパッケージ
+  ggrepel # ラベルを重ならなくする
+  )
+```
 
-pacman::p_load(psych, GPArotation, tidyverse, readxl, gt, gtExtras, dendextend, cluster, factoextra, useful, ggrepel)
+## 本性の概要
 
-# コード11-1
-# install.packages("psych")
-# install.packages("GPArotation")
 
-# コード11-2
+## 因子分析とは
+
+因子分析(factor analysis)は、観測された変数の背後に存在する**潜在的な共通因子**(common factor)を明らかにするための多変量解析の手法です。
+因子分析には2つのアプローチがあります。
+
+1. **探索的因子分析**：データから潜在的な因子構造を探索する方法
+2. 確認的因子分析：因子数と因子負荷量について、事前に仮説を立てて分析する方法
+
+テキストでは、探索的因子分析について説明します。
+
+### 因子分析のモデル構造
+
+教科書のp.305からの解説を参照
+
+### 因子分析の特徴
+
+たとえば，お店を訪れたお客さんに10個の質問からなるアンケートに答えてもらい，1000名分のデータが集まったとしましょう。
+いま，皆さんの手には以下のような1000人分の10個の回答結果のデータがあります。
+
+| ID | Q1 | Q2 | Q3 | Q4 | Q5 | Q6 | Q7 | Q8 | Q9 | Q10 |
+|----|----|----|----|----|----|----|----|----|----|----|
+| 1  | 5  | 3  | 4  | 2  | 3  |  4  |  4 | 2  | 4  | 2  |
+| 2  | 4  | 4  | 5  | 3  | 4  | 5   | 5 | 3  | 5  | 3  |
+|... | ...| ...| ...| ...| ...| ... |...| ...|...| ...|
+|1000| 3  | 2  | 3  | 1  | 2  | 3   | 3 | 1  | 3  | 1  |
+
+
+このとき，`ID`が`i = 1`のQ1の解答 $5$ が，`1`さんが心の中に持っている価値観（例：お店の清潔さ）に従って決められたものであると考えることができます。
+このように，回答者の心の中にある価値観や性格などの**潜在的な因子**が，質問項目への回答を決定していると考えることができます。
+この**潜在的な因子**を特定する統計的手法の1つが**因子分析**(factor analysis)です。
+上の表のように，1000人が答えた10個の質問項目の回答から，少数の潜在的因子を特定することで，少ない数の因子でデータを説明することができます。
+1000人の回答は1000通りある，というのではアンケート調査から分かることはありませんが，
+少数の共通因子を特定することで，1000人の回答を理解しやすくまとめることができます。
+このように，**因子分析は，観測された変数の背後に存在する潜在的な共通因子を明らかにするための多変量解析の手法**です。
+
+
+## 2因子モデル
+
+因子の数を2と仮定したモデルを2因子モデルといいます。
+ここで，$j = 1, 2, \dots , J$ 個の質問項目をもつアンケート調査を$i$, $i = 1, 2, ..., n$人の回答者に実施したとします。
+
+- $\boldsymbol{x}_i$：観測変数。実際にデータとして得られた質問項目（例：テストの点数）
+- $\boldsymbol{f}_i$：共通因子。目に見えない潜在的な能力や性質（例：計算力、読解力）
+- $\boldsymbol{\alpha}$：因子負荷量（Factor Loading）。各共通因子が観測変数に与える影響の強さ
+- $\boldsymbol{\varepsilon}_i$：独自因子（Unique Factor）。その項目特有の誤差や要因
+
+$J$個の項目の背後には2つの潜在因子 $f_1$ と $f_2$ が存在すると仮定して、以下のモデルを考えます。
+$i$さんの$j$番目の質問項目への回答を$x_{ji}$ とします。
+今手元にあるデータは，$x_{ji}$ だけです。
+その質問項目への回答は次のように表すとします。
+$$
+\begin{aligned}
+\begin{cases}
+x_{1i} &= \alpha _{11} f_{1i} + \alpha _{12} f_{2i} + \varepsilon_{1i} \\
+ \ \vdots \\
+x_{Ji} &= \alpha _{J1} f_{1i} + \alpha _{J2} f_{2i} + \varepsilon_{Ji}
+\end{cases}
+\end{aligned}
+$$
+
+掛けて足す、の構造をもっているので、行列で表すことができます。
+
+$$
+\begin{aligned}
+\underbrace{
+\begin{pmatrix}
+x_{1i} \\
+\vdots \\
+x_{Ji}
+\end{pmatrix}
+}_{J\times1}
+&=
+\underbrace{
+\begin{pmatrix}
+\alpha _{11} & \alpha _{12} \\
+\vdots & \vdots \\
+\alpha _{J1} & \alpha _{J2}
+\end{pmatrix}
+}_{J\times2}
+\underbrace{
+\begin{pmatrix}
+f_{1i} \\
+f_{2i}
+\end{pmatrix}
+}_{2\times1}
++
+\underbrace{
+\begin{pmatrix}
+\varepsilon_{1i} \\
+\vdots \\
+\varepsilon_{Ji}
+\end{pmatrix}
+}_{J\times1}
+\end{aligned}
+$$
+
+まとめて書くと、次のようになります。
+
+$$
+\boldsymbol{x}_i = \boldsymbol{\alpha} \boldsymbol{f}_i + \boldsymbol{\varepsilon}_i
+$$
+この式を**2因子モデル**といいます。
+任意の非特異な$2 \times 2$ の正則行列$\boldsymbol{T}$を用いて、次のように変形します。
+$$
+\begin{aligned}
+\boldsymbol{x}_i &= \boldsymbol{\alpha} (\boldsymbol{TT^{-1}}) \boldsymbol{f}_i + \boldsymbol{\varepsilon}_i\\
+& = \underbrace{(\boldsymbol{\alpha T})}_{J\times 2, 2\times 2} \underbrace{(\boldsymbol{T^{-1}f}_i)}_{2\times 2, 2\times 1} + \boldsymbol{\varepsilon}_i\\
+& = \boldsymbol{\alpha}^* \boldsymbol{f}_i^* + \boldsymbol{\varepsilon}_i
+\end{aligned}
+$$
+
+この式の変形を詳しく見ていきましょう。
+これは、**因子の回転**(factor rotation)と呼ばれる操作で、$\boldsymbol{\alpha}$ を $\boldsymbol{\alpha}^*$ に、$\boldsymbol{f}_i$ を $\boldsymbol{f}_i^*$ に変換することを意味します。
+この $\boldsymbol{T}$ をどのように選ぶか，つまり**どのように回転させるのか**によって、$\boldsymbol{\alpha}^*$ と $\boldsymbol{f}_i^*$ の値が変わります。
+ではこの回転について、詳しく見ていきましょう。
+
+### 因子軸の回転
+
+因子分析には**「回転の不定性」**という性質があります。
+行列 $\boldsymbol{T}$ を挟み込んでも、計算結果として得られる観測変数 $\boldsymbol{x}_i$ の値（あるいは分散共分散構造）は全く変わりません。
+これは、潜在因子の座標軸，つまり縦軸と横軸を回転させて新しい因子負荷量 $\boldsymbol{\alpha}^*$ と新しい因子スコア $\boldsymbol{f}_i^*$ を作っていることに相当します。
+初期の計算で得られる $\boldsymbol{\alpha}$ は、すべての因子がすべての変数に中途半端に影響していることが多く、解釈が困難です。
+そこで、適切な $\boldsymbol{T}$ を選ぶことで、特定の変数には強く、別の変数には弱く影響するように「整理」し直すのです。
+この $\boldsymbol{\alpha}^*$ を**回転後の因子負荷量**といい、$\boldsymbol{f}_i^*$ を**回転後の因子得点**といいます。
+
+
+```{r code11-2, filename ="データの読み込みと整理"}
 factor_exdata <- readxl::read_excel("data/factor_ex.xlsx", na = ".")
+summary(factor_exdata)
+```
 
+読み込んだデータは、変数`ID`と5つの質問項目`V1`から`V6`で構成されています。
+質問項目は、1から7のリッカート尺度で回答されており、数値が大きいほど肯定的な回答を意味しています。
+`V5`は逆質問であるため、数値が大きいほど重要度が低いことを意味するので、$8 - 得点$ として逆転させておきます。
+
+```{r}
 factor_exdata$V5 <- 8 - factor_exdata$V5
-rownames(factor_exdata) <- factor_exdata$ID
+summary(factor_exdata)
+```
 
-factor_exdata2 <- factor_exdata %>%
-  select(-ID)
-knitr::kable(summary(factor_exdata2))
+次に、`ID`を行名に設定します。
 
+```{r column-row, filename="IDを行名に設定"}
+factor_exdata <- factor_exdata |>
+  column_to_rownames(var = "ID")
+glimpse(factor_exdata)
+```
+
+```{r}
+knitr::kable(summary(factor_exdata))
+```
+
+
+```{r}
 # コード11-3
-knitr::kable(cor(factor_exdata2), caption = "相関行列")
+knitr::kable(cor(factor_exdata), caption = "相関行列")
 
 # コード11-4
-cor.exdata <- cor(factor_exdata2)
+cor.exdata <- cor(factor_exdata)
 
 VSS.scree(cor.exdata)
 
 # コード11-5
-fa <- fa(r = factor_exdata2, nfactors = 2,
+fa <- fa(r = factor_exdata, nfactors = 2,
   rotate = "promax", fm = "ml")
 fa
 
@@ -36,14 +191,14 @@ fa.diagram(fa)
 
 # コード11-7
 fs <- data.frame(fa$scores)
-factor_exdata2$rowname <- rownames(factor_exdata2)
+factor_exdata$rowname <- rownames(factor_exdata)
 fs$rowname <- rownames(fs)
-factor_exdata2 <- left_join(factor_exdata2, fs, by = "rowname")
-knitr::kable(head(factor_exdata2), caption = "結合後データ")
+factor_exdata <- left_join(factor_exdata, fs, by = "rowname")
+knitr::kable(head(factor_exdata), caption = "結合後データ")
 
 # コード11-8
 
-ex_cluster <- factor_exdata2 %>%
+ex_cluster <- factor_exdata %>%
   select(ML1, ML2)
 Hier1 <- agnes(ex_cluster, metric = "euclidian", stand = TRUE)
 pltree(Hier1)
@@ -52,19 +207,19 @@ pltree(Hier1)
 cl_1 <- kmeans(ex_cluster, 3)
 clus_fa <- data.frame(cl_1$cluster)
 clus_fa$rowname <- rownames(clus_fa)
-factor_exdata2 <- left_join(factor_exdata2, clus_fa, by = "rowname")
-factor_exdata2$cl_1.cluster <- factor(factor_exdata2$cl_1.cluster)
+factor_exdata <- left_join(factor_exdata, clus_fa, by = "rowname")
+factor_exdata$cl_1.cluster <- factor(factor_exdata$cl_1.cluster)
 
 # Visualizing the clusters with 2 factors
-p1 <- ggplot(data = factor_exdata2,
+p1 <- ggplot(data = factor_exdata,
              mapping = aes(x = ML1, y = ML2, color = cl_1.cluster))
 p1 + geom_point() +
-  geom_text_repel(mapping = aes(label = rownames(factor_exdata2))) +
+  geom_text_repel(mapping = aes(label = rownames(factor_exdata))) +
   labs(x = "Ease of use", y = "Design")
 
 # コード11-10
 factor_exdata3 <- factor_exdata %>%
-  select(-ID)
+  dplyr::select(V1:V6) # 質問項目だけを厳密に抽出
 pca_res <- pca(factor_exdata3, nfactors = 2, rotate = "none")
 pca_res
 
@@ -81,5 +236,13 @@ pc2_eig <- eigen_list$vectors[, 2]
 PC1 <- pc1_eig * sqrt(eigen_list$values[1])
 PC2 <- pc2_eig * sqrt(eigen_list$values[2])
 knitr::kable(data.frame(cbind(PC1, PC2)), caption = "計算結果")
+```
+
+
+```{r}
+# 結果の表示（行名をV1-V6に合わせて見やすくします）
+loadings_manual <- data.frame(PC1, PC2)
+rownames(loadings_manual) <- colnames(factor_exdata3)
+knitr::kable(loadings_manual, caption = "主成分負荷量の計算結果")
 ```
 
