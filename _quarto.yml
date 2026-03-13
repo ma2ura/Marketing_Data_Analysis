@@ -2,24 +2,32 @@ project:
   type: book
   output-dir: docs
 
+lightbox: auto
+
 book:
   title: "マーケティング・データ分析の学習メモ"
+  author: "Soichi Matsuura"
+  search: true
   reader-mode: true
-  page-footer:
-      border: true
-      background: "#a10000"
-      left: "Copyright 2025, Soichi Matsuura"
-      right:
-        - icon: github
-          href: https://github.com/ma2ura
-        - icon: twitter
-          href: https://twitter.com/matsuura_rits
-          aria-label: Twitter
   cover-image: img/tagashira.jpg
   favicon: img/favicon.ico
   site-url: https://so-ichi.com
   repo-url: https://github.com/ma2ura/Marketing_Data_Analysis/
   repo-branch: main
+
+  page-footer:
+      border: true
+      background: "#a10000"
+      left: "Copyright 2026, Soichi Matsuura"
+      right:
+        - icon: house
+          href: https://so-ichi.com/r.html
+        - icon: github
+          href: https://github.com/ma2ura
+        - icon: twitter
+          href: https://twitter.com/matsuura_rits
+          aria-label: Twitter
+
 
   chapters:
     - index.qmd
@@ -38,58 +46,72 @@ book:
         - chapter11.qmd
         - chapter12.qmd
 
+website:
+  back-to-top-navigation: true
+
 format:
   html:
     theme:
       - cosmo
       - styles.scss
+
+    toc: true
+    toc-location: left
+    toc-title: "ここの目次"
+    toc-depth: 2
+    toc-expand: true
+
+    code-tools: true
+    code-link: true
+    code-line-numbers: true
+    code-block-bg: true
+    code-block-border-left: "#002D72"
+    html-math-method: katex
+    author-meta: "Soichi Matsuura"
+
     # mainfont: "Noto Sans JP"
     # monofont: "0xProto"
     # fontsize: 1.2em
-    # code-ling: true
-    html-math-method: katex
-    author-meta: "Soichi Matsuura"
+
     # callout-appearance: simple
     code-copy: hover
     code-overflow: scroll
-    # code-link: true
-    code-line-numbers: true
     link-external-icon: true
     df-print: paged
+
     # grid:
       # sidebar-width: 350px
       # body-width: 1200px
+
     twitter-card: true
     page-navigation: true
     back-to-top-navigation: true
+
     include-in-header:
       text: |
         <style>
-        .marky {
-          background: linear-gradient(transparent 60%, #FCFFC1 0%);
-        }
-        .markb {
-          background: linear-gradient(transparent 60%, #88E2EA 0%);
-        }
-        .markp{
-          background: linear-gradient(transparent 70%, #ffcdd2 0%)
-        }
+        .marky {background: linear-gradient(transparent 60%, #FCFFC1 0%);}
+        .markb {background: linear-gradient(transparent 60%, #88E2EA 0%);}
+        .markp {background: linear-gradient(transparent 70%, #ffcdd2 0%);}
         </style>
-  pdf:
-    pdf-engine: lualatex
-    documentclass: ltjsbook
-    include-in-header:
-      - text: |
-          \usepackage{float}
-          \usepackage{caption}
-          \usepackage{longtable}
-          \usepackage{placeins}
-          \usepackage{booktabs}
-          \usepackage{indentfirst}
-          \setlength{\parindent}{2em}
-          \setlength{\parskip}{0pt}
-          \usepackage{fvextra}
-          \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+  # pdf:
+  #   pdf-engine: lualatex
+  #   documentclass: ltjsbook
+  #   include-in-header:
+  #     - text: |
+  #         \usepackage{float}
+  #         \usepackage{caption}
+  #         \usepackage{longtable}
+  #         \usepackage{placeins}
+  #         \usepackage{booktabs}
+  #         \usepackage{indentfirst}
+  #         \setlength{\parindent}{2em}
+  #         \setlength{\parskip}{0pt}
+  #         \usepackage{fvextra}
+  #         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+
+
+
   # pdf:
   #   pdf-engine: lualatex
   #   documentclass: ltjbook

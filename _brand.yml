@@ -7,11 +7,11 @@ typography:
     weight: bold
     color: "#002D72"
   monospace:
-    family: "MyricaM M"
+    family: "0xProto"
     size: 12pt
   monospace-inline:
-    family: "MyricaM M"
+    family: "0xProto"
     size: 12pt
   monospace-block:
-    family: "MyricaM M"
+    family: "0xProto"
     size: 12pt
