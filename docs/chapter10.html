@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.27">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="Soichi Matsuura">
+
 <title>7&nbsp; 第10章 セグメントとクラスター分析 – マーケティング・データ分析の学習メモ</title>
 <style>
 code{white-space: pre-wrap;}
@@ -55,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -82,7 +86,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -108,11 +113,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><style>
+}</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<style>
 .marky {background: linear-gradient(transparent 60%, #FCFFC1 0%);}
 .markb {background: linear-gradient(transparent 60%, #88E2EA 0%);}
 .markp {background: linear-gradient(transparent 70%, #ffcdd2 0%);}
 </style>
+
+
 <meta name="twitter:title" content="7&nbsp; 第10章 セグメントとクラスター分析 – マーケティング・データ分析の学習メモ">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://so-ichi.com/chapter10_files/figure-html/code10-3-1.png">
@@ -120,10 +130,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="twitter:image-width" content="6300">
 <meta name="twitter:card" content="summary_large_image">
 </head>
+
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -134,9 +147,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">マーケティング・データ分析の学習メモ</a> 
         <div class="sidebar-tools-main">
@@ -156,7 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></span></a>
@@ -170,15 +187,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></span></a>
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part02.html" class="sidebar-item-text sidebar-link">
@@ -187,8 +204,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></span></a>
@@ -213,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part03.html" class="sidebar-item-text sidebar-link">
@@ -222,8 +239,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter10.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></span></a>
@@ -232,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章 探索的因子分析</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -242,23 +259,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">ここの目次</h2>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">ここの目次</h2>
    
   <ul class="collapse">
-<li><a href="#%E9%9A%8E%E5%B1%A4%E7%9A%84%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E5%88%86%E6%9E%90" id="toc-階層的クラスター分析" class="nav-link active" data-scroll-target="#%E9%9A%8E%E5%B1%A4%E7%9A%84%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E5%88%86%E6%9E%90"><span class="header-section-number">7.1</span> 階層的クラスター分析</a></li>
-  </ul></nav>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+  <li><a href="#階層的クラスター分析" id="toc-階層的クラスター分析" class="nav-link active" data-scroll-target="#階層的クラスター分析"><span class="header-section-number">7.1</span> 階層的クラスター分析</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part03.html">第3部 探索型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter10.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span>
-</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part03.html">第3部 探索型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter10.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -272,9 +293,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>クラスター分析(cluster analysis)は、観測値をいくつかのグループに分ける手法です。ここでは、階層的クラスター分析と非階層的クラスター分析(K-means法)を学習します。</p>
-<section id="階層的クラスター分析" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="階層的クラスター分析">
-<span class="header-section-number">7.1</span> 階層的クラスター分析</h2>
+</header>
+
+
+<p>クラスター分析(cluster analysis)は、観測値をいくつかのグループに分ける手法です。ここでは、階層的クラスター分析と非階層的クラスター分析(K-means法)を学習します。</p>
+<section id="階層的クラスター分析" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="階層的クラスター分析"><span class="header-section-number">7.1</span> 階層的クラスター分析</h2>
 <p>データの中から類似している観測値を段階的にクラスターとしてまとめて、最終的に1つのクラスターになるまで繰り返す方法です。 類似度は距離で測定され、距離が近いほど類似しているとみなされます。 距離概念として、</p>
 <ul>
 <li>ユークリッド距離(Euclidean distance)</li>
@@ -284,27 +308,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>などがあります。 デンドログラム(dendrogram)という樹形図を使って、クラスターの結合過程を視覚的に表現します。</p>
 <p>2023年実施の消費者調査アンケートデータを使って、階層的クラスター分析を実行してみます。 必要なパッケージを読み込みます。</p>
 <ul>
-<li>
-<code>tidyverse</code>: データ操作と可視化</li>
-<li>
-<code>readxl</code>: Excelデータの読み込み</li>
-<li>
-<code>cluster</code>: クラスター分析</li>
-<li>
-<code>factoextra</code>: クラスター分析の可視化</li>
-<li>
-<code>ggrepel</code>: グラフ上のラベル配置</li>
-<li>
-<code>useful</code>: 便利な関数群</li>
+<li><code>tidyverse</code>: データ操作と可視化</li>
+<li><code>readxl</code>: Excelデータの読み込み</li>
+<li><code>cluster</code>: クラスター分析</li>
+<li><code>factoextra</code>: クラスター分析の可視化</li>
+<li><code>ggrepel</code>: グラフ上のラベル配置</li>
+<li><code>useful</code>: 便利な関数群</li>
 </ul>
 <p>そしてデータを読み込みます。 <code>read_xlsx()</code>関数の引数として，</p>
 <ul>
-<li>
-<code>path</code>: データファイルのパスとファイル名</li>
-<li>
-<code>sheet</code>: 読み込むシート名</li>
-<li>
-<code>na</code>: 欠損値を表す文字列</li>
+<li><code>path</code>: データファイルのパスとファイル名</li>
+<li><code>sheet</code>: 読み込むシート名</li>
+<li><code>na</code>: 欠損値を表す文字列</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, cluster, factoextra, ggrepel, useful)</span>
@@ -315,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6"></a>  <span class="at">na =</span> <span class="st">" "</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>読み込んだデータを<code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>で確認します。</p>
+<p>読み込んだデータを<code>str()</code>で確認します。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>df_cons <span class="sc">|&gt;</span><span class="fu">str</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -423,7 +438,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>992変数，5364観測値からなるデータを読み込みました。 東京都(<code>13</code>)と兵庫県(<code>28</code>)の回答者を対象に，ブランド志向性(<code>q12_4</code>)と価格志向性(<code>q13_3</code>)の2変数を使ってクラスター分析を実行します。</p>
-<p>教科書では，カテゴリー変数の数値を文字列に変換するために，<code>case_when()</code>関数を使っていますが， この処理だと変数の型が文字列となり，カテゴリー変数としてRが認識しなくなります。 そこでここでは，<code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>関数を使って，変数の型を因子型に変換し，ラベルを付与する方法を採用します。</p>
+<p>教科書では，カテゴリー変数の数値を文字列に変換するために，<code>case_when()</code>関数を使っていますが， この処理だと変数の型が文字列となり，カテゴリー変数としてRが認識しなくなります。 そこでここでは，<code>factor()</code>関数を使って，変数の型を因子型に変換し，ラベルを付与する方法を採用します。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># 東京と兵庫の県番号リスト作成</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>ken_number   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">28</span>)</span>
@@ -451,14 +466,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>クラスター分析を実行する関数の引数は数値データのみである必要があるので，<code>select()</code>で必要な変数だけを抽出し，オブジェクト<code>clus_cons</code>に格納します。</p>
 <p><code>agnes()</code>関数を使って階層的クラスター分析を実行します。引数として，</p>
 <ul>
-<li>
-<code>clus_cons</code>: クラスター分析対象データ</li>
-<li>
-<code>metric</code>: 距離尺度</li>
-<li>
-<code>method</code>: クラスター結合方法</li>
-<li>
-<code>stand</code>: 変数の標準化</li>
+<li><code>clus_cons</code>: クラスター分析対象データ</li>
+<li><code>metric</code>: 距離尺度</li>
+<li><code>method</code>: クラスター結合方法</li>
+<li><code>stand</code>: 変数の標準化</li>
 </ul>
 <p>を指定します。 実行結果を<code>Hier1</code>に格納し，<code>pltree()</code>関数でデンドログラムを作成します。</p>
 <div class="cell" data-layout-align="center">
@@ -475,12 +486,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-11"><a href="#cb5-11"></a><span class="fu">pltree</span>(Hier1) <span class="co"># デンドログラムの作成</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="chapter10_files/figure-html/code10-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter10_files/figure-html/code10-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
+<figure class="figure">
+<p><a href="chapter10_files/figure-html/code10-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter10_files/figure-html/code10-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<p>次に，<code><a href="https://rdrr.io/r/stats/hclust.html">hclust()</a></code>関数を使って階層的クラスター分析を実行します。 階層別クラスターの分析手順は以下の通りです。</p>
+<p>次に，<code>hclust()</code>関数を使って階層的クラスター分析を実行します。 階層別クラスターの分析手順は以下の通りです。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>alt_Hier <span class="ot">&lt;-</span> clus_cons <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">dist</span>(<span class="st">"euclidian"</span>) <span class="sc">|&gt;</span> <span class="co"># ユークリッド距離の計算</span></span>
@@ -495,7 +507,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-6"><a href="#cb7-6"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="chapter10_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter10_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
+<figure class="figure">
+<p><a href="chapter10_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter10_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
@@ -509,7 +522,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-6"><a href="#cb8-6"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="chapter10_files/figure-html/code10-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="chapter10_files/figure-html/code10-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
+<figure class="figure">
+<p><a href="chapter10_files/figure-html/code10-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="chapter10_files/figure-html/code10-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
@@ -523,7 +537,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-6"><a href="#cb9-6"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="chapter10_files/figure-html/code10-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="chapter10_files/figure-html/code10-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
+<figure class="figure">
+<p><a href="chapter10_files/figure-html/code10-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="chapter10_files/figure-html/code10-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
@@ -627,7 +642,8 @@ Available components:
 <span id="cb12-12"><a href="#cb12-12"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="chapter10_files/figure-html/code10-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="chapter10_files/figure-html/code10-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
+<figure class="figure">
+<p><a href="chapter10_files/figure-html/code10-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="chapter10_files/figure-html/code10-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
@@ -652,7 +668,8 @@ Available components:
 <col style="width: 16%">
 <col style="width: 14%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: right;">県番号</th>
 <th style="text-align: right;">性別</th>
 <th style="text-align: right;">年齢</th>
@@ -663,7 +680,8 @@ Available components:
 <th style="text-align: left;">Gender</th>
 <th style="text-align: left;">MaritalSt.</th>
 <th style="text-align: left;">cluster_id</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">13</td>
@@ -770,7 +788,8 @@ Available components:
 <col style="width: 13%">
 <col style="width: 13%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">cluster_id</th>
 <th style="text-align: right;">N</th>
 <th style="text-align: right;">Loyalty_m</th>
@@ -779,7 +798,8 @@ Available components:
 <th style="text-align: right;">Male_r</th>
 <th style="text-align: right;">Tokyo_r</th>
 <th style="text-align: right;">Married_r</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">1</td>
@@ -839,7 +859,10 @@ Available components:
 
 <!-- -->
 
-</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -1291,14 +1314,16 @@ Available components:
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="./part03.html" class="pagination-link" aria-label="第3部 探索型データ分析">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">第3部 探索型データ分析</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapter11.html" class="pagination-link" aria-label="第11章">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./chapter11.html" class="pagination-link" aria-label="第11章 探索的因子分析">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章 探索的因子分析</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -1506,7 +1531,8 @@ Available components:
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Copyright 2026, Soichi Matsuura</p>
 </div>   
@@ -1515,7 +1541,7 @@ Available components:
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-<li class="nav-item compact">
+    <li class="nav-item compact">
     <a class="nav-link" href="https://so-ichi.com/r.html">
       <i class="bi bi-house" role="img">
 </i> 
@@ -1534,9 +1560,10 @@ Available components:
     </a>
   </li>  
 </ul>
-</div>
+    </div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
@@ -1568,6 +1595,8 @@ Available components:
   
 })();
           </script>
+
+
 
 
 </body></html>

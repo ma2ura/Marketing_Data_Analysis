@@ -1,6 +1,6 @@
 ## 第7章 回帰分析上の工夫
 
-ここでは、次のような回帰分析を行う上で役立ついくつかの工夫について説明しています。
+ここでは、次のような回帰分析を行う上で役立ついくつかの工夫について説明します。
 
 1. ダミー変数
 2. 交差項
@@ -9,13 +9,22 @@
 
 準備として、必要なパッケージとデータを読み込みます。
 データは`MktRes_firmdata.xlsx`を使用し、2019年のデータに絞り込みます。
+
 ```{r code7-1, filename="code 7-1 データの読み込みと加工"}
 # パッケージ
 pacman::p_load(
-  tidyverse, readxl, sjPlot, marginaleffects,
-  car, modelsummary, knitr, kableExtra,
-  ggthemes, plotly
+  tidyverse, # データ加工と可視化
+  readxl, # Excelファイルの読み込み
+  sjPlot, # 回帰分析の可視化
+  marginaleffects, # 交差項の可視化
+  car, # 線形仮説の検定
+  modelsummary, # 回帰分析の結果の表形式での表示
+  knitr, # 表の作成
+  kableExtra, # 表の装飾
+  ggthemes, # グラフのテーマ拡張
+  plotly # インタラクティブなグラフ作成
   )
+
 # データの読み込み
 firmdata <- readxl::read_xlsx("data/MktRes_firmdata.xlsx")
 firmdata19 <- firmdata |>
@@ -23,7 +32,7 @@ firmdata19 <- firmdata |>
 ```
 
 1. `pacman::p_load()`で各種パッケージを読み込みます。インストールされていない場合は自動的にインストールされます。
-2. `readxl::read_xlsx()`関数でExcelファイルを読み込みんで、`firmdata`データフレームに格納します。
+2. `readxl::read_xlsx()`関数でExcelファイルを読み込み、`firmdata`データフレームに格納します。
 3. `dplyr::filter()`関数で2019年のデータに絞り込んで、`firmdata19`データフレームに格納します。
 
 
@@ -44,14 +53,14 @@ firmdata19$ind_en |>
 ```
 
 `ind_en`には`r unique(firmdata19$ind_en) |> length()`種類の産業があることが分かります。
-このうち、本書では`Retial Stores, NEC`、`Supermarket Chains`、`Department Stores`の3つを小売業と定義しています。
+このうち、本書では`Retail Stores, NEC`、`Supermarket Chains`、`Department Stores`の3つを小売業と定義しています。
 これらの産業を`retail`というベクトルにまとめます。
 
 ```{r}
 retail <- c("Retail Stores, NEC", "Supermarket Chains", "Department Stores")
 ```
 
-変数`ind_en`の値が`retail`に含まれる業種なら`Retail`、そうでなければ`Other`となる変数`format`を作成します。
+変数`ind_en`の値が`retail`に含まれる業種であれば`Retail`、そうでなければ`Other`となる変数`format`を作成します。
 ここでは、`dplyr`パッケージの`mutate()`関数と`if_else()`関数を使って新しい変数`format`を作成します。
 
 :::{.column-margin}
@@ -90,7 +99,7 @@ with(firmdata19, table(format))
 次に、`format`変数を使って、営業利益率`op`を従属変数、マーケティング費用`mkexp`と`format`を独立変数とした回帰モデルを推定します。
 
 :::{.callout-caution}
-ここで、「format」変数は「Retail」か「Other」という2種類の文字が入ってる文字列やん！ダミー変数ちゃうやん！と思った人は素晴らしい。その通りです。
+ここで、「format」変数は「Retail」か「Other」という2種類の文字列からなる変数であり、ダミー変数そのものではありません。
 しかし、Rの`lm()`関数は、自動的に文字列やカテゴリ変数をダミー変数に変換して回帰分析を行ってくれます。したがって、ここでは特にダミー変数に変換せず、そのまま`format`変数を使って回帰分析を行っています。教科書p.200で解説しています。
 :::
 
@@ -107,14 +116,14 @@ $$
 op_i = \beta_0 + \beta_1 mkexp_i + \beta_2 format_i + \varepsilon_i
 $$
 
-`format`を`Rtail`のとき1、`Other`のとき0となるダミー変数として捉えると、上の式は次のように表現できます。
+`format`を`Retail`のとき1、`Other`のとき0となるダミー変数として捉えると、上の式は次のように表現できます。
 
 $$
 \begin{aligned}
-\mathrm{E}[op_i \mid Retail = 1]  &= \beta_0 + \beta_1 kexp_i + \beta _2\\
+\mathrm{E}[op_i \mid Retail = 1]  &= \beta_0 + \beta_1 mkexp_i + \beta_2 \\
 &= (\beta_0 + \beta_2) + \beta_1 mkexp_i \\
 \mathrm{E}[op_i \mid Retail = 0]  &= \beta_0 + \beta_1 mkexp_i
-\end{aligned}\\
+\end{aligned}
 $$
 
 `format`の回帰係数$\beta_2$は、切片の差を表しています。
@@ -172,7 +181,7 @@ $$
 op_i = \beta_0 + \beta_1 mkexp_i + \beta_2 retail_i + \beta_3 mkexp_i \times retail_i +\varepsilon_i
 $$
 
-先ほどと同様に、`retail`を小売業を表すダミー変数です。
+先ほどと同様に、`retail`は小売業を表すダミー変数です。
 したがって、上の式は次のように表現できます。
 
 $$
@@ -386,6 +395,7 @@ $\beta_1$は$z_i = 0$のときの$x$が$y$に与える影響を表しますが�
   - 交互作用項の係数とその標準誤差
   - モデル全体の決定係数（$R^2$）
   - 主効果および単純効果（一方が分かればもう一方を正確に算出可能）
+
 ### 実証的根拠
 
 例としてあげられているブランド拡張の評価に関する実データを用いた分析では、以下のことが示されている。
@@ -404,27 +414,59 @@ $$
 $$
 
 
-```{r}
+`Headphone07`データを使って、連続変数の交差項の分析を行います。
+このデータは、ヘッドフォンの売上高を従属変数、研究開発費とプロモーション費を独立変数とした回帰分析のためのデータです。
+
+`readr`パッケージの`read_csv()`関数を使って、データを読み込み、`glimpse()`関数を使ってデータフレームの構造を確認します。
+
+```{r code7-8, filename="データの読み込みと確認"}
 # コード7-8
 Headphone07 <- readr::read_csv("data/headphone07.csv", na = ".")
 
 #データフレームの確認
 glimpse(Headphone07)
+```
 
-# コード7-9
+
+データに含まれる変数を用いて、次のような回帰モデルを推定します。
+
+$$
+\begin{aligned}
+Sales &= \beta_0 + \beta_1 R\&D + \beta_2 Promotion \\
+      &\quad + \beta_3 R\&D \times Promotion + \varepsilon
+\end{aligned}
+$$
+
+これを`lm()`関数を使って最小二乗法で推定します。
+
+
+```{r code7-9, filename="回帰分析"}
 fit_int <- lm(sales ~ rd * promotion, data = Headphone07)
 summary(fit_int)
+```
 
-# コード7-10
+
+
+次に`promotion`と`rd`を中心化して回帰分析を再度行います。
+中心化は、変数からその平均値を引くことで行います。
+```{r code7-10, filename="中心化されたデータでの回帰分析"}
 Headphone07 <- Headphone07 %>%
-  mutate(promotion_c = promotion - mean(promotion, na.rm = TRUE),
-         rd_c = rd - mean(rd, na.rm = TRUE))
+  mutate(
+    promotion_c = promotion - mean(promotion, na.rm = TRUE),
+    rd_c = rd - mean(rd, na.rm = TRUE)
+  )
 
 fit_int_c <- lm(sales ~ rd_c * promotion_c , data = Headphone07)
 summary(fit_int_c)
+```
 
+`Residuals`の各統計量や、表の下の`residual standard error`以下の統計量は、中心化の有無に関わらず同じであることが分かります。
+しかし、回帰係数は中心化の有無で大きく異なっていることがわかります。
+
+```{r code7-11, filename="作図"}
 # コード7-11
 leg = c("Mean - 1sd", "Mean", "Mean + 1sd")
+
 int_fig1 <- plot_model(fit_int_c,
  type = "int",
  mdrt.values = "meansd",
@@ -437,19 +479,21 @@ int_fig1 <- plot_model(fit_int_c,
     name = "Promotion level",
     labels = leg)
 int_fig1
+```
 
-# コード7-12
-# install.packages("marginaleffects")
 
+```{r code7-13, filename="交差項の傾きの可視化"}
 # コード7-13
-# library(marginaleffects)
+# library(marginaleffects)``
 int_fig2 <- plot_slopes(fit_int_c, variables = "rd_c",
   condition = "promotion_c", conf_level = .99999999) +
   labs(title = "Marginal effects of R&D on Sales",
        x = "Promotion", y = "Slope of R&D on Sales") +
   geom_hline(aes(yintercept = 0), linetype = "dashed")
 int_fig2
+```
 
+```{r code7-14, filename="中心化なしの交差項の傾きの可視化"}
 # コード7-14
 firmdata19 <- firmdata19 %>%
   mutate(mkexp_c = mkexp - mean(mkexp),
@@ -477,13 +521,18 @@ fit_prod <- lm(log(sales) ~ log(labor_cost) + log(ppent),
   data = firmdata19)
 
 summary(fit_prod)
+```
 
-# コード7-18
+
+```{r code7-18, filename="価格弾力性の分析"}
 price <- readr::read_csv("data/price_data.csv")
 
 fit_q <- lm(log(q) ~ log(p), data = price)
 summary(fit_q)
+```
 
+  
+```{r}
 # コード7-19
 # install.packages("car")
 
@@ -528,5 +577,4 @@ msummary(Int,
   statistic =  'conf.int', conf_level = .95,
   gof_omit = "Log.Lik.|AIC|BIC|RMSE",
   output = "latex")
-
 ```

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="Soichi Matsuura">
+
 <title>8&nbsp; 第11章 探索的因子分析 – マーケティング・データ分析の学習メモ</title>
 <style>
 code{white-space: pre-wrap;}
@@ -55,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -72,9 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-11b0c5ace49ebb5413c2b5bfe89f7b68.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-af547cbcc093905440ab43901ab47364.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-11b0c5ace49ebb5413c2b5bfe89f7b68.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2faf606acb82b7945c08ef153ee7e46.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8b6ec28c7624df160bce42457c818d22.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2faf606acb82b7945c08ef153ee7e46.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -82,7 +86,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -108,13 +113,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
+}</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<style>
 .marky {background: linear-gradient(transparent 60%, #FCFFC1 0%);}
 .markb {background: linear-gradient(transparent 60%, #88E2EA 0%);}
 .markp {background: linear-gradient(transparent 70%, #ffcdd2 0%);}
 </style>
-<script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
  for (var i = 0; i < mathElements.length; i++) {
@@ -127,7 +136,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     fleqn: false
    });
 }}});
-  </script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
 <script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
@@ -154,6 +165,7 @@ window.Quarto = {
   typesetMath
 };
 </script>
+
 <meta name="twitter:title" content="8&nbsp; 第11章 探索的因子分析 – マーケティング・データ分析の学習メモ">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://so-ichi.com/chapter11_files/figure-html/unnamed-chunk-4-1.png">
@@ -161,10 +173,13 @@ window.Quarto = {
 <meta name="twitter:image-width" content="6300">
 <meta name="twitter:card" content="summary_large_image">
 </head>
+
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -175,9 +190,13 @@ window.Quarto = {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">マーケティング・データ分析の学習メモ</a> 
         <div class="sidebar-tools-main">
@@ -197,7 +216,7 @@ window.Quarto = {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></span></a>
@@ -211,15 +230,15 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></span></a>
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part02.html" class="sidebar-item-text sidebar-link">
@@ -228,8 +247,8 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></span></a>
@@ -254,7 +273,7 @@ window.Quarto = {
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part03.html" class="sidebar-item-text sidebar-link">
@@ -263,8 +282,8 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></span></a>
@@ -283,25 +302,29 @@ window.Quarto = {
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">ここの目次</h2>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">ここの目次</h2>
    
   <ul class="collapse">
-<li><a href="#%E6%9C%AC%E6%80%A7%E3%81%AE%E6%A6%82%E8%A6%81" id="toc-本性の概要" class="nav-link active" data-scroll-target="#%E6%9C%AC%E6%80%A7%E3%81%AE%E6%A6%82%E8%A6%81"><span class="header-section-number">8.1</span> 本性の概要</a></li>
-  <li><a href="#%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%81%A8%E3%81%AF" id="toc-因子分析とは" class="nav-link" data-scroll-target="#%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%81%A8%E3%81%AF"><span class="header-section-number">8.2</span> 因子分析とは</a></li>
-  <li><a href="#%E5%9B%A0%E5%AD%90%E3%83%A2%E3%83%87%E3%83%AB" id="toc-因子モデル" class="nav-link" data-scroll-target="#%E5%9B%A0%E5%AD%90%E3%83%A2%E3%83%87%E3%83%AB"><span class="header-section-number">8.3</span> 2因子モデル</a></li>
-  </ul></nav>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+  <li><a href="#本性の概要" id="toc-本性の概要" class="nav-link active" data-scroll-target="#本性の概要"><span class="header-section-number">8.1</span> 本性の概要</a></li>
+  <li><a href="#因子分析とは" id="toc-因子分析とは" class="nav-link" data-scroll-target="#因子分析とは"><span class="header-section-number">8.2</span> 因子分析とは</a></li>
+  <li><a href="#因子モデル" id="toc-因子モデル" class="nav-link" data-scroll-target="#因子モデル"><span class="header-section-number">8.3</span> 2因子モデル</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part03.html">第3部 探索型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter11.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章 探索的因子分析</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章 探索的因子分析</span>
-</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part03.html">第3部 探索型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter11.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章 探索的因子分析</span></a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">第11章 探索的因子分析</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -315,7 +338,10 @@ window.Quarto = {
   
 
 
-</header><div class="cell" data-layout-align="center">
+</header>
+
+
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
 <span id="cb1-2"><a href="#cb1-2"></a>  psych, <span class="co"># 因子分析のためのパッケージ</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a>  GPArotation, <span class="co"># 因子分析の回転方法を提供するパッケージ</span></span>
@@ -329,26 +355,33 @@ window.Quarto = {
 <span id="cb1-11"><a href="#cb1-11"></a>  useful, <span class="co"># PCAのためのパッケージ</span></span>
 <span id="cb1-12"><a href="#cb1-12"></a>  ggrepel <span class="co"># ラベルを重ならなくする</span></span>
 <span id="cb1-13"><a href="#cb1-13"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+The downloaded binary packages are in
+    /var/folders/lf/9kvp0m950bx72lzg24t53g280000gn/T//RtmpltLXdD/downloaded_packages</code></pre>
 </div>
-<section id="本性の概要" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="本性の概要">
-<span class="header-section-number">8.1</span> 本性の概要</h2>
-</section><section id="因子分析とは" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="因子分析とは">
-<span class="header-section-number">8.2</span> 因子分析とは</h2>
+</div>
+<section id="本性の概要" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="本性の概要"><span class="header-section-number">8.1</span> 本性の概要</h2>
+</section>
+<section id="因子分析とは" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="因子分析とは"><span class="header-section-number">8.2</span> 因子分析とは</h2>
 <p>因子分析(factor analysis)は、観測された変数の背後に存在する<strong>潜在的な共通因子</strong>(common factor)を明らかにするための多変量解析の手法です。 因子分析には2つのアプローチがあります。</p>
 <ol type="1">
-<li>
-<strong>探索的因子分析</strong>：データから潜在的な因子構造を探索する方法</li>
+<li><strong>探索的因子分析</strong>：データから潜在的な因子構造を探索する方法</li>
 <li>確認的因子分析：因子数と因子負荷量について、事前に仮説を立てて分析する方法</li>
 </ol>
 <p>テキストでは、探索的因子分析について説明します。</p>
-<section id="因子分析のモデル構造" class="level3" data-number="8.2.1"><h3 data-number="8.2.1" class="anchored" data-anchor-id="因子分析のモデル構造">
-<span class="header-section-number">8.2.1</span> 因子分析のモデル構造</h3>
+<section id="因子分析のモデル構造" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="因子分析のモデル構造"><span class="header-section-number">8.2.1</span> 因子分析のモデル構造</h3>
 <p>教科書のp.305からの解説を参照</p>
-</section><section id="因子分析の特徴" class="level3" data-number="8.2.2"><h3 data-number="8.2.2" class="anchored" data-anchor-id="因子分析の特徴">
-<span class="header-section-number">8.2.2</span> 因子分析の特徴</h3>
+</section>
+<section id="因子分析の特徴" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="因子分析の特徴"><span class="header-section-number">8.2.2</span> 因子分析の特徴</h3>
 <p>たとえば，お店を訪れたお客さんに10個の質問からなるアンケートに答えてもらい，1000名分のデータが集まったとしましょう。 いま，皆さんの手には以下のような1000人分の10個の回答結果のデータがあります。</p>
 <table class="caption-top table">
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th>ID</th>
 <th>Q1</th>
 <th>Q2</th>
@@ -360,7 +393,8 @@ window.Quarto = {
 <th>Q8</th>
 <th>Q9</th>
 <th>Q10</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
@@ -417,18 +451,16 @@ window.Quarto = {
 </tbody>
 </table>
 <p>このとき，<code>ID</code>が<code>i = 1</code>のQ1の解答 <span class="math inline">5</span> が，<code>1</code>さんが心の中に持っている価値観（例：お店の清潔さ）に従って決められたものであると考えることができます。 このように，回答者の心の中にある価値観や性格などの<strong>潜在的な因子</strong>が，質問項目への回答を決定していると考えることができます。 この<strong>潜在的な因子</strong>を特定する統計的手法の1つが<strong>因子分析</strong>(factor analysis)です。 上の表のように，1000人が答えた10個の質問項目の回答から，少数の潜在的因子を特定することで，少ない数の因子でデータを説明することができます。 1000人の回答は1000通りある，というのではアンケート調査から分かることはありませんが， 少数の共通因子を特定することで，1000人の回答を理解しやすくまとめることができます。 このように，<strong>因子分析は，観測された変数の背後に存在する潜在的な共通因子を明らかにするための多変量解析の手法</strong>です。</p>
-</section></section><section id="因子モデル" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="因子モデル">
-<span class="header-section-number">8.3</span> 2因子モデル</h2>
+</section>
+</section>
+<section id="因子モデル" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="因子モデル"><span class="header-section-number">8.3</span> 2因子モデル</h2>
 <p>因子の数を2と仮定したモデルを2因子モデルといいます。 ここで，<span class="math inline">j = 1, 2, \dots , J</span> 個の質問項目をもつアンケート調査を<span class="math inline">i</span>, <span class="math inline">i = 1, 2, ..., n</span>人の回答者に実施したとします。</p>
 <ul>
-<li>
-<span class="math inline">\boldsymbol{x}_i</span>：観測変数。実際にデータとして得られた質問項目（例：テストの点数）</li>
-<li>
-<span class="math inline">\boldsymbol{f}_i</span>：共通因子。目に見えない潜在的な能力や性質（例：計算力、読解力）</li>
-<li>
-<span class="math inline">\boldsymbol{\alpha}</span>：因子負荷量（Factor Loading）。各共通因子が観測変数に与える影響の強さ</li>
-<li>
-<span class="math inline">\boldsymbol{\varepsilon}_i</span>：独自因子（Unique Factor）。その項目特有の誤差や要因</li>
+<li><span class="math inline">\boldsymbol{x}_i</span>：観測変数。実際にデータとして得られた質問項目（例：テストの点数）</li>
+<li><span class="math inline">\boldsymbol{f}_i</span>：共通因子。目に見えない潜在的な能力や性質（例：計算力、読解力）</li>
+<li><span class="math inline">\boldsymbol{\alpha}</span>：因子負荷量（Factor Loading）。各共通因子が観測変数に与える影響の強さ</li>
+<li><span class="math inline">\boldsymbol{\varepsilon}_i</span>：独自因子（Unique Factor）。その項目特有の誤差や要因</li>
 </ul>
 <p><span class="math inline">J</span>個の項目の背後には2つの潜在因子 <span class="math inline">f_1</span> と <span class="math inline">f_2</span> が存在すると仮定して、以下のモデルを考えます。 <span class="math inline">i</span>さんの<span class="math inline">j</span>番目の質問項目への回答を<span class="math inline">x_{ji}</span> とします。 今手元にあるデータは，<span class="math inline">x_{ji}</span> だけです。 その質問項目への回答は次のように表すとします。 <span class="math display">
 \begin{aligned}
@@ -483,17 +515,17 @@ f_{2i}
 &amp; = \boldsymbol{\alpha}^* \boldsymbol{f}_i^* + \boldsymbol{\varepsilon}_i
 \end{aligned}
 </span></p>
-<p>この式の変形を詳しく見ていきましょう。 これは、<strong>因子の回転</strong>(factor rotation)と呼ばれる操作で、<span class="math inline">\boldsymbol{\alpha}</span> を <span class="math inline">\boldsymbol{\alpha}^*</span> に、<span class="math inline">\boldsymbol{f}_i</span> を <span class="math inline">\boldsymbol{f}_i^*</span> に変換することを意味します。 この <span class="math inline">\boldsymbol{T}</span> をどのように選ぶか，つまり<strong>どのように回転させるのか</strong>によって、<span class="math inline">\boldsymbol{\alpha}^*</span> と <span class="math inline">\boldsymbol{f}_i^*</span> の値が変わります。</p>
-<section id="因子軸の回転" class="level3" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="因子軸の回転">
-<span class="header-section-number">8.3.1</span> 因子軸の回転</h3>
-<p>因子分析には<strong>「回転の不定性」</strong>という性質があります。 行列 <span class="math inline">\boldsymbol{T}</span> を挿入しても、計算結果として得られる観測変数 <span class="math inline">\boldsymbol{x}_i</span> の値（あるいは分散共分散構造）は全く変わりません。 これは、潜在因子の「ものさし（座標軸）」を回転させて、新しい因子負荷量 <span class="math inline">\boldsymbol{\alpha}^*</span> と新しい因子スコア <span class="math inline">\boldsymbol{f}_i^*</span> を作っていることに相当します。 初期の計算で得られる <span class="math inline">\boldsymbol{\alpha}</span> は、すべての因子がすべての変数に中途半端に影響していることが多く、解釈が困難です。 そこで、適切な <span class="math inline">\boldsymbol{T}</span> を選ぶことで、特定の変数には強く、別の変数には弱く影響するように「整理」し直すのです この<span class="math inline">\boldsymbol{\alpha}^*</span>を<strong>回転後の因子負荷量</strong>といい、<span class="math inline">\boldsymbol{f}_i^*</span>を<strong>回転後の因子得点</strong>といいます。</p>
+<p>この式の変形を詳しく見ていきましょう。 これは、<strong>因子の回転</strong>(factor rotation)と呼ばれる操作で、<span class="math inline">\boldsymbol{\alpha}</span> を <span class="math inline">\boldsymbol{\alpha}^*</span> に、<span class="math inline">\boldsymbol{f}_i</span> を <span class="math inline">\boldsymbol{f}_i^*</span> に変換することを意味します。 この <span class="math inline">\boldsymbol{T}</span> をどのように選ぶか，つまり<strong>どのように回転させるのか</strong>によって、<span class="math inline">\boldsymbol{\alpha}^*</span> と <span class="math inline">\boldsymbol{f}_i^*</span> の値が変わります。 ではこの回転について、詳しく見ていきましょう。</p>
+<section id="因子軸の回転" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="因子軸の回転"><span class="header-section-number">8.3.1</span> 因子軸の回転</h3>
+<p>因子分析には<strong>「回転の不定性」</strong>という性質があります。 行列 <span class="math inline">\boldsymbol{T}</span> を挟み込んでも、計算結果として得られる観測変数 <span class="math inline">\boldsymbol{x}_i</span> の値（あるいは分散共分散構造）は全く変わりません。 これは、潜在因子の座標軸，つまり縦軸と横軸を回転させて新しい因子負荷量 <span class="math inline">\boldsymbol{\alpha}^*</span> と新しい因子スコア <span class="math inline">\boldsymbol{f}_i^*</span> を作っていることに相当します。 初期の計算で得られる <span class="math inline">\boldsymbol{\alpha}</span> は、すべての因子がすべての変数に中途半端に影響していることが多く、解釈が困難です。 そこで、適切な <span class="math inline">\boldsymbol{T}</span> を選ぶことで、特定の変数には強く、別の変数には弱く影響するように「整理」し直すのです。 この <span class="math inline">\boldsymbol{\alpha}^*</span> を<strong>回転後の因子負荷量</strong>といい、<span class="math inline">\boldsymbol{f}_i^*</span> を<strong>回転後の因子得点</strong>といいます。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>データの読み込みと整理</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>factor_exdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"data/factor_ex.xlsx"</span>, <span class="at">na =</span> <span class="st">"."</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">summary</span>(factor_exdata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>factor_exdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"data/factor_ex.xlsx"</span>, <span class="at">na =</span> <span class="st">"."</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">summary</span>(factor_exdata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       ID              V1              V2            V3            V4     
@@ -514,8 +546,8 @@ f_{2i}
 </div>
 <p>読み込んだデータは、変数<code>ID</code>と5つの質問項目<code>V1</code>から<code>V6</code>で構成されています。 質問項目は、1から7のリッカート尺度で回答されており、数値が大きいほど肯定的な回答を意味しています。 <code>V5</code>は逆質問であるため、数値が大きいほど重要度が低いことを意味するので、<span class="math inline">8 - 得点</span> として逆転させておきます。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>factor_exdata<span class="sc">$</span>V5 <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">-</span> factor_exdata<span class="sc">$</span>V5</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">summary</span>(factor_exdata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>factor_exdata<span class="sc">$</span>V5 <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">-</span> factor_exdata<span class="sc">$</span>V5</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">summary</span>(factor_exdata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       ID              V1              V2            V3            V4     
  Min.   : 1.00   Min.   :1.000   Min.   :2.0   Min.   :1.0   Min.   :2.0  
@@ -539,9 +571,9 @@ f_{2i}
 <div class="code-with-filename-file">
 <pre><strong>IDを行名に設定</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>factor_exdata <span class="ot">&lt;-</span> factor_exdata <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">"ID"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">glimpse</span>(factor_exdata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>factor_exdata <span class="ot">&lt;-</span> factor_exdata <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">"ID"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">glimpse</span>(factor_exdata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 30
@@ -555,7 +587,7 @@ $ V6 &lt;dbl&gt; 4, 4, 3, 5, 2, 4, 3, 4, 3, 6, 3, 4, 3, 6, 4, 4, 4, 4, 3, 6, 3, 
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(factor_exdata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(factor_exdata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
@@ -567,7 +599,8 @@ $ V6 &lt;dbl&gt; 4, 4, 3, 5, 2, 4, 3, 4, 3, 6, 3, 4, 3, 6, 4, 4, 4, 4, 3, 6, 3, 
 <col style="width: 15%">
 <col style="width: 17%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: left;">V1</th>
 <th style="text-align: left;">V2</th>
@@ -575,7 +608,8 @@ $ V6 &lt;dbl&gt; 4, 4, 3, 5, 2, 4, 3, 4, 3, 6, 3, 4, 3, 6, 4, 4, 4, 4, 3, 6, 3, 
 <th style="text-align: left;">V4</th>
 <th style="text-align: left;">V5</th>
 <th style="text-align: left;">V6</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"></td>
@@ -636,8 +670,8 @@ $ V6 &lt;dbl&gt; 4, 4, 3, 5, 2, 4, 3, 4, 3, 6, 3, 4, 3, 6, 4, 4, 4, 4, 3, 6, 3, 
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># コード11-3</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cor</span>(factor_exdata), <span class="at">caption =</span> <span class="st">"相関行列"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># コード11-3</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cor</span>(factor_exdata), <span class="at">caption =</span> <span class="st">"相関行列"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>相関行列</caption>
@@ -650,7 +684,8 @@ $ V6 &lt;dbl&gt; 4, 4, 3, 5, 2, 4, 3, 4, 3, 6, 3, 4, 3, 6, 4, 4, 4, 4, 3, 6, 3, 
 <col style="width: 15%">
 <col style="width: 15%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: right;">V1</th>
 <th style="text-align: right;">V2</th>
@@ -658,7 +693,8 @@ $ V6 &lt;dbl&gt; 4, 4, 3, 5, 2, 4, 3, 4, 3, 6, 3, 4, 3, 6, 4, 4, 4, 4, 3, 6, 3, 
 <th style="text-align: right;">V4</th>
 <th style="text-align: right;">V5</th>
 <th style="text-align: right;">V6</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">V1</td>
@@ -717,20 +753,21 @@ $ V6 &lt;dbl&gt; 4, 4, 3, 5, 2, 4, 3, 4, 3, 6, 3, 4, 3, 6, 4, 4, 4, 4, 3, 6, 3, 
 </tbody>
 </table>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># コード11-4</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>cor.exdata <span class="ot">&lt;-</span> <span class="fu">cor</span>(factor_exdata)</span>
-<span id="cb10-3"><a href="#cb10-3"></a></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="fu">VSS.scree</span>(cor.exdata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># コード11-4</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>cor.exdata <span class="ot">&lt;-</span> <span class="fu">cor</span>(factor_exdata)</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="fu">VSS.scree</span>(cor.exdata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="chapter11_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter11_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
+<figure class="figure">
+<p><a href="chapter11_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter11_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># コード11-5</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>fa <span class="ot">&lt;-</span> <span class="fu">fa</span>(<span class="at">r =</span> factor_exdata, <span class="at">nfactors =</span> <span class="dv">2</span>,</span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">rotate =</span> <span class="st">"promax"</span>, <span class="at">fm =</span> <span class="st">"ml"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4"></a>fa</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># コード11-5</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>fa <span class="ot">&lt;-</span> <span class="fu">fa</span>(<span class="at">r =</span> factor_exdata, <span class="at">nfactors =</span> <span class="dv">2</span>,</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="at">rotate =</span> <span class="st">"promax"</span>, <span class="at">fm =</span> <span class="st">"ml"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>fa</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Factor Analysis using method =  ml
 Call: fa(r = factor_exdata, nfactors = 2, rotate = "promax", fm = "ml")
@@ -764,7 +801,7 @@ df of  the model are 4  and the objective function was  0.21
 The root mean square of the residuals (RMSR) is  0.03 
 The df corrected root mean square of the residuals is  0.05 
 
-The harmonic n.obs is  30 with the empirical chi square  0.65  with prob &lt;  0.96 
+The harmonic n.obs is  30 with the empirical chi square  0.33  with prob &lt;  0.99 
 The total n.obs was  30  with Likelihood Chi Square =  5.21  with prob &lt;  0.27 
 
 Tucker Lewis Index of factoring reliability =  0.95
@@ -777,24 +814,26 @@ Correlation of (regression) scores with factors   0.98 0.92
 Multiple R square of scores with factors          0.96 0.84
 Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># コード11-6</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">fa.diagram</span>(fa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># コード11-6</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">fa.diagram</span>(fa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="chapter11_files/figure-html/unnamed-chunk-4-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter11_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
+<figure class="figure">
+<p><a href="chapter11_files/figure-html/unnamed-chunk-4-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="chapter11_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># コード11-7</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>fs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(fa<span class="sc">$</span>scores)</span>
-<span id="cb14-3"><a href="#cb14-3"></a>factor_exdata<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(factor_exdata)</span>
-<span id="cb14-4"><a href="#cb14-4"></a>fs<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(fs)</span>
-<span id="cb14-5"><a href="#cb14-5"></a>factor_exdata <span class="ot">&lt;-</span> <span class="fu">left_join</span>(factor_exdata, fs, <span class="at">by =</span> <span class="st">"rowname"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(factor_exdata), <span class="at">caption =</span> <span class="st">"結合後データ"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># コード11-7</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>fs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(fa<span class="sc">$</span>scores)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>factor_exdata<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(factor_exdata)</span>
+<span id="cb15-4"><a href="#cb15-4"></a>fs<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(fs)</span>
+<span id="cb15-5"><a href="#cb15-5"></a>factor_exdata <span class="ot">&lt;-</span> <span class="fu">left_join</span>(factor_exdata, fs, <span class="at">by =</span> <span class="st">"rowname"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(factor_exdata), <span class="at">caption =</span> <span class="st">"結合後データ"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>結合後データ</caption>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: right;">V1</th>
 <th style="text-align: right;">V2</th>
 <th style="text-align: right;">V3</th>
@@ -804,7 +843,8 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <th style="text-align: left;">rowname</th>
 <th style="text-align: right;">ML1</th>
 <th style="text-align: right;">ML2</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">7</td>
@@ -814,8 +854,8 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">1</td>
-<td style="text-align: right;">1.3106155</td>
-<td style="text-align: right;">-0.2896470</td>
+<td style="text-align: right;">1.3105846</td>
+<td style="text-align: right;">-0.2899670</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">1</td>
@@ -825,8 +865,8 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">2</td>
-<td style="text-align: right;">-1.2878038</td>
-<td style="text-align: right;">-0.2073067</td>
+<td style="text-align: right;">-1.2878473</td>
+<td style="text-align: right;">-0.2069844</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">6</td>
@@ -836,8 +876,8 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">3</td>
-<td style="text-align: right;">1.1828544</td>
-<td style="text-align: right;">-0.7996332</td>
+<td style="text-align: right;">1.1827458</td>
+<td style="text-align: right;">-0.7999135</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
@@ -847,8 +887,8 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: left;">4</td>
-<td style="text-align: right;">0.1474225</td>
-<td style="text-align: right;">1.0035837</td>
+<td style="text-align: right;">0.1475745</td>
+<td style="text-align: right;">1.0035312</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">1</td>
@@ -858,8 +898,8 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">5</td>
-<td style="text-align: right;">-1.3907544</td>
-<td style="text-align: right;">-1.3067260</td>
+<td style="text-align: right;">-1.3909639</td>
+<td style="text-align: right;">-1.3063607</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">6</td>
@@ -869,54 +909,57 @@ Minimum correlation of possible factor scores     0.92 0.68</code></pre>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">6</td>
-<td style="text-align: right;">0.9928111</td>
-<td style="text-align: right;">-0.2875982</td>
+<td style="text-align: right;">0.9927775</td>
+<td style="text-align: right;">-0.2878395</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># コード11-8</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a></span>
-<span id="cb15-3"><a href="#cb15-3"></a>ex_cluster <span class="ot">&lt;-</span> factor_exdata <span class="sc">%&gt;%</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">select</span>(ML1, ML2)</span>
-<span id="cb15-5"><a href="#cb15-5"></a>Hier1 <span class="ot">&lt;-</span> <span class="fu">agnes</span>(ex_cluster, <span class="at">metric =</span> <span class="st">"euclidian"</span>, <span class="at">stand =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="fu">pltree</span>(Hier1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># コード11-8</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a>ex_cluster <span class="ot">&lt;-</span> factor_exdata <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">select</span>(ML1, ML2)</span>
+<span id="cb16-5"><a href="#cb16-5"></a>Hier1 <span class="ot">&lt;-</span> <span class="fu">agnes</span>(ex_cluster, <span class="at">metric =</span> <span class="st">"euclidian"</span>, <span class="at">stand =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="fu">pltree</span>(Hier1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="chapter11_files/figure-html/unnamed-chunk-4-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="chapter11_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
+<figure class="figure">
+<p><a href="chapter11_files/figure-html/unnamed-chunk-4-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="chapter11_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># コード11-9</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>cl_1 <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(ex_cluster, <span class="dv">3</span>)</span>
-<span id="cb16-3"><a href="#cb16-3"></a>clus_fa <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(cl_1<span class="sc">$</span>cluster)</span>
-<span id="cb16-4"><a href="#cb16-4"></a>clus_fa<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(clus_fa)</span>
-<span id="cb16-5"><a href="#cb16-5"></a>factor_exdata <span class="ot">&lt;-</span> <span class="fu">left_join</span>(factor_exdata, clus_fa, <span class="at">by =</span> <span class="st">"rowname"</span>)</span>
-<span id="cb16-6"><a href="#cb16-6"></a>factor_exdata<span class="sc">$</span>cl_1.cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(factor_exdata<span class="sc">$</span>cl_1.cluster)</span>
-<span id="cb16-7"><a href="#cb16-7"></a></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="co"># Visualizing the clusters with 2 factors</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> factor_exdata,</span>
-<span id="cb16-10"><a href="#cb16-10"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ML1, <span class="at">y =</span> ML2, <span class="at">color =</span> cl_1.cluster))</span>
-<span id="cb16-11"><a href="#cb16-11"></a>p1 <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb16-12"><a href="#cb16-12"></a>  <span class="fu">geom_text_repel</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(factor_exdata))) <span class="sc">+</span></span>
-<span id="cb16-13"><a href="#cb16-13"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ease of use"</span>, <span class="at">y =</span> <span class="st">"Design"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># コード11-9</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>cl_1 <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(ex_cluster, <span class="dv">3</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a>clus_fa <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(cl_1<span class="sc">$</span>cluster)</span>
+<span id="cb17-4"><a href="#cb17-4"></a>clus_fa<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(clus_fa)</span>
+<span id="cb17-5"><a href="#cb17-5"></a>factor_exdata <span class="ot">&lt;-</span> <span class="fu">left_join</span>(factor_exdata, clus_fa, <span class="at">by =</span> <span class="st">"rowname"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6"></a>factor_exdata<span class="sc">$</span>cl_1.cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(factor_exdata<span class="sc">$</span>cl_1.cluster)</span>
+<span id="cb17-7"><a href="#cb17-7"></a></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="co"># Visualizing the clusters with 2 factors</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> factor_exdata,</span>
+<span id="cb17-10"><a href="#cb17-10"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ML1, <span class="at">y =</span> ML2, <span class="at">color =</span> cl_1.cluster))</span>
+<span id="cb17-11"><a href="#cb17-11"></a>p1 <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a>  <span class="fu">geom_text_repel</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(factor_exdata))) <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ease of use"</span>, <span class="at">y =</span> <span class="st">"Design"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="chapter11_files/figure-html/unnamed-chunk-4-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="chapter11_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
+<figure class="figure">
+<p><a href="chapter11_files/figure-html/unnamed-chunk-4-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="chapter11_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># コード11-10</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>factor_exdata3 <span class="ot">&lt;-</span> factor_exdata <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(V1<span class="sc">:</span>V6) <span class="co"># 質問項目だけを厳密に抽出</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>pca_res <span class="ot">&lt;-</span> <span class="fu">pca</span>(factor_exdata3, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">rotate =</span> <span class="st">"none"</span>)</span>
-<span id="cb17-5"><a href="#cb17-5"></a>pca_res</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># コード11-10</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>factor_exdata3 <span class="ot">&lt;-</span> factor_exdata <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(V1<span class="sc">:</span>V6) <span class="co"># 質問項目だけを厳密に抽出</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>pca_res <span class="ot">&lt;-</span> <span class="fu">pca</span>(factor_exdata3, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">rotate =</span> <span class="st">"none"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5"></a>pca_res</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Principal Components Analysis
 Call: principal(r = r, nfactors = nfactors, residuals = residuals, 
     rotate = rotate, n.obs = n.obs, covar = covar, scores = scores, 
     missing = missing, impute = impute, oblique.scores = oblique.scores, 
-    method = method, use = use, cor = cor, correct = 0.5, weight = NULL)
+    method = method, use = use, cor = cor, correct = 0.5, weight = NULL, 
+    n.rotations = n.rotations)
 Standardized loadings (pattern matrix) based upon correlation matrix
      PC1  PC2   h2    u2 com
 V1  0.93 0.25 0.93 0.074 1.1
@@ -936,31 +979,33 @@ Cumulative Proportion 0.55 1.00
 Mean item complexity =  1.2
 Test of the hypothesis that 2 components are sufficient.
 
-The root mean square of the residuals (RMSR) is  0.07 
- with the empirical chi square  3.94  with prob &lt;  0.41 
+The root mean square of the residuals (RMSR) is  0.05 
+ with the empirical chi square  1.97  with prob &lt;  0.74 
 
-Fit based upon off diagonal values = 0.98</code></pre>
+Fit based upon off diagonal values = 0.99</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># コード11-11</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="co"># データの相関行列から固有値と固有ベクトルを抽出</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>cor_ex <span class="ot">&lt;-</span> <span class="fu">cor</span>(factor_exdata3)</span>
-<span id="cb19-4"><a href="#cb19-4"></a>eigen_list <span class="ot">&lt;-</span> <span class="fu">eigen</span>(cor_ex)</span>
-<span id="cb19-5"><a href="#cb19-5"></a></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="co"># 固有ベクトルについての情報をオブジェクトとして定義</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a>pc1_eig <span class="ot">&lt;-</span> eigen_list<span class="sc">$</span>vectors[, <span class="dv">1</span>]</span>
-<span id="cb19-8"><a href="#cb19-8"></a>pc2_eig <span class="ot">&lt;-</span> eigen_list<span class="sc">$</span>vectors[, <span class="dv">2</span>]</span>
-<span id="cb19-9"><a href="#cb19-9"></a></span>
-<span id="cb19-10"><a href="#cb19-10"></a><span class="co"># 固有ベクトルに，固有値の平方根を乗じる</span></span>
-<span id="cb19-11"><a href="#cb19-11"></a>PC1 <span class="ot">&lt;-</span> pc1_eig <span class="sc">*</span> <span class="fu">sqrt</span>(eigen_list<span class="sc">$</span>values[<span class="dv">1</span>])</span>
-<span id="cb19-12"><a href="#cb19-12"></a>PC2 <span class="ot">&lt;-</span> pc2_eig <span class="sc">*</span> <span class="fu">sqrt</span>(eigen_list<span class="sc">$</span>values[<span class="dv">2</span>])</span>
-<span id="cb19-13"><a href="#cb19-13"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">data.frame</span>(<span class="fu">cbind</span>(PC1, PC2)), <span class="at">caption =</span> <span class="st">"計算結果"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># コード11-11</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="co"># データの相関行列から固有値と固有ベクトルを抽出</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>cor_ex <span class="ot">&lt;-</span> <span class="fu">cor</span>(factor_exdata3)</span>
+<span id="cb20-4"><a href="#cb20-4"></a>eigen_list <span class="ot">&lt;-</span> <span class="fu">eigen</span>(cor_ex)</span>
+<span id="cb20-5"><a href="#cb20-5"></a></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="co"># 固有ベクトルについての情報をオブジェクトとして定義</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>pc1_eig <span class="ot">&lt;-</span> eigen_list<span class="sc">$</span>vectors[, <span class="dv">1</span>]</span>
+<span id="cb20-8"><a href="#cb20-8"></a>pc2_eig <span class="ot">&lt;-</span> eigen_list<span class="sc">$</span>vectors[, <span class="dv">2</span>]</span>
+<span id="cb20-9"><a href="#cb20-9"></a></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="co"># 固有ベクトルに，固有値の平方根を乗じる</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>PC1 <span class="ot">&lt;-</span> pc1_eig <span class="sc">*</span> <span class="fu">sqrt</span>(eigen_list<span class="sc">$</span>values[<span class="dv">1</span>])</span>
+<span id="cb20-12"><a href="#cb20-12"></a>PC2 <span class="ot">&lt;-</span> pc2_eig <span class="sc">*</span> <span class="fu">sqrt</span>(eigen_list<span class="sc">$</span>values[<span class="dv">2</span>])</span>
+<span id="cb20-13"><a href="#cb20-13"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">data.frame</span>(<span class="fu">cbind</span>(PC1, PC2)), <span class="at">caption =</span> <span class="st">"計算結果"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>計算結果</caption>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: right;">PC1</th>
 <th style="text-align: right;">PC2</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">0.9283425</td>
@@ -991,18 +1036,20 @@ Fit based upon off diagonal values = 0.98</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># 結果の表示（行名をV1-V6に合わせて見やすくします）</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>loadings_manual <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(PC1, PC2)</span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="fu">rownames</span>(loadings_manual) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(factor_exdata3)</span>
-<span id="cb20-4"><a href="#cb20-4"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(loadings_manual, <span class="at">caption =</span> <span class="st">"主成分負荷量の計算結果"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># 結果の表示（行名をV1-V6に合わせて見やすくします）</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>loadings_manual <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(PC1, PC2)</span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="fu">rownames</span>(loadings_manual) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(factor_exdata3)</span>
+<span id="cb21-4"><a href="#cb21-4"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(loadings_manual, <span class="at">caption =</span> <span class="st">"主成分負荷量の計算結果"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>主成分負荷量の計算結果</caption>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: right;">PC1</th>
 <th style="text-align: right;">PC2</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">V1</td>
@@ -1042,7 +1089,11 @@ Fit based upon off diagonal values = 0.98</code></pre>
 
 <!-- -->
 
-</section></section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -1494,7 +1545,9 @@ Fit based upon off diagonal values = 0.98</code></pre>
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="./chapter10.html" class="pagination-link" aria-label="第10章 セグメントとクラスター分析">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></span>
       </a>          
@@ -1505,257 +1558,258 @@ Fit based upon off diagonal values = 0.98</code></pre>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">## 第11章 探索的因子分析</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="in">```{r}</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb21-7"><a href="#cb21-7"></a>  psych, <span class="co"># 因子分析のためのパッケージ</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a>  GPArotation, <span class="co"># 因子分析の回転方法を提供するパッケージ</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a>  tidyverse, <span class="co"># データ操作と可視化のためのパッケージ群</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a>  readxl, <span class="co"># Excelファイルの読み込みのためのパッケージ</span></span>
-<span id="cb21-11"><a href="#cb21-11"></a>  gt, <span class="co"># 表の作成のためのパッケージ</span></span>
-<span id="cb21-12"><a href="#cb21-12"></a>  gtExtras, <span class="co"># gtパッケージの拡張機能を提供するパッケージ</span></span>
-<span id="cb21-13"><a href="#cb21-13"></a>  dendextend, <span class="co"># 階層的クラスタリングのためのパッケージ</span></span>
-<span id="cb21-14"><a href="#cb21-14"></a>  cluster, <span class="co"># クラスタリングのためのパッケージ</span></span>
-<span id="cb21-15"><a href="#cb21-15"></a>  factoextra, <span class="co"># クラスタリングの可視化のためのパッケージ</span></span>
-<span id="cb21-16"><a href="#cb21-16"></a>  useful, <span class="co"># PCAのためのパッケージ</span></span>
-<span id="cb21-17"><a href="#cb21-17"></a>  ggrepel <span class="co"># ラベルを重ならなくする</span></span>
-<span id="cb21-18"><a href="#cb21-18"></a>  )</span>
-<span id="cb21-19"><a href="#cb21-19"></a><span class="in">```</span></span>
-<span id="cb21-20"><a href="#cb21-20"></a></span>
-<span id="cb21-21"><a href="#cb21-21"></a><span class="fu">## 本性の概要</span></span>
-<span id="cb21-22"><a href="#cb21-22"></a></span>
-<span id="cb21-23"><a href="#cb21-23"></a></span>
-<span id="cb21-24"><a href="#cb21-24"></a><span class="fu">## 因子分析とは</span></span>
-<span id="cb21-25"><a href="#cb21-25"></a></span>
-<span id="cb21-26"><a href="#cb21-26"></a>因子分析(factor analysis)は、観測された変数の背後に存在する**潜在的な共通因子**(common factor)を明らかにするための多変量解析の手法です。</span>
-<span id="cb21-27"><a href="#cb21-27"></a>因子分析には2つのアプローチがあります。</span>
-<span id="cb21-28"><a href="#cb21-28"></a></span>
-<span id="cb21-29"><a href="#cb21-29"></a><span class="ss">1. </span>**探索的因子分析**：データから潜在的な因子構造を探索する方法</span>
-<span id="cb21-30"><a href="#cb21-30"></a><span class="ss">2. </span>確認的因子分析：因子数と因子負荷量について、事前に仮説を立てて分析する方法</span>
-<span id="cb21-31"><a href="#cb21-31"></a></span>
-<span id="cb21-32"><a href="#cb21-32"></a>テキストでは、探索的因子分析について説明します。</span>
-<span id="cb21-33"><a href="#cb21-33"></a></span>
-<span id="cb21-34"><a href="#cb21-34"></a><span class="fu">### 因子分析のモデル構造</span></span>
-<span id="cb21-35"><a href="#cb21-35"></a></span>
-<span id="cb21-36"><a href="#cb21-36"></a>教科書のp.305からの解説を参照</span>
-<span id="cb21-37"><a href="#cb21-37"></a></span>
-<span id="cb21-38"><a href="#cb21-38"></a><span class="fu">### 因子分析の特徴</span></span>
-<span id="cb21-39"><a href="#cb21-39"></a></span>
-<span id="cb21-40"><a href="#cb21-40"></a>たとえば，お店を訪れたお客さんに10個の質問からなるアンケートに答えてもらい，1000名分のデータが集まったとしましょう。</span>
-<span id="cb21-41"><a href="#cb21-41"></a>いま，皆さんの手には以下のような1000人分の10個の回答結果のデータがあります。</span>
-<span id="cb21-42"><a href="#cb21-42"></a></span>
-<span id="cb21-43"><a href="#cb21-43"></a><span class="pp">|</span> ID <span class="pp">|</span> Q1 <span class="pp">|</span> Q2 <span class="pp">|</span> Q3 <span class="pp">|</span> Q4 <span class="pp">|</span> Q5 <span class="pp">|</span> Q6 <span class="pp">|</span> Q7 <span class="pp">|</span> Q8 <span class="pp">|</span> Q9 <span class="pp">|</span> Q10 <span class="pp">|</span></span>
-<span id="cb21-44"><a href="#cb21-44"></a><span class="pp">|----|----|----|----|----|----|----|----|----|----|----|</span></span>
-<span id="cb21-45"><a href="#cb21-45"></a><span class="pp">|</span> 1  <span class="pp">|</span> 5  <span class="pp">|</span> 3  <span class="pp">|</span> 4  <span class="pp">|</span> 2  <span class="pp">|</span> 3  <span class="pp">|</span>  4  <span class="pp">|</span>  4 <span class="pp">|</span> 2  <span class="pp">|</span> 4  <span class="pp">|</span> 2  <span class="pp">|</span></span>
-<span id="cb21-46"><a href="#cb21-46"></a><span class="pp">|</span> 2  <span class="pp">|</span> 4  <span class="pp">|</span> 4  <span class="pp">|</span> 5  <span class="pp">|</span> 3  <span class="pp">|</span> 4  <span class="pp">|</span> 5   <span class="pp">|</span> 5 <span class="pp">|</span> 3  <span class="pp">|</span> 5  <span class="pp">|</span> 3  <span class="pp">|</span></span>
-<span id="cb21-47"><a href="#cb21-47"></a><span class="pp">|</span>... <span class="pp">|</span> ...<span class="pp">|</span> ...<span class="pp">|</span> ...<span class="pp">|</span> ...<span class="pp">|</span> ...<span class="pp">|</span> ... <span class="pp">|</span>...<span class="pp">|</span> ...<span class="pp">|</span>...<span class="pp">|</span> ...<span class="pp">|</span></span>
-<span id="cb21-48"><a href="#cb21-48"></a><span class="pp">|</span>1000<span class="pp">|</span> 3  <span class="pp">|</span> 2  <span class="pp">|</span> 3  <span class="pp">|</span> 1  <span class="pp">|</span> 2  <span class="pp">|</span> 3   <span class="pp">|</span> 3 <span class="pp">|</span> 1  <span class="pp">|</span> 3  <span class="pp">|</span> 1  <span class="pp">|</span></span>
-<span id="cb21-49"><a href="#cb21-49"></a></span>
-<span id="cb21-50"><a href="#cb21-50"></a></span>
-<span id="cb21-51"><a href="#cb21-51"></a>このとき，<span class="in">`ID`</span>が<span class="in">`i = 1`</span>のQ1の解答 $5$ が，<span class="in">`1`</span>さんが心の中に持っている価値観（例：お店の清潔さ）に従って決められたものであると考えることができます。</span>
-<span id="cb21-52"><a href="#cb21-52"></a>このように，回答者の心の中にある価値観や性格などの**潜在的な因子**が，質問項目への回答を決定していると考えることができます。</span>
-<span id="cb21-53"><a href="#cb21-53"></a>この**潜在的な因子**を特定する統計的手法の1つが**因子分析**(factor analysis)です。</span>
-<span id="cb21-54"><a href="#cb21-54"></a>上の表のように，1000人が答えた10個の質問項目の回答から，少数の潜在的因子を特定することで，少ない数の因子でデータを説明することができます。</span>
-<span id="cb21-55"><a href="#cb21-55"></a>1000人の回答は1000通りある，というのではアンケート調査から分かることはありませんが，</span>
-<span id="cb21-56"><a href="#cb21-56"></a>少数の共通因子を特定することで，1000人の回答を理解しやすくまとめることができます。</span>
-<span id="cb21-57"><a href="#cb21-57"></a>このように，**因子分析は，観測された変数の背後に存在する潜在的な共通因子を明らかにするための多変量解析の手法**です。</span>
-<span id="cb21-58"><a href="#cb21-58"></a></span>
-<span id="cb21-59"><a href="#cb21-59"></a></span>
-<span id="cb21-60"><a href="#cb21-60"></a><span class="fu">## 2因子モデル</span></span>
-<span id="cb21-61"><a href="#cb21-61"></a></span>
-<span id="cb21-62"><a href="#cb21-62"></a>因子の数を2と仮定したモデルを2因子モデルといいます。</span>
-<span id="cb21-63"><a href="#cb21-63"></a>ここで，$j = 1, 2, \dots , J$ 個の質問項目をもつアンケート調査を$i$, $i = 1, 2, ..., n$人の回答者に実施したとします。</span>
-<span id="cb21-64"><a href="#cb21-64"></a></span>
-<span id="cb21-65"><a href="#cb21-65"></a><span class="ss">- </span>$\boldsymbol{x}_i$：観測変数。実際にデータとして得られた質問項目（例：テストの点数）</span>
-<span id="cb21-66"><a href="#cb21-66"></a><span class="ss">- </span>$\boldsymbol{f}_i$：共通因子。目に見えない潜在的な能力や性質（例：計算力、読解力）</span>
-<span id="cb21-67"><a href="#cb21-67"></a><span class="ss">- </span>$\boldsymbol{\alpha}$：因子負荷量（Factor Loading）。各共通因子が観測変数に与える影響の強さ</span>
-<span id="cb21-68"><a href="#cb21-68"></a><span class="ss">- </span>$\boldsymbol{\varepsilon}_i$：独自因子（Unique Factor）。その項目特有の誤差や要因</span>
-<span id="cb21-69"><a href="#cb21-69"></a></span>
-<span id="cb21-70"><a href="#cb21-70"></a>$J$個の項目の背後には2つの潜在因子 $f_1$ と $f_2$ が存在すると仮定して、以下のモデルを考えます。</span>
-<span id="cb21-71"><a href="#cb21-71"></a>$i$さんの$j$番目の質問項目への回答を$x_{ji}$ とします。</span>
-<span id="cb21-72"><a href="#cb21-72"></a>今手元にあるデータは，$x_{ji}$ だけです。</span>
-<span id="cb21-73"><a href="#cb21-73"></a>その質問項目への回答は次のように表すとします。</span>
-<span id="cb21-74"><a href="#cb21-74"></a>$$</span>
-<span id="cb21-75"><a href="#cb21-75"></a>\begin{aligned}</span>
-<span id="cb21-76"><a href="#cb21-76"></a>\begin{cases}</span>
-<span id="cb21-77"><a href="#cb21-77"></a>x_{1i} &amp;= \alpha _{11} f_{1i} + \alpha _{12} f_{2i} + \varepsilon_{1i} <span class="sc">\\</span></span>
-<span id="cb21-78"><a href="#cb21-78"></a> \ \vdots <span class="sc">\\</span></span>
-<span id="cb21-79"><a href="#cb21-79"></a>x_{Ji} &amp;= \alpha _{J1} f_{1i} + \alpha _{J2} f_{2i} + \varepsilon_{Ji}</span>
-<span id="cb21-80"><a href="#cb21-80"></a>\end{cases}</span>
-<span id="cb21-81"><a href="#cb21-81"></a>\end{aligned}</span>
-<span id="cb21-82"><a href="#cb21-82"></a>$$</span>
-<span id="cb21-83"><a href="#cb21-83"></a></span>
-<span id="cb21-84"><a href="#cb21-84"></a>掛けて足す、の構造をもっているので、行列で表すことができます。</span>
-<span id="cb21-85"><a href="#cb21-85"></a></span>
-<span id="cb21-86"><a href="#cb21-86"></a>$$</span>
-<span id="cb21-87"><a href="#cb21-87"></a>\begin{aligned}</span>
-<span id="cb21-88"><a href="#cb21-88"></a>\underbrace{</span>
-<span id="cb21-89"><a href="#cb21-89"></a>\begin{pmatrix}</span>
-<span id="cb21-90"><a href="#cb21-90"></a>x_{1i} <span class="sc">\\</span></span>
-<span id="cb21-91"><a href="#cb21-91"></a>\vdots <span class="sc">\\</span></span>
-<span id="cb21-92"><a href="#cb21-92"></a>x_{Ji}</span>
-<span id="cb21-93"><a href="#cb21-93"></a>\end{pmatrix}</span>
-<span id="cb21-94"><a href="#cb21-94"></a>}_{J\times1}</span>
-<span id="cb21-95"><a href="#cb21-95"></a>&amp;=</span>
-<span id="cb21-96"><a href="#cb21-96"></a>\underbrace{</span>
-<span id="cb21-97"><a href="#cb21-97"></a>\begin{pmatrix}</span>
-<span id="cb21-98"><a href="#cb21-98"></a>\alpha _{11} &amp; \alpha _{12} <span class="sc">\\</span></span>
-<span id="cb21-99"><a href="#cb21-99"></a>\vdots &amp; \vdots <span class="sc">\\</span></span>
-<span id="cb21-100"><a href="#cb21-100"></a>\alpha _{J1} &amp; \alpha _{J2}</span>
-<span id="cb21-101"><a href="#cb21-101"></a>\end{pmatrix}</span>
-<span id="cb21-102"><a href="#cb21-102"></a>}_{J\times2}</span>
-<span id="cb21-103"><a href="#cb21-103"></a>\underbrace{</span>
-<span id="cb21-104"><a href="#cb21-104"></a>\begin{pmatrix}</span>
-<span id="cb21-105"><a href="#cb21-105"></a>f_{1i} <span class="sc">\\</span></span>
-<span id="cb21-106"><a href="#cb21-106"></a>f_{2i}</span>
-<span id="cb21-107"><a href="#cb21-107"></a>\end{pmatrix}</span>
-<span id="cb21-108"><a href="#cb21-108"></a>}_{2\times1}</span>
-<span id="cb21-109"><a href="#cb21-109"></a>+</span>
-<span id="cb21-110"><a href="#cb21-110"></a>\underbrace{</span>
-<span id="cb21-111"><a href="#cb21-111"></a>\begin{pmatrix}</span>
-<span id="cb21-112"><a href="#cb21-112"></a>\varepsilon_{1i} <span class="sc">\\</span></span>
-<span id="cb21-113"><a href="#cb21-113"></a>\vdots <span class="sc">\\</span></span>
-<span id="cb21-114"><a href="#cb21-114"></a>\varepsilon_{Ji}</span>
-<span id="cb21-115"><a href="#cb21-115"></a>\end{pmatrix}</span>
-<span id="cb21-116"><a href="#cb21-116"></a>}_{J\times1}</span>
-<span id="cb21-117"><a href="#cb21-117"></a>\end{aligned}</span>
-<span id="cb21-118"><a href="#cb21-118"></a>$$</span>
-<span id="cb21-119"><a href="#cb21-119"></a></span>
-<span id="cb21-120"><a href="#cb21-120"></a>まとめて書くと、次のようになります。</span>
-<span id="cb21-121"><a href="#cb21-121"></a></span>
-<span id="cb21-122"><a href="#cb21-122"></a>$$</span>
-<span id="cb21-123"><a href="#cb21-123"></a>\boldsymbol{x}_i = \boldsymbol{\alpha} \boldsymbol{f}_i + \boldsymbol{\varepsilon}_i</span>
-<span id="cb21-124"><a href="#cb21-124"></a>$$</span>
-<span id="cb21-125"><a href="#cb21-125"></a>この式を**2因子モデル**といいます。</span>
-<span id="cb21-126"><a href="#cb21-126"></a>任意の非特異な$2 \times 2$ の正則行列$\boldsymbol{T}$を用いて、次のように変形します。</span>
-<span id="cb21-127"><a href="#cb21-127"></a>$$</span>
-<span id="cb21-128"><a href="#cb21-128"></a>\begin{aligned}</span>
-<span id="cb21-129"><a href="#cb21-129"></a>\boldsymbol{x}_i &amp;= \boldsymbol{\alpha} (\boldsymbol{TT^{-1}}) \boldsymbol{f}_i + \boldsymbol{\varepsilon}_i<span class="sc">\\</span></span>
-<span id="cb21-130"><a href="#cb21-130"></a>&amp; = \underbrace{(\boldsymbol{\alpha T})}_{J\times 2, 2\times 2} \underbrace{(\boldsymbol{T^{-1}f}_i)}_{2\times 2, 2\times 1} + \boldsymbol{\varepsilon}_i<span class="sc">\\</span></span>
-<span id="cb21-131"><a href="#cb21-131"></a>&amp; = \boldsymbol{\alpha}^* \boldsymbol{f}_i^* + \boldsymbol{\varepsilon}_i</span>
-<span id="cb21-132"><a href="#cb21-132"></a>\end{aligned}</span>
-<span id="cb21-133"><a href="#cb21-133"></a>$$</span>
-<span id="cb21-134"><a href="#cb21-134"></a></span>
-<span id="cb21-135"><a href="#cb21-135"></a>この式の変形を詳しく見ていきましょう。</span>
-<span id="cb21-136"><a href="#cb21-136"></a>これは、**因子の回転**(factor rotation)と呼ばれる操作で、$\boldsymbol{\alpha}$ を $\boldsymbol{\alpha}^*$ に、$\boldsymbol{f}_i$ を $\boldsymbol{f}_i^*$ に変換することを意味します。</span>
-<span id="cb21-137"><a href="#cb21-137"></a>この $\boldsymbol{T}$ をどのように選ぶか，つまり**どのように回転させるのか**によって、$\boldsymbol{\alpha}^*$ と $\boldsymbol{f}_i^*$ の値が変わります。</span>
-<span id="cb21-138"><a href="#cb21-138"></a></span>
-<span id="cb21-139"><a href="#cb21-139"></a><span class="fu">### 因子軸の回転</span></span>
-<span id="cb21-140"><a href="#cb21-140"></a></span>
-<span id="cb21-141"><a href="#cb21-141"></a>因子分析には**「回転の不定性」**という性質があります。</span>
-<span id="cb21-142"><a href="#cb21-142"></a>行列 $\boldsymbol{T}$ を挿入しても、計算結果として得られる観測変数 $\boldsymbol{x}_i$ の値（あるいは分散共分散構造）は全く変わりません。</span>
-<span id="cb21-143"><a href="#cb21-143"></a>これは、潜在因子の「ものさし（座標軸）」を回転させて、新しい因子負荷量 $\boldsymbol{\alpha}^*$ と新しい因子スコア $\boldsymbol{f}_i^*$ を作っていることに相当します。</span>
-<span id="cb21-144"><a href="#cb21-144"></a>初期の計算で得られる $\boldsymbol{\alpha}$ は、すべての因子がすべての変数に中途半端に影響していることが多く、解釈が困難です。</span>
-<span id="cb21-145"><a href="#cb21-145"></a>そこで、適切な $\boldsymbol{T}$ を選ぶことで、特定の変数には強く、別の変数には弱く影響するように「整理」し直すのです</span>
-<span id="cb21-146"><a href="#cb21-146"></a>この$\boldsymbol{\alpha}^*$を**回転後の因子負荷量**といい、$\boldsymbol{f}_i^*$を**回転後の因子得点**といいます。</span>
-<span id="cb21-147"><a href="#cb21-147"></a></span>
-<span id="cb21-148"><a href="#cb21-148"></a></span>
-<span id="cb21-149"><a href="#cb21-149"></a></span>
-<span id="cb21-150"><a href="#cb21-150"></a><span class="in">```{r code11-2, filename ="データの読み込みと整理"}</span></span>
-<span id="cb21-151"><a href="#cb21-151"></a>factor_exdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"data/factor_ex.xlsx"</span>, <span class="at">na =</span> <span class="st">"."</span>)</span>
-<span id="cb21-152"><a href="#cb21-152"></a><span class="fu">summary</span>(factor_exdata)</span>
-<span id="cb21-153"><a href="#cb21-153"></a><span class="in">```</span></span>
-<span id="cb21-154"><a href="#cb21-154"></a></span>
-<span id="cb21-155"><a href="#cb21-155"></a>読み込んだデータは、変数<span class="in">`ID`</span>と5つの質問項目<span class="in">`V1`</span>から<span class="in">`V6`</span>で構成されています。</span>
-<span id="cb21-156"><a href="#cb21-156"></a>質問項目は、1から7のリッカート尺度で回答されており、数値が大きいほど肯定的な回答を意味しています。</span>
-<span id="cb21-157"><a href="#cb21-157"></a><span class="in">`V5`</span>は逆質問であるため、数値が大きいほど重要度が低いことを意味するので、$8 - 得点$ として逆転させておきます。</span>
-<span id="cb21-158"><a href="#cb21-158"></a></span>
-<span id="cb21-161"><a href="#cb21-161"></a><span class="in">```{r}</span></span>
-<span id="cb21-162"><a href="#cb21-162"></a>factor_exdata<span class="sc">$</span>V5 <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">-</span> factor_exdata<span class="sc">$</span>V5</span>
-<span id="cb21-163"><a href="#cb21-163"></a><span class="fu">summary</span>(factor_exdata)</span>
-<span id="cb21-164"><a href="#cb21-164"></a><span class="in">```</span></span>
-<span id="cb21-165"><a href="#cb21-165"></a></span>
-<span id="cb21-166"><a href="#cb21-166"></a>次に、<span class="in">`ID`</span>を行名に設定します。</span>
-<span id="cb21-167"><a href="#cb21-167"></a></span>
-<span id="cb21-168"><a href="#cb21-168"></a><span class="in">```{r column-row, filename="IDを行名に設定"}</span></span>
-<span id="cb21-169"><a href="#cb21-169"></a>factor_exdata <span class="ot">&lt;-</span> factor_exdata <span class="sc">|&gt;</span></span>
-<span id="cb21-170"><a href="#cb21-170"></a>  <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">"ID"</span>)</span>
-<span id="cb21-171"><a href="#cb21-171"></a><span class="fu">glimpse</span>(factor_exdata)</span>
-<span id="cb21-172"><a href="#cb21-172"></a><span class="in">```</span></span>
-<span id="cb21-173"><a href="#cb21-173"></a></span>
-<span id="cb21-176"><a href="#cb21-176"></a><span class="in">```{r}</span></span>
-<span id="cb21-177"><a href="#cb21-177"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(factor_exdata))</span>
-<span id="cb21-178"><a href="#cb21-178"></a><span class="in">```</span></span>
-<span id="cb21-179"><a href="#cb21-179"></a></span>
-<span id="cb21-180"><a href="#cb21-180"></a></span>
-<span id="cb21-183"><a href="#cb21-183"></a><span class="in">```{r}</span></span>
-<span id="cb21-184"><a href="#cb21-184"></a><span class="co"># コード11-3</span></span>
-<span id="cb21-185"><a href="#cb21-185"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cor</span>(factor_exdata), <span class="at">caption =</span> <span class="st">"相関行列"</span>)</span>
-<span id="cb21-186"><a href="#cb21-186"></a></span>
-<span id="cb21-187"><a href="#cb21-187"></a><span class="co"># コード11-4</span></span>
-<span id="cb21-188"><a href="#cb21-188"></a>cor.exdata <span class="ot">&lt;-</span> <span class="fu">cor</span>(factor_exdata)</span>
-<span id="cb21-189"><a href="#cb21-189"></a></span>
-<span id="cb21-190"><a href="#cb21-190"></a><span class="fu">VSS.scree</span>(cor.exdata)</span>
-<span id="cb21-191"><a href="#cb21-191"></a></span>
-<span id="cb21-192"><a href="#cb21-192"></a><span class="co"># コード11-5</span></span>
-<span id="cb21-193"><a href="#cb21-193"></a>fa <span class="ot">&lt;-</span> <span class="fu">fa</span>(<span class="at">r =</span> factor_exdata, <span class="at">nfactors =</span> <span class="dv">2</span>,</span>
-<span id="cb21-194"><a href="#cb21-194"></a>  <span class="at">rotate =</span> <span class="st">"promax"</span>, <span class="at">fm =</span> <span class="st">"ml"</span>)</span>
-<span id="cb21-195"><a href="#cb21-195"></a>fa</span>
-<span id="cb21-196"><a href="#cb21-196"></a></span>
-<span id="cb21-197"><a href="#cb21-197"></a><span class="co"># コード11-6</span></span>
-<span id="cb21-198"><a href="#cb21-198"></a><span class="fu">fa.diagram</span>(fa)</span>
-<span id="cb21-199"><a href="#cb21-199"></a></span>
-<span id="cb21-200"><a href="#cb21-200"></a><span class="co"># コード11-7</span></span>
-<span id="cb21-201"><a href="#cb21-201"></a>fs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(fa<span class="sc">$</span>scores)</span>
-<span id="cb21-202"><a href="#cb21-202"></a>factor_exdata<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(factor_exdata)</span>
-<span id="cb21-203"><a href="#cb21-203"></a>fs<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(fs)</span>
-<span id="cb21-204"><a href="#cb21-204"></a>factor_exdata <span class="ot">&lt;-</span> <span class="fu">left_join</span>(factor_exdata, fs, <span class="at">by =</span> <span class="st">"rowname"</span>)</span>
-<span id="cb21-205"><a href="#cb21-205"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(factor_exdata), <span class="at">caption =</span> <span class="st">"結合後データ"</span>)</span>
-<span id="cb21-206"><a href="#cb21-206"></a></span>
-<span id="cb21-207"><a href="#cb21-207"></a><span class="co"># コード11-8</span></span>
-<span id="cb21-208"><a href="#cb21-208"></a></span>
-<span id="cb21-209"><a href="#cb21-209"></a>ex_cluster <span class="ot">&lt;-</span> factor_exdata <span class="sc">%&gt;%</span></span>
-<span id="cb21-210"><a href="#cb21-210"></a>  <span class="fu">select</span>(ML1, ML2)</span>
-<span id="cb21-211"><a href="#cb21-211"></a>Hier1 <span class="ot">&lt;-</span> <span class="fu">agnes</span>(ex_cluster, <span class="at">metric =</span> <span class="st">"euclidian"</span>, <span class="at">stand =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb21-212"><a href="#cb21-212"></a><span class="fu">pltree</span>(Hier1)</span>
-<span id="cb21-213"><a href="#cb21-213"></a></span>
-<span id="cb21-214"><a href="#cb21-214"></a><span class="co"># コード11-9</span></span>
-<span id="cb21-215"><a href="#cb21-215"></a>cl_1 <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(ex_cluster, <span class="dv">3</span>)</span>
-<span id="cb21-216"><a href="#cb21-216"></a>clus_fa <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(cl_1<span class="sc">$</span>cluster)</span>
-<span id="cb21-217"><a href="#cb21-217"></a>clus_fa<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(clus_fa)</span>
-<span id="cb21-218"><a href="#cb21-218"></a>factor_exdata <span class="ot">&lt;-</span> <span class="fu">left_join</span>(factor_exdata, clus_fa, <span class="at">by =</span> <span class="st">"rowname"</span>)</span>
-<span id="cb21-219"><a href="#cb21-219"></a>factor_exdata<span class="sc">$</span>cl_1.cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(factor_exdata<span class="sc">$</span>cl_1.cluster)</span>
-<span id="cb21-220"><a href="#cb21-220"></a></span>
-<span id="cb21-221"><a href="#cb21-221"></a><span class="co"># Visualizing the clusters with 2 factors</span></span>
-<span id="cb21-222"><a href="#cb21-222"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> factor_exdata,</span>
-<span id="cb21-223"><a href="#cb21-223"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ML1, <span class="at">y =</span> ML2, <span class="at">color =</span> cl_1.cluster))</span>
-<span id="cb21-224"><a href="#cb21-224"></a>p1 <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb21-225"><a href="#cb21-225"></a>  <span class="fu">geom_text_repel</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(factor_exdata))) <span class="sc">+</span></span>
-<span id="cb21-226"><a href="#cb21-226"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ease of use"</span>, <span class="at">y =</span> <span class="st">"Design"</span>)</span>
-<span id="cb21-227"><a href="#cb21-227"></a></span>
-<span id="cb21-228"><a href="#cb21-228"></a><span class="co"># コード11-10</span></span>
-<span id="cb21-229"><a href="#cb21-229"></a>factor_exdata3 <span class="ot">&lt;-</span> factor_exdata <span class="sc">%&gt;%</span></span>
-<span id="cb21-230"><a href="#cb21-230"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(V1<span class="sc">:</span>V6) <span class="co"># 質問項目だけを厳密に抽出</span></span>
-<span id="cb21-231"><a href="#cb21-231"></a>pca_res <span class="ot">&lt;-</span> <span class="fu">pca</span>(factor_exdata3, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">rotate =</span> <span class="st">"none"</span>)</span>
-<span id="cb21-232"><a href="#cb21-232"></a>pca_res</span>
-<span id="cb21-233"><a href="#cb21-233"></a></span>
-<span id="cb21-234"><a href="#cb21-234"></a><span class="co"># コード11-11</span></span>
-<span id="cb21-235"><a href="#cb21-235"></a><span class="co"># データの相関行列から固有値と固有ベクトルを抽出</span></span>
-<span id="cb21-236"><a href="#cb21-236"></a>cor_ex <span class="ot">&lt;-</span> <span class="fu">cor</span>(factor_exdata3)</span>
-<span id="cb21-237"><a href="#cb21-237"></a>eigen_list <span class="ot">&lt;-</span> <span class="fu">eigen</span>(cor_ex)</span>
-<span id="cb21-238"><a href="#cb21-238"></a></span>
-<span id="cb21-239"><a href="#cb21-239"></a><span class="co"># 固有ベクトルについての情報をオブジェクトとして定義</span></span>
-<span id="cb21-240"><a href="#cb21-240"></a>pc1_eig <span class="ot">&lt;-</span> eigen_list<span class="sc">$</span>vectors[, <span class="dv">1</span>]</span>
-<span id="cb21-241"><a href="#cb21-241"></a>pc2_eig <span class="ot">&lt;-</span> eigen_list<span class="sc">$</span>vectors[, <span class="dv">2</span>]</span>
-<span id="cb21-242"><a href="#cb21-242"></a></span>
-<span id="cb21-243"><a href="#cb21-243"></a><span class="co"># 固有ベクトルに，固有値の平方根を乗じる</span></span>
-<span id="cb21-244"><a href="#cb21-244"></a>PC1 <span class="ot">&lt;-</span> pc1_eig <span class="sc">*</span> <span class="fu">sqrt</span>(eigen_list<span class="sc">$</span>values[<span class="dv">1</span>])</span>
-<span id="cb21-245"><a href="#cb21-245"></a>PC2 <span class="ot">&lt;-</span> pc2_eig <span class="sc">*</span> <span class="fu">sqrt</span>(eigen_list<span class="sc">$</span>values[<span class="dv">2</span>])</span>
-<span id="cb21-246"><a href="#cb21-246"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">data.frame</span>(<span class="fu">cbind</span>(PC1, PC2)), <span class="at">caption =</span> <span class="st">"計算結果"</span>)</span>
-<span id="cb21-247"><a href="#cb21-247"></a><span class="in">```</span></span>
-<span id="cb21-248"><a href="#cb21-248"></a></span>
-<span id="cb21-249"><a href="#cb21-249"></a></span>
-<span id="cb21-252"><a href="#cb21-252"></a><span class="in">```{r}</span></span>
-<span id="cb21-253"><a href="#cb21-253"></a><span class="co"># 結果の表示（行名をV1-V6に合わせて見やすくします）</span></span>
-<span id="cb21-254"><a href="#cb21-254"></a>loadings_manual <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(PC1, PC2)</span>
-<span id="cb21-255"><a href="#cb21-255"></a><span class="fu">rownames</span>(loadings_manual) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(factor_exdata3)</span>
-<span id="cb21-256"><a href="#cb21-256"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(loadings_manual, <span class="at">caption =</span> <span class="st">"主成分負荷量の計算結果"</span>)</span>
-<span id="cb21-257"><a href="#cb21-257"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">## 第11章 探索的因子分析</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="in">```{r}</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb22-7"><a href="#cb22-7"></a>  psych, <span class="co"># 因子分析のためのパッケージ</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>  GPArotation, <span class="co"># 因子分析の回転方法を提供するパッケージ</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a>  tidyverse, <span class="co"># データ操作と可視化のためのパッケージ群</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a>  readxl, <span class="co"># Excelファイルの読み込みのためのパッケージ</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a>  gt, <span class="co"># 表の作成のためのパッケージ</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a>  gtExtras, <span class="co"># gtパッケージの拡張機能を提供するパッケージ</span></span>
+<span id="cb22-13"><a href="#cb22-13"></a>  dendextend, <span class="co"># 階層的クラスタリングのためのパッケージ</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a>  cluster, <span class="co"># クラスタリングのためのパッケージ</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a>  factoextra, <span class="co"># クラスタリングの可視化のためのパッケージ</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a>  useful, <span class="co"># PCAのためのパッケージ</span></span>
+<span id="cb22-17"><a href="#cb22-17"></a>  ggrepel <span class="co"># ラベルを重ならなくする</span></span>
+<span id="cb22-18"><a href="#cb22-18"></a>  )</span>
+<span id="cb22-19"><a href="#cb22-19"></a><span class="in">```</span></span>
+<span id="cb22-20"><a href="#cb22-20"></a></span>
+<span id="cb22-21"><a href="#cb22-21"></a><span class="fu">## 本性の概要</span></span>
+<span id="cb22-22"><a href="#cb22-22"></a></span>
+<span id="cb22-23"><a href="#cb22-23"></a></span>
+<span id="cb22-24"><a href="#cb22-24"></a><span class="fu">## 因子分析とは</span></span>
+<span id="cb22-25"><a href="#cb22-25"></a></span>
+<span id="cb22-26"><a href="#cb22-26"></a>因子分析(factor analysis)は、観測された変数の背後に存在する**潜在的な共通因子**(common factor)を明らかにするための多変量解析の手法です。</span>
+<span id="cb22-27"><a href="#cb22-27"></a>因子分析には2つのアプローチがあります。</span>
+<span id="cb22-28"><a href="#cb22-28"></a></span>
+<span id="cb22-29"><a href="#cb22-29"></a><span class="ss">1. </span>**探索的因子分析**：データから潜在的な因子構造を探索する方法</span>
+<span id="cb22-30"><a href="#cb22-30"></a><span class="ss">2. </span>確認的因子分析：因子数と因子負荷量について、事前に仮説を立てて分析する方法</span>
+<span id="cb22-31"><a href="#cb22-31"></a></span>
+<span id="cb22-32"><a href="#cb22-32"></a>テキストでは、探索的因子分析について説明します。</span>
+<span id="cb22-33"><a href="#cb22-33"></a></span>
+<span id="cb22-34"><a href="#cb22-34"></a><span class="fu">### 因子分析のモデル構造</span></span>
+<span id="cb22-35"><a href="#cb22-35"></a></span>
+<span id="cb22-36"><a href="#cb22-36"></a>教科書のp.305からの解説を参照</span>
+<span id="cb22-37"><a href="#cb22-37"></a></span>
+<span id="cb22-38"><a href="#cb22-38"></a><span class="fu">### 因子分析の特徴</span></span>
+<span id="cb22-39"><a href="#cb22-39"></a></span>
+<span id="cb22-40"><a href="#cb22-40"></a>たとえば，お店を訪れたお客さんに10個の質問からなるアンケートに答えてもらい，1000名分のデータが集まったとしましょう。</span>
+<span id="cb22-41"><a href="#cb22-41"></a>いま，皆さんの手には以下のような1000人分の10個の回答結果のデータがあります。</span>
+<span id="cb22-42"><a href="#cb22-42"></a></span>
+<span id="cb22-43"><a href="#cb22-43"></a><span class="pp">|</span> ID <span class="pp">|</span> Q1 <span class="pp">|</span> Q2 <span class="pp">|</span> Q3 <span class="pp">|</span> Q4 <span class="pp">|</span> Q5 <span class="pp">|</span> Q6 <span class="pp">|</span> Q7 <span class="pp">|</span> Q8 <span class="pp">|</span> Q9 <span class="pp">|</span> Q10 <span class="pp">|</span></span>
+<span id="cb22-44"><a href="#cb22-44"></a><span class="pp">|----|----|----|----|----|----|----|----|----|----|----|</span></span>
+<span id="cb22-45"><a href="#cb22-45"></a><span class="pp">|</span> 1  <span class="pp">|</span> 5  <span class="pp">|</span> 3  <span class="pp">|</span> 4  <span class="pp">|</span> 2  <span class="pp">|</span> 3  <span class="pp">|</span>  4  <span class="pp">|</span>  4 <span class="pp">|</span> 2  <span class="pp">|</span> 4  <span class="pp">|</span> 2  <span class="pp">|</span></span>
+<span id="cb22-46"><a href="#cb22-46"></a><span class="pp">|</span> 2  <span class="pp">|</span> 4  <span class="pp">|</span> 4  <span class="pp">|</span> 5  <span class="pp">|</span> 3  <span class="pp">|</span> 4  <span class="pp">|</span> 5   <span class="pp">|</span> 5 <span class="pp">|</span> 3  <span class="pp">|</span> 5  <span class="pp">|</span> 3  <span class="pp">|</span></span>
+<span id="cb22-47"><a href="#cb22-47"></a><span class="pp">|</span>... <span class="pp">|</span> ...<span class="pp">|</span> ...<span class="pp">|</span> ...<span class="pp">|</span> ...<span class="pp">|</span> ...<span class="pp">|</span> ... <span class="pp">|</span>...<span class="pp">|</span> ...<span class="pp">|</span>...<span class="pp">|</span> ...<span class="pp">|</span></span>
+<span id="cb22-48"><a href="#cb22-48"></a><span class="pp">|</span>1000<span class="pp">|</span> 3  <span class="pp">|</span> 2  <span class="pp">|</span> 3  <span class="pp">|</span> 1  <span class="pp">|</span> 2  <span class="pp">|</span> 3   <span class="pp">|</span> 3 <span class="pp">|</span> 1  <span class="pp">|</span> 3  <span class="pp">|</span> 1  <span class="pp">|</span></span>
+<span id="cb22-49"><a href="#cb22-49"></a></span>
+<span id="cb22-50"><a href="#cb22-50"></a></span>
+<span id="cb22-51"><a href="#cb22-51"></a>このとき，<span class="in">`ID`</span>が<span class="in">`i = 1`</span>のQ1の解答 $5$ が，<span class="in">`1`</span>さんが心の中に持っている価値観（例：お店の清潔さ）に従って決められたものであると考えることができます。</span>
+<span id="cb22-52"><a href="#cb22-52"></a>このように，回答者の心の中にある価値観や性格などの**潜在的な因子**が，質問項目への回答を決定していると考えることができます。</span>
+<span id="cb22-53"><a href="#cb22-53"></a>この**潜在的な因子**を特定する統計的手法の1つが**因子分析**(factor analysis)です。</span>
+<span id="cb22-54"><a href="#cb22-54"></a>上の表のように，1000人が答えた10個の質問項目の回答から，少数の潜在的因子を特定することで，少ない数の因子でデータを説明することができます。</span>
+<span id="cb22-55"><a href="#cb22-55"></a>1000人の回答は1000通りある，というのではアンケート調査から分かることはありませんが，</span>
+<span id="cb22-56"><a href="#cb22-56"></a>少数の共通因子を特定することで，1000人の回答を理解しやすくまとめることができます。</span>
+<span id="cb22-57"><a href="#cb22-57"></a>このように，**因子分析は，観測された変数の背後に存在する潜在的な共通因子を明らかにするための多変量解析の手法**です。</span>
+<span id="cb22-58"><a href="#cb22-58"></a></span>
+<span id="cb22-59"><a href="#cb22-59"></a></span>
+<span id="cb22-60"><a href="#cb22-60"></a><span class="fu">## 2因子モデル</span></span>
+<span id="cb22-61"><a href="#cb22-61"></a></span>
+<span id="cb22-62"><a href="#cb22-62"></a>因子の数を2と仮定したモデルを2因子モデルといいます。</span>
+<span id="cb22-63"><a href="#cb22-63"></a>ここで，$j = 1, 2, \dots , J$ 個の質問項目をもつアンケート調査を$i$, $i = 1, 2, ..., n$人の回答者に実施したとします。</span>
+<span id="cb22-64"><a href="#cb22-64"></a></span>
+<span id="cb22-65"><a href="#cb22-65"></a><span class="ss">- </span>$\boldsymbol{x}_i$：観測変数。実際にデータとして得られた質問項目（例：テストの点数）</span>
+<span id="cb22-66"><a href="#cb22-66"></a><span class="ss">- </span>$\boldsymbol{f}_i$：共通因子。目に見えない潜在的な能力や性質（例：計算力、読解力）</span>
+<span id="cb22-67"><a href="#cb22-67"></a><span class="ss">- </span>$\boldsymbol{\alpha}$：因子負荷量（Factor Loading）。各共通因子が観測変数に与える影響の強さ</span>
+<span id="cb22-68"><a href="#cb22-68"></a><span class="ss">- </span>$\boldsymbol{\varepsilon}_i$：独自因子（Unique Factor）。その項目特有の誤差や要因</span>
+<span id="cb22-69"><a href="#cb22-69"></a></span>
+<span id="cb22-70"><a href="#cb22-70"></a>$J$個の項目の背後には2つの潜在因子 $f_1$ と $f_2$ が存在すると仮定して、以下のモデルを考えます。</span>
+<span id="cb22-71"><a href="#cb22-71"></a>$i$さんの$j$番目の質問項目への回答を$x_{ji}$ とします。</span>
+<span id="cb22-72"><a href="#cb22-72"></a>今手元にあるデータは，$x_{ji}$ だけです。</span>
+<span id="cb22-73"><a href="#cb22-73"></a>その質問項目への回答は次のように表すとします。</span>
+<span id="cb22-74"><a href="#cb22-74"></a>$$</span>
+<span id="cb22-75"><a href="#cb22-75"></a>\begin{aligned}</span>
+<span id="cb22-76"><a href="#cb22-76"></a>\begin{cases}</span>
+<span id="cb22-77"><a href="#cb22-77"></a>x_{1i} &amp;= \alpha _{11} f_{1i} + \alpha _{12} f_{2i} + \varepsilon_{1i} <span class="sc">\\</span></span>
+<span id="cb22-78"><a href="#cb22-78"></a> \ \vdots <span class="sc">\\</span></span>
+<span id="cb22-79"><a href="#cb22-79"></a>x_{Ji} &amp;= \alpha _{J1} f_{1i} + \alpha _{J2} f_{2i} + \varepsilon_{Ji}</span>
+<span id="cb22-80"><a href="#cb22-80"></a>\end{cases}</span>
+<span id="cb22-81"><a href="#cb22-81"></a>\end{aligned}</span>
+<span id="cb22-82"><a href="#cb22-82"></a>$$</span>
+<span id="cb22-83"><a href="#cb22-83"></a></span>
+<span id="cb22-84"><a href="#cb22-84"></a>掛けて足す、の構造をもっているので、行列で表すことができます。</span>
+<span id="cb22-85"><a href="#cb22-85"></a></span>
+<span id="cb22-86"><a href="#cb22-86"></a>$$</span>
+<span id="cb22-87"><a href="#cb22-87"></a>\begin{aligned}</span>
+<span id="cb22-88"><a href="#cb22-88"></a>\underbrace{</span>
+<span id="cb22-89"><a href="#cb22-89"></a>\begin{pmatrix}</span>
+<span id="cb22-90"><a href="#cb22-90"></a>x_{1i} <span class="sc">\\</span></span>
+<span id="cb22-91"><a href="#cb22-91"></a>\vdots <span class="sc">\\</span></span>
+<span id="cb22-92"><a href="#cb22-92"></a>x_{Ji}</span>
+<span id="cb22-93"><a href="#cb22-93"></a>\end{pmatrix}</span>
+<span id="cb22-94"><a href="#cb22-94"></a>}_{J\times1}</span>
+<span id="cb22-95"><a href="#cb22-95"></a>&amp;=</span>
+<span id="cb22-96"><a href="#cb22-96"></a>\underbrace{</span>
+<span id="cb22-97"><a href="#cb22-97"></a>\begin{pmatrix}</span>
+<span id="cb22-98"><a href="#cb22-98"></a>\alpha _{11} &amp; \alpha _{12} <span class="sc">\\</span></span>
+<span id="cb22-99"><a href="#cb22-99"></a>\vdots &amp; \vdots <span class="sc">\\</span></span>
+<span id="cb22-100"><a href="#cb22-100"></a>\alpha _{J1} &amp; \alpha _{J2}</span>
+<span id="cb22-101"><a href="#cb22-101"></a>\end{pmatrix}</span>
+<span id="cb22-102"><a href="#cb22-102"></a>}_{J\times2}</span>
+<span id="cb22-103"><a href="#cb22-103"></a>\underbrace{</span>
+<span id="cb22-104"><a href="#cb22-104"></a>\begin{pmatrix}</span>
+<span id="cb22-105"><a href="#cb22-105"></a>f_{1i} <span class="sc">\\</span></span>
+<span id="cb22-106"><a href="#cb22-106"></a>f_{2i}</span>
+<span id="cb22-107"><a href="#cb22-107"></a>\end{pmatrix}</span>
+<span id="cb22-108"><a href="#cb22-108"></a>}_{2\times1}</span>
+<span id="cb22-109"><a href="#cb22-109"></a>+</span>
+<span id="cb22-110"><a href="#cb22-110"></a>\underbrace{</span>
+<span id="cb22-111"><a href="#cb22-111"></a>\begin{pmatrix}</span>
+<span id="cb22-112"><a href="#cb22-112"></a>\varepsilon_{1i} <span class="sc">\\</span></span>
+<span id="cb22-113"><a href="#cb22-113"></a>\vdots <span class="sc">\\</span></span>
+<span id="cb22-114"><a href="#cb22-114"></a>\varepsilon_{Ji}</span>
+<span id="cb22-115"><a href="#cb22-115"></a>\end{pmatrix}</span>
+<span id="cb22-116"><a href="#cb22-116"></a>}_{J\times1}</span>
+<span id="cb22-117"><a href="#cb22-117"></a>\end{aligned}</span>
+<span id="cb22-118"><a href="#cb22-118"></a>$$</span>
+<span id="cb22-119"><a href="#cb22-119"></a></span>
+<span id="cb22-120"><a href="#cb22-120"></a>まとめて書くと、次のようになります。</span>
+<span id="cb22-121"><a href="#cb22-121"></a></span>
+<span id="cb22-122"><a href="#cb22-122"></a>$$</span>
+<span id="cb22-123"><a href="#cb22-123"></a>\boldsymbol{x}_i = \boldsymbol{\alpha} \boldsymbol{f}_i + \boldsymbol{\varepsilon}_i</span>
+<span id="cb22-124"><a href="#cb22-124"></a>$$</span>
+<span id="cb22-125"><a href="#cb22-125"></a>この式を**2因子モデル**といいます。</span>
+<span id="cb22-126"><a href="#cb22-126"></a>任意の非特異な$2 \times 2$ の正則行列$\boldsymbol{T}$を用いて、次のように変形します。</span>
+<span id="cb22-127"><a href="#cb22-127"></a>$$</span>
+<span id="cb22-128"><a href="#cb22-128"></a>\begin{aligned}</span>
+<span id="cb22-129"><a href="#cb22-129"></a>\boldsymbol{x}_i &amp;= \boldsymbol{\alpha} (\boldsymbol{TT^{-1}}) \boldsymbol{f}_i + \boldsymbol{\varepsilon}_i<span class="sc">\\</span></span>
+<span id="cb22-130"><a href="#cb22-130"></a>&amp; = \underbrace{(\boldsymbol{\alpha T})}_{J\times 2, 2\times 2} \underbrace{(\boldsymbol{T^{-1}f}_i)}_{2\times 2, 2\times 1} + \boldsymbol{\varepsilon}_i<span class="sc">\\</span></span>
+<span id="cb22-131"><a href="#cb22-131"></a>&amp; = \boldsymbol{\alpha}^* \boldsymbol{f}_i^* + \boldsymbol{\varepsilon}_i</span>
+<span id="cb22-132"><a href="#cb22-132"></a>\end{aligned}</span>
+<span id="cb22-133"><a href="#cb22-133"></a>$$</span>
+<span id="cb22-134"><a href="#cb22-134"></a></span>
+<span id="cb22-135"><a href="#cb22-135"></a>この式の変形を詳しく見ていきましょう。</span>
+<span id="cb22-136"><a href="#cb22-136"></a>これは、**因子の回転**(factor rotation)と呼ばれる操作で、$\boldsymbol{\alpha}$ を $\boldsymbol{\alpha}^*$ に、$\boldsymbol{f}_i$ を $\boldsymbol{f}_i^*$ に変換することを意味します。</span>
+<span id="cb22-137"><a href="#cb22-137"></a>この $\boldsymbol{T}$ をどのように選ぶか，つまり**どのように回転させるのか**によって、$\boldsymbol{\alpha}^*$ と $\boldsymbol{f}_i^*$ の値が変わります。</span>
+<span id="cb22-138"><a href="#cb22-138"></a>ではこの回転について、詳しく見ていきましょう。</span>
+<span id="cb22-139"><a href="#cb22-139"></a></span>
+<span id="cb22-140"><a href="#cb22-140"></a><span class="fu">### 因子軸の回転</span></span>
+<span id="cb22-141"><a href="#cb22-141"></a></span>
+<span id="cb22-142"><a href="#cb22-142"></a>因子分析には**「回転の不定性」**という性質があります。</span>
+<span id="cb22-143"><a href="#cb22-143"></a>行列 $\boldsymbol{T}$ を挟み込んでも、計算結果として得られる観測変数 $\boldsymbol{x}_i$ の値（あるいは分散共分散構造）は全く変わりません。</span>
+<span id="cb22-144"><a href="#cb22-144"></a>これは、潜在因子の座標軸，つまり縦軸と横軸を回転させて新しい因子負荷量 $\boldsymbol{\alpha}^*$ と新しい因子スコア $\boldsymbol{f}_i^*$ を作っていることに相当します。</span>
+<span id="cb22-145"><a href="#cb22-145"></a>初期の計算で得られる $\boldsymbol{\alpha}$ は、すべての因子がすべての変数に中途半端に影響していることが多く、解釈が困難です。</span>
+<span id="cb22-146"><a href="#cb22-146"></a>そこで、適切な $\boldsymbol{T}$ を選ぶことで、特定の変数には強く、別の変数には弱く影響するように「整理」し直すのです。</span>
+<span id="cb22-147"><a href="#cb22-147"></a>この $\boldsymbol{\alpha}^*$ を**回転後の因子負荷量**といい、$\boldsymbol{f}_i^*$ を**回転後の因子得点**といいます。</span>
+<span id="cb22-148"><a href="#cb22-148"></a></span>
+<span id="cb22-149"><a href="#cb22-149"></a></span>
+<span id="cb22-150"><a href="#cb22-150"></a><span class="in">```{r code11-2, filename ="データの読み込みと整理"}</span></span>
+<span id="cb22-151"><a href="#cb22-151"></a>factor_exdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"data/factor_ex.xlsx"</span>, <span class="at">na =</span> <span class="st">"."</span>)</span>
+<span id="cb22-152"><a href="#cb22-152"></a><span class="fu">summary</span>(factor_exdata)</span>
+<span id="cb22-153"><a href="#cb22-153"></a><span class="in">```</span></span>
+<span id="cb22-154"><a href="#cb22-154"></a></span>
+<span id="cb22-155"><a href="#cb22-155"></a>読み込んだデータは、変数<span class="in">`ID`</span>と5つの質問項目<span class="in">`V1`</span>から<span class="in">`V6`</span>で構成されています。</span>
+<span id="cb22-156"><a href="#cb22-156"></a>質問項目は、1から7のリッカート尺度で回答されており、数値が大きいほど肯定的な回答を意味しています。</span>
+<span id="cb22-157"><a href="#cb22-157"></a><span class="in">`V5`</span>は逆質問であるため、数値が大きいほど重要度が低いことを意味するので、$8 - 得点$ として逆転させておきます。</span>
+<span id="cb22-158"><a href="#cb22-158"></a></span>
+<span id="cb22-161"><a href="#cb22-161"></a><span class="in">```{r}</span></span>
+<span id="cb22-162"><a href="#cb22-162"></a>factor_exdata<span class="sc">$</span>V5 <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">-</span> factor_exdata<span class="sc">$</span>V5</span>
+<span id="cb22-163"><a href="#cb22-163"></a><span class="fu">summary</span>(factor_exdata)</span>
+<span id="cb22-164"><a href="#cb22-164"></a><span class="in">```</span></span>
+<span id="cb22-165"><a href="#cb22-165"></a></span>
+<span id="cb22-166"><a href="#cb22-166"></a>次に、<span class="in">`ID`</span>を行名に設定します。</span>
+<span id="cb22-167"><a href="#cb22-167"></a></span>
+<span id="cb22-168"><a href="#cb22-168"></a><span class="in">```{r column-row, filename="IDを行名に設定"}</span></span>
+<span id="cb22-169"><a href="#cb22-169"></a>factor_exdata <span class="ot">&lt;-</span> factor_exdata <span class="sc">|&gt;</span></span>
+<span id="cb22-170"><a href="#cb22-170"></a>  <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">"ID"</span>)</span>
+<span id="cb22-171"><a href="#cb22-171"></a><span class="fu">glimpse</span>(factor_exdata)</span>
+<span id="cb22-172"><a href="#cb22-172"></a><span class="in">```</span></span>
+<span id="cb22-173"><a href="#cb22-173"></a></span>
+<span id="cb22-176"><a href="#cb22-176"></a><span class="in">```{r}</span></span>
+<span id="cb22-177"><a href="#cb22-177"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(factor_exdata))</span>
+<span id="cb22-178"><a href="#cb22-178"></a><span class="in">```</span></span>
+<span id="cb22-179"><a href="#cb22-179"></a></span>
+<span id="cb22-180"><a href="#cb22-180"></a></span>
+<span id="cb22-183"><a href="#cb22-183"></a><span class="in">```{r}</span></span>
+<span id="cb22-184"><a href="#cb22-184"></a><span class="co"># コード11-3</span></span>
+<span id="cb22-185"><a href="#cb22-185"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cor</span>(factor_exdata), <span class="at">caption =</span> <span class="st">"相関行列"</span>)</span>
+<span id="cb22-186"><a href="#cb22-186"></a></span>
+<span id="cb22-187"><a href="#cb22-187"></a><span class="co"># コード11-4</span></span>
+<span id="cb22-188"><a href="#cb22-188"></a>cor.exdata <span class="ot">&lt;-</span> <span class="fu">cor</span>(factor_exdata)</span>
+<span id="cb22-189"><a href="#cb22-189"></a></span>
+<span id="cb22-190"><a href="#cb22-190"></a><span class="fu">VSS.scree</span>(cor.exdata)</span>
+<span id="cb22-191"><a href="#cb22-191"></a></span>
+<span id="cb22-192"><a href="#cb22-192"></a><span class="co"># コード11-5</span></span>
+<span id="cb22-193"><a href="#cb22-193"></a>fa <span class="ot">&lt;-</span> <span class="fu">fa</span>(<span class="at">r =</span> factor_exdata, <span class="at">nfactors =</span> <span class="dv">2</span>,</span>
+<span id="cb22-194"><a href="#cb22-194"></a>  <span class="at">rotate =</span> <span class="st">"promax"</span>, <span class="at">fm =</span> <span class="st">"ml"</span>)</span>
+<span id="cb22-195"><a href="#cb22-195"></a>fa</span>
+<span id="cb22-196"><a href="#cb22-196"></a></span>
+<span id="cb22-197"><a href="#cb22-197"></a><span class="co"># コード11-6</span></span>
+<span id="cb22-198"><a href="#cb22-198"></a><span class="fu">fa.diagram</span>(fa)</span>
+<span id="cb22-199"><a href="#cb22-199"></a></span>
+<span id="cb22-200"><a href="#cb22-200"></a><span class="co"># コード11-7</span></span>
+<span id="cb22-201"><a href="#cb22-201"></a>fs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(fa<span class="sc">$</span>scores)</span>
+<span id="cb22-202"><a href="#cb22-202"></a>factor_exdata<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(factor_exdata)</span>
+<span id="cb22-203"><a href="#cb22-203"></a>fs<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(fs)</span>
+<span id="cb22-204"><a href="#cb22-204"></a>factor_exdata <span class="ot">&lt;-</span> <span class="fu">left_join</span>(factor_exdata, fs, <span class="at">by =</span> <span class="st">"rowname"</span>)</span>
+<span id="cb22-205"><a href="#cb22-205"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(factor_exdata), <span class="at">caption =</span> <span class="st">"結合後データ"</span>)</span>
+<span id="cb22-206"><a href="#cb22-206"></a></span>
+<span id="cb22-207"><a href="#cb22-207"></a><span class="co"># コード11-8</span></span>
+<span id="cb22-208"><a href="#cb22-208"></a></span>
+<span id="cb22-209"><a href="#cb22-209"></a>ex_cluster <span class="ot">&lt;-</span> factor_exdata <span class="sc">%&gt;%</span></span>
+<span id="cb22-210"><a href="#cb22-210"></a>  <span class="fu">select</span>(ML1, ML2)</span>
+<span id="cb22-211"><a href="#cb22-211"></a>Hier1 <span class="ot">&lt;-</span> <span class="fu">agnes</span>(ex_cluster, <span class="at">metric =</span> <span class="st">"euclidian"</span>, <span class="at">stand =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-212"><a href="#cb22-212"></a><span class="fu">pltree</span>(Hier1)</span>
+<span id="cb22-213"><a href="#cb22-213"></a></span>
+<span id="cb22-214"><a href="#cb22-214"></a><span class="co"># コード11-9</span></span>
+<span id="cb22-215"><a href="#cb22-215"></a>cl_1 <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(ex_cluster, <span class="dv">3</span>)</span>
+<span id="cb22-216"><a href="#cb22-216"></a>clus_fa <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(cl_1<span class="sc">$</span>cluster)</span>
+<span id="cb22-217"><a href="#cb22-217"></a>clus_fa<span class="sc">$</span>rowname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(clus_fa)</span>
+<span id="cb22-218"><a href="#cb22-218"></a>factor_exdata <span class="ot">&lt;-</span> <span class="fu">left_join</span>(factor_exdata, clus_fa, <span class="at">by =</span> <span class="st">"rowname"</span>)</span>
+<span id="cb22-219"><a href="#cb22-219"></a>factor_exdata<span class="sc">$</span>cl_1.cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(factor_exdata<span class="sc">$</span>cl_1.cluster)</span>
+<span id="cb22-220"><a href="#cb22-220"></a></span>
+<span id="cb22-221"><a href="#cb22-221"></a><span class="co"># Visualizing the clusters with 2 factors</span></span>
+<span id="cb22-222"><a href="#cb22-222"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> factor_exdata,</span>
+<span id="cb22-223"><a href="#cb22-223"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ML1, <span class="at">y =</span> ML2, <span class="at">color =</span> cl_1.cluster))</span>
+<span id="cb22-224"><a href="#cb22-224"></a>p1 <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb22-225"><a href="#cb22-225"></a>  <span class="fu">geom_text_repel</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(factor_exdata))) <span class="sc">+</span></span>
+<span id="cb22-226"><a href="#cb22-226"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ease of use"</span>, <span class="at">y =</span> <span class="st">"Design"</span>)</span>
+<span id="cb22-227"><a href="#cb22-227"></a></span>
+<span id="cb22-228"><a href="#cb22-228"></a><span class="co"># コード11-10</span></span>
+<span id="cb22-229"><a href="#cb22-229"></a>factor_exdata3 <span class="ot">&lt;-</span> factor_exdata <span class="sc">%&gt;%</span></span>
+<span id="cb22-230"><a href="#cb22-230"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(V1<span class="sc">:</span>V6) <span class="co"># 質問項目だけを厳密に抽出</span></span>
+<span id="cb22-231"><a href="#cb22-231"></a>pca_res <span class="ot">&lt;-</span> <span class="fu">pca</span>(factor_exdata3, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">rotate =</span> <span class="st">"none"</span>)</span>
+<span id="cb22-232"><a href="#cb22-232"></a>pca_res</span>
+<span id="cb22-233"><a href="#cb22-233"></a></span>
+<span id="cb22-234"><a href="#cb22-234"></a><span class="co"># コード11-11</span></span>
+<span id="cb22-235"><a href="#cb22-235"></a><span class="co"># データの相関行列から固有値と固有ベクトルを抽出</span></span>
+<span id="cb22-236"><a href="#cb22-236"></a>cor_ex <span class="ot">&lt;-</span> <span class="fu">cor</span>(factor_exdata3)</span>
+<span id="cb22-237"><a href="#cb22-237"></a>eigen_list <span class="ot">&lt;-</span> <span class="fu">eigen</span>(cor_ex)</span>
+<span id="cb22-238"><a href="#cb22-238"></a></span>
+<span id="cb22-239"><a href="#cb22-239"></a><span class="co"># 固有ベクトルについての情報をオブジェクトとして定義</span></span>
+<span id="cb22-240"><a href="#cb22-240"></a>pc1_eig <span class="ot">&lt;-</span> eigen_list<span class="sc">$</span>vectors[, <span class="dv">1</span>]</span>
+<span id="cb22-241"><a href="#cb22-241"></a>pc2_eig <span class="ot">&lt;-</span> eigen_list<span class="sc">$</span>vectors[, <span class="dv">2</span>]</span>
+<span id="cb22-242"><a href="#cb22-242"></a></span>
+<span id="cb22-243"><a href="#cb22-243"></a><span class="co"># 固有ベクトルに，固有値の平方根を乗じる</span></span>
+<span id="cb22-244"><a href="#cb22-244"></a>PC1 <span class="ot">&lt;-</span> pc1_eig <span class="sc">*</span> <span class="fu">sqrt</span>(eigen_list<span class="sc">$</span>values[<span class="dv">1</span>])</span>
+<span id="cb22-245"><a href="#cb22-245"></a>PC2 <span class="ot">&lt;-</span> pc2_eig <span class="sc">*</span> <span class="fu">sqrt</span>(eigen_list<span class="sc">$</span>values[<span class="dv">2</span>])</span>
+<span id="cb22-246"><a href="#cb22-246"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">data.frame</span>(<span class="fu">cbind</span>(PC1, PC2)), <span class="at">caption =</span> <span class="st">"計算結果"</span>)</span>
+<span id="cb22-247"><a href="#cb22-247"></a><span class="in">```</span></span>
+<span id="cb22-248"><a href="#cb22-248"></a></span>
+<span id="cb22-249"><a href="#cb22-249"></a></span>
+<span id="cb22-252"><a href="#cb22-252"></a><span class="in">```{r}</span></span>
+<span id="cb22-253"><a href="#cb22-253"></a><span class="co"># 結果の表示（行名をV1-V6に合わせて見やすくします）</span></span>
+<span id="cb22-254"><a href="#cb22-254"></a>loadings_manual <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(PC1, PC2)</span>
+<span id="cb22-255"><a href="#cb22-255"></a><span class="fu">rownames</span>(loadings_manual) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(factor_exdata3)</span>
+<span id="cb22-256"><a href="#cb22-256"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(loadings_manual, <span class="at">caption =</span> <span class="st">"主成分負荷量の計算結果"</span>)</span>
+<span id="cb22-257"><a href="#cb22-257"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Copyright 2026, Soichi Matsuura</p>
 </div>   
@@ -1764,7 +1818,7 @@ Fit based upon off diagonal values = 0.98</code></pre>
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-<li class="nav-item compact">
+    <li class="nav-item compact">
     <a class="nav-link" href="https://so-ichi.com/r.html">
       <i class="bi bi-house" role="img">
 </i> 
@@ -1783,9 +1837,10 @@ Fit based upon off diagonal values = 0.98</code></pre>
     </a>
   </li>  
 </ul>
-</div>
+    </div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
@@ -1817,6 +1872,8 @@ Fit based upon off diagonal values = 0.98</code></pre>
   
 })();
           </script>
+
+
 
 
 </body></html>

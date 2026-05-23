@@ -1,99 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/index.html</loc>
-    <lastmod>2026-01-30T03:39:41.583Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/part01.html</loc>
-    <lastmod>2026-01-27T04:56:55.325Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/chapter04.html</loc>
-    <lastmod>2026-01-27T06:46:03.265Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/part02.html</loc>
-    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/chapter05.html</loc>
-    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/chapter06.html</loc>
-    <lastmod>2026-01-27T06:08:03.231Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/chapter07.html</loc>
-    <lastmod>2026-01-30T04:48:07.817Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/chapter08.html</loc>
-    <lastmod>2026-01-30T03:39:41.555Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/part03.html</loc>
-    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/chapter10.html</loc>
-    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/chapter11.html</loc>
-    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/chapter12.html</loc>
-    <lastmod>2026-01-06T01:35:31.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ma2ura.github.io/Marketing_Data_Analysis/マーケティング・データ分析の学習メモ.pdf</loc>
-    <lastmod>2026-01-27T06:21:49.065Z</lastmod>
-  </url>
-  <url>
-    <loc>https://so-ichi.com/chapter04.html</loc>
-    <lastmod>2026-03-09T14:25:30.403Z</lastmod>
-  </url>
-  <url>
     <loc>https://so-ichi.com/index.html</loc>
-    <lastmod>2026-03-07T15:33:03.140Z</lastmod>
+    <lastmod>2026-05-23T12:09:34.760Z</lastmod>
   </url>
   <url>
     <loc>https://so-ichi.com/part01.html</loc>
-    <lastmod>2026-03-07T15:33:14.316Z</lastmod>
+    <lastmod>2026-05-23T12:09:34.760Z</lastmod>
+  </url>
+  <url>
+    <loc>https://so-ichi.com/chapter04.html</loc>
+    <lastmod>2026-05-23T12:09:34.709Z</lastmod>
   </url>
   <url>
     <loc>https://so-ichi.com/part02.html</loc>
-    <lastmod>2026-03-05T00:32:19.000Z</lastmod>
+    <lastmod>2026-05-23T12:09:34.760Z</lastmod>
   </url>
   <url>
     <loc>https://so-ichi.com/chapter05.html</loc>
-    <lastmod>2026-03-09T14:26:31.000Z</lastmod>
+    <lastmod>2026-05-23T12:09:34.710Z</lastmod>
   </url>
   <url>
     <loc>https://so-ichi.com/chapter06.html</loc>
-    <lastmod>2026-03-09T14:26:51.865Z</lastmod>
+    <lastmod>2026-05-23T12:09:34.710Z</lastmod>
   </url>
   <url>
     <loc>https://so-ichi.com/chapter07.html</loc>
-    <lastmod>2026-03-05T00:32:19.000Z</lastmod>
+    <lastmod>2026-05-23T12:27:25.307Z</lastmod>
+  </url>
+  <url>
+    <loc>https://so-ichi.com/chapter08.html</loc>
+    <lastmod>2026-05-23T12:09:34.710Z</lastmod>
   </url>
   <url>
     <loc>https://so-ichi.com/part03.html</loc>
-    <lastmod>2026-03-05T00:32:19.000Z</lastmod>
+    <lastmod>2026-05-23T12:09:34.760Z</lastmod>
   </url>
   <url>
     <loc>https://so-ichi.com/chapter10.html</loc>
-    <lastmod>2026-03-05T00:32:19.000Z</lastmod>
+    <lastmod>2026-05-23T12:09:34.710Z</lastmod>
   </url>
   <url>
     <loc>https://so-ichi.com/chapter11.html</loc>
-    <lastmod>2026-03-13T01:33:37.449Z</lastmod>
+    <lastmod>2026-05-23T12:09:34.711Z</lastmod>
   </url>
   <url>
     <loc>https://so-ichi.com/chapter12.html</loc>
-    <lastmod>2026-03-05T00:32:19.227Z</lastmod>
+    <lastmod>2026-05-23T12:09:34.711Z</lastmod>
   </url>
 </urlset>
