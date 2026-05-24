@@ -108,13 +108,13 @@ for (i in 1:trial_count) {
 d_mean
 ```
 
-試行回数`trials`とサイコロを振る回数`sample_sizes`を引数にした関数を作成すると、さらに便利になります。
+試行回数`trial_count`とサイコロを振る回数`sample_sizes`を引数にした関数を作成すると、さらに便利になります。
 ここでは、自作関数`dice_mean()`を定義してみましょう。
 デフォルト値として、試行回数を3回、サイコロを振る回数を10回に設定しています。
 
 ```{r dice_mean_function}
 dice_mean <- function(trial_count = 3, sample_sizes = 10) {
-  d_mean <- numeric(trial_count) # 空のリストを作成
+  d_mean <- numeric(trial_count) # 空の数列を作成
   for (i in 1:trial_count) {
     d_mean[i] <- mean(sample(dice, size = sample_sizes, replace = TRUE))
   }
@@ -245,7 +245,7 @@ knitr::kable(
 ## 区間推定
 
 いま、標準正規分布に従う母集団から抽出した無作為標本$Z_1, Z_2, ..., Z_n$を考えます。
-標準正規分布の確率分布関数$\phi(z)$を用いると、次のように表せます。
+標準正規分布の累積分布関数$\Phi(z)$を用いると、次のように表せます。
 $$
 P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq z_{\frac{\alpha}{2}} \right) = 1 - \alpha
 $$
@@ -263,16 +263,23 @@ $$
 図にすると次のようになります。
 
 ```{r normal_dist}
-averate <- 1800
+average_life <- 1800
 standard_dev <- 180
-rnorm(1000, mean = averate, sd = standard_dev) |>
-  as_tibble() |>
-  ggplot(aes(x = value)) +
+lifetime_sample <- tibble(lifetime = rnorm(1000, mean = average_life, sd = standard_dev))
+lifetime_sample |>
+  ggplot(aes(x = lifetime)) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 30,
+    fill = "lightblue",
+    color = "black",
+    alpha = 0.7
+    ) +
   stat_function(
     fun = dnorm,
-    args = list(mean = averate, sd = standard_dev),
+    args = list(mean = average_life, sd = standard_dev),
     color = "red",
-    size = 1
+    linewidth = 1
     ) +
   theme_minimal()
 ```
@@ -308,9 +315,9 @@ bulb_df |>
     ) +
   stat_function(
     fun = dnorm,
-    args = list(mean = averate, sd = standard_dev),
+      args = list(mean = average_life, sd = standard_dev),
     color = "red",
-    size = 1
+      linewidth = 1
     ) +
   theme_minimal()
 ```
