@@ -206,6 +206,7 @@ firm2018 |>
 教科書を先取りしますが、`if_else()`関数を使ってダミー変数を作成し、`count()`関数でクロス集計表を作成し、`gt`パッケージで表形式で表示します。
 `tidyr`パッケージの`pivot_wider()`関数を使って、クロス集計表が見やすくなるように、縦は産業名、横は広告費が中央値より大きいか否か、で表示するように変形しています。
 
+
 :::{.column-margin}
 `table()`関数を使うと簡単にクロス集計表が作れますが、あえて`data.frame`型のまま処理できる`dplyr::count()`関数を使っています。そのため、データが矩形データのまま扱えるので、後で他の処理に使いやすくなるものの、表にすると見にくくなるので、`tidyr::pivot_wider()`関数で見やすく変形しています。
 :::
@@ -215,159 +216,332 @@ firm2018 <- firm2018 |>
   mutate(
     ad_dummy = if_else(adint > median(adint, na.rm = TRUE), 1L, 0L)
     )
-firm2018 %>%
+firm2018 |>
   count(ind_en, ad_dummy) |>
   tidyr::pivot_wider(names_from = ad_dummy, values_from = n, values_fill = 0) |>
   gt::gt() |>
   gtExtras::gt_theme_538()
 ```
 
-次に、カテゴリ変数ごとに処理を行いたい場合、例えば、産業分類ごとに売上高の平均値や標準偏差を計算したい場合は、`group_by()`関数を使って、カテゴリ変数でグループ化してから、`summarize()`関数で集計します。
+次に、カテゴリ変数ごとに処理を行いたい場合、例えば、産業分類ごとに売上高の平均値や標準偏差を計算したい場合は、
+`summarise()`関数や`mutate()`関数の中で、`.by = `という引数を使って、グループ化して処理することができます。
+<!-- `group_by()`関数を使って、カテゴリ変数でグループ化してから、`summarize()`関数で集計します。 -->
 
-```{r}
-
-# コード4-39
+```{r code4-39, filename = "コード4-39"}
 firm2018 |>
-  group_by(ind_en) |>
   summarize(
-      obs = n(),
-      sales_m = mean(sales),
-      sales_sd = sd(sales),
-      adint_m = mean(adint),
-      adint_sd = sd(adint)
+    .by = ind_en, # 産業分類ごとに以下を計算
+      obs = n(), # 観測数
+      sales_m = mean(sales), # 売上高の平均値
+      sales_sd = sd(sales), # 売上高の標準偏差
+      adint_m = mean(adint), # 広告費の平均値
+      adint_sd = sd(adint) # 広告費の標準偏差
       ) |>
-  gt::gt() |>
-  gt::fmt_number(
+  gt::gt() |> # 表形式で表示
+  gt::fmt_number( # 数値の表示形式を指定
     columns = c(sales_m, sales_sd, adint_m, adint_sd),
     decimals = 2
   ) |>
-  gtExtras::gt_theme_538()
+  gtExtras::gt_theme_538() # 表のテーマを指定
 ```
 
-<!-- 
 
-
-# コード4-40
+```{r code4-40, filename = "コード4-40"}
 X <-tibble(
   x1 = c(-3, -1, 0, 2, 5),
   y1 = c(16, 12, 10, 6, 0),
   y2 = c(8, 6, 5, 3, 0)
 )
 X
+```
 
-# コード4-41
+
+```{r code4-41, filename = "相関係数"}
 cor(X$x1, X$y1)
-
-# コード4-42
-# For mac users
+```
+<!-- 
+コード4-42
 # set_theme(theme_gray(base_size = 10, base_family = "HiraMinProN-W3"))
+ -->
 
-# コード4-43
+`ggplot2`パッケージを使って、散布図を描いてみましょう。
+`ggplot2`パッケージの`ggplot()`関数は、主に次の引数を使います。
+
+- `data`：データフレームを指定
+- `mapping`：美的(aesthetic)マッピングを指定。`aes()`関数を使って、x軸とy軸にどの変数を割り当てるかを指定します。
+- `geom_***`: グラフの種類を指定。ここでは、`geom_point()`で散布図を描き、`geom_smooth(method = lm)`で線形回帰モデルをフィットさせた線を描きます。
+
+たくさんのオプションが用意されていますが、まずは基本的な使い方を覚えましょう。
+
+```{r code4-43, filename = "散布図を描く"}
 ggplot (data = X, mapping = aes(x = x1, y = y1)) +
+  geom_point() + # 散布図を描く
+  geom_smooth(method = lm) # 線形回帰モデルをフィットさせる
+```
+
+引数名を省略したり、`+`の位置を変えたりしても、同じグラフが描けます。
+通常はこれくらい簡略化して書くことが多いです。
+
+```{r filename="上の簡略版"}
+ggplot(X) + aes(x1, y1) + 
   geom_point() +
-  geom_smooth(method = lm)
+  geom_smooth(method =lm)
+```
 
-# コード4-44
-AB <- tibble(A = c(-2, -1, 0, 1, 2), B = c(4, 1, 0, 1, 4))
+変数$A$と$B$をもつデータフレーム`AB`を作成して、相関係数を計算し、散布図を描いてみましょう。
+```{r code4-44, filename = "コード4-43"}
+AB <- tibble(
+  A = c(-2, -1, 0, 1, 2), 
+  B = c(4, 1, 0, 1, 4)
+  )
 AB
+```
 
 
-# コード4-45
+```{r code4-45, filename = "コード4-44"}
 cor(AB$A, AB$B)
+```
 
-# コード4-46
-ggplot(data = AB, mapping = aes(x = A, y = B)) +
+```{r code4-46, filename = "コード4-45"}
+ggplot(AB) + aes(A,B) +
   geom_point() +
   geom_smooth(
-    method = lm,
-    formula = y ~ x + I(x^2),
-    se = FALSE
+    method = lm, # 線形回帰モデルをフィットさせる
+    formula = y ~ x + I(x^2), # 2次の項を追加して、非線形の関係をモデル化
+    se = FALSE # 標準誤差の表示をオフ
   )
+```
 
-# コード4-47
+
+## 簡易的なデータ探索法紹介
+
+### データ処理と顧客関係管理(CRM)
+
+
+```{r code4-47, filename = "コード4-47"}
 idpos <- readr::read_csv("data/2022idpos.csv", na = ".")
 head(idpos)
+```
 
-# コード4-48
-idpos$datediff <-
-  as.numeric(difftime("2019-10-02", idpos$date, units = "days"))
+データの中身を確認すると、4つの変数`id`、`date`、`spent`、`coupon`が含まれており、それぞれの方が
+
+- `id`：数値型
+- `date`：文字列
+- `spent`：数値型
+- `coupon`：数値型
+
+となっています。
+本来は`id`は顧客を表すカテゴリー変数で、`date`は日付を表す変数、`coupon`はクーポン利用の有無を表すダミー変数なので、これらの変数の型を適切に変換しておきましょう。
+
+```{r}
+idpos <- idpos |>
+  mutate(
+    id = as.factor(id), # idをカテゴリー変数に変換
+    date = lubridate::ymd(date), # dateを日付型に
+    coupon = factor(coupon, levels = c(0, 1), labels = c("クーポン未使用", "クーポン使用")) # couponをカテゴリー変数に変換
+  ) 
+glimpse(idpos)
+```
+
+次に、`date`変数を使って、ある基準日から何日前の来店かを表す`datediff`という新しい変数を作成します。
+ここでは、基準日を2019年10月2日に設定して、`date`変数の日付から基準日までの差を計算して、`datediff`変数に格納します。
+```{r code4-48, filename = "コード4-48"}
+idpos <- idpos |>
+  mutate(
+    datediff = as.numeric(as.Date("2019-10-02") - date) # 基準日からの差を計算
+  )
 head(idpos)
+```
 
-# コード4-49
-idpos_cust <- idpos %>%
-  group_by(id) %>%
-  summarize(frequency = n(),
-            monetary = sum(spent),
-            cherry = sum(coupon),
-            recency = min(datediff)
-            )
+次に、顧客ごとに、来店頻度(frequency)、累計購入金額(monetary)、クーポン利用回数(cherry)、最終来店からの経過日数(recency)を計算して、新しいデータフレーム`idpos_cust`に格納します。
+
+```{r code4-49, filename = "コード4-49"}
+idpos_cust <- idpos |>
+  summarize(
+    .by = id, # 顧客ごとに集計
+    frequency = n(),
+    monetary = sum(spent),
+    cherry = sum(coupon == "クーポン使用", na.rm = TRUE),
+    recency = min(datediff)
+  ) |>
+  arrange(id)
 head(idpos_cust)
+glimpse(idpos_cust)
+```
 
-# コード4-50
-idpos_cust_m <- idpos_cust %>%
-  arrange(desc(monetary))
+`idpos_cust`データフレームには、顧客ごとに、来店頻度(frequency)、累計購入金額(monetary)、クーポン利用回数(cherry)、最終来店からの経過日数(recency)が格納されました。
+その結果、観測値が1,487件、変数が5つのデータフレームができました。
 
-# 上位 10 人の顧客 (Monetary)
+合計購入金額(`monetary`)の高い順に並び替えます。
+降順に並び替えるには、`arrange()`関数の中で、`desc()`関数を使います。
+
+```{r code4-50, filename = "コード4-50"}
+idpos_cust_m <- idpos_cust |> 
+  arrange(desc(monetary)) # monetaryの降順に並び替え
+idpos_cust_m |> head() # 上位20件を表示
+```
+
+### データの結合
+
+2つのデータフレームを結合する方法を学びましょう。
+データフレームの結合は基本関数でもできますが、`tidyverse`の`dplyr`パッケージのJOIN関数が便利です。
+`dplyr`パッケージのJOIN関数には、以下の4つがあります。
+
+- `inner_join()` : 内部結合
+- `left_join()` : 左外部結合
+- `right_join()` : 右外部結合
+- `full_join()` : 完全外部結合
+
+それぞれの結合の結果をベン図で表すと以下のようになります。
+
+![結合](img/join.png){width="80%"}
+
+データの結合のイメージ図は以下の通りです(この図は、Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemundによる"R for Data Science"の図を引用しています)。
+
+![結合結果](img/R4D_join.png){width="80%"}
+
+内部結合は、2つのデータフレームの共通の変数の値が一致する行のみを抽出するため、結合後のデータフレームが非常に小さくなりがちであるため、ほとんど使用しません。
+最も利用する可能性が高いのは、結合元のデータフレームのすべての行を残す**左外部結合**です。
+これは`dplyr::left_join()`で実行できます。
+
+
+![左外部結合](img/left_join_function.png)
+
+`left_join()`の引数は、以下の通りです。
+
+- `x` : 結合元のデータフレーム
+- `y` : 結合するデータフレーム
+- `by` : 結合する変数
+
+:::{.callout-important}
+JOIN関数で2つのデータフレームを結合するときは，1つ以上のキーとなる変数が，結合元のデータフレームと結合するデータフレームの両方に存在し，またキーの値により行が一意に決まる，つまり観測値がユニークになっていることが重要です。
+:::
+
+```{r}
 idpos_cust_m[1:10, ]
+```
 
+```{r}
 # コード4-51
 id_data <- readr::read_csv("data/id_data.csv", na = ".")
+id_data <- id_data |>
+  mutate(
+    id = as.factor(id)
+  )
 str(id_data)
+dplyr::glimpse(id_data)
+```
 
+3000件の観測値と4つの変数からなるデータフレーム`id_data`が読み込まれました。
+これを`idpos_cust`と結合してみます。
+
+```{r}
+dplyr::glimpse(idpos_cust)
+```
+
+```{r}
 # コード4-52
-idpos_cust <- left_join(idpos_cust, id_data, by = "id")
+idpos_cust <- idpos_cust |>
+  left_join(
+    id_data, 
+    by = "id"
+  )
 head(idpos_cust)
+```
 
+```{r}
 # コード4-53
-idpos_cust_m <- idpos_cust %>%
+idpos_cust_m <- idpos_cust |>
   arrange(desc(monetary))
+```
 
-# 上位顧客 20 人中の男女比
+
+購買金額`monetary`の上位顧客20人中の男女比を確認するには、`gender`変数の頻度を確認します。
+
+```{r}
 table(idpos_cust_m[1:20, ]$gender)
+```
 
-# コード4-54
-idpos_cust_m$decile_rank <-
-  cut(idpos_cust_m$monetary,
-      quantile(idpos_cust_m$monetary, (0:10) / 10, na.rm = TRUE),
-      label = FALSE, include.lowest = TRUE)
+`monetary`変数を10等分して、各顧客がどのランクに属するかを表す変数`decile_rank`を作成します。
+`cut()`関数を使って、`monetary`変数を10等分して、各顧客がどのランクに属するかを表す変数`decile_rank`を作成します。
+
+```{r}
+idpos_cust_m <- idpos_cust_m |>
+  mutate(
+    decile_rank = cut(
+      monetary, 
+      quantile(
+        monetary, 
+        (0:10) / 10, 
+        na.rm = TRUE
+      ),
+      label = FALSE,
+      include.lowest = TRUE
+    )
+  )
 head(idpos_cust_m)
+```
 
 # コード4-55
-decile <- idpos_cust_m %>%
-  group_by(decile_rank) %>%
+```{r}
+decile <- idpos_cust_m |>
+  group_by(decile_rank) |>
   summarize(freq = n(),
             monetary = sum(monetary))
 total <- sum(decile$monetary)
+```
 
-decile2 <- decile %>%
-  mutate(percent = monetary / total * 100) %>%
+
+```{r}
+decile2 <- decile |>
+  mutate(
+    percent = round(monetary / total * 100, digits = 2)) |>
   arrange(desc(decile_rank))
 
 decile2
+```
 
-# コード4-56
+
+```{r}
 sales_wide <- readr::read_csv("data/sales_wide.csv", na = ".")
 sales_wide
+```
 
-# コード4-57
-sales_long <- gather(data = sales_wide,
-                     key = "month", value = "sales", starts_with("sales"))
+テキストで用いられている`gather()`関数は非推奨なので、
+推奨されている`tidyr`パッケージの`pivot_longer()`関数を使って、データを縦長に変形してみましょう。
+
+```{r}
+sales_long <- sales_wide |> 
+  pivot_longer(
+    cols = starts_with("sales"),
+    names_to = "month",
+    values_to = "sales"
+  )
 sales_long
+```
 
+
+
+```{r}
 # コード4-58
-sales_long <- sales_wide %>%
+sales_long <- sales_wide |>
   rename('06'  = sales06,
          '07'  = sales07,
          '08'  = sales08,
          '09'  = sales09,
-         '10'  = sales10) %>%
-  gather(key = "month", value = "sales", '06':'10') %>%
+         '10'  = sales10) |>
+  gather(key = "month", value = "sales", '06':'10') |>
   arrange(store)
 sales_long
+```
 
+
+
+
+```{r}
 # コード4-59
-wide_test <- sales_long %>%
-  spread(key = "month", value = "sales") %>%
+wide_test <- sales_long |>
+  spread(key = "month", value = "sales") |>
   rename(sales06 = '06',
          sales07 = '07',
          sales08 = '08',
@@ -375,8 +549,6 @@ wide_test <- sales_long %>%
          sales10 = '10')
 wide_test
 
-
 ```
---->
 
 

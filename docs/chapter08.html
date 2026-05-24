@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
-
+<meta name="generator" content="quarto-1.9.37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Soichi Matsuura">
-
 <title>6&nbsp; 第8章 消費者の選択と離散選択モデル – マーケティング・データ分析の学習メモ</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -58,7 +58,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -71,20 +70,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./img/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2faf606acb82b7945c08ef153ee7e46.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8b6ec28c7624df160bce42457c818d22.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2faf606acb82b7945c08ef153ee7e46.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-fc8564e7bb1a38287883ba922e186079.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-28d2321d8d7e4f93cd9754515dc59dad.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-fc8564e7bb1a38287883ba922e186079.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-52e09e6e303b1dda867a222b625ac07f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-4821737fae1cfc579e75059a4b0a2faf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-4821737fae1cfc579e75059a4b0a2faf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4821737fae1cfc579e75059a4b0a2faf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -110,17 +107,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<style>
+}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
 .marky {background: linear-gradient(transparent 60%, #FCFFC1 0%);}
 .markb {background: linear-gradient(transparent 60%, #88E2EA 0%);}
 .markp {background: linear-gradient(transparent 70%, #ffcdd2 0%);}
 </style>
-
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
+<script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
  for (var i = 0; i < mathElements.length; i++) {
@@ -133,9 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     fleqn: false
    });
 }}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
-
+  </script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 <script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
@@ -162,18 +153,14 @@ window.Quarto = {
   typesetMath
 };
 </script>
-
 <meta name="twitter:title" content="6&nbsp; 第8章 消費者の選択と離散選択モデル – マーケティング・データ分析の学習メモ">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
-
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -184,13 +171,9 @@ window.Quarto = {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">マーケティング・データ分析の学習メモ</a> 
         <div class="sidebar-tools-main">
@@ -210,7 +193,7 @@ window.Quarto = {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">はじめに</span></span></a>
@@ -224,15 +207,15 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ整理と要約</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part02.html" class="sidebar-item-text sidebar-link">
@@ -241,8 +224,8 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">第5章 基礎統計学復習</span></span></a>
@@ -267,7 +250,7 @@ window.Quarto = {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./part03.html" class="sidebar-item-text sidebar-link">
@@ -276,8 +259,8 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">第10章 セグメントとクラスター分析</span></span></a>
@@ -296,28 +279,24 @@ window.Quarto = {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
-    <h2 id="toc-title">ここの目次</h2>
+</div>
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">ここの目次</h2>
    
   <ul class="collapse">
-  <li><a href="#顕示選好の理論" id="toc-顕示選好の理論" class="nav-link active" data-scroll-target="#顕示選好の理論"><span class="header-section-number">6.1</span> 顕示選好の理論</a></li>
-  <li><a href="#顕示選考理論" id="toc-顕示選考理論" class="nav-link" data-scroll-target="#顕示選考理論"><span class="header-section-number">6.2</span> 顕示選考理論</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<li><a href="#%E9%A1%95%E7%A4%BA%E9%81%B8%E5%A5%BD%E3%81%AE%E7%90%86%E8%AB%96" id="toc-顕示選好の理論" class="nav-link active" data-scroll-target="#%E9%A1%95%E7%A4%BA%E9%81%B8%E5%A5%BD%E3%81%AE%E7%90%86%E8%AB%96"><span class="header-section-number">6.1</span> 顕示選好の理論</a></li>
+  <li><a href="#%E9%A1%95%E7%A4%BA%E9%81%B8%E8%80%83%E7%90%86%E8%AB%96" id="toc-顕示選考理論" class="nav-link" data-scroll-target="#%E9%A1%95%E7%A4%BA%E9%81%B8%E8%80%83%E7%90%86%E8%AB%96"><span class="header-section-number">6.2</span> 顕示選考理論</a></li>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part02.html">第2部 仮説検証型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter08.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">第8章 消費者の選択と離散選択モデル</span></a></li></ol></nav>
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">第8章 消費者の選択と離散選択モデル</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part02.html">第2部 仮説検証型データ分析</a></li><li class="breadcrumb-item"><a href="./chapter08.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">第8章 消費者の選択と離散選択モデル</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">
+<span class="chapter-number">6</span>&nbsp; <span class="chapter-title">第8章 消費者の選択と離散選択モデル</span>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -331,11 +310,8 @@ window.Quarto = {
   
 
 
-</header>
-
-
-<section id="顕示選好の理論" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="顕示選好の理論"><span class="header-section-number">6.1</span> 顕示選好の理論</h2>
+</header><section id="顕示選好の理論" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="顕示選好の理論">
+<span class="header-section-number">6.1</span> 顕示選好の理論</h2>
 <p>Kreps (1988) “Notes on the Theory of Choice”に基づいて，単一個人意思決定モデルの基礎的な考え方を説明します。</p>
 <p><span class="markp">「選択」(choice)という現象は，ある集合<span class="math inline">A</span>がある個人にとっての実際に選択可能な選択肢の集合であったときに，その中から個人によって1つの選択肢<span class="math inline">a \in A</span>が選ばれる，という現象</span>をいいます。 ここに，<span class="markp">「選ぶ」というのは，第三者に観察できる行為として選ぶ，ということに限って用いられます。</span> また，問題となっている集合<span class="math inline">A</span>の各要素<span class="math inline">a \in A</span>を「選択肢」(alternative)と呼びます。</p>
 <p>選択現象を問題にしている選択肢<span class="math inline">a</span>が確率的構造を持っているとき，その選択肢をとくに<strong>クジ</strong>(lottery)と呼びます。</p>
@@ -352,8 +328,8 @@ C : X \subseteq A \mapsto C(A) \subseteq X
 <p><span class="math inline">C: \mathcal{P}(X) \to \mathcal{P}(X)</span>が， <span class="math display">
 \forall A \in \mathcal{P}(X); \  C(A) \subseteq A
 </span> であるとき，<span class="math inline">X</span>上の選択関数(choice function)である，といいます。 ここで，<span class="math inline">\mathcal{P}(X)</span>は，<span class="math inline">X</span>の部分集合1つ1つを全部集めてできる冪集合(power set)のうち，<span class="math inline">X</span>の中から二者択一の結果だけを集めたデータを表します。</p>
-<section id="選好モデル" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="選好モデル"><span class="header-section-number">6.1.1</span> 選好モデル</h3>
+<section id="選好モデル" class="level3" data-number="6.1.1"><h3 data-number="6.1.1" class="anchored" data-anchor-id="選好モデル">
+<span class="header-section-number">6.1.1</span> 選好モデル</h3>
 <p>二項関係(binary relation)を定義します。 <span class="math inline">X</span>の（たまたま同じであることを許す）2つの要素について語られた関係が，<span class="math inline">X</span>上の二項関係(binary relation)であるとは， <span class="math inline">X \times X</span>のすべての要素<span class="math inline">(x,y)</span>について，<span class="math inline">x</span>は<span class="math inline">y</span>に対してその関係にあるか，またはその関係にないか，を必ず一方をいうことができる場合を言います。</p>
 <p>つまり，選択肢集合<span class="math inline">A</span>に選択肢<span class="math inline">x</span>と<span class="math inline">y</span>があり，その人の選択結果<span class="math inline">C(\{x,y\}) = ?</span>を見ます。 その人が選択するものは，</p>
 <p><span class="math display">
@@ -364,9 +340,8 @@ C(\{x,y\}) &amp;= \{y\} \quad yを選び，xを選ばなかった\\
 C(\{x,y\}) &amp;= \{x,y\} \quad xもyも選んだ。
 \end{aligned}
 </span></p>
-</section>
-<section id="選好" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="選好"><span class="header-section-number">6.1.2</span> 選好</h3>
+</section><section id="選好" class="level3" data-number="6.1.2"><h3 data-number="6.1.2" class="anchored" data-anchor-id="選好">
+<span class="header-section-number">6.1.2</span> 選好</h3>
 <p><span class="math inline">X</span> 上の選択関数 <span class="math inline">C: \mathcal{P}(X) \rightarrow  \mathcal{P}(X)</span> が与えられたとき，<span class="math inline">X</span> の(それがたまたま同じであることを許す)2つの要素についての関係を，各 <span class="math inline">(x,y) \in X \times X</span> に対して，<span class="math inline">y \not \in C(\{x,y\})</span> なら，<span class="math inline">x</span> は <span class="math inline">y</span> に対してその関係にあり，<span class="math inline">y \in C(\{x,y\})</span> なら <span class="math inline">x</span> は <span class="math inline">y</span> に対してその関係にない，というやり方で定められるとき，その関係(それは二項関係である)を，(選択関数 <span class="math inline">C:\mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> によって生成された) <span class="math inline">X</span> 上の<strong>強選好</strong>(strict preference)といいます。</p>
 <p>この二項関係を記号 <span class="math inline">\succ</span> で表わし，<span class="math inline">x</span> が <span class="math inline">y</span> に対して強選好の関係にあるとき，<span class="math inline">x</span> を <span class="math inline">y</span> よりも厳密に選好する，あるいは <span class="math inline">x</span> は <span class="math inline">y</span> よりも厳密に選好されるといって，<span class="math inline">x \succ y</span> と書き，<span class="math inline">x</span> が <span class="math inline">y</span> に対して強選好の関係にないとき，<span class="math inline">x</span> は <span class="math inline">y</span> よりも厳密に選好されるわけではない，といって <span class="math inline">x \not \succ y</span> と書きます。</p>
 <p>ある <span class="math inline">X</span> 上の強選好 <span class="math inline">\succ</span> は，それが定義されたもとの選択関数 <span class="math inline">C : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>を明示する必要があるときは，<span class="math inline">\succ _c</span>と書く。</p>
@@ -396,7 +371,8 @@ C : \mathcal{P}(X) ∋ A \rightarrow C(A) \in \mathcal{P}(X)
 <ul>
 <li>説明する対象は、選択関数 <span class="math inline">C : \mathcal{P}(X) \in A  \mapsto C(A) \in \mathcal{P}(X)</span> である。</li>
 <li>データを取ってくるパラメータとしての選好<span class="math inline">\succ</span> (つまり、<span class="math inline">X</span>上のすべての二者択一の結果)を考える。</li>
-<li>選択を説明するモデルは選好モデル<span class="math inline">C(A, \succ) = \{x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}</span></li>
+<li>選択を説明するモデルは選好モデル<span class="math inline">C(A, \succ) = \{x \in A \mid \nexists y \in A \quad  \text{s.t.} \quad y \succ x \}</span>
+</li>
 <li>選択理論とは、「<span class="math inline">C: \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> が・・・の条件を満たすとき、<span class="math inline">C</span>のうち××から作った$C(A, ××) = C(A)」が成り立つような「･･･」と「××」を考えます。</li>
 </ul>
 <p>ただ、選好<span class="math inline">\succ</span>としてどんなものでも認めてしまうと、</p>
@@ -405,16 +381,24 @@ C : \mathcal{P}(X) ∋ A \rightarrow C(A) \in \mathcal{P}(X)
 </span> となる場合があります。 たとえば、<span class="math inline">A = X = \{x, y, z\}</span>で、 <span class="math inline">C(\{x,y\}) = \{x\}</span>、 <span class="math inline">C(\{y,z\}) = \{y\}</span>、 <span class="math inline">C(\{x,z\}) = \{z\}</span> かつ、 <span class="math inline">C(A) \not = \emptyset</span>. 場合、<span class="math inline">C(\{x,y,z\}) = \emptyset</span> となります。</p>
 <p>つまり、</p>
 <ul>
-<li><span class="math inline">z \succ x</span> より <span class="math inline">x \not \in C(\{x,y, z\}, \succ)</span></li>
-<li><span class="math inline">x \succ y</span> より <span class="math inline">y \not \in C(\{x,y, z\}, \succ)</span></li>
-<li><span class="math inline">y \succ z</span> より <span class="math inline">z \not \in C(\{x,y, z\}, \succ)</span></li>
+<li>
+<span class="math inline">z \succ x</span> より <span class="math inline">x \not \in C(\{x,y, z\}, \succ)</span>
+</li>
+<li>
+<span class="math inline">x \succ y</span> より <span class="math inline">y \not \in C(\{x,y, z\}, \succ)</span>
+</li>
+<li>
+<span class="math inline">y \succ z</span> より <span class="math inline">z \not \in C(\{x,y, z\}, \succ)</span>
+</li>
 </ul>
 <p>すなわち、<span class="math inline">C(\{x,y,z\}, \succ) = \emptyset</span> となります。</p>
 <p>て、次のように選択関数 <span class="math inline">C_{\succ} : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span> を定めます。</p>
 <p>では、どのような二者択一行動を示す人なら、その人の選好モデルは完結性があるのかを考えます。 次の2つの条件が満たされるとき、選好<span class="math inline">\succ</span>は<strong>完結性</strong>(completeness)を持つといいます。</p>
 <ol type="1">
-<li><strong>反対称性</strong>(asymmetry) : <span class="math inline">\forall x,y \in X;</span>, 「<span class="math inline">x \succ y</span> かつ <span class="math inline">y \succ x</span>」ということはない。つまり二者択一行動が<span class="math inline">C(\{x,y\}) = \{\emptyset\}</span>ということがない。</li>
-<li><strong>負推移性</strong>(negative transitivity) : <span class="math inline">\forall x,y \in X;</span>, 「もし <span class="math inline">x \not \succ y</span> かつ <span class="math inline">y \not \succ z</span>」ならば「<span class="math inline">x \not \succ z</span>」である。 つまり二者択一行動としては、もし<span class="math inline">y \in C(\{x,y\})</span> かつ <span class="math inline">z \in C(\{y,z\})</span> ならば、<span class="math inline">z \in C(\{x,z\})</span> である。</li>
+<li>
+<strong>反対称性</strong>(asymmetry) : <span class="math inline">\forall x,y \in X;</span>, 「<span class="math inline">x \succ y</span> かつ <span class="math inline">y \succ x</span>」ということはない。つまり二者択一行動が<span class="math inline">C(\{x,y\}) = \{\emptyset\}</span>ということがない。</li>
+<li>
+<strong>負推移性</strong>(negative transitivity) : <span class="math inline">\forall x,y \in X;</span>, 「もし <span class="math inline">x \not \succ y</span> かつ <span class="math inline">y \not \succ z</span>」ならば「<span class="math inline">x \not \succ z</span>」である。 つまり二者択一行動としては、もし<span class="math inline">y \in C(\{x,y\})</span> かつ <span class="math inline">z \in C(\{y,z\})</span> ならば、<span class="math inline">z \in C(\{x,z\})</span> である。</li>
 </ol>
 <p>これより、<span class="math inline">X</span> 上の強選好 <span class="math inline">\succ</span> は、次のように定義できます。</p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -448,9 +432,8 @@ C : \mathcal{P}(X) ∋ A \rightarrow C(A) \in \mathcal{P}(X)
 </div>
 </div>
 <p>選好<span class="math inline">\succ</span>が反対称的かつ負推移的であるとき、<strong>推移的</strong>(acyclic)であるといい、 <span class="math inline">x_1 \succ x_2</span> かつ <span class="math inline">x_2 \succ x_3</span> かつ <span class="math inline">\cdots</span> かつ <span class="math inline">x_{n-1} \succ x_n</span> なら <span class="math inline">x_1 \not = x_n</span> となります。</p>
-</section>
-<section id="xが有限集合の場合" class="level3" data-number="6.1.3">
-<h3 data-number="6.1.3" class="anchored" data-anchor-id="xが有限集合の場合"><span class="header-section-number">6.1.3</span> <span class="math inline">X</span>が有限集合の場合</h3>
+</section><section id="xが有限集合の場合" class="level3" data-number="6.1.3"><h3 data-number="6.1.3" class="anchored" data-anchor-id="xが有限集合の場合">
+<span class="header-section-number">6.1.3</span> <span class="math inline">X</span>が有限集合の場合</h3>
 <p><span class="math inline">X</span> 上の強選好 <span class="math inline">\succ</span> が <span class="math display">
 \forall x \in X; \quad x \not \succ x
 </span> であるとき、<strong>非反射的</strong>(irreflexive)である、あるいは非反射性を満たすといいます。</p>
@@ -525,10 +508,8 @@ Important
 </div>
 <p>が選好関係であるとき、<span class="math inline">X</span>が有限集合であれば、任意の<span class="math inline">A \in \mathcal{P}(X)</span>に対し、<span class="math inline">C(A, \succ) \not = \emptyset</span> となります。</p>
 <p>ここまでの説明により、ある個人の選択行動を説明するために必要な条件は、 <span class="markp">ある個人が(有限の)選択肢の中から選び取るとき、その人の選好が反対称的かつ負推移的であれば、選択肢集合が非空なら、その人がもつ選択関数は非空である</span>、ということがわかりました。</p>
-</section>
-</section>
-<section id="顕示選考理論" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="顕示選考理論"><span class="header-section-number">6.2</span> 顕示選考理論</h2>
+</section></section><section id="顕示選考理論" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="顕示選考理論">
+<span class="header-section-number">6.2</span> 顕示選考理論</h2>
 <p>選択肢集合<span class="math inline">X</span>が有限であるとします。 すると、<span class="math inline">X</span>上の強選好<span class="math inline">\succ</span>が<span class="math inline">X</span>上の選好関係であるならば、 <span class="math inline">C(\cdot , \succ) : \mathcal{P}(X) \rightarrow \mathcal{P}(X)</span>は非空まつ<strong>ハウタッカーの公理</strong>(Houthakker’s axiom)を満たします。</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -551,14 +532,17 @@ Important
 </div>
 <p>具体例で説明します。 たとえば、あなたの買い物の選択肢として</p>
 <ul>
-<li><span class="math inline">A=\{\text{みかん, リンゴ, バナナ}\}</span>、</li>
+<li>
+<span class="math inline">A=\{\text{みかん, リンゴ, バナナ}\}</span>、</li>
 <li><span class="math inline">B=\{\text{バナナ, リンゴ, ぶどう}\}</span></li>
 </ul>
 <p>があるとします。</p>
 <p>このとき、あなたは</p>
 <ul>
-<li><span class="math inline">A</span> の中からリンゴを選び（<span class="math inline">C(A)=\{\text{リンゴ}\}</span>）、</li>
-<li><span class="math inline">B</span> の中からバナナを選ぶ（<span class="math inline">C(B)=\{\text{バナナ}\}</span>）</li>
+<li>
+<span class="math inline">A</span> の中からリンゴを選び（<span class="math inline">C(A)=\{\text{リンゴ}\}</span>）、</li>
+<li>
+<span class="math inline">B</span> の中からバナナを選ぶ（<span class="math inline">C(B)=\{\text{バナナ}\}</span>）</li>
 </ul>
 <p>とします。</p>
 <p>リンゴとバナナはいずれも <span class="math inline">A\cap B</span> に含まれています。 ハウタッカーの公理は、この状況のもとでは、 選択肢集合が <span class="math inline">B</span> に変わってもリンゴが選ばれ、 選択肢集合が <span class="math inline">A</span> に変わってもバナナが選ばれなければならない、 ということを要請します。</p>
@@ -659,13 +643,17 @@ Important
 <p>だとします。 つまりリンゴとバナナは同程度に最も好ましく、次にみかん、最後にぶどう、という順番です。</p>
 <p>この好みに基づく選択関数 <span class="math inline">C</span> を、「与えられた集合の中の“最も好ましいもの”をすべて選ぶ」と定めます。 つまり任意の <span class="math inline">A\subseteq X</span> に対して</p>
 <ul>
-<li><span class="math inline">A</span> にリンゴまたはバナナが含まれていれば、<span class="math inline">C(A) = A\cap\{\text{リンゴ, バナナ}\}</span></li>
+<li>
+<span class="math inline">A</span> にリンゴまたはバナナが含まれていれば、<span class="math inline">C(A) = A\cap\{\text{リンゴ, バナナ}\}</span>
+</li>
 <li>そうでなければ（リンゴもバナナも無いなら）、残りの中で最上位のもの（ここではみかん、なければぶどう）を選ぶ</li>
 </ul>
 <p>というルールです。たとえば</p>
 <ul>
-<li><span class="math inline">C(\{\text{みかん, リンゴ, バナナ}\})=\{\text{リンゴ, バナナ}\}</span>,</li>
-<li><span class="math inline">C(\{\text{バナナ, ぶどう}\})=\{\text{バナナ}\}</span>,</li>
+<li>
+<span class="math inline">C(\{\text{みかん, リンゴ, バナナ}\})=\{\text{リンゴ, バナナ}\}</span>,</li>
+<li>
+<span class="math inline">C(\{\text{バナナ, ぶどう}\})=\{\text{バナナ}\}</span>,</li>
 <li><span class="math inline">C(\{\text{みかん, ぶどう}\})=\{\text{みかん}\}</span></li>
 </ul>
 <p>のようになります。</p>
@@ -685,17 +673,17 @@ Important
 <div class="cell-output cell-output-stdout">
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/lf/9kvp0m950bx72lzg24t53g280000gn/T//RtmpomcaUI/downloaded_packages</code></pre>
+    /var/folders/3k/7grsq_p50s341kh1q563qy040000gn/T//RtmprL1cVJ/downloaded_packages</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/lf/9kvp0m950bx72lzg24t53g280000gn/T//RtmpomcaUI/downloaded_packages</code></pre>
+    /var/folders/3k/7grsq_p50s341kh1q563qy040000gn/T//RtmprL1cVJ/downloaded_packages</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/lf/9kvp0m950bx72lzg24t53g280000gn/T//RtmpomcaUI/downloaded_packages</code></pre>
+    /var/folders/3k/7grsq_p50s341kh1q563qy040000gn/T//RtmprL1cVJ/downloaded_packages</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -776,105 +764,101 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <div class="cell-output-display">
 <!-- preamble start -->
 
-    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
-
-    <script>
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script><script>
       // Create table-specific functions using external factory
-      const tableFns_hx719v94csnnnte2hyol = TinyTable.createTableFunctions("tinytable_hx719v94csnnnte2hyol");
+      const tableFns_acdhidlprnu3uy3n6az6 = TinyTable.createTableFunctions("tinytable_acdhidlprnu3uy3n6az6");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '7', j: 2 }, { i: '7', j: 3 }, { i: '7', j: 4 } ], css_id: 'tinytable_css_pd598edks58ajoar1vgo',}, 
-          { positions: [ { i: '6', j: 2 }, { i: '6', j: 3 }, { i: '6', j: 4 } ], css_id: 'tinytable_css_i79zl7m5n3rbvv736zju',}, 
-          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 } ], css_id: 'tinytable_css_3mrvkz9ai967hy7ba74s',}, 
-          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_3zqjt90az7y97vy1rpky',}, 
-          { positions: [ { i: '7', j: 1 } ], css_id: 'tinytable_css_16hggwrjq7rrsqdiac5c',}, 
-          { positions: [ { i: '6', j: 1 } ], css_id: 'tinytable_css_k6p9ur3i43sz44ecnh4p',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 } ], css_id: 'tinytable_css_93aid3mpvf8ehl1gcx93',}, 
-          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_oau2inhvxniknw6g54p4',}, 
+          { positions: [ { i: '7', j: 2 }, { i: '7', j: 3 }, { i: '7', j: 4 } ], css_id: 'tinytable_css_atz0ri948m13y35w4b2s',}, 
+          { positions: [ { i: '6', j: 2 }, { i: '6', j: 3 }, { i: '6', j: 4 } ], css_id: 'tinytable_css_8czp2u8zxmsiepwzcucp',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 } ], css_id: 'tinytable_css_uutfubb0q16qpha1waun',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_hd2zshvpdsm6kxycafcw',}, 
+          { positions: [ { i: '7', j: 1 } ], css_id: 'tinytable_css_2g5fgnxepgs692p0hwda',}, 
+          { positions: [ { i: '6', j: 1 } ], css_id: 'tinytable_css_92iuyoii5xmraugpp22i',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 } ], css_id: 'tinytable_css_nvux934czm36qpu1lszp',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_j4rn3zl0wi367ix936u7',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_hx719v94csnnnte2hyol.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_acdhidlprnu3uy3n6az6.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
-    </script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
-    <style>
+    </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+<style>
     /* tinytable css entries after */
-    #tinytable_hx719v94csnnnte2hyol td.tinytable_css_pd598edks58ajoar1vgo, #tinytable_hx719v94csnnnte2hyol th.tinytable_css_pd598edks58ajoar1vgo {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_hx719v94csnnnte2hyol td.tinytable_css_i79zl7m5n3rbvv736zju, #tinytable_hx719v94csnnnte2hyol th.tinytable_css_i79zl7m5n3rbvv736zju {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_hx719v94csnnnte2hyol td.tinytable_css_3mrvkz9ai967hy7ba74s, #tinytable_hx719v94csnnnte2hyol th.tinytable_css_3mrvkz9ai967hy7ba74s { text-align: center }
-    #tinytable_hx719v94csnnnte2hyol td.tinytable_css_3zqjt90az7y97vy1rpky, #tinytable_hx719v94csnnnte2hyol th.tinytable_css_3zqjt90az7y97vy1rpky {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_hx719v94csnnnte2hyol td.tinytable_css_16hggwrjq7rrsqdiac5c, #tinytable_hx719v94csnnnte2hyol th.tinytable_css_16hggwrjq7rrsqdiac5c {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_hx719v94csnnnte2hyol td.tinytable_css_k6p9ur3i43sz44ecnh4p, #tinytable_hx719v94csnnnte2hyol th.tinytable_css_k6p9ur3i43sz44ecnh4p {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_hx719v94csnnnte2hyol td.tinytable_css_93aid3mpvf8ehl1gcx93, #tinytable_hx719v94csnnnte2hyol th.tinytable_css_93aid3mpvf8ehl1gcx93 { text-align: left }
-    #tinytable_hx719v94csnnnte2hyol td.tinytable_css_oau2inhvxniknw6g54p4, #tinytable_hx719v94csnnnte2hyol th.tinytable_css_oau2inhvxniknw6g54p4 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_acdhidlprnu3uy3n6az6 td.tinytable_css_atz0ri948m13y35w4b2s, #tinytable_acdhidlprnu3uy3n6az6 th.tinytable_css_atz0ri948m13y35w4b2s {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_acdhidlprnu3uy3n6az6 td.tinytable_css_8czp2u8zxmsiepwzcucp, #tinytable_acdhidlprnu3uy3n6az6 th.tinytable_css_8czp2u8zxmsiepwzcucp {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_acdhidlprnu3uy3n6az6 td.tinytable_css_uutfubb0q16qpha1waun, #tinytable_acdhidlprnu3uy3n6az6 th.tinytable_css_uutfubb0q16qpha1waun { text-align: center }
+    #tinytable_acdhidlprnu3uy3n6az6 td.tinytable_css_hd2zshvpdsm6kxycafcw, #tinytable_acdhidlprnu3uy3n6az6 th.tinytable_css_hd2zshvpdsm6kxycafcw {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_acdhidlprnu3uy3n6az6 td.tinytable_css_2g5fgnxepgs692p0hwda, #tinytable_acdhidlprnu3uy3n6az6 th.tinytable_css_2g5fgnxepgs692p0hwda {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_acdhidlprnu3uy3n6az6 td.tinytable_css_92iuyoii5xmraugpp22i, #tinytable_acdhidlprnu3uy3n6az6 th.tinytable_css_92iuyoii5xmraugpp22i {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_acdhidlprnu3uy3n6az6 td.tinytable_css_nvux934czm36qpu1lszp, #tinytable_acdhidlprnu3uy3n6az6 th.tinytable_css_nvux934czm36qpu1lszp { text-align: left }
+    #tinytable_acdhidlprnu3uy3n6az6 td.tinytable_css_j4rn3zl0wi367ix936u7, #tinytable_acdhidlprnu3uy3n6az6 th.tinytable_css_j4rn3zl0wi367ix936u7 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
     </style>
-    <div class="container">
-      <table class="tinytable" id="tinytable_hx719v94csnnnte2hyol" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
-        <caption>モデル比較</caption>
-        <thead>
-              <tr>
-                <th scope="col" data-row="0" data-col="1"> </th>
+<div class="container">
+      <table class="tinytable" id="tinytable_acdhidlprnu3uy3n6az6" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+<caption>モデル比較</caption>
+        <thead><tr>
+<th scope="col" data-row="0" data-col="1"> </th>
                 <th scope="col" data-row="0" data-col="2">Linear probability model</th>
                 <th scope="col" data-row="0" data-col="3">Probit model</th>
                 <th scope="col" data-row="0" data-col="4">Logit model</th>
-              </tr>
-        </thead>
-        <tfoot><tr><td colspan="4">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr>
-<tr><td colspan="4">Values in [ ] show robust standard errors</td></tr></tfoot>
-        <tbody>
-                <tr>
-                  <td data-row="1" data-col="1">(Intercept)</td>
+              </tr></thead>
+<tfoot>
+<tr><td colspan="4">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr>
+<tr><td colspan="4">Values in [ ] show robust standard errors</td></tr>
+</tfoot>
+<tbody>
+<tr>
+<td data-row="1" data-col="1">(Intercept)</td>
                   <td data-row="1" data-col="2">1.196***</td>
                   <td data-row="1" data-col="3">2.041***</td>
                   <td data-row="1" data-col="4">3.332***</td>
                 </tr>
-                <tr>
-                  <td data-row="2" data-col="1"></td>
+<tr>
+<td data-row="2" data-col="1"></td>
                   <td data-row="2" data-col="2">(0.065)</td>
                   <td data-row="2" data-col="3">(0.212)</td>
                   <td data-row="2" data-col="4">(0.361)</td>
                 </tr>
-                <tr>
-                  <td data-row="3" data-col="1">p1</td>
+<tr>
+<td data-row="3" data-col="1">p1</td>
                   <td data-row="3" data-col="2">-0.085***</td>
                   <td data-row="3" data-col="3">-0.247***</td>
                   <td data-row="3" data-col="4">-0.404***</td>
                 </tr>
-                <tr>
-                  <td data-row="4" data-col="1"></td>
+<tr>
+<td data-row="4" data-col="1"></td>
                   <td data-row="4" data-col="2">(0.006)</td>
                   <td data-row="4" data-col="3">(0.021)</td>
                   <td data-row="4" data-col="4">(0.036)</td>
                 </tr>
-                <tr>
-                  <td data-row="5" data-col="1">a1</td>
+<tr>
+<td data-row="5" data-col="1">a1</td>
                   <td data-row="5" data-col="2">0.221***</td>
                   <td data-row="5" data-col="3">0.628***</td>
                   <td data-row="5" data-col="4">1.035***</td>
                 </tr>
-                <tr>
-                  <td data-row="6" data-col="1"></td>
+<tr>
+<td data-row="6" data-col="1"></td>
                   <td data-row="6" data-col="2">(0.029)</td>
                   <td data-row="6" data-col="3">(0.087)</td>
                   <td data-row="6" data-col="4">(0.145)</td>
                 </tr>
-                <tr>
-                  <td data-row="7" data-col="1">Num.Obs.</td>
+<tr>
+<td data-row="7" data-col="1">Num.Obs.</td>
                   <td data-row="7" data-col="2">1000</td>
                   <td data-row="7" data-col="3">1000</td>
                   <td data-row="7" data-col="4">1000</td>
                 </tr>
-        </tbody>
-      </table>
-    </div>
+</tbody>
+</table>
+</div>
 <!-- hack to avoid NA insertion in last line -->
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># 適合度指標において，サンプルサイズ ("nobs") のみ表示するという指示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -951,91 +935,85 @@ dF/dx is for discrete change for the following variables:
 <div class="cell-output-display">
 <!-- preamble start -->
 
-    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
-
-    <script>
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script><script>
       // Create table-specific functions using external factory
-      const tableFns_q4lv2y650xrtefjhoj4a = TinyTable.createTableFunctions("tinytable_q4lv2y650xrtefjhoj4a");
+      const tableFns_lbtfykuxkvi3tkxol951 = TinyTable.createTableFunctions("tinytable_lbtfykuxkvi3tkxol951");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '6', j: 2 }, { i: '6', j: 3 } ], css_id: 'tinytable_css_xbbvuk6aw39hjggcc3oh',}, 
-          { positions: [ { i: '4', j: 2 }, { i: '4', j: 3 } ], css_id: 'tinytable_css_aqdfnnlnce23xsa441q1',}, 
-          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '5', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '5', j: 3 } ], css_id: 'tinytable_css_5lfbar4awksv3m2rgdn9',}, 
-          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_pvdszi1a88mgxjtb7zea',}, 
-          { positions: [ { i: '6', j: 1 } ], css_id: 'tinytable_css_h760v89688595cmrfd6c',}, 
-          { positions: [ { i: '4', j: 1 } ], css_id: 'tinytable_css_4fjsrtue6rwowga2owfh',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '5', j: 1 } ], css_id: 'tinytable_css_3wpi1mnsr2aoyzuhkbr2',}, 
-          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_d9plkoe2nfz2jlvxjfxg',}, 
+          { positions: [ { i: '6', j: 2 }, { i: '6', j: 3 } ], css_id: 'tinytable_css_p8hw38447d19o5w86uxw',}, 
+          { positions: [ { i: '4', j: 2 }, { i: '4', j: 3 } ], css_id: 'tinytable_css_y8yr77f8powq7n0clrog',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '5', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '5', j: 3 } ], css_id: 'tinytable_css_xe5e2hzgd7udgj4i5g5g',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_ybchshk6et53dhw6wdhb',}, 
+          { positions: [ { i: '6', j: 1 } ], css_id: 'tinytable_css_kba1u7mje0rx7vfi8xru',}, 
+          { positions: [ { i: '4', j: 1 } ], css_id: 'tinytable_css_e9yvvd2mj4zjuzvxtvit',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '5', j: 1 } ], css_id: 'tinytable_css_blvy57dqjyapf1hofsoo',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_j6vi8gmzzs1h2bq1guhc',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_q4lv2y650xrtefjhoj4a.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_lbtfykuxkvi3tkxol951.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
-    </script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
-    <style>
+    </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+<style>
     /* tinytable css entries after */
-    #tinytable_q4lv2y650xrtefjhoj4a td.tinytable_css_xbbvuk6aw39hjggcc3oh, #tinytable_q4lv2y650xrtefjhoj4a th.tinytable_css_xbbvuk6aw39hjggcc3oh {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_q4lv2y650xrtefjhoj4a td.tinytable_css_aqdfnnlnce23xsa441q1, #tinytable_q4lv2y650xrtefjhoj4a th.tinytable_css_aqdfnnlnce23xsa441q1 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_q4lv2y650xrtefjhoj4a td.tinytable_css_5lfbar4awksv3m2rgdn9, #tinytable_q4lv2y650xrtefjhoj4a th.tinytable_css_5lfbar4awksv3m2rgdn9 { text-align: center }
-    #tinytable_q4lv2y650xrtefjhoj4a td.tinytable_css_pvdszi1a88mgxjtb7zea, #tinytable_q4lv2y650xrtefjhoj4a th.tinytable_css_pvdszi1a88mgxjtb7zea {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_q4lv2y650xrtefjhoj4a td.tinytable_css_h760v89688595cmrfd6c, #tinytable_q4lv2y650xrtefjhoj4a th.tinytable_css_h760v89688595cmrfd6c {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_q4lv2y650xrtefjhoj4a td.tinytable_css_4fjsrtue6rwowga2owfh, #tinytable_q4lv2y650xrtefjhoj4a th.tinytable_css_4fjsrtue6rwowga2owfh {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_q4lv2y650xrtefjhoj4a td.tinytable_css_3wpi1mnsr2aoyzuhkbr2, #tinytable_q4lv2y650xrtefjhoj4a th.tinytable_css_3wpi1mnsr2aoyzuhkbr2 { text-align: left }
-    #tinytable_q4lv2y650xrtefjhoj4a td.tinytable_css_d9plkoe2nfz2jlvxjfxg, #tinytable_q4lv2y650xrtefjhoj4a th.tinytable_css_d9plkoe2nfz2jlvxjfxg {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_lbtfykuxkvi3tkxol951 td.tinytable_css_p8hw38447d19o5w86uxw, #tinytable_lbtfykuxkvi3tkxol951 th.tinytable_css_p8hw38447d19o5w86uxw {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_lbtfykuxkvi3tkxol951 td.tinytable_css_y8yr77f8powq7n0clrog, #tinytable_lbtfykuxkvi3tkxol951 th.tinytable_css_y8yr77f8powq7n0clrog {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_lbtfykuxkvi3tkxol951 td.tinytable_css_xe5e2hzgd7udgj4i5g5g, #tinytable_lbtfykuxkvi3tkxol951 th.tinytable_css_xe5e2hzgd7udgj4i5g5g { text-align: center }
+    #tinytable_lbtfykuxkvi3tkxol951 td.tinytable_css_ybchshk6et53dhw6wdhb, #tinytable_lbtfykuxkvi3tkxol951 th.tinytable_css_ybchshk6et53dhw6wdhb {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_lbtfykuxkvi3tkxol951 td.tinytable_css_kba1u7mje0rx7vfi8xru, #tinytable_lbtfykuxkvi3tkxol951 th.tinytable_css_kba1u7mje0rx7vfi8xru {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_lbtfykuxkvi3tkxol951 td.tinytable_css_e9yvvd2mj4zjuzvxtvit, #tinytable_lbtfykuxkvi3tkxol951 th.tinytable_css_e9yvvd2mj4zjuzvxtvit {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_lbtfykuxkvi3tkxol951 td.tinytable_css_blvy57dqjyapf1hofsoo, #tinytable_lbtfykuxkvi3tkxol951 th.tinytable_css_blvy57dqjyapf1hofsoo { text-align: left }
+    #tinytable_lbtfykuxkvi3tkxol951 td.tinytable_css_j6vi8gmzzs1h2bq1guhc, #tinytable_lbtfykuxkvi3tkxol951 th.tinytable_css_j6vi8gmzzs1h2bq1guhc {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
     </style>
-    <div class="container">
-      <table class="tinytable" id="tinytable_q4lv2y650xrtefjhoj4a" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
-        <caption>限界効果サマリー</caption>
-        <thead>
-              <tr>
-                <th scope="col" data-row="0" data-col="1"> </th>
+<div class="container">
+      <table class="tinytable" id="tinytable_lbtfykuxkvi3tkxol951" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+<caption>限界効果サマリー</caption>
+        <thead><tr>
+<th scope="col" data-row="0" data-col="1"> </th>
                 <th scope="col" data-row="0" data-col="2">(1)</th>
                 <th scope="col" data-row="0" data-col="3">(2)</th>
-              </tr>
-        </thead>
-        <tfoot><tr><td colspan="3">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
-        <tbody>
-                <tr>
-                  <td data-row="1" data-col="1">p1</td>
+              </tr></thead>
+<tfoot><tr><td colspan="3">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+<tbody>
+<tr>
+<td data-row="1" data-col="1">p1</td>
                   <td data-row="1" data-col="2">-0.085***</td>
                   <td data-row="1" data-col="3">-0.098***</td>
                 </tr>
-                <tr>
-                  <td data-row="2" data-col="1"></td>
+<tr>
+<td data-row="2" data-col="1"></td>
                   <td data-row="2" data-col="2">(0.006)</td>
                   <td data-row="2" data-col="3">(0.009)</td>
                 </tr>
-                <tr>
-                  <td data-row="3" data-col="1">a1</td>
+<tr>
+<td data-row="3" data-col="1">a1</td>
                   <td data-row="3" data-col="2">0.219***</td>
                   <td data-row="3" data-col="3">0.245***</td>
                 </tr>
-                <tr>
-                  <td data-row="4" data-col="1"></td>
+<tr>
+<td data-row="4" data-col="1"></td>
                   <td data-row="4" data-col="2">(0.029)</td>
                   <td data-row="4" data-col="3">(0.032)</td>
                 </tr>
-                <tr>
-                  <td data-row="5" data-col="1">Num.Obs.</td>
+<tr>
+<td data-row="5" data-col="1">Num.Obs.</td>
                   <td data-row="5" data-col="2">1000</td>
                   <td data-row="5" data-col="3">1000</td>
                 </tr>
-                <tr>
-                  <td data-row="6" data-col="1">Marginal effect type</td>
+<tr>
+<td data-row="6" data-col="1">Marginal effect type</td>
                   <td data-row="6" data-col="2">Average Marginal Effect</td>
                   <td data-row="6" data-col="3">Marginal Effect at Mean</td>
                 </tr>
-        </tbody>
-      </table>
-    </div>
+</tbody>
+</table>
+</div>
 <!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
@@ -1262,10 +1240,7 @@ Likelihood ratio test : chisq = 371.66 (p.value = &lt; 2.22e-16)</code></pre>
 
 <!-- -->
 
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -1717,9 +1692,7 @@ Likelihood ratio test : chisq = 371.66 (p.value = &lt; 2.22e-16)</code></pre>
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./chapter07.html" class="pagination-link" aria-label="第7章 回帰分析上の工夫">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">第7章 回帰分析上の工夫</span></span>
       </a>          
@@ -2319,8 +2292,7 @@ Likelihood ratio test : chisq = 371.66 (p.value = &lt; 2.22e-16)</code></pre>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
 <p>Copyright 2026, Soichi Matsuura</p>
 </div>   
@@ -2329,7 +2301,7 @@ Likelihood ratio test : chisq = 371.66 (p.value = &lt; 2.22e-16)</code></pre>
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+<li class="nav-item compact">
     <a class="nav-link" href="https://so-ichi.com/r.html">
       <i class="bi bi-house" role="img">
 </i> 
@@ -2348,11 +2320,9 @@ Likelihood ratio test : chisq = 371.66 (p.value = &lt; 2.22e-16)</code></pre>
     </a>
   </li>  
 </ul>
-    </div>
+</div>
   </div>
 </footer>
-
-
 
 
 </body></html>
