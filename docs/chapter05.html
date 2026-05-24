@@ -428,10 +428,10 @@ window.Quarto = {
 <pre><code>[1] 3.7 3.5 3.6</code></pre>
 </div>
 </div>
-<p>試行回数<code>trials</code>とサイコロを振る回数<code>sample_sizes</code>を引数にした関数を作成すると、さらに便利になります。 ここでは、自作関数<code>dice_mean()</code>を定義してみましょう。 デフォルト値として、試行回数を3回、サイコロを振る回数を10回に設定しています。</p>
+<p>試行回数<code>trial_count</code>とサイコロを振る回数<code>sample_sizes</code>を引数にした関数を作成すると、さらに便利になります。 ここでは、自作関数<code>dice_mean()</code>を定義してみましょう。 デフォルト値として、試行回数を3回、サイコロを振る回数を10回に設定しています。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>dice_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">trial_count =</span> <span class="dv">3</span>, <span class="at">sample_sizes =</span> <span class="dv">10</span>) {</span>
-<span id="cb14-2"><a href="#cb14-2"></a>  d_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial_count) <span class="co"># 空のリストを作成</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  d_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial_count) <span class="co"># 空の数列を作成</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial_count) {</span>
 <span id="cb14-4"><a href="#cb14-4"></a>    d_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">sample</span>(dice, <span class="at">size =</span> sample_sizes, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb14-5"><a href="#cb14-5"></a>  }</span>
@@ -678,7 +678,7 @@ Table: サイコロの標本平均比較 2
 --->
 </section><section id="区間推定" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="区間推定">
 <span class="header-section-number">3.1</span> 区間推定</h2>
-<p>いま、標準正規分布に従う母集団から抽出した無作為標本<span class="math inline">Z_1, Z_2, ..., Z_n</span>を考えます。 標準正規分布の確率分布関数<span class="math inline">\phi(z)</span>を用いると、次のように表せます。 <span class="math display">
+<p>いま、標準正規分布に従う母集団から抽出した無作為標本<span class="math inline">Z_1, Z_2, ..., Z_n</span>を考えます。 標準正規分布の累積分布関数<span class="math inline">\Phi(z)</span>を用いると、次のように表せます。 <span class="math display">
 P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq z_{\frac{\alpha}{2}} \right) = 1 - \alpha
 </span></p>
 <section id="電球の寿命データで区間推定" class="level3" data-number="3.1.1"><h3 data-number="3.1.1" class="anchored" data-anchor-id="電球の寿命データで区間推定">
@@ -691,18 +691,25 @@ P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}
 </ul>
 <p>図にすると次のようになります。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>averate <span class="ot">&lt;-</span> <span class="dv">1800</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>average_life <span class="ot">&lt;-</span> <span class="dv">1800</span></span>
 <span id="cb23-2"><a href="#cb23-2"></a>standard_dev <span class="ot">&lt;-</span> <span class="dv">180</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a><span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> averate, <span class="at">sd =</span> standard_dev) <span class="sc">|&gt;</span></span>
-<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
-<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
-<span id="cb23-6"><a href="#cb23-6"></a>  <span class="fu">stat_function</span>(</span>
-<span id="cb23-7"><a href="#cb23-7"></a>    <span class="at">fun =</span> dnorm,</span>
-<span id="cb23-8"><a href="#cb23-8"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> averate, <span class="at">sd =</span> standard_dev),</span>
-<span id="cb23-9"><a href="#cb23-9"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb23-10"><a href="#cb23-10"></a>    <span class="at">size =</span> <span class="dv">1</span></span>
-<span id="cb23-11"><a href="#cb23-11"></a>    ) <span class="sc">+</span></span>
-<span id="cb23-12"><a href="#cb23-12"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-3"><a href="#cb23-3"></a>lifetime_sample <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">lifetime =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> average_life, <span class="at">sd =</span> standard_dev))</span>
+<span id="cb23-4"><a href="#cb23-4"></a>lifetime_sample <span class="sc">|&gt;</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lifetime)) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb23-7"><a href="#cb23-7"></a>    <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)),</span>
+<span id="cb23-8"><a href="#cb23-8"></a>    <span class="at">bins =</span> <span class="dv">30</span>,</span>
+<span id="cb23-9"><a href="#cb23-9"></a>    <span class="at">fill =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb23-10"><a href="#cb23-10"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb23-11"><a href="#cb23-11"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a>    ) <span class="sc">+</span></span>
+<span id="cb23-13"><a href="#cb23-13"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb23-14"><a href="#cb23-14"></a>    <span class="at">fun =</span> dnorm,</span>
+<span id="cb23-15"><a href="#cb23-15"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> average_life, <span class="at">sd =</span> standard_dev),</span>
+<span id="cb23-16"><a href="#cb23-16"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb23-17"><a href="#cb23-17"></a>    <span class="at">linewidth =</span> <span class="dv">1</span></span>
+<span id="cb23-18"><a href="#cb23-18"></a>    ) <span class="sc">+</span></span>
+<span id="cb23-19"><a href="#cb23-19"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><a href="chapter05_files/figure-html/normal_dist-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="chapter05_files/figure-html/normal_dist-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="3150"></a></p>
@@ -743,9 +750,9 @@ P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}
 <span id="cb28-11"><a href="#cb28-11"></a>    ) <span class="sc">+</span></span>
 <span id="cb28-12"><a href="#cb28-12"></a>  <span class="fu">stat_function</span>(</span>
 <span id="cb28-13"><a href="#cb28-13"></a>    <span class="at">fun =</span> dnorm,</span>
-<span id="cb28-14"><a href="#cb28-14"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> averate, <span class="at">sd =</span> standard_dev),</span>
+<span id="cb28-14"><a href="#cb28-14"></a>      <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> average_life, <span class="at">sd =</span> standard_dev),</span>
 <span id="cb28-15"><a href="#cb28-15"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb28-16"><a href="#cb28-16"></a>    <span class="at">size =</span> <span class="dv">1</span></span>
+<span id="cb28-16"><a href="#cb28-16"></a>      <span class="at">linewidth =</span> <span class="dv">1</span></span>
 <span id="cb28-17"><a href="#cb28-17"></a>    ) <span class="sc">+</span></span>
 <span id="cb28-18"><a href="#cb28-18"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -1505,13 +1512,13 @@ NOTE: n is number in *each* group</code></pre>
 <span id="cb51-116"><a href="#cb51-116"></a>d_mean</span>
 <span id="cb51-117"><a href="#cb51-117"></a><span class="in">```</span></span>
 <span id="cb51-118"><a href="#cb51-118"></a></span>
-<span id="cb51-119"><a href="#cb51-119"></a>試行回数<span class="in">`trials`</span>とサイコロを振る回数<span class="in">`sample_sizes`</span>を引数にした関数を作成すると、さらに便利になります。</span>
+<span id="cb51-119"><a href="#cb51-119"></a>試行回数<span class="in">`trial_count`</span>とサイコロを振る回数<span class="in">`sample_sizes`</span>を引数にした関数を作成すると、さらに便利になります。</span>
 <span id="cb51-120"><a href="#cb51-120"></a>ここでは、自作関数<span class="in">`dice_mean()`</span>を定義してみましょう。</span>
 <span id="cb51-121"><a href="#cb51-121"></a>デフォルト値として、試行回数を3回、サイコロを振る回数を10回に設定しています。</span>
 <span id="cb51-122"><a href="#cb51-122"></a></span>
 <span id="cb51-123"><a href="#cb51-123"></a><span class="in">```{r dice_mean_function}</span></span>
 <span id="cb51-124"><a href="#cb51-124"></a>dice_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">trial_count =</span> <span class="dv">3</span>, <span class="at">sample_sizes =</span> <span class="dv">10</span>) {</span>
-<span id="cb51-125"><a href="#cb51-125"></a>  d_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial_count) <span class="co"># 空のリストを作成</span></span>
+<span id="cb51-125"><a href="#cb51-125"></a>  d_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial_count) <span class="co"># 空の数列を作成</span></span>
 <span id="cb51-126"><a href="#cb51-126"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial_count) {</span>
 <span id="cb51-127"><a href="#cb51-127"></a>    d_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">sample</span>(dice, <span class="at">size =</span> sample_sizes, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb51-128"><a href="#cb51-128"></a>  }</span>
@@ -1642,7 +1649,7 @@ NOTE: n is number in *each* group</code></pre>
 <span id="cb51-259"><a href="#cb51-259"></a><span class="fu">## 区間推定</span></span>
 <span id="cb51-260"><a href="#cb51-260"></a></span>
 <span id="cb51-261"><a href="#cb51-261"></a>いま、標準正規分布に従う母集団から抽出した無作為標本$Z_1, Z_2, ..., Z_n$を考えます。</span>
-<span id="cb51-262"><a href="#cb51-262"></a>標準正規分布の確率分布関数$\phi(z)$を用いると、次のように表せます。</span>
+<span id="cb51-262"><a href="#cb51-262"></a>標準正規分布の累積分布関数$\Phi(z)$を用いると、次のように表せます。</span>
 <span id="cb51-263"><a href="#cb51-263"></a>$$</span>
 <span id="cb51-264"><a href="#cb51-264"></a>P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq z_{\frac{\alpha}{2}} \right) = 1 - \alpha</span>
 <span id="cb51-265"><a href="#cb51-265"></a>$$</span>
@@ -1660,154 +1667,161 @@ NOTE: n is number in *each* group</code></pre>
 <span id="cb51-277"><a href="#cb51-277"></a>図にすると次のようになります。</span>
 <span id="cb51-278"><a href="#cb51-278"></a></span>
 <span id="cb51-279"><a href="#cb51-279"></a><span class="in">```{r normal_dist}</span></span>
-<span id="cb51-280"><a href="#cb51-280"></a>averate <span class="ot">&lt;-</span> <span class="dv">1800</span></span>
+<span id="cb51-280"><a href="#cb51-280"></a>average_life <span class="ot">&lt;-</span> <span class="dv">1800</span></span>
 <span id="cb51-281"><a href="#cb51-281"></a>standard_dev <span class="ot">&lt;-</span> <span class="dv">180</span></span>
-<span id="cb51-282"><a href="#cb51-282"></a><span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> averate, <span class="at">sd =</span> standard_dev) <span class="sc">|&gt;</span></span>
-<span id="cb51-283"><a href="#cb51-283"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
-<span id="cb51-284"><a href="#cb51-284"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
-<span id="cb51-285"><a href="#cb51-285"></a>  <span class="fu">stat_function</span>(</span>
-<span id="cb51-286"><a href="#cb51-286"></a>    <span class="at">fun =</span> dnorm,</span>
-<span id="cb51-287"><a href="#cb51-287"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> averate, <span class="at">sd =</span> standard_dev),</span>
-<span id="cb51-288"><a href="#cb51-288"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb51-289"><a href="#cb51-289"></a>    <span class="at">size =</span> <span class="dv">1</span></span>
-<span id="cb51-290"><a href="#cb51-290"></a>    ) <span class="sc">+</span></span>
-<span id="cb51-291"><a href="#cb51-291"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb51-292"><a href="#cb51-292"></a><span class="in">```</span></span>
-<span id="cb51-293"><a href="#cb51-293"></a></span>
-<span id="cb51-294"><a href="#cb51-294"></a></span>
-<span id="cb51-295"><a href="#cb51-295"></a>この分布から抽出したと想定される16個の電球の寿命データが以下の通りです。</span>
-<span id="cb51-296"><a href="#cb51-296"></a></span>
-<span id="cb51-297"><a href="#cb51-297"></a><span class="in">```{r code5-5}</span></span>
-<span id="cb51-298"><a href="#cb51-298"></a><span class="co"># コード5-5</span></span>
-<span id="cb51-299"><a href="#cb51-299"></a>bulb <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="co"># 白熱電球の寿命データ</span></span>
-<span id="cb51-300"><a href="#cb51-300"></a>    <span class="fl">1939.6</span>, <span class="fl">1680.3</span>, <span class="fl">1982.1</span>, <span class="fl">2215.6</span>,</span>
-<span id="cb51-301"><a href="#cb51-301"></a>    <span class="fl">2092.5</span>, <span class="fl">1928.9</span>, <span class="fl">2003.8</span>, <span class="fl">1955.5</span>,</span>
-<span id="cb51-302"><a href="#cb51-302"></a>    <span class="fl">1800.1</span>, <span class="fl">1659.5</span>, <span class="fl">2066.2</span>, <span class="fl">2107.2</span>,</span>
-<span id="cb51-303"><a href="#cb51-303"></a>    <span class="fl">2085.5</span>, <span class="fl">1878.6</span>, <span class="fl">2007.6</span>, <span class="fl">1816.1</span></span>
-<span id="cb51-304"><a href="#cb51-304"></a>  )</span>
-<span id="cb51-305"><a href="#cb51-305"></a><span class="fu">mean</span>(bulb)</span>
-<span id="cb51-306"><a href="#cb51-306"></a><span class="fu">sd</span>(bulb)</span>
-<span id="cb51-307"><a href="#cb51-307"></a><span class="in">```</span></span>
-<span id="cb51-308"><a href="#cb51-308"></a></span>
-<span id="cb51-309"><a href="#cb51-309"></a>先ほどの分布にこのデータのヒストグラムを重ねると、次のようになります。</span>
-<span id="cb51-310"><a href="#cb51-310"></a></span>
-<span id="cb51-313"><a href="#cb51-313"></a><span class="in">```{r}</span></span>
-<span id="cb51-314"><a href="#cb51-314"></a><span class="co"># ヒストグラムの作成</span></span>
-<span id="cb51-315"><a href="#cb51-315"></a>bulb_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">lifetime =</span> bulb)</span>
-<span id="cb51-316"><a href="#cb51-316"></a>bulb_df <span class="sc">|&gt;</span> </span>
-<span id="cb51-317"><a href="#cb51-317"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lifetime)) <span class="sc">+</span></span>
-<span id="cb51-318"><a href="#cb51-318"></a>  <span class="fu">geom_histogram</span>(</span>
-<span id="cb51-319"><a href="#cb51-319"></a>    <span class="fu">aes</span>(<span class="at">y =</span> ..density..),</span>
-<span id="cb51-320"><a href="#cb51-320"></a>    <span class="at">bins =</span> <span class="dv">8</span>,</span>
-<span id="cb51-321"><a href="#cb51-321"></a>    <span class="at">fill =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb51-322"><a href="#cb51-322"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb51-323"><a href="#cb51-323"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
-<span id="cb51-324"><a href="#cb51-324"></a>    ) <span class="sc">+</span></span>
-<span id="cb51-325"><a href="#cb51-325"></a>  <span class="fu">stat_function</span>(</span>
-<span id="cb51-326"><a href="#cb51-326"></a>    <span class="at">fun =</span> dnorm,</span>
-<span id="cb51-327"><a href="#cb51-327"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> averate, <span class="at">sd =</span> standard_dev),</span>
-<span id="cb51-328"><a href="#cb51-328"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb51-329"><a href="#cb51-329"></a>    <span class="at">size =</span> <span class="dv">1</span></span>
-<span id="cb51-330"><a href="#cb51-330"></a>    ) <span class="sc">+</span></span>
-<span id="cb51-331"><a href="#cb51-331"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb51-332"><a href="#cb51-332"></a><span class="in">```</span></span>
-<span id="cb51-333"><a href="#cb51-333"></a></span>
-<span id="cb51-334"><a href="#cb51-334"></a>そのとき、この手元にある16個の電球の寿命データの平均値が、母平均1800の周りでどの範囲に入るかを95％の信頼水準で推定してみましょう。</span>
-<span id="cb51-335"><a href="#cb51-335"></a></span>
-<span id="cb51-336"><a href="#cb51-336"></a></span>
-<span id="cb51-337"><a href="#cb51-337"></a></span>
-<span id="cb51-338"><a href="#cb51-338"></a></span>
-<span id="cb51-339"><a href="#cb51-339"></a><span class="in">```{r t-test_bulb}</span></span>
-<span id="cb51-340"><a href="#cb51-340"></a><span class="co"># t検定の実施</span></span>
-<span id="cb51-341"><a href="#cb51-341"></a>bulb_ci <span class="ot">&lt;-</span> <span class="fu">t.test</span>(bulb)</span>
-<span id="cb51-342"><a href="#cb51-342"></a>bulb_ci<span class="sc">$</span>conf.int </span>
-<span id="cb51-343"><a href="#cb51-343"></a><span class="co"># 信頼区間の出力（デフォルトで 95％信頼水準）</span></span>
-<span id="cb51-344"><a href="#cb51-344"></a><span class="in">```</span></span>
+<span id="cb51-282"><a href="#cb51-282"></a>lifetime_sample <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">lifetime =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> average_life, <span class="at">sd =</span> standard_dev))</span>
+<span id="cb51-283"><a href="#cb51-283"></a>lifetime_sample <span class="sc">|&gt;</span></span>
+<span id="cb51-284"><a href="#cb51-284"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lifetime)) <span class="sc">+</span></span>
+<span id="cb51-285"><a href="#cb51-285"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb51-286"><a href="#cb51-286"></a>    <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)),</span>
+<span id="cb51-287"><a href="#cb51-287"></a>    <span class="at">bins =</span> <span class="dv">30</span>,</span>
+<span id="cb51-288"><a href="#cb51-288"></a>    <span class="at">fill =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb51-289"><a href="#cb51-289"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb51-290"><a href="#cb51-290"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb51-291"><a href="#cb51-291"></a>    ) <span class="sc">+</span></span>
+<span id="cb51-292"><a href="#cb51-292"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb51-293"><a href="#cb51-293"></a>    <span class="at">fun =</span> dnorm,</span>
+<span id="cb51-294"><a href="#cb51-294"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> average_life, <span class="at">sd =</span> standard_dev),</span>
+<span id="cb51-295"><a href="#cb51-295"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb51-296"><a href="#cb51-296"></a>    <span class="at">linewidth =</span> <span class="dv">1</span></span>
+<span id="cb51-297"><a href="#cb51-297"></a>    ) <span class="sc">+</span></span>
+<span id="cb51-298"><a href="#cb51-298"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb51-299"><a href="#cb51-299"></a><span class="in">```</span></span>
+<span id="cb51-300"><a href="#cb51-300"></a></span>
+<span id="cb51-301"><a href="#cb51-301"></a></span>
+<span id="cb51-302"><a href="#cb51-302"></a>この分布から抽出したと想定される16個の電球の寿命データが以下の通りです。</span>
+<span id="cb51-303"><a href="#cb51-303"></a></span>
+<span id="cb51-304"><a href="#cb51-304"></a><span class="in">```{r code5-5}</span></span>
+<span id="cb51-305"><a href="#cb51-305"></a><span class="co"># コード5-5</span></span>
+<span id="cb51-306"><a href="#cb51-306"></a>bulb <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="co"># 白熱電球の寿命データ</span></span>
+<span id="cb51-307"><a href="#cb51-307"></a>    <span class="fl">1939.6</span>, <span class="fl">1680.3</span>, <span class="fl">1982.1</span>, <span class="fl">2215.6</span>,</span>
+<span id="cb51-308"><a href="#cb51-308"></a>    <span class="fl">2092.5</span>, <span class="fl">1928.9</span>, <span class="fl">2003.8</span>, <span class="fl">1955.5</span>,</span>
+<span id="cb51-309"><a href="#cb51-309"></a>    <span class="fl">1800.1</span>, <span class="fl">1659.5</span>, <span class="fl">2066.2</span>, <span class="fl">2107.2</span>,</span>
+<span id="cb51-310"><a href="#cb51-310"></a>    <span class="fl">2085.5</span>, <span class="fl">1878.6</span>, <span class="fl">2007.6</span>, <span class="fl">1816.1</span></span>
+<span id="cb51-311"><a href="#cb51-311"></a>  )</span>
+<span id="cb51-312"><a href="#cb51-312"></a><span class="fu">mean</span>(bulb)</span>
+<span id="cb51-313"><a href="#cb51-313"></a><span class="fu">sd</span>(bulb)</span>
+<span id="cb51-314"><a href="#cb51-314"></a><span class="in">```</span></span>
+<span id="cb51-315"><a href="#cb51-315"></a></span>
+<span id="cb51-316"><a href="#cb51-316"></a>先ほどの分布にこのデータのヒストグラムを重ねると、次のようになります。</span>
+<span id="cb51-317"><a href="#cb51-317"></a></span>
+<span id="cb51-320"><a href="#cb51-320"></a><span class="in">```{r}</span></span>
+<span id="cb51-321"><a href="#cb51-321"></a><span class="co"># ヒストグラムの作成</span></span>
+<span id="cb51-322"><a href="#cb51-322"></a>bulb_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">lifetime =</span> bulb)</span>
+<span id="cb51-323"><a href="#cb51-323"></a>bulb_df <span class="sc">|&gt;</span> </span>
+<span id="cb51-324"><a href="#cb51-324"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lifetime)) <span class="sc">+</span></span>
+<span id="cb51-325"><a href="#cb51-325"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb51-326"><a href="#cb51-326"></a>    <span class="fu">aes</span>(<span class="at">y =</span> ..density..),</span>
+<span id="cb51-327"><a href="#cb51-327"></a>    <span class="at">bins =</span> <span class="dv">8</span>,</span>
+<span id="cb51-328"><a href="#cb51-328"></a>    <span class="at">fill =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb51-329"><a href="#cb51-329"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb51-330"><a href="#cb51-330"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb51-331"><a href="#cb51-331"></a>    ) <span class="sc">+</span></span>
+<span id="cb51-332"><a href="#cb51-332"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb51-333"><a href="#cb51-333"></a>    <span class="at">fun =</span> dnorm,</span>
+<span id="cb51-334"><a href="#cb51-334"></a>      <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> average_life, <span class="at">sd =</span> standard_dev),</span>
+<span id="cb51-335"><a href="#cb51-335"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb51-336"><a href="#cb51-336"></a>      <span class="at">linewidth =</span> <span class="dv">1</span></span>
+<span id="cb51-337"><a href="#cb51-337"></a>    ) <span class="sc">+</span></span>
+<span id="cb51-338"><a href="#cb51-338"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb51-339"><a href="#cb51-339"></a><span class="in">```</span></span>
+<span id="cb51-340"><a href="#cb51-340"></a></span>
+<span id="cb51-341"><a href="#cb51-341"></a>そのとき、この手元にある16個の電球の寿命データの平均値が、母平均1800の周りでどの範囲に入るかを95％の信頼水準で推定してみましょう。</span>
+<span id="cb51-342"><a href="#cb51-342"></a></span>
+<span id="cb51-343"><a href="#cb51-343"></a></span>
+<span id="cb51-344"><a href="#cb51-344"></a></span>
 <span id="cb51-345"><a href="#cb51-345"></a></span>
-<span id="cb51-346"><a href="#cb51-346"></a></span>
-<span id="cb51-347"><a href="#cb51-347"></a></span>
-<span id="cb51-348"><a href="#cb51-348"></a><span class="in">```{r code5-6}</span></span>
-<span id="cb51-349"><a href="#cb51-349"></a><span class="co"># コード5-6</span></span>
-<span id="cb51-350"><a href="#cb51-350"></a><span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb51-351"><a href="#cb51-351"></a><span class="co"># 標準正規分布における上側 2.5％点の分位点を求める。</span></span>
-<span id="cb51-352"><a href="#cb51-352"></a><span class="in">```</span></span>
+<span id="cb51-346"><a href="#cb51-346"></a><span class="in">```{r t-test_bulb}</span></span>
+<span id="cb51-347"><a href="#cb51-347"></a><span class="co"># t検定の実施</span></span>
+<span id="cb51-348"><a href="#cb51-348"></a>bulb_ci <span class="ot">&lt;-</span> <span class="fu">t.test</span>(bulb)</span>
+<span id="cb51-349"><a href="#cb51-349"></a>bulb_ci<span class="sc">$</span>conf.int </span>
+<span id="cb51-350"><a href="#cb51-350"></a><span class="co"># 信頼区間の出力（デフォルトで 95％信頼水準）</span></span>
+<span id="cb51-351"><a href="#cb51-351"></a><span class="in">```</span></span>
+<span id="cb51-352"><a href="#cb51-352"></a></span>
 <span id="cb51-353"><a href="#cb51-353"></a></span>
-<span id="cb51-354"><a href="#cb51-354"></a><span class="in">```{r code5-7}</span></span>
-<span id="cb51-355"><a href="#cb51-355"></a><span class="co"># コード5-7</span></span>
-<span id="cb51-356"><a href="#cb51-356"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(bulb) <span class="co"># 標本サイズの計算</span></span>
-<span id="cb51-357"><a href="#cb51-357"></a>z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="co"># 上側2.5％点の分位点</span></span>
-<span id="cb51-358"><a href="#cb51-358"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(bulb) <span class="co"># 標本平均の計算</span></span>
-<span id="cb51-359"><a href="#cb51-359"></a>sigma <span class="ot">&lt;-</span> <span class="dv">180</span> <span class="co"># 母標準偏差の設定</span></span>
+<span id="cb51-354"><a href="#cb51-354"></a></span>
+<span id="cb51-355"><a href="#cb51-355"></a><span class="in">```{r code5-6}</span></span>
+<span id="cb51-356"><a href="#cb51-356"></a><span class="co"># コード5-6</span></span>
+<span id="cb51-357"><a href="#cb51-357"></a><span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb51-358"><a href="#cb51-358"></a><span class="co"># 標準正規分布における上側 2.5％点の分位点を求める。</span></span>
+<span id="cb51-359"><a href="#cb51-359"></a><span class="in">```</span></span>
 <span id="cb51-360"><a href="#cb51-360"></a></span>
-<span id="cb51-361"><a href="#cb51-361"></a><span class="co"># 信頼区間の計算</span></span>
-<span id="cb51-362"><a href="#cb51-362"></a>upper <span class="ot">&lt;-</span> xbar <span class="sc">+</span> z <span class="sc">*</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
-<span id="cb51-363"><a href="#cb51-363"></a>lower <span class="ot">&lt;-</span> xbar <span class="sc">-</span> z <span class="sc">*</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
-<span id="cb51-364"><a href="#cb51-364"></a></span>
-<span id="cb51-365"><a href="#cb51-365"></a><span class="co"># 結果のまとめと出力</span></span>
-<span id="cb51-366"><a href="#cb51-366"></a>ci.bulb <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(lower, upper), <span class="at">nrow =</span> <span class="dv">1</span>)</span>
-<span id="cb51-367"><a href="#cb51-367"></a><span class="fu">colnames</span>(ci.bulb) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ci.lower"</span>, <span class="st">"ci.upper"</span>)</span>
-<span id="cb51-368"><a href="#cb51-368"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb51-369"><a href="#cb51-369"></a>  ci.bulb, </span>
-<span id="cb51-370"><a href="#cb51-370"></a>  <span class="at">caption =</span> <span class="st">"Bulb data CI (95％)"</span>, </span>
-<span id="cb51-371"><a href="#cb51-371"></a>  <span class="at">align =</span> <span class="st">"cc"</span></span>
-<span id="cb51-372"><a href="#cb51-372"></a>  )</span>
-<span id="cb51-373"><a href="#cb51-373"></a><span class="in">```</span></span>
-<span id="cb51-374"><a href="#cb51-374"></a></span>
-<span id="cb51-375"><a href="#cb51-375"></a><span class="in">```{r code5-8}</span></span>
-<span id="cb51-376"><a href="#cb51-376"></a><span class="co"># コード5-8</span></span>
-<span id="cb51-377"><a href="#cb51-377"></a><span class="fu">mean</span>(bulb)</span>
-<span id="cb51-378"><a href="#cb51-378"></a></span>
-<span id="cb51-379"><a href="#cb51-379"></a><span class="co"># コード5-9</span></span>
-<span id="cb51-380"><a href="#cb51-380"></a><span class="fu">t.test</span>(bulb, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">mu =</span> <span class="dv">1800</span>)</span>
+<span id="cb51-361"><a href="#cb51-361"></a><span class="in">```{r code5-7}</span></span>
+<span id="cb51-362"><a href="#cb51-362"></a><span class="co"># コード5-7</span></span>
+<span id="cb51-363"><a href="#cb51-363"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(bulb) <span class="co"># 標本サイズの計算</span></span>
+<span id="cb51-364"><a href="#cb51-364"></a>z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="co"># 上側2.5％点の分位点</span></span>
+<span id="cb51-365"><a href="#cb51-365"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(bulb) <span class="co"># 標本平均の計算</span></span>
+<span id="cb51-366"><a href="#cb51-366"></a>sigma <span class="ot">&lt;-</span> <span class="dv">180</span> <span class="co"># 母標準偏差の設定</span></span>
+<span id="cb51-367"><a href="#cb51-367"></a></span>
+<span id="cb51-368"><a href="#cb51-368"></a><span class="co"># 信頼区間の計算</span></span>
+<span id="cb51-369"><a href="#cb51-369"></a>upper <span class="ot">&lt;-</span> xbar <span class="sc">+</span> z <span class="sc">*</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb51-370"><a href="#cb51-370"></a>lower <span class="ot">&lt;-</span> xbar <span class="sc">-</span> z <span class="sc">*</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb51-371"><a href="#cb51-371"></a></span>
+<span id="cb51-372"><a href="#cb51-372"></a><span class="co"># 結果のまとめと出力</span></span>
+<span id="cb51-373"><a href="#cb51-373"></a>ci.bulb <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(lower, upper), <span class="at">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb51-374"><a href="#cb51-374"></a><span class="fu">colnames</span>(ci.bulb) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ci.lower"</span>, <span class="st">"ci.upper"</span>)</span>
+<span id="cb51-375"><a href="#cb51-375"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb51-376"><a href="#cb51-376"></a>  ci.bulb, </span>
+<span id="cb51-377"><a href="#cb51-377"></a>  <span class="at">caption =</span> <span class="st">"Bulb data CI (95％)"</span>, </span>
+<span id="cb51-378"><a href="#cb51-378"></a>  <span class="at">align =</span> <span class="st">"cc"</span></span>
+<span id="cb51-379"><a href="#cb51-379"></a>  )</span>
+<span id="cb51-380"><a href="#cb51-380"></a><span class="in">```</span></span>
 <span id="cb51-381"><a href="#cb51-381"></a></span>
-<span id="cb51-382"><a href="#cb51-382"></a><span class="co"># コード5-10</span></span>
-<span id="cb51-383"><a href="#cb51-383"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(bulb) <span class="co"># 標本サイズの計算</span></span>
-<span id="cb51-384"><a href="#cb51-384"></a>z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="co"># 上側2.5％点の分位点</span></span>
-<span id="cb51-385"><a href="#cb51-385"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(bulb) <span class="co"># 標本平均の計算</span></span>
-<span id="cb51-386"><a href="#cb51-386"></a>sigma <span class="ot">&lt;-</span> <span class="dv">180</span> <span class="co"># 母標準偏差の設定</span></span>
-<span id="cb51-387"><a href="#cb51-387"></a>mu <span class="ot">&lt;-</span> <span class="dv">1800</span> <span class="co"># 帰無仮説の平均値 </span></span>
-<span id="cb51-388"><a href="#cb51-388"></a><span class="co"># Z値の計算</span></span>
-<span id="cb51-389"><a href="#cb51-389"></a>Z <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu) <span class="sc">/</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
-<span id="cb51-390"><a href="#cb51-390"></a>Z</span>
-<span id="cb51-391"><a href="#cb51-391"></a><span class="in">```</span></span>
-<span id="cb51-392"><a href="#cb51-392"></a></span>
-<span id="cb51-393"><a href="#cb51-393"></a><span class="in">```{r code5-11}</span></span>
-<span id="cb51-394"><a href="#cb51-394"></a><span class="co"># コード5-11</span></span>
-<span id="cb51-395"><a href="#cb51-395"></a><span class="co"># データの読み込みと前処理</span></span>
-<span id="cb51-396"><a href="#cb51-396"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
-<span id="cb51-397"><a href="#cb51-397"></a>firm2018 <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
-<span id="cb51-398"><a href="#cb51-398"></a>  <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2018</span>) <span class="sc">|&gt;</span></span>
-<span id="cb51-399"><a href="#cb51-399"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb51-400"><a href="#cb51-400"></a>    <span class="at">ad_dummy =</span> <span class="fu">ifelse</span>(adint <span class="sc">&gt;</span> <span class="fu">median</span>(adint), <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb51-401"><a href="#cb51-401"></a>    )</span>
-<span id="cb51-402"><a href="#cb51-402"></a><span class="co"># t検定の実施</span></span>
-<span id="cb51-403"><a href="#cb51-403"></a><span class="fu">t.test</span>(sales <span class="sc">~</span> ad_dummy, <span class="at">data =</span> firm2018)</span>
-<span id="cb51-404"><a href="#cb51-404"></a><span class="in">```</span></span>
-<span id="cb51-405"><a href="#cb51-405"></a></span>
-<span id="cb51-406"><a href="#cb51-406"></a><span class="in">```{r code5-12}</span></span>
-<span id="cb51-407"><a href="#cb51-407"></a><span class="co"># コード5-12</span></span>
-<span id="cb51-408"><a href="#cb51-408"></a><span class="fu">var.test</span>(sales <span class="sc">~</span> ad_dummy, <span class="at">data =</span> firm2018, <span class="at">ratio =</span> <span class="dv">1</span>)</span>
-<span id="cb51-409"><a href="#cb51-409"></a><span class="in">```</span></span>
-<span id="cb51-410"><a href="#cb51-410"></a></span>
-<span id="cb51-411"><a href="#cb51-411"></a></span>
-<span id="cb51-412"><a href="#cb51-412"></a><span class="in">```{r code5-14}</span></span>
-<span id="cb51-413"><a href="#cb51-413"></a><span class="co"># 効果量d=0.8、検出力0.8、有意水準0.05の場合の</span></span>
-<span id="cb51-414"><a href="#cb51-414"></a><span class="co"># 必要標本サイズの推定</span></span>
-<span id="cb51-415"><a href="#cb51-415"></a>est_n <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.8</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span>
-<span id="cb51-416"><a href="#cb51-416"></a>est_n</span>
-<span id="cb51-417"><a href="#cb51-417"></a><span class="in">```</span></span>
+<span id="cb51-382"><a href="#cb51-382"></a><span class="in">```{r code5-8}</span></span>
+<span id="cb51-383"><a href="#cb51-383"></a><span class="co"># コード5-8</span></span>
+<span id="cb51-384"><a href="#cb51-384"></a><span class="fu">mean</span>(bulb)</span>
+<span id="cb51-385"><a href="#cb51-385"></a></span>
+<span id="cb51-386"><a href="#cb51-386"></a><span class="co"># コード5-9</span></span>
+<span id="cb51-387"><a href="#cb51-387"></a><span class="fu">t.test</span>(bulb, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">mu =</span> <span class="dv">1800</span>)</span>
+<span id="cb51-388"><a href="#cb51-388"></a></span>
+<span id="cb51-389"><a href="#cb51-389"></a><span class="co"># コード5-10</span></span>
+<span id="cb51-390"><a href="#cb51-390"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(bulb) <span class="co"># 標本サイズの計算</span></span>
+<span id="cb51-391"><a href="#cb51-391"></a>z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="co"># 上側2.5％点の分位点</span></span>
+<span id="cb51-392"><a href="#cb51-392"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(bulb) <span class="co"># 標本平均の計算</span></span>
+<span id="cb51-393"><a href="#cb51-393"></a>sigma <span class="ot">&lt;-</span> <span class="dv">180</span> <span class="co"># 母標準偏差の設定</span></span>
+<span id="cb51-394"><a href="#cb51-394"></a>mu <span class="ot">&lt;-</span> <span class="dv">1800</span> <span class="co"># 帰無仮説の平均値 </span></span>
+<span id="cb51-395"><a href="#cb51-395"></a><span class="co"># Z値の計算</span></span>
+<span id="cb51-396"><a href="#cb51-396"></a>Z <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu) <span class="sc">/</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb51-397"><a href="#cb51-397"></a>Z</span>
+<span id="cb51-398"><a href="#cb51-398"></a><span class="in">```</span></span>
+<span id="cb51-399"><a href="#cb51-399"></a></span>
+<span id="cb51-400"><a href="#cb51-400"></a><span class="in">```{r code5-11}</span></span>
+<span id="cb51-401"><a href="#cb51-401"></a><span class="co"># コード5-11</span></span>
+<span id="cb51-402"><a href="#cb51-402"></a><span class="co"># データの読み込みと前処理</span></span>
+<span id="cb51-403"><a href="#cb51-403"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
+<span id="cb51-404"><a href="#cb51-404"></a>firm2018 <span class="ot">&lt;-</span> firmdata <span class="sc">|&gt;</span></span>
+<span id="cb51-405"><a href="#cb51-405"></a>  <span class="fu">filter</span>(fyear <span class="sc">==</span> <span class="dv">2018</span>) <span class="sc">|&gt;</span></span>
+<span id="cb51-406"><a href="#cb51-406"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb51-407"><a href="#cb51-407"></a>    <span class="at">ad_dummy =</span> <span class="fu">ifelse</span>(adint <span class="sc">&gt;</span> <span class="fu">median</span>(adint), <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb51-408"><a href="#cb51-408"></a>    )</span>
+<span id="cb51-409"><a href="#cb51-409"></a><span class="co"># t検定の実施</span></span>
+<span id="cb51-410"><a href="#cb51-410"></a><span class="fu">t.test</span>(sales <span class="sc">~</span> ad_dummy, <span class="at">data =</span> firm2018)</span>
+<span id="cb51-411"><a href="#cb51-411"></a><span class="in">```</span></span>
+<span id="cb51-412"><a href="#cb51-412"></a></span>
+<span id="cb51-413"><a href="#cb51-413"></a><span class="in">```{r code5-12}</span></span>
+<span id="cb51-414"><a href="#cb51-414"></a><span class="co"># コード5-12</span></span>
+<span id="cb51-415"><a href="#cb51-415"></a><span class="fu">var.test</span>(sales <span class="sc">~</span> ad_dummy, <span class="at">data =</span> firm2018, <span class="at">ratio =</span> <span class="dv">1</span>)</span>
+<span id="cb51-416"><a href="#cb51-416"></a><span class="in">```</span></span>
+<span id="cb51-417"><a href="#cb51-417"></a></span>
 <span id="cb51-418"><a href="#cb51-418"></a></span>
-<span id="cb51-419"><a href="#cb51-419"></a></span>
-<span id="cb51-420"><a href="#cb51-420"></a><span class="in">```{r code5-15}</span></span>
-<span id="cb51-421"><a href="#cb51-421"></a><span class="co"># コード5-15</span></span>
-<span id="cb51-422"><a href="#cb51-422"></a><span class="fu">plot</span>(est_n)</span>
-<span id="cb51-423"><a href="#cb51-423"></a><span class="in">```</span></span>
-<span id="cb51-424"><a href="#cb51-424"></a></span>
-<span id="cb51-425"><a href="#cb51-425"></a><span class="in">```{r code5-16}</span></span>
-<span id="cb51-426"><a href="#cb51-426"></a><span class="co"># コード5-16</span></span>
-<span id="cb51-427"><a href="#cb51-427"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.8</span>, <span class="at">n =</span> <span class="dv">26</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span>
-<span id="cb51-428"><a href="#cb51-428"></a><span class="in">```</span></span>
-<span id="cb51-429"><a href="#cb51-429"></a></span>
+<span id="cb51-419"><a href="#cb51-419"></a><span class="in">```{r code5-14}</span></span>
+<span id="cb51-420"><a href="#cb51-420"></a><span class="co"># 効果量d=0.8、検出力0.8、有意水準0.05の場合の</span></span>
+<span id="cb51-421"><a href="#cb51-421"></a><span class="co"># 必要標本サイズの推定</span></span>
+<span id="cb51-422"><a href="#cb51-422"></a>est_n <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.8</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span>
+<span id="cb51-423"><a href="#cb51-423"></a>est_n</span>
+<span id="cb51-424"><a href="#cb51-424"></a><span class="in">```</span></span>
+<span id="cb51-425"><a href="#cb51-425"></a></span>
+<span id="cb51-426"><a href="#cb51-426"></a></span>
+<span id="cb51-427"><a href="#cb51-427"></a><span class="in">```{r code5-15}</span></span>
+<span id="cb51-428"><a href="#cb51-428"></a><span class="co"># コード5-15</span></span>
+<span id="cb51-429"><a href="#cb51-429"></a><span class="fu">plot</span>(est_n)</span>
+<span id="cb51-430"><a href="#cb51-430"></a><span class="in">```</span></span>
+<span id="cb51-431"><a href="#cb51-431"></a></span>
+<span id="cb51-432"><a href="#cb51-432"></a><span class="in">```{r code5-16}</span></span>
+<span id="cb51-433"><a href="#cb51-433"></a><span class="co"># コード5-16</span></span>
+<span id="cb51-434"><a href="#cb51-434"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.8</span>, <span class="at">n =</span> <span class="dv">26</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span>
+<span id="cb51-435"><a href="#cb51-435"></a><span class="in">```</span></span>
+<span id="cb51-436"><a href="#cb51-436"></a></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

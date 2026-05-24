@@ -326,14 +326,14 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># first time only</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>次に、<code>pacman</code>パッケージの<code>p_load()</code>関数を使って，<code>tidyverse</code>と<code>readxl</code>パッケージをインストールおよび読み込みします。 <code>::</code>という記法はパッケージ名を明示的に指定して関数を使う方法ですが、ここでは<code>pacman</code>パッケージの<code>p_load()</code>関数を指定して使っています。</p>
+<p>次に、<code>pacman</code>パッケージの<code>p_load()</code>関数を使って、<code>tidyverse</code>と<code>readxl</code>パッケージをインストールおよび読み込みします。 <code>::</code>という記法はパッケージ名を明示的に指定して関数を使う方法ですが、ここでは<code>pacman</code>パッケージの<code>p_load()</code>関数を指定して使っています。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readxl, gt, gtExtras)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>一度<code>pacman</code>パッケージをインストールすれば、あとは<code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">pacman::p_load()</a></code>関数を使うだけで、指定したパッケージがインストールされていなければ自動的にインストールし、読み込みまで行ってくれます。非常に便利です。</p>
-</div></div><p>作業ディレクトリ内の<code>data</code>フォルダに入っている<code>2022idpos.csv</code>というデータを読み込みます。 何を読み込んだのか確認するために，基本関数<code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>でデータの先頭6行を表示させます。</p>
+</div></div><p>作業ディレクトリ内の<code>data</code>フォルダに入っている<code>2022idpos.csv</code>というデータを読み込みます。 何を読み込んだのか確認するために、基本関数<code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>でデータの先頭6行を表示させます。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>idpos <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/2022idpos.csv"</span>, <span class="at">na =</span> <span class="st">"."</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>idpos <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -347,15 +347,15 @@ window.Quarto = {
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><code>readr</code>パッケージの<code>read_csv()</code>関数は，CSV形式のデータを読み込むための関数です。<code>na = "."</code>という引数は，データ内の<code>.</code>を欠損値として扱うことを指定しています。</p>
-</div></div><p>読み込んだデータに含まれている変数の名前を確認するため，基本関数<code><a href="https://rdrr.io/r/base/names.html">names()</a></code>を使います。</p>
+<p><code>readr</code>パッケージの<code>read_csv()</code>関数は、CSV形式のデータを読み込むための関数です。<code>na = "."</code>という引数は、データ内の<code>.</code>を欠損値として扱うことを指定しています。</p>
+</div></div><p>読み込んだデータに含まれている変数の名前を確認するため、基本関数<code><a href="https://rdrr.io/r/base/names.html">names()</a></code>を使います。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>idpos <span class="sc">|&gt;</span> <span class="fu">names</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "id"     "date"   "spent"  "coupon"</code></pre>
 </div>
 </div>
-<p>データの詳細を確認するため，<code>tidyverse</code>の<code>dplyr</code>パッケージの<code>glimpse()</code>関数を使います。</p>
+<p>データの詳細を確認するため、<code>tidyverse</code>の<code>dplyr</code>パッケージの<code>glimpse()</code>関数を使います。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>idpos <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -367,14 +367,14 @@ $ spent  &lt;dbl&gt; 14326, 10232, 6881, 6365, 7595, 7858, 9405, 1821, 8375, 182
 $ coupon &lt;dbl&gt; 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, …</code></pre>
 </div>
 </div>
-<p>Excelのようにデータを表示させたいなら，基本関数<code><a href="https://rdrr.io/r/utils/View.html">View()</a></code>を使います。</p>
+<p>Excelのようにデータを表示させたいなら、基本関数<code><a href="https://rdrr.io/r/utils/View.html">View()</a></code>を使います。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">View</span>(idpos)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>これで，自分が読み込んだデータがどんなものかを確認できました。</p>
+<p>これで、自分が読み込んだデータがどんなものかを確認できました。</p>
 <section id="dplyrでデータの要約" class="level3" data-number="2.0.1"><h3 data-number="2.0.1" class="anchored" data-anchor-id="dplyrでデータの要約">
 <span class="header-section-number">2.0.1</span> dplyrでデータの要約</h3>
-<p><code>tidyverse</code>の<code>dplyr</code>パッケージを使うと，データの要約が簡単にできます。 ここでは，</p>
+<p><code>tidyverse</code>の<code>dplyr</code>パッケージを使うと、データの要約が簡単にできます。 ここでは、</p>
 <ul>
 <li>
 <code>summarise()</code>関数：データの要約統計量を計算する</li>
@@ -390,28 +390,32 @@ $ coupon &lt;dbl&gt; 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0,
 <code>rename()</code>関数：変数の名前を変更する</li>
 </ul>
 <p>の使い方を学びます。</p>
-<p>先ほど読み込んだデータには，</p>
+<p>先ほど読み込んだデータには、</p>
 <ul>
-<li>id：顧客ID</li>
-<li>date：購入日</li>
-<li>spent：購入金額</li>
-<li>coupon：クーポン利用の有無 (1=利用, 0=未利用)</li>
+<li>
+<code>id</code> ： 顧客ID</li>
+<li>
+<code>date</code> ： 購入日</li>
+<li>
+<code>spent</code> ： 購入金額</li>
+<li>
+<code>coupon</code> ： クーポン利用の有無 (<code>1=利用</code>, <code>0=未利用</code>)</li>
 </ul>
-<p>という4変数に3,000の観測値が含まれています。 このデータを<code>dplyr</code>の各関数を使って，以下のような操作をしてみます。</p>
-<p>まず，</p>
+<p>という4変数に3,000の観測値が含まれています。 このデータを<code>dplyr</code>の各関数を使って、以下のような操作をしてみます。</p>
+<p>まず、</p>
 <ol type="1">
 <li>
-<code>select()</code>関数で<code>spent</code>と<code>coupon</code>を抽出し，</li>
+<code>select()</code>関数で<code>spent</code>と<code>coupon</code>を抽出し、</li>
 <li>
-<code>arrange()</code>関数で<code>spent</code>の降順に並び替え，</li>
+<code>arrange()</code>関数で<code>spent</code>の降順に並び替え、</li>
 <li>
-<code>mutate()</code>関数で<code>spent</code>の金額を10倍した<code>spent10</code>という新しい変数を作成し，</li>
+<code>mutate()</code>関数で<code>spent</code>の金額を10倍した<code>spent10</code>という新しい変数を作成し、</li>
 <li>
-<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>関数で<code>spent10</code>が10000以上の行を抽出し，</li>
+<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>関数で<code>spent10</code>が10000以上の行を抽出し、</li>
 <li>
-<code>summarise()</code>関数で<code>spent10</code>の平均を計算し，</li>
+<code>summarise()</code>関数で<code>spent10</code>の平均を計算し、</li>
 <li>
-<code>rename()</code>関数で<code>spent10</code>を<code>spent_times10</code>に名前変更する，</li>
+<code>rename()</code>関数で<code>spent10</code>を<code>spent_times10</code>に名前変更する、</li>
 </ol>
 <p>という一連の操作を行います(この処理に意味はないです。)</p>
 <div class="cell" data-layout-align="center">
@@ -431,14 +435,14 @@ $ coupon &lt;dbl&gt; 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0,
 </div>
 </div>
 </div>
-<p>すると，spentを10倍して，1万円以上の買い物の平均値を計算した結果が<code>spent_times10</code>として表示されます。</p>
+<p>すると、spentを10倍して、1万円以上の買い物の平均値を計算した結果が<code>spent_times10</code>として表示されます。</p>
 <p>このように加工したデータを<code>csv</code>ファイルとして保存するには、<code>readr</code>パッケージの<code>write_csv()</code>関数を使います。 <code>write_csv()</code>関数は、第1引数に保存したいデータフレームを指定し、第2引数に保存先のファイルパスを指定します。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(idpos, <span class="at">path =</span> <span class="st">"data/new_data.csv"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="企業データの処理" class="level3 page-columns page-full" data-number="2.0.2"><h3 data-number="2.0.2" class="anchored" data-anchor-id="企業データの処理">
 <span class="header-section-number">2.0.2</span> 企業データの処理</h3>
-<p>MS Excelのファイルを読み込むこともできます。 ここでは，<code>readxl</code>パッケージの<code>read_xlsx()</code>関数を使って，企業データを読み込みます。</p>
+<p>MS Excelのファイルを読み込むこともできます。 ここでは、<code>readxl</code>パッケージの<code>read_xlsx()</code>関数を使って、企業データを読み込みます。</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2"></a>firmdata <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -543,27 +547,27 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
 <span id="cb15-5"><a href="#cb15-5"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
 <span id="cb15-6"><a href="#cb15-6"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="gojnpwpnwm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="iwitrquvos" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#gojnpwpnwm table {
+#iwitrquvos table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gojnpwpnwm thead, #gojnpwpnwm tbody, #gojnpwpnwm tfoot, #gojnpwpnwm tr, #gojnpwpnwm td, #gojnpwpnwm th {
+#iwitrquvos thead, #iwitrquvos tbody, #iwitrquvos tfoot, #iwitrquvos tr, #iwitrquvos td, #iwitrquvos th {
   border-style: none;
 }
 
-#gojnpwpnwm p {
+#iwitrquvos p {
   margin: 0;
   padding: 0;
 }
 
-#gojnpwpnwm .gt_table {
+#iwitrquvos .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -589,12 +593,12 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-left-color: #D3D3D3;
 }
 
-#gojnpwpnwm .gt_caption {
+#iwitrquvos .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gojnpwpnwm .gt_title {
+#iwitrquvos .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -606,7 +610,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-width: 0;
 }
 
-#gojnpwpnwm .gt_subtitle {
+#iwitrquvos .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -618,7 +622,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-top-width: 0;
 }
 
-#gojnpwpnwm .gt_heading {
+#iwitrquvos .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -630,13 +634,13 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#gojnpwpnwm .gt_bottom_border {
+#iwitrquvos .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gojnpwpnwm .gt_col_headings {
+#iwitrquvos .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -651,7 +655,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#gojnpwpnwm .gt_col_heading {
+#iwitrquvos .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -671,7 +675,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   overflow-x: hidden;
 }
 
-#gojnpwpnwm .gt_column_spanner_outer {
+#iwitrquvos .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -683,15 +687,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 4px;
 }
 
-#gojnpwpnwm .gt_column_spanner_outer:first-child {
+#iwitrquvos .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gojnpwpnwm .gt_column_spanner_outer:last-child {
+#iwitrquvos .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gojnpwpnwm .gt_column_spanner {
+#iwitrquvos .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -703,11 +707,11 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   width: 100%;
 }
 
-#gojnpwpnwm .gt_spanner_row {
+#iwitrquvos .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gojnpwpnwm .gt_group_heading {
+#iwitrquvos .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -733,7 +737,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   text-align: left;
 }
 
-#gojnpwpnwm .gt_empty_group_heading {
+#iwitrquvos .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -748,15 +752,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   vertical-align: middle;
 }
 
-#gojnpwpnwm .gt_from_md > :first-child {
+#iwitrquvos .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gojnpwpnwm .gt_from_md > :last-child {
+#iwitrquvos .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gojnpwpnwm .gt_row {
+#iwitrquvos .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -775,7 +779,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   overflow-x: hidden;
 }
 
-#gojnpwpnwm .gt_stub {
+#iwitrquvos .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -788,7 +792,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#gojnpwpnwm .gt_stub_row_group {
+#iwitrquvos .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -802,15 +806,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   vertical-align: top;
 }
 
-#gojnpwpnwm .gt_row_group_first td {
+#iwitrquvos .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gojnpwpnwm .gt_row_group_first th {
+#iwitrquvos .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gojnpwpnwm .gt_summary_row {
+#iwitrquvos .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -820,16 +824,16 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#gojnpwpnwm .gt_first_summary_row {
+#iwitrquvos .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gojnpwpnwm .gt_first_summary_row.thick {
+#iwitrquvos .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gojnpwpnwm .gt_last_summary_row {
+#iwitrquvos .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -839,7 +843,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#gojnpwpnwm .gt_grand_summary_row {
+#iwitrquvos .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -849,7 +853,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#gojnpwpnwm .gt_first_grand_summary_row {
+#iwitrquvos .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -859,7 +863,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-top-color: #D3D3D3;
 }
 
-#gojnpwpnwm .gt_last_grand_summary_row_top {
+#iwitrquvos .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -869,11 +873,11 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#gojnpwpnwm .gt_striped {
+#iwitrquvos .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gojnpwpnwm .gt_table_body {
+#iwitrquvos .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -882,7 +886,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#gojnpwpnwm .gt_footnotes {
+#iwitrquvos .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -896,7 +900,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#gojnpwpnwm .gt_footnote {
+#iwitrquvos .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -905,7 +909,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#gojnpwpnwm .gt_sourcenotes {
+#iwitrquvos .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -919,7 +923,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#gojnpwpnwm .gt_sourcenote {
+#iwitrquvos .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -927,76 +931,76 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#gojnpwpnwm .gt_left {
+#iwitrquvos .gt_left {
   text-align: left;
 }
 
-#gojnpwpnwm .gt_center {
+#iwitrquvos .gt_center {
   text-align: center;
 }
 
-#gojnpwpnwm .gt_right {
+#iwitrquvos .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gojnpwpnwm .gt_font_normal {
+#iwitrquvos .gt_font_normal {
   font-weight: normal;
 }
 
-#gojnpwpnwm .gt_font_bold {
+#iwitrquvos .gt_font_bold {
   font-weight: bold;
 }
 
-#gojnpwpnwm .gt_font_italic {
+#iwitrquvos .gt_font_italic {
   font-style: italic;
 }
 
-#gojnpwpnwm .gt_super {
+#iwitrquvos .gt_super {
   font-size: 65%;
 }
 
-#gojnpwpnwm .gt_footnote_marks {
+#iwitrquvos .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gojnpwpnwm .gt_asterisk {
+#iwitrquvos .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gojnpwpnwm .gt_indent_1 {
+#iwitrquvos .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gojnpwpnwm .gt_indent_2 {
+#iwitrquvos .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gojnpwpnwm .gt_indent_3 {
+#iwitrquvos .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gojnpwpnwm .gt_indent_4 {
+#iwitrquvos .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gojnpwpnwm .gt_indent_5 {
+#iwitrquvos .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gojnpwpnwm .katex-display {
+#iwitrquvos .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gojnpwpnwm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iwitrquvos div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#gojnpwpnwm tbody tr:last-child {
+#iwitrquvos tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -1106,27 +1110,27 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
 <span id="cb16-8"><a href="#cb16-8"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
 <span id="cb16-9"><a href="#cb16-9"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="qokslexsui" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jiantkfzjc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#qokslexsui table {
+#jiantkfzjc table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qokslexsui thead, #qokslexsui tbody, #qokslexsui tfoot, #qokslexsui tr, #qokslexsui td, #qokslexsui th {
+#jiantkfzjc thead, #jiantkfzjc tbody, #jiantkfzjc tfoot, #jiantkfzjc tr, #jiantkfzjc td, #jiantkfzjc th {
   border-style: none;
 }
 
-#qokslexsui p {
+#jiantkfzjc p {
   margin: 0;
   padding: 0;
 }
 
-#qokslexsui .gt_table {
+#jiantkfzjc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1152,12 +1156,12 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-left-color: #D3D3D3;
 }
 
-#qokslexsui .gt_caption {
+#jiantkfzjc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qokslexsui .gt_title {
+#jiantkfzjc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1169,7 +1173,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-width: 0;
 }
 
-#qokslexsui .gt_subtitle {
+#jiantkfzjc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1181,7 +1185,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-top-width: 0;
 }
 
-#qokslexsui .gt_heading {
+#jiantkfzjc .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1193,13 +1197,13 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#qokslexsui .gt_bottom_border {
+#jiantkfzjc .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qokslexsui .gt_col_headings {
+#jiantkfzjc .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1214,7 +1218,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#qokslexsui .gt_col_heading {
+#jiantkfzjc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1234,7 +1238,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   overflow-x: hidden;
 }
 
-#qokslexsui .gt_column_spanner_outer {
+#jiantkfzjc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1246,15 +1250,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 4px;
 }
 
-#qokslexsui .gt_column_spanner_outer:first-child {
+#jiantkfzjc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qokslexsui .gt_column_spanner_outer:last-child {
+#jiantkfzjc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qokslexsui .gt_column_spanner {
+#jiantkfzjc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1266,11 +1270,11 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   width: 100%;
 }
 
-#qokslexsui .gt_spanner_row {
+#jiantkfzjc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qokslexsui .gt_group_heading {
+#jiantkfzjc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1296,7 +1300,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   text-align: left;
 }
 
-#qokslexsui .gt_empty_group_heading {
+#jiantkfzjc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1311,15 +1315,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   vertical-align: middle;
 }
 
-#qokslexsui .gt_from_md > :first-child {
+#jiantkfzjc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qokslexsui .gt_from_md > :last-child {
+#jiantkfzjc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qokslexsui .gt_row {
+#jiantkfzjc .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1338,7 +1342,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   overflow-x: hidden;
 }
 
-#qokslexsui .gt_stub {
+#jiantkfzjc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1351,7 +1355,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#qokslexsui .gt_stub_row_group {
+#jiantkfzjc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1365,15 +1369,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   vertical-align: top;
 }
 
-#qokslexsui .gt_row_group_first td {
+#jiantkfzjc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qokslexsui .gt_row_group_first th {
+#jiantkfzjc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qokslexsui .gt_summary_row {
+#jiantkfzjc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1383,16 +1387,16 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#qokslexsui .gt_first_summary_row {
+#jiantkfzjc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qokslexsui .gt_first_summary_row.thick {
+#jiantkfzjc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qokslexsui .gt_last_summary_row {
+#jiantkfzjc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1402,7 +1406,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#qokslexsui .gt_grand_summary_row {
+#jiantkfzjc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1412,7 +1416,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#qokslexsui .gt_first_grand_summary_row {
+#jiantkfzjc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1422,7 +1426,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-top-color: #D3D3D3;
 }
 
-#qokslexsui .gt_last_grand_summary_row_top {
+#jiantkfzjc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1432,11 +1436,11 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#qokslexsui .gt_striped {
+#jiantkfzjc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qokslexsui .gt_table_body {
+#jiantkfzjc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1445,7 +1449,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#qokslexsui .gt_footnotes {
+#jiantkfzjc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1459,7 +1463,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#qokslexsui .gt_footnote {
+#jiantkfzjc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1468,7 +1472,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#qokslexsui .gt_sourcenotes {
+#jiantkfzjc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1482,7 +1486,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#qokslexsui .gt_sourcenote {
+#jiantkfzjc .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1490,76 +1494,76 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#qokslexsui .gt_left {
+#jiantkfzjc .gt_left {
   text-align: left;
 }
 
-#qokslexsui .gt_center {
+#jiantkfzjc .gt_center {
   text-align: center;
 }
 
-#qokslexsui .gt_right {
+#jiantkfzjc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qokslexsui .gt_font_normal {
+#jiantkfzjc .gt_font_normal {
   font-weight: normal;
 }
 
-#qokslexsui .gt_font_bold {
+#jiantkfzjc .gt_font_bold {
   font-weight: bold;
 }
 
-#qokslexsui .gt_font_italic {
+#jiantkfzjc .gt_font_italic {
   font-style: italic;
 }
 
-#qokslexsui .gt_super {
+#jiantkfzjc .gt_super {
   font-size: 65%;
 }
 
-#qokslexsui .gt_footnote_marks {
+#jiantkfzjc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qokslexsui .gt_asterisk {
+#jiantkfzjc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qokslexsui .gt_indent_1 {
+#jiantkfzjc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qokslexsui .gt_indent_2 {
+#jiantkfzjc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qokslexsui .gt_indent_3 {
+#jiantkfzjc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qokslexsui .gt_indent_4 {
+#jiantkfzjc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qokslexsui .gt_indent_5 {
+#jiantkfzjc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qokslexsui .katex-display {
+#jiantkfzjc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qokslexsui div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jiantkfzjc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#qokslexsui tbody tr:last-child {
+#jiantkfzjc tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -1693,27 +1697,27 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
 <span id="cb17-15"><a href="#cb17-15"></a>  gtExtras<span class="sc">::</span><span class="fu">gt_theme_538</span>() <span class="co"># 表のテーマを指定</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell-output-display">
-<div id="drrxmvxvjq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ghdytmaxth" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#drrxmvxvjq table {
+#ghdytmaxth table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#drrxmvxvjq thead, #drrxmvxvjq tbody, #drrxmvxvjq tfoot, #drrxmvxvjq tr, #drrxmvxvjq td, #drrxmvxvjq th {
+#ghdytmaxth thead, #ghdytmaxth tbody, #ghdytmaxth tfoot, #ghdytmaxth tr, #ghdytmaxth td, #ghdytmaxth th {
   border-style: none;
 }
 
-#drrxmvxvjq p {
+#ghdytmaxth p {
   margin: 0;
   padding: 0;
 }
 
-#drrxmvxvjq .gt_table {
+#ghdytmaxth .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1739,12 +1743,12 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-left-color: #D3D3D3;
 }
 
-#drrxmvxvjq .gt_caption {
+#ghdytmaxth .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#drrxmvxvjq .gt_title {
+#ghdytmaxth .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1756,7 +1760,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-width: 0;
 }
 
-#drrxmvxvjq .gt_subtitle {
+#ghdytmaxth .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1768,7 +1772,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-top-width: 0;
 }
 
-#drrxmvxvjq .gt_heading {
+#ghdytmaxth .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1780,13 +1784,13 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#drrxmvxvjq .gt_bottom_border {
+#ghdytmaxth .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#drrxmvxvjq .gt_col_headings {
+#ghdytmaxth .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1801,7 +1805,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#drrxmvxvjq .gt_col_heading {
+#ghdytmaxth .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1821,7 +1825,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   overflow-x: hidden;
 }
 
-#drrxmvxvjq .gt_column_spanner_outer {
+#ghdytmaxth .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1833,15 +1837,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 4px;
 }
 
-#drrxmvxvjq .gt_column_spanner_outer:first-child {
+#ghdytmaxth .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#drrxmvxvjq .gt_column_spanner_outer:last-child {
+#ghdytmaxth .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#drrxmvxvjq .gt_column_spanner {
+#ghdytmaxth .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1853,11 +1857,11 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   width: 100%;
 }
 
-#drrxmvxvjq .gt_spanner_row {
+#ghdytmaxth .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#drrxmvxvjq .gt_group_heading {
+#ghdytmaxth .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1883,7 +1887,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   text-align: left;
 }
 
-#drrxmvxvjq .gt_empty_group_heading {
+#ghdytmaxth .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1898,15 +1902,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   vertical-align: middle;
 }
 
-#drrxmvxvjq .gt_from_md > :first-child {
+#ghdytmaxth .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#drrxmvxvjq .gt_from_md > :last-child {
+#ghdytmaxth .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#drrxmvxvjq .gt_row {
+#ghdytmaxth .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1925,7 +1929,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   overflow-x: hidden;
 }
 
-#drrxmvxvjq .gt_stub {
+#ghdytmaxth .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1938,7 +1942,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#drrxmvxvjq .gt_stub_row_group {
+#ghdytmaxth .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1952,15 +1956,15 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   vertical-align: top;
 }
 
-#drrxmvxvjq .gt_row_group_first td {
+#ghdytmaxth .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#drrxmvxvjq .gt_row_group_first th {
+#ghdytmaxth .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#drrxmvxvjq .gt_summary_row {
+#ghdytmaxth .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1970,16 +1974,16 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#drrxmvxvjq .gt_first_summary_row {
+#ghdytmaxth .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#drrxmvxvjq .gt_first_summary_row.thick {
+#ghdytmaxth .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#drrxmvxvjq .gt_last_summary_row {
+#ghdytmaxth .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1989,7 +1993,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#drrxmvxvjq .gt_grand_summary_row {
+#ghdytmaxth .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1999,7 +2003,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#drrxmvxvjq .gt_first_grand_summary_row {
+#ghdytmaxth .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2009,7 +2013,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-top-color: #D3D3D3;
 }
 
-#drrxmvxvjq .gt_last_grand_summary_row_top {
+#ghdytmaxth .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2019,11 +2023,11 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#drrxmvxvjq .gt_striped {
+#ghdytmaxth .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#drrxmvxvjq .gt_table_body {
+#ghdytmaxth .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2032,7 +2036,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-bottom-color: #D3D3D3;
 }
 
-#drrxmvxvjq .gt_footnotes {
+#ghdytmaxth .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2046,7 +2050,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#drrxmvxvjq .gt_footnote {
+#ghdytmaxth .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2055,7 +2059,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#drrxmvxvjq .gt_sourcenotes {
+#ghdytmaxth .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2069,7 +2073,7 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   border-right-color: #D3D3D3;
 }
 
-#drrxmvxvjq .gt_sourcenote {
+#ghdytmaxth .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2077,76 +2081,76 @@ $ roa                    &lt;dbl&gt; 0.0597044987, 0.0537819098, 0.0412342008, 0
   padding-right: 5px;
 }
 
-#drrxmvxvjq .gt_left {
+#ghdytmaxth .gt_left {
   text-align: left;
 }
 
-#drrxmvxvjq .gt_center {
+#ghdytmaxth .gt_center {
   text-align: center;
 }
 
-#drrxmvxvjq .gt_right {
+#ghdytmaxth .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#drrxmvxvjq .gt_font_normal {
+#ghdytmaxth .gt_font_normal {
   font-weight: normal;
 }
 
-#drrxmvxvjq .gt_font_bold {
+#ghdytmaxth .gt_font_bold {
   font-weight: bold;
 }
 
-#drrxmvxvjq .gt_font_italic {
+#ghdytmaxth .gt_font_italic {
   font-style: italic;
 }
 
-#drrxmvxvjq .gt_super {
+#ghdytmaxth .gt_super {
   font-size: 65%;
 }
 
-#drrxmvxvjq .gt_footnote_marks {
+#ghdytmaxth .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#drrxmvxvjq .gt_asterisk {
+#ghdytmaxth .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#drrxmvxvjq .gt_indent_1 {
+#ghdytmaxth .gt_indent_1 {
   text-indent: 5px;
 }
 
-#drrxmvxvjq .gt_indent_2 {
+#ghdytmaxth .gt_indent_2 {
   text-indent: 10px;
 }
 
-#drrxmvxvjq .gt_indent_3 {
+#ghdytmaxth .gt_indent_3 {
   text-indent: 15px;
 }
 
-#drrxmvxvjq .gt_indent_4 {
+#ghdytmaxth .gt_indent_4 {
   text-indent: 20px;
 }
 
-#drrxmvxvjq .gt_indent_5 {
+#ghdytmaxth .gt_indent_5 {
   text-indent: 25px;
 }
 
-#drrxmvxvjq .katex-display {
+#ghdytmaxth .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#drrxmvxvjq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ghdytmaxth div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#drrxmvxvjq tbody tr:last-child {
+#ghdytmaxth tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -2612,7 +2616,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>JOIN関数で2つのデータフレームを結合するときは，1つ以上のキーとなる変数が，結合元のデータフレームと結合するデータフレームの両方に存在し，またキーの値により行が一意に決まる，つまり観測値がユニークになっていることが重要です。</p>
+<p>JOIN関数で2つのデータフレームを結合するときは、1つ以上のキーとなる変数が、結合元のデータフレームと結合するデータフレームの両方に存在し、またキーの値により行が一意に決まる、つまり観測値がユニークになっていることが重要です。</p>
 </div>
 </div>
 <!----
@@ -3318,7 +3322,7 @@ female   male
 <span id="cb47-18"><a href="#cb47-18"></a><span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
 <span id="cb47-19"><a href="#cb47-19"></a><span class="in">```</span></span>
 <span id="cb47-20"><a href="#cb47-20"></a></span>
-<span id="cb47-21"><a href="#cb47-21"></a>次に、<span class="in">`pacman`</span>パッケージの<span class="in">`p_load()`</span>関数を使って，<span class="in">`tidyverse`</span>と<span class="in">`readxl`</span>パッケージをインストールおよび読み込みします。</span>
+<span id="cb47-21"><a href="#cb47-21"></a>次に、<span class="in">`pacman`</span>パッケージの<span class="in">`p_load()`</span>関数を使って、<span class="in">`tidyverse`</span>と<span class="in">`readxl`</span>パッケージをインストールおよび読み込みします。</span>
 <span id="cb47-22"><a href="#cb47-22"></a><span class="in">`::`</span>という記法はパッケージ名を明示的に指定して関数を使う方法ですが、ここでは<span class="in">`pacman`</span>パッケージの<span class="in">`p_load()`</span>関数を指定して使っています。</span>
 <span id="cb47-23"><a href="#cb47-23"></a></span>
 <span id="cb47-24"><a href="#cb47-24"></a><span class="in">```{r tidyverse}</span></span>
@@ -3330,41 +3334,41 @@ female   male
 <span id="cb47-30"><a href="#cb47-30"></a>:::</span>
 <span id="cb47-31"><a href="#cb47-31"></a></span>
 <span id="cb47-32"><a href="#cb47-32"></a>作業ディレクトリ内の<span class="in">`data`</span>フォルダに入っている<span class="in">`2022idpos.csv`</span>というデータを読み込みます。</span>
-<span id="cb47-33"><a href="#cb47-33"></a>何を読み込んだのか確認するために，基本関数<span class="in">`head()`</span>でデータの先頭6行を表示させます。</span>
+<span id="cb47-33"><a href="#cb47-33"></a>何を読み込んだのか確認するために、基本関数<span class="in">`head()`</span>でデータの先頭6行を表示させます。</span>
 <span id="cb47-34"><a href="#cb47-34"></a><span class="in">```{r code4-6}</span></span>
 <span id="cb47-35"><a href="#cb47-35"></a>idpos <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/2022idpos.csv"</span>, <span class="at">na =</span> <span class="st">"."</span>)</span>
 <span id="cb47-36"><a href="#cb47-36"></a>idpos <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
 <span id="cb47-37"><a href="#cb47-37"></a><span class="in">```</span></span>
 <span id="cb47-38"><a href="#cb47-38"></a></span>
 <span id="cb47-39"><a href="#cb47-39"></a>:::{.column-margin}</span>
-<span id="cb47-40"><a href="#cb47-40"></a><span class="in">`readr`</span>パッケージの<span class="in">`read_csv()`</span>関数は，CSV形式のデータを読み込むための関数です。<span class="in">`na = "."`</span>という引数は，データ内の<span class="in">`.`</span>を欠損値として扱うことを指定しています。</span>
+<span id="cb47-40"><a href="#cb47-40"></a><span class="in">`readr`</span>パッケージの<span class="in">`read_csv()`</span>関数は、CSV形式のデータを読み込むための関数です。<span class="in">`na = "."`</span>という引数は、データ内の<span class="in">`.`</span>を欠損値として扱うことを指定しています。</span>
 <span id="cb47-41"><a href="#cb47-41"></a>:::</span>
 <span id="cb47-42"><a href="#cb47-42"></a></span>
-<span id="cb47-43"><a href="#cb47-43"></a>読み込んだデータに含まれている変数の名前を確認するため，基本関数<span class="in">`names()`</span>を使います。</span>
+<span id="cb47-43"><a href="#cb47-43"></a>読み込んだデータに含まれている変数の名前を確認するため、基本関数<span class="in">`names()`</span>を使います。</span>
 <span id="cb47-44"><a href="#cb47-44"></a></span>
 <span id="cb47-45"><a href="#cb47-45"></a><span class="in">```{r names}</span></span>
 <span id="cb47-46"><a href="#cb47-46"></a>idpos <span class="sc">|&gt;</span> <span class="fu">names</span>()</span>
 <span id="cb47-47"><a href="#cb47-47"></a><span class="in">```</span></span>
 <span id="cb47-48"><a href="#cb47-48"></a></span>
-<span id="cb47-49"><a href="#cb47-49"></a>データの詳細を確認するため，<span class="in">`tidyverse`</span>の<span class="in">`dplyr`</span>パッケージの<span class="in">`glimpse()`</span>関数を使います。</span>
+<span id="cb47-49"><a href="#cb47-49"></a>データの詳細を確認するため、<span class="in">`tidyverse`</span>の<span class="in">`dplyr`</span>パッケージの<span class="in">`glimpse()`</span>関数を使います。</span>
 <span id="cb47-50"><a href="#cb47-50"></a></span>
 <span id="cb47-51"><a href="#cb47-51"></a><span class="in">```{r code4-9}</span></span>
 <span id="cb47-52"><a href="#cb47-52"></a>idpos <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span>
 <span id="cb47-53"><a href="#cb47-53"></a><span class="in">```</span></span>
 <span id="cb47-54"><a href="#cb47-54"></a></span>
-<span id="cb47-55"><a href="#cb47-55"></a>Excelのようにデータを表示させたいなら，基本関数<span class="in">`View()`</span>を使います。</span>
+<span id="cb47-55"><a href="#cb47-55"></a>Excelのようにデータを表示させたいなら、基本関数<span class="in">`View()`</span>を使います。</span>
 <span id="cb47-56"><a href="#cb47-56"></a></span>
 <span id="cb47-57"><a href="#cb47-57"></a><span class="in">```{r code4-10}</span></span>
 <span id="cb47-58"><a href="#cb47-58"></a><span class="co">#| eval: false</span></span>
 <span id="cb47-59"><a href="#cb47-59"></a><span class="fu">View</span>(idpos)</span>
 <span id="cb47-60"><a href="#cb47-60"></a><span class="in">```</span></span>
 <span id="cb47-61"><a href="#cb47-61"></a></span>
-<span id="cb47-62"><a href="#cb47-62"></a>これで，自分が読み込んだデータがどんなものかを確認できました。</span>
+<span id="cb47-62"><a href="#cb47-62"></a>これで、自分が読み込んだデータがどんなものかを確認できました。</span>
 <span id="cb47-63"><a href="#cb47-63"></a></span>
 <span id="cb47-64"><a href="#cb47-64"></a><span class="fu">### dplyrでデータの要約</span></span>
 <span id="cb47-65"><a href="#cb47-65"></a></span>
-<span id="cb47-66"><a href="#cb47-66"></a><span class="in">`tidyverse`</span>の<span class="in">`dplyr`</span>パッケージを使うと，データの要約が簡単にできます。</span>
-<span id="cb47-67"><a href="#cb47-67"></a>ここでは，</span>
+<span id="cb47-66"><a href="#cb47-66"></a><span class="in">`tidyverse`</span>の<span class="in">`dplyr`</span>パッケージを使うと、データの要約が簡単にできます。</span>
+<span id="cb47-67"><a href="#cb47-67"></a>ここでは、</span>
 <span id="cb47-68"><a href="#cb47-68"></a></span>
 <span id="cb47-69"><a href="#cb47-69"></a><span class="ss">- </span><span class="in">`summarise()`</span>関数：データの要約統計量を計算する</span>
 <span id="cb47-70"><a href="#cb47-70"></a><span class="ss">- </span><span class="in">`mutate()`</span>関数：新しい変数を作成する</span>
@@ -3375,24 +3379,24 @@ female   male
 <span id="cb47-75"><a href="#cb47-75"></a></span>
 <span id="cb47-76"><a href="#cb47-76"></a>の使い方を学びます。</span>
 <span id="cb47-77"><a href="#cb47-77"></a></span>
-<span id="cb47-78"><a href="#cb47-78"></a>先ほど読み込んだデータには，</span>
+<span id="cb47-78"><a href="#cb47-78"></a>先ほど読み込んだデータには、</span>
 <span id="cb47-79"><a href="#cb47-79"></a></span>
-<span id="cb47-80"><a href="#cb47-80"></a><span class="ss">- </span>id：顧客ID</span>
-<span id="cb47-81"><a href="#cb47-81"></a><span class="ss">- </span>date：購入日</span>
-<span id="cb47-82"><a href="#cb47-82"></a><span class="ss">- </span>spent：購入金額</span>
-<span id="cb47-83"><a href="#cb47-83"></a><span class="ss">- </span>coupon：クーポン利用の有無 (1=利用, 0=未利用)</span>
+<span id="cb47-80"><a href="#cb47-80"></a><span class="ss">- </span><span class="in">`id`</span> ： 顧客ID</span>
+<span id="cb47-81"><a href="#cb47-81"></a><span class="ss">- </span><span class="in">`date`</span> ： 購入日</span>
+<span id="cb47-82"><a href="#cb47-82"></a><span class="ss">- </span><span class="in">`spent`</span> ： 購入金額</span>
+<span id="cb47-83"><a href="#cb47-83"></a><span class="ss">- </span><span class="in">`coupon`</span> ： クーポン利用の有無 (<span class="in">`1=利用`</span>, <span class="in">`0=未利用`</span>)</span>
 <span id="cb47-84"><a href="#cb47-84"></a></span>
 <span id="cb47-85"><a href="#cb47-85"></a>という4変数に3,000の観測値が含まれています。</span>
-<span id="cb47-86"><a href="#cb47-86"></a>このデータを<span class="in">`dplyr`</span>の各関数を使って，以下のような操作をしてみます。</span>
+<span id="cb47-86"><a href="#cb47-86"></a>このデータを<span class="in">`dplyr`</span>の各関数を使って、以下のような操作をしてみます。</span>
 <span id="cb47-87"><a href="#cb47-87"></a></span>
-<span id="cb47-88"><a href="#cb47-88"></a>まず，</span>
+<span id="cb47-88"><a href="#cb47-88"></a>まず、</span>
 <span id="cb47-89"><a href="#cb47-89"></a></span>
-<span id="cb47-90"><a href="#cb47-90"></a><span class="ss">1. </span><span class="in">`select()`</span>関数で<span class="in">`spent`</span>と<span class="in">`coupon`</span>を抽出し，</span>
-<span id="cb47-91"><a href="#cb47-91"></a><span class="ss">2. </span><span class="in">`arrange()`</span>関数で<span class="in">`spent`</span>の降順に並び替え，</span>
-<span id="cb47-92"><a href="#cb47-92"></a><span class="ss">3. </span><span class="in">`mutate()`</span>関数で<span class="in">`spent`</span>の金額を10倍した<span class="in">`spent10`</span>という新しい変数を作成し，</span>
-<span id="cb47-93"><a href="#cb47-93"></a><span class="ss">4. </span><span class="in">`filter()`</span>関数で<span class="in">`spent10`</span>が10000以上の行を抽出し，</span>
-<span id="cb47-94"><a href="#cb47-94"></a><span class="ss">5. </span><span class="in">`summarise()`</span>関数で<span class="in">`spent10`</span>の平均を計算し，</span>
-<span id="cb47-95"><a href="#cb47-95"></a><span class="ss">6. </span><span class="in">`rename()`</span>関数で<span class="in">`spent10`</span>を<span class="in">`spent_times10`</span>に名前変更する，</span>
+<span id="cb47-90"><a href="#cb47-90"></a><span class="ss">1. </span><span class="in">`select()`</span>関数で<span class="in">`spent`</span>と<span class="in">`coupon`</span>を抽出し、</span>
+<span id="cb47-91"><a href="#cb47-91"></a><span class="ss">2. </span><span class="in">`arrange()`</span>関数で<span class="in">`spent`</span>の降順に並び替え、</span>
+<span id="cb47-92"><a href="#cb47-92"></a><span class="ss">3. </span><span class="in">`mutate()`</span>関数で<span class="in">`spent`</span>の金額を10倍した<span class="in">`spent10`</span>という新しい変数を作成し、</span>
+<span id="cb47-93"><a href="#cb47-93"></a><span class="ss">4. </span><span class="in">`filter()`</span>関数で<span class="in">`spent10`</span>が10000以上の行を抽出し、</span>
+<span id="cb47-94"><a href="#cb47-94"></a><span class="ss">5. </span><span class="in">`summarise()`</span>関数で<span class="in">`spent10`</span>の平均を計算し、</span>
+<span id="cb47-95"><a href="#cb47-95"></a><span class="ss">6. </span><span class="in">`rename()`</span>関数で<span class="in">`spent10`</span>を<span class="in">`spent_times10`</span>に名前変更する、</span>
 <span id="cb47-96"><a href="#cb47-96"></a></span>
 <span id="cb47-97"><a href="#cb47-97"></a>という一連の操作を行います(この処理に意味はないです。)</span>
 <span id="cb47-98"><a href="#cb47-98"></a></span>
@@ -3407,7 +3411,7 @@ female   male
 <span id="cb47-109"><a href="#cb47-109"></a>  <span class="fu">rename</span>(<span class="at">spent_times10 =</span> mean_spent10)</span>
 <span id="cb47-110"><a href="#cb47-110"></a><span class="in">```</span></span>
 <span id="cb47-111"><a href="#cb47-111"></a></span>
-<span id="cb47-112"><a href="#cb47-112"></a>すると，spentを10倍して，1万円以上の買い物の平均値を計算した結果が<span class="in">`spent_times10`</span>として表示されます。</span>
+<span id="cb47-112"><a href="#cb47-112"></a>すると、spentを10倍して、1万円以上の買い物の平均値を計算した結果が<span class="in">`spent_times10`</span>として表示されます。</span>
 <span id="cb47-113"><a href="#cb47-113"></a></span>
 <span id="cb47-114"><a href="#cb47-114"></a>このように加工したデータを<span class="in">`csv`</span>ファイルとして保存するには、<span class="in">`readr`</span>パッケージの<span class="in">`write_csv()`</span>関数を使います。</span>
 <span id="cb47-115"><a href="#cb47-115"></a><span class="in">`write_csv()`</span>関数は、第1引数に保存したいデータフレームを指定し、第2引数に保存先のファイルパスを指定します。</span>
@@ -3420,7 +3424,7 @@ female   male
 <span id="cb47-124"><a href="#cb47-124"></a><span class="fu">### 企業データの処理</span></span>
 <span id="cb47-125"><a href="#cb47-125"></a></span>
 <span id="cb47-126"><a href="#cb47-126"></a>MS Excelのファイルを読み込むこともできます。</span>
-<span id="cb47-127"><a href="#cb47-127"></a>ここでは，<span class="in">`readxl`</span>パッケージの<span class="in">`read_xlsx()`</span>関数を使って，企業データを読み込みます。</span>
+<span id="cb47-127"><a href="#cb47-127"></a>ここでは、<span class="in">`readxl`</span>パッケージの<span class="in">`read_xlsx()`</span>関数を使って、企業データを読み込みます。</span>
 <span id="cb47-128"><a href="#cb47-128"></a></span>
 <span id="cb47-129"><a href="#cb47-129"></a><span class="in">```{r code 4-27}</span></span>
 <span id="cb47-130"><a href="#cb47-130"></a>firmdata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"data/MktRes_firmdata.xlsx"</span>)</span>
@@ -3710,7 +3714,7 @@ female   male
 <span id="cb47-422"><a href="#cb47-422"></a><span class="ss">- </span><span class="in">`by`</span> : 結合する変数</span>
 <span id="cb47-423"><a href="#cb47-423"></a></span>
 <span id="cb47-424"><a href="#cb47-424"></a>:::{.callout-important}</span>
-<span id="cb47-425"><a href="#cb47-425"></a>JOIN関数で2つのデータフレームを結合するときは，1つ以上のキーとなる変数が，結合元のデータフレームと結合するデータフレームの両方に存在し，またキーの値により行が一意に決まる，つまり観測値がユニークになっていることが重要です。</span>
+<span id="cb47-425"><a href="#cb47-425"></a>JOIN関数で2つのデータフレームを結合するときは、1つ以上のキーとなる変数が、結合元のデータフレームと結合するデータフレームの両方に存在し、またキーの値により行が一意に決まる、つまり観測値がユニークになっていることが重要です。</span>
 <span id="cb47-426"><a href="#cb47-426"></a>:::</span>
 <span id="cb47-427"><a href="#cb47-427"></a></span>
 <span id="cb47-428"><a href="#cb47-428"></a></span>
