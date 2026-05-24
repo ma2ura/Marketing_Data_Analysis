@@ -404,9 +404,6 @@ idpos_cust_m |> head() # 上位20件を表示
 最も利用する可能性が高いのは、結合元のデータフレームのすべての行を残す**左外部結合**です。
 これは`dplyr::left_join()`で実行できます。
 
-
-![左外部結合](img/left_join_function.png)
-
 `left_join()`の引数は、以下の通りです。
 
 - `x` : 結合元のデータフレーム
@@ -417,9 +414,15 @@ idpos_cust_m |> head() # 上位20件を表示
 JOIN関数で2つのデータフレームを結合するときは，1つ以上のキーとなる変数が，結合元のデータフレームと結合するデータフレームの両方に存在し，またキーの値により行が一意に決まる，つまり観測値がユニークになっていることが重要です。
 :::
 
+
+<!----
 ```{r}
 idpos_cust_m[1:10, ]
 ```
+--->
+
+結合するデータフレーム`id_data.csv`を読み込んで、`id_data`という名前のデータフレームに格納しましょう。
+変数`id`は顧客IDを表すカテゴリー変数なので、読み込むときに`as.factor()`関数を使って、`id`変数をカテゴリー変数に変換しておきます。
 
 ```{r}
 # コード4-51
@@ -429,25 +432,21 @@ id_data <- id_data |>
     id = as.factor(id)
   )
 str(id_data)
-dplyr::glimpse(id_data)
 ```
 
 3000件の観測値と4つの変数からなるデータフレーム`id_data`が読み込まれました。
-これを`idpos_cust`と結合してみます。
-
-```{r}
-dplyr::glimpse(idpos_cust)
-```
+これを`idpos_cust`と左外部結合して大きくなったデータフレームを`idpos_cust`に上書きして格納します。
 
 ```{r}
 # コード4-52
 idpos_cust <- idpos_cust |>
   left_join(
-    id_data, 
-    by = "id"
+    id_data, # 結合するデータフレーム
+    by = "id" # 主キーとなる変数
   )
 head(idpos_cust)
 ```
+
 
 ```{r}
 # コード4-53
@@ -465,6 +464,32 @@ table(idpos_cust_m[1:20, ]$gender)
 `monetary`変数を10等分して、各顧客がどのランクに属するかを表す変数`decile_rank`を作成します。
 `cut()`関数を使って、`monetary`変数を10等分して、各顧客がどのランクに属するかを表す変数`decile_rank`を作成します。
 
+:::{.column-margin}
+`cut()`関数は、数値を指定した区間に分割して、カテゴリ変数を作成するための関数です。
+`cut()`関数の引数は、
+
+- `x` : 分割する数値ベクトル
+- `breaks` : 分割する区間の境界を指定する数値ベクトル
+- `labels` : 分割された区間に対応するラベルを指定するベクトル
+- `include.lowest` : 最初の区間に最小値を含めるかどうかを指定する論理値
+- `right` : 区間の右端を含めるかどうかを指定する論理値
+- `dig.lab` : ラベルに使用する小数点以下の桁数を指定する整数
+- `ordered_result` : 結果のカテゴリ変数を順序付きにするかどうかを指定する論理値
+
+となり、最初の2つを指定すれば、数値を区間に分割して、カテゴリ変数を作成することができます。
+この分割する区間を指定するとき、`quantile()`関数を使って、`monetary`変数の10分位点を計算して、その分位点を区間の境界として指定しています。
+
+`quantile()`関数の引数は、
+
+- `x` : 分位点を計算する数値ベクトル
+- `probs` : 分位点を指定する数値ベクトル。0から1の範囲で指定します。
+- `na.rm` : 欠損値を除外して計算するかどうかを指定する論理値
+- `names` : 結果の分位点に名前を付けるかどうかを指定する論理値
+- `type` : 分位点の計算方法を指定する整数。1から9のいずれかを指定します。詳しくは`?quantile`で確認してください。
+
+ここでは、`monetary`変数を10等分するために、`quantile()`関数を使って、`monetary`変数の10分位点を計算しています。
+:::
+
 ```{r}
 idpos_cust_m <- idpos_cust_m |>
   mutate(
@@ -475,32 +500,41 @@ idpos_cust_m <- idpos_cust_m |>
         (0:10) / 10, 
         na.rm = TRUE
       ),
-      label = FALSE,
-      include.lowest = TRUE
+      label = FALSE,　# 区間に対応するラベルを数値で指定
+      include.lowest = TRUE # 最初の区間に最小値を含める
     )
   )
 head(idpos_cust_m)
 ```
 
-# コード4-55
-```{r}
+`decile_rank`変数が追加されています。
+次に、`decile_rank`変数ごとに、顧客の頻度と累計購入金額の合計を計算して、`decile`という新しいデータフレームに格納します。
+
+```{r code4-56, filename = "コード4-56"}
 decile <- idpos_cust_m |>
-  group_by(decile_rank) |>
-  summarize(freq = n(),
-            monetary = sum(monetary))
-total <- sum(decile$monetary)
+  summarize(
+    .by = decile_rank, # decile_rankごとに集計
+    freq = n(), # 顧客の頻度
+    monetary = sum(monetary) # 累計購入金額の合計
+  )
+total <- sum(decile$monetary) # 全体の累計購入金額の合計を計算
 ```
 
+次に、`decile`データフレームに、累計購入金額の合計に対する各ランクの累計購入金額の割合を表す`percent`変数を追加して、`decile2`という新しいデータフレームに格納します。
 
-```{r}
+```{r code4-57, filename = "コード4-57"}  
 decile2 <- decile |>
   mutate(
-    percent = round(monetary / total * 100, digits = 2)) |>
+    # 累計購入金額の合計に対する各ランクの累計購入金額の割合を計算して、percent変数に格納
+    percent = round(monetary / total * 100, digits = 2)
+  ) |>
   arrange(desc(decile_rank))
-
 decile2
 ```
 
+もっとも多くの購入金額を占めるグループ1が、全体購入金額の約45％を占めていることが分かりました。
+
+## 補論：ワイド型とロング型
 
 ```{r}
 sales_wide <- readr::read_csv("data/sales_wide.csv", na = ".")
@@ -511,44 +545,31 @@ sales_wide
 推奨されている`tidyr`パッケージの`pivot_longer()`関数を使って、データを縦長に変形してみましょう。
 
 ```{r}
-sales_long <- sales_wide |> 
-  pivot_longer(
-    cols = starts_with("sales"),
-    names_to = "month",
-    values_to = "sales"
-  )
-sales_long
-```
-
-
-
-```{r}
-# コード4-58
 sales_long <- sales_wide |>
-  rename('06'  = sales06,
-         '07'  = sales07,
-         '08'  = sales08,
-         '09'  = sales09,
-         '10'  = sales10) |>
-  gather(key = "month", value = "sales", '06':'10') |>
+  pivot_longer(
+    cols = starts_with("sales"), # salesで始まる列を変形の対象に指定
+    names_to = "month", # monthという名前の変数に列名を格納
+    values_to = "sales", # salesという名前の変数に値を格納
+    names_prefix = "sales" # salesで始まる変数名からsalesを削除
+  ) |>
   arrange(store)
 sales_long
 ```
 
+`names_prefix`引数を使うと、変形の対象となる列名から指定した文字列を削除して、`names_to`で指定した変数に格納することができ、教科書のコード4-58の処理が不要になります。
 
-
+次に、`tidyr`パッケージの`pivot_wider()`関数を使って、データを横長に変形してみましょう。
+Rは変数名に数字から始まる文字列を使うことはできないため、`names_prefix`引数を使って、変形の対象となる列名にsalesを付加して、`names_to`で指定した変数に格納するようにします。
 
 ```{r}
 # コード4-59
 wide_test <- sales_long |>
-  spread(key = "month", value = "sales") |>
-  rename(sales06 = '06',
-         sales07 = '07',
-         sales08 = '08',
-         sales09 = '09',
-         sales10 = '10')
+  pivot_wider(
+    names_from = month, # month変数の値を列名にする
+    values_from = sales, # sales変数の値を列の値にする
+    names_prefix = "sales" # month変数にsalesを付加して列名にする
+  ) 
 wide_test
-
 ```
 
-
+ロング型で加工したデータをワイド型にして、`knitr`パッケージの`kable()`関数や`gt`パッケージの`gt()`関数で表形式で表示させることができます。

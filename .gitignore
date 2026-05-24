@@ -56,3 +56,13 @@ rsconnect/
 *.out
 # *.pdf
 *.synctex.gz
+
+.DS_Store
+.gitignore
+
+**/*.quarto_ipynb
+
+/img/
+
+/Marketing_data_analysis_files/
+/chapter*/
