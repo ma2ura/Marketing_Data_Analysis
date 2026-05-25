@@ -77,7 +77,7 @@ for (変数 in ベクトル) {
 }
 ```
 
-とかくことで、ベクトルの要素を順番に変数に代入しながら、繰り返し処理を行うことができます。
+と書くことで、ベクトルの要素を順番に変数に代入しながら、繰り返し処理を行うことができます。
 先ほどのコードをよく見ると、変化しているのは変数名だけで、処理内容は同じであることがわかります。
 そこで、変数名の数字を変数にして、ループ処理を行うと、次のようになります。
 
@@ -263,9 +263,9 @@ $$
 例として、次のような白熱電球の寿命データが手元にあるものとしましょう。
 ここで、以下のことが分かっているものとします。
 
-- 平均寿命が1800時間である。
-- 寿命の標準偏差$\sigma$は180時間である。
-- 平均寿命は正規分布に従う。
+- （シミュレーション上の真値として）母平均$\mu = 1800$時間である。
+- 母標準偏差$\sigma = 180$時間は既知とする。
+- 個体の寿命$X$は正規分布$N(\mu, \sigma^2)$に従う。
 
 この設定に従うデータを生成します。
 `rnorm()`関数を使って、1000個のデータを生成し、`lifetime_sample`に格納します。
@@ -354,43 +354,144 @@ bulb_df |>
 ```
 
 平均1800、標準偏差180の正規分布にしたがう母集団から取り出した16個のデータからなる標本の平均は、1800ではなく、`r m_bulb`となっています。
-この手元にある16個の電球の寿命データの平均値が、母平均1800の周りでどの範囲に入るかを95％の信頼水準で推定してみましょう。
-ここでは、`t.test()`関数を使って、信頼区間を求めてみます。
-信頼区間の出力はデフォルトで 95％信頼水準となっています。
+この手元にある16個の電球の寿命データの平均値が、母平均1800の周りでどの範囲に入るかを95％信頼区間で推定してみましょう。
 
-```{r t-test_bulb}
-# t検定の実施
-bulb_ci <- t.test(bulb)
-bulb_ci$conf.int 
-```
+この節では、仮定に応じて次の2通りを明確に分けます。
 
+- 母標準偏差$\sigma$が既知: $z$に基づく区間推定
+- 母標準偏差$\sigma$が未知: $t$に基づく区間推定
 
+まず、この章の設定（$\sigma = 180$既知）に対応する$z$区間を計算します。
 
-```{r code5-6}
-# コード5-6
-qnorm(0.025, lower.tail = FALSE)
-# 標準正規分布における上側 2.5％点の分位点を求める。
-```
+```{r z-ci_bulb}
+n <- length(bulb) # 標本サイズ
+z <- qnorm(0.025, lower.tail = FALSE) # 上側2.5%点
+xbar <- mean(bulb) # 標本平均
+sigma <- 180 # 母標準偏差（既知）
 
-```{r code5-7}
-# コード5-7
-n <- length(bulb) # 標本サイズの計算
-z <- qnorm(0.025, lower.tail = FALSE) # 上側2.5％点の分位点
-xbar <- mean(bulb) # 標本平均の計算
-sigma <- 180 # 母標準偏差の設定
-
-# 信頼区間の計算
 upper <- xbar + z * (sigma / sqrt(n))
 lower <- xbar - z * (sigma / sqrt(n))
 
-# 結果のまとめと出力
 ci.bulb <- matrix(c(lower, upper), nrow = 1)
 colnames(ci.bulb) <- c("ci.lower", "ci.upper")
 knitr::kable(
-  ci.bulb, 
-  caption = "Bulb data CI (95％)", 
+  ci.bulb,
+  caption = "Bulb data CI (95%, sigma known)",
   align = "cc"
-  )
+)
+```
+
+比較のため、実務でよくある「$\sigma$未知」の場合として、`t.test()`による$t$区間も計算します。
+
+```{r t-test_bulb}
+bulb_ci_t <- t.test(bulb, conf.level = 0.95)
+bulb_ci_t$conf.int
+```
+
+実際にどの程度の平均値が信頼区間になるのかシミュレーションで確認してみましょう。
+
+平均1800、標準偏差180の正規分布から、標本サイズ16の標本を1000回発生させ、標本平均を1000個計算してヒストグラムにしてみます。
+
+```{r}
+# サンプルを1000個作成
+set.seed(442)
+trials <- 1000
+n <- 16
+
+# 正規母集団 N(1800, 180^2) から直接サンプリング
+samples <- matrix(
+  rnorm(trials * n, mean = average_life, sd = standard_dev),
+  nrow = trials,
+  ncol = n
+)
+d_mean <- rowMeans(samples)
+summary(d_mean)
+```
+
+この標本サイズ16の標本1000個から計算した1000個の平均値のヒストグラムを書きます。
+
+```{r}
+df_mean <- tibble(d_mean)
+ggplot(df_mean) + 
+  aes(x = d_mean) + 
+  geom_histogram(
+    bins = 30,
+    fill = "lightblue",
+    color = "black",
+    alpha = 0.7
+  ) + 
+  theme_economist_white()
+```
+
+これが平均1800の正規母集団から得た1000個の標本平均の分布です。この標本平均の平均を計算してみます。
+
+```{r}
+d_mean_mean <- d_mean |> mean()
+d_mean_mean
+```
+
+母集団から取り出した1000個の標本の標本平均の平均は、`r d_mean_mean`となり、母平均1800に近い値になっています。
+
+では100万個の標本から平均値を計算して、その平均値を計算してみます。
+
+```{r}
+#| cache = TRUE
+set.seed(442)
+trials <- 1000000
+n <- 16
+samples <- matrix(
+  rnorm(trials * n, mean = average_life, sd = standard_dev),
+  nrow = trials,
+  ncol = n
+)
+d_mean <- rowMeans(samples)
+```
+
+```{r}
+df_mean <- tibble(d_mean)
+ggplot(df_mean) + 
+  aes(x = d_mean) + 
+  geom_histogram(
+    bins = 30,
+    fill = "lightblue",
+    color = "black",
+    alpha = 0.7
+  ) + 
+  theme_economist_white()
+```
+
+この100万個の標本の平均の平均を見てみると、母集団の1800に近づいていることが分かります。
+
+```{r}
+d_mean_mean2 <- d_mean |> mean()
+d_mean_mean2
+```
+
+試行回数を増やすことで、標本平均の平均が母平均に近づく特性を、**大数の法則**と呼びます。
+また、標本平均$\bar{X}$自体のばらつきは標準誤差$\sigma / \sqrt{n}$で決まり、この例では$180 / \sqrt{16} = 45$です。
+
+```{r code5-6}
+# 参考: z区間で使う標準正規分布の上側2.5%点
+qnorm(0.025, lower.tail = FALSE)
+```
+
+```{r code5-7}
+# 再掲: 母標準偏差既知（sigma=180）での95% z区間
+n <- length(bulb)
+z <- qnorm(0.025, lower.tail = FALSE)
+xbar <- mean(bulb)
+sigma <- 180
+
+upper <- xbar + z * (sigma / sqrt(n))
+lower <- xbar - z * (sigma / sqrt(n))
+
+ci.bulb <- matrix(c(lower, upper), nrow = 1)
+colnames(ci.bulb) <- c("ci.lower", "ci.upper")
+knitr::kable(
+  ci.bulb,
+  caption = "Bulb data CI (95%, sigma known)",
+  align = "cc"
+)
 ```
 
 ```{r code5-8}
