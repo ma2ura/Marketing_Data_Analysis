@@ -1,5 +1,8 @@
 ## 第5章 基礎統計学復習
 
+
+## Rでシミュレーション入門
+
 経営学部の1回生がおおよそ学んでいるであろう統計学の内容を、Rコードとともに復習します。
 テキストの内容に加えて、コードの効率化や関数化についても解説します。
 
@@ -9,11 +12,13 @@
 # コード5-1
 pacman::p_load(
   tidyverse, # データ操作の総合パッケージ集
+  ggthemes, # グラフの拡張
   readxl, # Excelファイルの読み込み
   pwr,  # 効果量と検出力の計算
   knitr # 表形式での出力
 )
 ```
+
 
 次に、確率変数のシミュレーションを通じて、統計学の復習をしてみましょう。
 まずサイコロを作ります。
@@ -26,7 +31,7 @@ dice <- 1:6
 つぎに`sample()`関数を用いて、`dice`の中から1つの数をランダムに取り出します。
 ランダムさを再現するために、`set.seed()`関数を使って乱数のシード値を設定しておきましょう。
 
-:::{.aside}
+:::{.column-margin}
 `sample()`関数の引数は以下の通りです。
 
 - `x`: 抽出元のベクトル
@@ -37,9 +42,8 @@ dice <- 1:6
 
 ```{r code5-2, filename="サイコロを振る"}
 set.seed(442) # 乱数のタネを設定
-d <- sample(dice, size = 1)
-# 結果の表示
-print(d)
+d <- sample(dice, size = 1) # サイコロを振る
+print(d) # 結果の表示
 ```
 
 これでサイコロを振って、その結果を返すコードができました。
@@ -55,14 +59,27 @@ d5 <- sample(dice, size = 1)
 print(c(d1, d2, d3, d4, d5))
 ```
 
-同じコードを3回以上書いているなと思ったら、ループ処理や関数化を検討しましょう。
-`for()`関数を使ったり、サイコロを投げる回数を引数にした関数を作成したりする方法があります。
+これで5回サイコロを振った結果が表示されます。
+プログラミングでは、同じコードを3回以上書いているなと思ったら、ループ処理や関数化を検討しましょう。
+ループ処理や関数を使うことで、コードが短く、読みやすく、管理しやすいものになります。
+そこで、`for`ループを使った方法を学習しましょう。
+
+<!-- ループ処理のための`for()`関数を使ったり、サイコロを投げる回数を引数にした関数を作成したりする方法があります。 -->
 
 ### forループ
 
 forループを使って、繰り返し処理を行います。
+forループの書き方は、
+
+```
+for (変数 in ベクトル) {
+  繰り返し処理
+}
+```
+
+とかくことで、ベクトルの要素を順番に変数に代入しながら、繰り返し処理を行うことができます。
 先ほどのコードをよく見ると、変化しているのは変数名だけで、処理内容は同じであることがわかります。
-このような場合、ループ処理を使うとコードを効率化できます
+そこで、変数名の数字を変数にして、ループ処理を行うと、次のようになります。
 
 ```{r}
 set.seed(442) # 乱数のタネを設定
@@ -76,14 +93,46 @@ print(d) # 結果の表示
 
 上のようにforループを使うと、サイコロを振る回数$n$を変更するだけで、コード全体を変更する必要がなくなります。
 
+:::{.column-margin}
+`sample()`関数は、オプションで`n`を指定すると、`n`回の抽出を行うことができるので、
+
+```{r}
+d <- sample(
+    dice, 
+    size = 5
+  )
+print(d)
+```
+
+とすることで、サイコロを5回振った結果が得られるように見えますが、`sample()`関数はデフォルトで、非復元抽出を行うため、一旦出た要素はもう出なくなります。したがって、
+上のコードだと1〜6の数値から5つをランダムに選んでいるだけになります。
+そこで、`replace = TRUE`オプションを付けると、復元抽出となり、一旦出た要素が再び出る可能性があるようになります。
+
+```{r}
+d <- sample(
+    dice, 
+    size = 5, 
+    replace = TRUE
+  )
+print(d)
+```
+
+:::
+
+
+では、サイコロを10回振って、その結果をオブジェクトに代入してみます。
 
 ```{r dice-throw}
 d1 <- sample(dice, size = 10, replace = TRUE)
-d2 <- sample(dice, size = 10, replace = TRUE)
-d3 <- sample(dice, size = 10, replace = TRUE)
 ```
 
-をまとめて書くと、次のようになります。
+これをさらに3回繰り返す、という試行(trials)を行うために、`for`ループを使って次のように書きます。
+ここでは、1回の試行でサイコロを10回振った結果として、10個の数値が入ったベクトルを得ることになり、その試行を3回繰り返すので、3つのベクトルを収納する場所を`list`として用意しておきます。
+
+:::{.column-margin}
+プログラミングにはおおよそ`list`と呼ばれる複数のオブジェクトを収納するためのデータ構造が用意されていることが多いです。
+Rでは、`list()`関数を使って空のリストを作成し、`[[i]]`のようにして、リストの$i$番目の要素にアクセスすることができます。
+:::
 
 ```{r}
 d <- list() # 空のリストを作成
@@ -92,6 +141,9 @@ for (i in 1:3) { # ループ処理
 }
 d # 結果の表示
 ```
+
+これで3つの要素(数値ベクトル)をもつリスト`d`ができました。
+このリストの各要素にアクセスするには、`d[[1]]`、`d[[2]]`、`d[[3]]`のようにします。
 
 これをさらに発展させて、後で変更する可能性のある変数である試行回数やサイコロを振る回数を別に設定しておいて、コードを読みやすく、また変更しやすくします。
 
@@ -108,12 +160,23 @@ for (i in 1:trial_count) {
 d_mean
 ```
 
-試行回数`trial_count`とサイコロを振る回数`sample_sizes`を引数にした関数を作成すると、さらに便利になります。
+これで、`trial_count`と`sample_sizes`を変更するだけで、サイコロを振る回数や、試行回数を簡単に変更できるようになりました。
+
+次に、試行回数`trial_count`とサイコロを振る回数`sample_sizes`を引数にした関数を作成すると、さらに便利になります。
 ここでは、自作関数`dice_mean()`を定義してみましょう。
+自作関数`dice_mean()`は引数として、
+
+- `trial_count`: 試行回数
+- `sample_sizes`: サイコロを振る回数
+
+を受け取るようにします。
 デフォルト値として、試行回数を3回、サイコロを振る回数を10回に設定しています。
 
 ```{r dice_mean_function}
-dice_mean <- function(trial_count = 3, sample_sizes = 10) {
+dice_mean <- function(
+  trial_count = 3,  # 試行回数 デフォルトで3回
+  sample_sizes = 10 # サイコロを振る回数 デフォルトで10回
+  ) {
   d_mean <- numeric(trial_count) # 空の数列を作成
   for (i in 1:trial_count) {
     d_mean[i] <- mean(sample(dice, size = sample_sizes, replace = TRUE))
@@ -121,6 +184,8 @@ dice_mean <- function(trial_count = 3, sample_sizes = 10) {
   return(d_mean)
 }
 ```
+
+この自作関数`dice_mean()`を使うと、試行回数やサイコロを振る回数を簡単に変更して、平均値を計算することができます。
 
 ```{r use_dice_mean}
 dice_mean() # デフォルト値で実行
@@ -153,15 +218,17 @@ knitr::kable(
 )
 ```
 
-`tidyverse`の`purrr`パッケージを使うと、さらに簡潔に書けます。
+`for`ループによる繰り返し処理は処理速度に問題があるため、
+より高速かつ便利な`tidyverse`の`purrr`パッケージを使って、さらに簡潔に書きます。
 
 ```{r}
 set.seed(352)
 trial_count <- 3 # 試行回数
 sizes <- c(10, 100, 1000) # サイコロを振る回数
+
 # map_dfr()でデータフレームを直接作成
 d_mean_df <- map_dfr(sizes, function(n) {
-  # replicate()で3回繰り返し試行    
+  # replicate()で3回繰り返し試行
   results <- replicate(
     trial_count, 
     mean(sample(dice, size = n, replace = TRUE))
@@ -181,7 +248,211 @@ kable(
 )
 ```
 
-<!--- 
+## 区間推定
+
+いま、標準正規分布に従う母集団から抽出した無作為標本$Z_1, Z_2, ..., Z_n$を考えます。
+標準正規分布の累積分布関数$\Phi(z)$を用いると、次のように表せます。
+
+$$
+P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq z_{\frac{\alpha}{2}} \right) = 1 - \alpha
+$$
+
+
+## 電球の寿命データで区間推定
+
+例として、次のような白熱電球の寿命データが手元にあるものとしましょう。
+ここで、以下のことが分かっているものとします。
+
+- 平均寿命が1800時間である。
+- 寿命の標準偏差$\sigma$は180時間である。
+- 平均寿命は正規分布に従う。
+
+この設定に従うデータを生成します。
+`rnorm()`関数を使って、1000個のデータを生成し、`lifetime_sample`に格納します。
+
+```{r filename="母集団の生成"}
+average_life <- 1800 # 平均寿命
+standard_dev <- 180 # 標準偏差
+lifetime_sample <- tibble(
+  lifetime = rnorm( # 正規分布
+    1000, # データ数
+    mean = average_life, # 平均
+    sd = standard_dev # 標準偏差
+  )
+)
+```
+
+この1000個のデータをヒストグラムに表してみます。
+理論上の正規分布の確率密度関数を赤線で表します。
+
+```{r normal_dist}
+lifetime_sample |>
+  ggplot(aes(x = lifetime)) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 30,
+    fill = "lightblue",
+    color = "black",
+    alpha = 0.7
+    ) +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = average_life, sd = standard_dev),
+    color = "red",
+    linewidth = 1
+    ) +
+  theme_economist_white()
+```
+
+
+この分布から抽出したと想定される16個の電球の寿命データが以下の通りです。
+
+```{r code5-5}
+# コード5-5
+bulb <- c(# 白熱電球の寿命データ
+    1939.6, 1680.3, 1982.1, 2215.6,
+    2092.5, 1928.9, 2003.8, 1955.5,
+    1800.1, 1659.5, 2066.2, 2107.2,
+    2085.5, 1878.6, 2007.6, 1816.1
+  )
+```
+
+この1つの標本(sample)の平均と標準偏差は以下のようになります。
+
+```{r}
+(m_bulb <- mean(bulb))
+(sd_bulb <- sd(bulb))
+```
+
+理論上の正規分布に、この標本のデータのヒストグラムを重ねると、次のようになります。
+
+```{r}
+# ヒストグラムの作成
+bulb_df <- tibble(lifetime = bulb)
+bulb_df |> 
+  ggplot(aes(x = lifetime)) +
+  geom_histogram(
+    aes(y = ..density..),
+    bins = 8,
+    fill = "lightblue",
+    color = "black",
+    alpha = 0.7
+    ) +
+  geom_vline(xintercept = m_bulb, colour="blue", linetype = "dashed") +
+  geom_vline(xintercept = 1800, colour = "red", linetype = "dashed") +
+  stat_function(
+    fun = dnorm,
+      args = list(
+        mean = average_life, 
+        sd = standard_dev
+      ),
+    color = "red",
+    linewidth = 1
+    ) +
+  xlim(1200, 2400) + 
+  theme_economist_white()
+```
+
+平均1800、標準偏差180の正規分布にしたがう母集団から取り出した16個のデータからなる標本の平均は、1800ではなく、`r m_bulb`となっています。
+この手元にある16個の電球の寿命データの平均値が、母平均1800の周りでどの範囲に入るかを95％の信頼水準で推定してみましょう。
+
+
+
+```{r t-test_bulb}
+# t検定の実施
+bulb_ci <- t.test(bulb)
+bulb_ci$conf.int 
+# 信頼区間の出力（デフォルトで 95％信頼水準）
+```
+
+
+
+```{r code5-6}
+# コード5-6
+qnorm(0.025, lower.tail = FALSE)
+# 標準正規分布における上側 2.5％点の分位点を求める。
+```
+
+```{r code5-7}
+# コード5-7
+n <- length(bulb) # 標本サイズの計算
+z <- qnorm(0.025, lower.tail = FALSE) # 上側2.5％点の分位点
+xbar <- mean(bulb) # 標本平均の計算
+sigma <- 180 # 母標準偏差の設定
+
+# 信頼区間の計算
+upper <- xbar + z * (sigma / sqrt(n))
+lower <- xbar - z * (sigma / sqrt(n))
+
+# 結果のまとめと出力
+ci.bulb <- matrix(c(lower, upper), nrow = 1)
+colnames(ci.bulb) <- c("ci.lower", "ci.upper")
+knitr::kable(
+  ci.bulb, 
+  caption = "Bulb data CI (95％)", 
+  align = "cc"
+  )
+```
+
+```{r code5-8}
+# コード5-8
+mean(bulb)
+
+# コード5-9
+t.test(bulb, alternative = "two.sided", mu = 1800)
+
+# コード5-10
+n <- length(bulb) # 標本サイズの計算
+z <- qnorm(0.025, lower.tail = FALSE) # 上側2.5％点の分位点
+xbar <- mean(bulb) # 標本平均の計算
+sigma <- 180 # 母標準偏差の設定
+mu <- 1800 # 帰無仮説の平均値 
+# Z値の計算
+Z <- (xbar - mu) / (sigma / sqrt(n))
+Z
+```
+
+```{r code5-11, filename="データの読み込みと前処理"}
+firmdata <- readxl::read_xlsx("data/MktRes_firmdata.xlsx")
+firm2018 <- firmdata |>
+  filter(fyear == 2018) |> # 2018に限定
+  mutate( # ダミー変数を作成
+    ad_dummy = ifelse(adint > median(adint), 1, 0)
+    )
+# t検定の実施
+t.test(sales ~ ad_dummy, data = firm2018)
+```
+
+```{r code5-12}
+# コード5-12
+var.test(sales ~ ad_dummy, data = firm2018, ratio = 1)
+```
+
+
+```{r code5-14}
+# 効果量d=0.8、検出力0.8、有意水準0.05の場合の
+# 必要標本サイズの推定
+est_n <- pwr.t.test(d = 0.8, power = 0.8, sig.level = 0.05)
+est_n
+```
+
+
+```{r code5-15}
+# コード5-15
+plot(est_n)
+```
+
+```{r code5-16}
+# コード5-16
+pwr.t.test(d = 0.8, n = 26, sig.level = 0.05)
+```
+
+
+
+
+
+
+<!----
 
 ```{r}
 set.seed(352)
@@ -240,182 +511,4 @@ knitr::kable(
   )
 ```
 
---->
-
-## 区間推定
-
-いま、標準正規分布に従う母集団から抽出した無作為標本$Z_1, Z_2, ..., Z_n$を考えます。
-標準正規分布の累積分布関数$\Phi(z)$を用いると、次のように表せます。
-$$
-P \left( -z_{\frac{\alpha}{2}} \leq \frac{\bar{Z} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq z_{\frac{\alpha}{2}} \right) = 1 - \alpha
-$$
-
-
-### 電球の寿命データで区間推定
-
-例として、次のような白熱電球の寿命データが手元にあるものとしましょう。
-ここで、以下のことが分かっているものとします。
-
-- 平均寿命が1800時間である。
-- 寿命の標準偏差$\sigma $は180時間である。
-- 平均寿命は正規分布に従う。
-
-図にすると次のようになります。
-
-```{r normal_dist}
-average_life <- 1800
-standard_dev <- 180
-lifetime_sample <- tibble(lifetime = rnorm(1000, mean = average_life, sd = standard_dev))
-lifetime_sample |>
-  ggplot(aes(x = lifetime)) +
-  geom_histogram(
-    aes(y = after_stat(density)),
-    bins = 30,
-    fill = "lightblue",
-    color = "black",
-    alpha = 0.7
-    ) +
-  stat_function(
-    fun = dnorm,
-    args = list(mean = average_life, sd = standard_dev),
-    color = "red",
-    linewidth = 1
-    ) +
-  theme_minimal()
-```
-
-
-この分布から抽出したと想定される16個の電球の寿命データが以下の通りです。
-
-```{r code5-5}
-# コード5-5
-bulb <- c(# 白熱電球の寿命データ
-    1939.6, 1680.3, 1982.1, 2215.6,
-    2092.5, 1928.9, 2003.8, 1955.5,
-    1800.1, 1659.5, 2066.2, 2107.2,
-    2085.5, 1878.6, 2007.6, 1816.1
-  )
-mean(bulb)
-sd(bulb)
-```
-
-先ほどの分布にこのデータのヒストグラムを重ねると、次のようになります。
-
-```{r}
-# ヒストグラムの作成
-bulb_df <- tibble(lifetime = bulb)
-bulb_df |> 
-  ggplot(aes(x = lifetime)) +
-  geom_histogram(
-    aes(y = ..density..),
-    bins = 8,
-    fill = "lightblue",
-    color = "black",
-    alpha = 0.7
-    ) +
-  stat_function(
-    fun = dnorm,
-      args = list(mean = average_life, sd = standard_dev),
-    color = "red",
-      linewidth = 1
-    ) +
-  theme_minimal()
-```
-
-そのとき、この手元にある16個の電球の寿命データの平均値が、母平均1800の周りでどの範囲に入るかを95％の信頼水準で推定してみましょう。
-
-
-
-
-```{r t-test_bulb}
-# t検定の実施
-bulb_ci <- t.test(bulb)
-bulb_ci$conf.int 
-# 信頼区間の出力（デフォルトで 95％信頼水準）
-```
-
-
-
-```{r code5-6}
-# コード5-6
-qnorm(0.025, lower.tail = FALSE)
-# 標準正規分布における上側 2.5％点の分位点を求める。
-```
-
-```{r code5-7}
-# コード5-7
-n <- length(bulb) # 標本サイズの計算
-z <- qnorm(0.025, lower.tail = FALSE) # 上側2.5％点の分位点
-xbar <- mean(bulb) # 標本平均の計算
-sigma <- 180 # 母標準偏差の設定
-
-# 信頼区間の計算
-upper <- xbar + z * (sigma / sqrt(n))
-lower <- xbar - z * (sigma / sqrt(n))
-
-# 結果のまとめと出力
-ci.bulb <- matrix(c(lower, upper), nrow = 1)
-colnames(ci.bulb) <- c("ci.lower", "ci.upper")
-knitr::kable(
-  ci.bulb, 
-  caption = "Bulb data CI (95％)", 
-  align = "cc"
-  )
-```
-
-```{r code5-8}
-# コード5-8
-mean(bulb)
-
-# コード5-9
-t.test(bulb, alternative = "two.sided", mu = 1800)
-
-# コード5-10
-n <- length(bulb) # 標本サイズの計算
-z <- qnorm(0.025, lower.tail = FALSE) # 上側2.5％点の分位点
-xbar <- mean(bulb) # 標本平均の計算
-sigma <- 180 # 母標準偏差の設定
-mu <- 1800 # 帰無仮説の平均値 
-# Z値の計算
-Z <- (xbar - mu) / (sigma / sqrt(n))
-Z
-```
-
-```{r code5-11}
-# コード5-11
-# データの読み込みと前処理
-firmdata <- readxl::read_xlsx("data/MktRes_firmdata.xlsx")
-firm2018 <- firmdata |>
-  filter(fyear == 2018) |>
-  mutate(
-    ad_dummy = ifelse(adint > median(adint), 1, 0)
-    )
-# t検定の実施
-t.test(sales ~ ad_dummy, data = firm2018)
-```
-
-```{r code5-12}
-# コード5-12
-var.test(sales ~ ad_dummy, data = firm2018, ratio = 1)
-```
-
-
-```{r code5-14}
-# 効果量d=0.8、検出力0.8、有意水準0.05の場合の
-# 必要標本サイズの推定
-est_n <- pwr.t.test(d = 0.8, power = 0.8, sig.level = 0.05)
-est_n
-```
-
-
-```{r code5-15}
-# コード5-15
-plot(est_n)
-```
-
-```{r code5-16}
-# コード5-16
-pwr.t.test(d = 0.8, n = 26, sig.level = 0.05)
-```
-
-
+------>
